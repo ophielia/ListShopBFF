@@ -1,0 +1,174 @@
+{
+"": {
+    "emit-module-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/module/allshared.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/module/allshared.swiftdeps"
+},
+"generated/Skie/Skie.SwiftCoroutineDispatcher.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SwiftCoroutineDispatcher.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SwiftCoroutineDispatcher.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SwiftCoroutineDispatcher.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SwiftCoroutineDispatcher~partial.swiftmodule"
+},
+"generated/Skie/Skie.AsyncStreamDispatcherDelegate.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.AsyncStreamDispatcherDelegate.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.AsyncStreamDispatcherDelegate.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.AsyncStreamDispatcherDelegate.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.AsyncStreamDispatcherDelegate~partial.swiftmodule"
+},
+"generated/Skie/Skie.Namespace.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Namespace.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Namespace.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Namespace.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Namespace~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftFlowIterator.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowIterator.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowIterator.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowIterator.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowIterator~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftFlowProtocol.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowProtocol.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowProtocol.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowProtocol.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlowProtocol~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftOptionalFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftSharedFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftSharedFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftSharedFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftSharedFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftSharedFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftOptionalSharedFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalSharedFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalSharedFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalSharedFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalSharedFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftMutableSharedFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableSharedFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableSharedFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableSharedFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableSharedFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftOptionalMutableSharedFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableSharedFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableSharedFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableSharedFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableSharedFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftStateFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftStateFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftStateFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftStateFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftStateFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftOptionalStateFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalStateFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalStateFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalStateFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalStateFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftMutableStateFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableStateFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableStateFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableStateFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftMutableStateFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieSwiftOptionalMutableStateFlow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableStateFlow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableStateFlow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableStateFlow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieSwiftOptionalMutableStateFlow~partial.swiftmodule"
+},
+"generated/Skie/Skie.bridgeSubscriptionCount.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.bridgeSubscriptionCount.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.bridgeSubscriptionCount.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.bridgeSubscriptionCount.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.bridgeSubscriptionCount~partial.swiftmodule"
+},
+"generated/Skie/Skie.SkieColdFlowIterator.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieColdFlowIterator.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieColdFlowIterator.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieColdFlowIterator.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.SkieColdFlowIterator~partial.swiftmodule"
+},
+"generated/KotlinxCoroutinesCore/KotlinxCoroutinesCore.Flow.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.Flow.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.Flow.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.Flow.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.Flow~partial.swiftmodule"
+},
+"generated/KotlinxCoroutinesCore/KotlinxCoroutinesCore.FlowCollector.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.FlowCollector.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.FlowCollector.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.FlowCollector.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/KotlinxCoroutinesCore.FlowCollector~partial.swiftmodule"
+},
+"generated/Breeds/Breeds.BreedRepository.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedRepository.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedRepository.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedRepository.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedRepository~partial.swiftmodule"
+},
+"generated/Skie/Skie.FlowConversions.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.FlowConversions.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.FlowConversions.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.FlowConversions.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.FlowConversions~partial.swiftmodule"
+},
+"generated/Analytics/Analytics.BreedAnalytics.NotFetchedReason.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.BreedAnalytics.NotFetchedReason.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.BreedAnalytics.NotFetchedReason.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.BreedAnalytics.NotFetchedReason.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.BreedAnalytics.NotFetchedReason~partial.swiftmodule"
+},
+"generated/Skie/Skie.Skie_SuspendResult.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Skie_SuspendResult.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Skie_SuspendResult.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Skie_SuspendResult.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Skie.Skie_SuspendResult~partial.swiftmodule"
+},
+"generated/Breeds/Breeds.BreedDataEvent.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataEvent.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataEvent.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataEvent.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataEvent~partial.swiftmodule"
+},
+"generated/Breeds/Breeds.BreedDataRefreshState.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataRefreshState.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataRefreshState.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataRefreshState.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataRefreshState~partial.swiftmodule"
+},
+"generated/Breeds/Breeds.BreedDataState.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataState.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataState.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataState.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Breeds.BreedDataState~partial.swiftmodule"
+},
+"generated/Analytics/Analytics.AnalyticsKt.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.AnalyticsKt.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.AnalyticsKt.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.AnalyticsKt.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Analytics.AnalyticsKt~partial.swiftmodule"
+},
+"generated/Allshared/Allshared.StartSDKKt.swift": {
+    "object": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Allshared.StartSDKKt.o",
+    "dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Allshared.StartSDKKt.d",
+    "swift-dependencies": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Allshared.StartSDKKt.swiftdeps",
+    "swiftmodule": "/Users/runner/work/ListShopBFF/ListShopBFF/allshared/build/skie/binaries/debugFramework/DEBUG/iosArm64/swift-compiler/object-files/Allshared.StartSDKKt~partial.swiftmodule"
+}
+}

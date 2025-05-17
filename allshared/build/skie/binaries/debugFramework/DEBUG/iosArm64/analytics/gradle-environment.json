@@ -1,0 +1,9 @@
+{
+    "gradleVersion": "8.12",
+    "ci": "GitHub Actions",
+    "skieVersion": "0.10.0",
+    "timestampInMs": 1747477179992,
+    "kotlinVersion": "2.1.0",
+    "jvmVersion": "21.0.7+6-LTS",
+    "macOSVersion": "14.7.5"
+}

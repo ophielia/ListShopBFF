@@ -1,0 +1,1519 @@
+Name: "allshared"
+Classes:
+- Name: "AllsharedBase"
+  SwiftName: "KotlinBase"
+- Name: "AllsharedMutableSet"
+  SwiftName: "KotlinMutableSet"
+- Name: "AllsharedMutableDictionary"
+  SwiftName: "KotlinMutableDictionary"
+- Name: "AllsharedNumber"
+  SwiftName: "KotlinNumber"
+- Name: "AllsharedByte"
+  SwiftName: "KotlinByte"
+- Name: "AllsharedUByte"
+  SwiftName: "KotlinUByte"
+- Name: "AllsharedShort"
+  SwiftName: "KotlinShort"
+- Name: "AllsharedUShort"
+  SwiftName: "KotlinUShort"
+- Name: "AllsharedInt"
+  SwiftName: "KotlinInt"
+- Name: "AllsharedUInt"
+  SwiftName: "KotlinUInt"
+- Name: "AllsharedLong"
+  SwiftName: "KotlinLong"
+- Name: "AllsharedULong"
+  SwiftName: "KotlinULong"
+- Name: "AllsharedFloat"
+  SwiftName: "KotlinFloat"
+- Name: "AllsharedDouble"
+  SwiftName: "KotlinDouble"
+- Name: "AllsharedBoolean"
+  SwiftName: "KotlinBoolean"
+- Name: "AllsharedKotlinThrowable"
+  SwiftName: "KotlinThrowable"
+  Properties:
+  - Name: "cause"
+    PropertyKind: "Instance"
+    SwiftName: "cause"
+    Type: "AllsharedKotlinThrowable * _Nullable"
+  - Name: "message"
+    PropertyKind: "Instance"
+    SwiftName: "message"
+    Type: "NSString * _Nullable"
+  Methods:
+  - Selector: "initWithMessage:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+  - Selector: "initWithCause:"
+    MethodKind: "Instance"
+    SwiftName: "init(cause:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "initWithMessage:cause:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:cause:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+    - Position: 1
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "getStackTrace"
+    MethodKind: "Instance"
+    SwiftName: "getStackTrace()"
+    ResultType: "AllsharedKotlinArray<NSString *> * _Nonnull"
+  - Selector: "printStackTrace"
+    MethodKind: "Instance"
+    SwiftName: "printStackTrace()"
+    ResultType: "void"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedKotlinArray"
+  SwiftName: "KotlinArray"
+  Properties:
+  - Name: "size"
+    PropertyKind: "Instance"
+    SwiftName: "size"
+    Type: "int32_t"
+  Methods:
+  - Selector: "arrayWithSize:init:"
+    MethodKind: "Instance"
+    SwiftName: "init(size:init:)"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+    - Position: 1
+      Type: "T _Nullable (^ _Nonnull)(AllsharedInt * _Nonnull)"
+  - Selector: "getIndex:"
+    MethodKind: "Instance"
+    SwiftName: "get(index:)"
+    ResultType: "T _Nullable"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+  - Selector: "iterator"
+    MethodKind: "Instance"
+    SwiftName: "iterator()"
+    ResultType: "id<AllsharedKotlinIterator> _Nonnull"
+  - Selector: "setIndex:value:"
+    MethodKind: "Instance"
+    SwiftName: "set(index:value:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+    - Position: 1
+      Type: "T _Nullable"
+- Name: "AllsharedKotlinEnum"
+  SwiftName: "KotlinEnum"
+  Properties:
+  - Name: "name"
+    PropertyKind: "Instance"
+    SwiftName: "name"
+    Type: "NSString * _Nonnull"
+  - Name: "ordinal"
+    PropertyKind: "Instance"
+    SwiftName: "ordinal"
+    Type: "int32_t"
+  Methods:
+  - Selector: "initWithName:ordinal:"
+    MethodKind: "Instance"
+    SwiftName: "init(name:ordinal:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nonnull"
+    - Position: 1
+      Type: "int32_t"
+  - Selector: "compareToOther:"
+    MethodKind: "Instance"
+    SwiftName: "compareTo(other:)"
+    ResultType: "int32_t"
+    Parameters:
+    - Position: 0
+      Type: "E _Nonnull"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedKotlinEnumCompanion"
+  SwiftName: "KotlinEnumCompanion"
+- Name: "AllsharedKotlinCancellationException"
+  SwiftName: "KotlinCancellationException"
+  Methods:
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "initWithMessage:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+  - Selector: "initWithMessage:cause:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:cause:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+    - Position: 1
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "initWithCause:"
+    MethodKind: "Instance"
+    SwiftName: "init(cause:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nullable"
+- Name: "AllsharedKotlinIllegalStateException"
+  SwiftName: "KotlinIllegalStateException"
+  Methods:
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "initWithMessage:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+  - Selector: "initWithMessage:cause:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:cause:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+    - Position: 1
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "initWithCause:"
+    MethodKind: "Instance"
+    SwiftName: "init(cause:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nullable"
+- Name: "AllsharedKotlinRuntimeException"
+  SwiftName: "KotlinRuntimeException"
+  Methods:
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "initWithMessage:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+  - Selector: "initWithMessage:cause:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:cause:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+    - Position: 1
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "initWithCause:"
+    MethodKind: "Instance"
+    SwiftName: "init(cause:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nullable"
+- Name: "AllsharedKotlinException"
+  SwiftName: "KotlinException"
+  Methods:
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "initWithMessage:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+  - Selector: "initWithMessage:cause:"
+    MethodKind: "Instance"
+    SwiftName: "init(message:cause:)"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nullable"
+    - Position: 1
+      Type: "AllsharedKotlinThrowable * _Nullable"
+  - Selector: "initWithCause:"
+    MethodKind: "Instance"
+    SwiftName: "init(cause:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nullable"
+- Name: "AllsharedAnalyticsHandle"
+  SwiftName: "AnalyticsHandle"
+  Properties:
+  - Name: "appAnalytics"
+    PropertyKind: "Instance"
+    SwiftName: "appAnalytics"
+    Type: "AllsharedAppAnalytics * _Nonnull"
+  - Name: "breedAnalytics"
+    PropertyKind: "Instance"
+    SwiftName: "breedAnalytics"
+    Type: "AllsharedBreedAnalytics * _Nonnull"
+  - Name: "httpClientAnalytics"
+    PropertyKind: "Instance"
+    SwiftName: "httpClientAnalytics"
+    Type: "AllsharedHttpClientAnalytics * _Nonnull"
+  Methods:
+  - Selector: "initWithAppAnalytics:breedAnalytics:httpClientAnalytics:"
+    MethodKind: "Instance"
+    SwiftName: "init(appAnalytics:breedAnalytics:httpClientAnalytics:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedAppAnalytics * _Nonnull"
+    - Position: 1
+      Type: "AllsharedBreedAnalytics * _Nonnull"
+    - Position: 2
+      Type: "AllsharedHttpClientAnalytics * _Nonnull"
+  - Selector: "doCopyAppAnalytics:breedAnalytics:httpClientAnalytics:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(appAnalytics:breedAnalytics:httpClientAnalytics:)"
+    ResultType: "AllsharedAnalyticsHandle * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedAppAnalytics * _Nonnull"
+    - Position: 1
+      Type: "AllsharedBreedAnalytics * _Nonnull"
+    - Position: 2
+      Type: "AllsharedHttpClientAnalytics * _Nonnull"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedHttpClientAnalytics"
+  SwiftName: "HttpClientAnalytics"
+  Methods:
+  - Selector: "logMessageMessage:"
+    MethodKind: "Instance"
+    SwiftName: "logMessage(message:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nonnull"
+- Name: "AllsharedBreedAnalytics"
+  SwiftName: "BreedAnalytics"
+  Methods:
+  - Selector: "breedsFetchedFromNetworkSize:"
+    MethodKind: "Instance"
+    SwiftName: "breedsFetchedFromNetwork(size:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+  - Selector: "breedsNotFetchedFromNetworkReason:"
+    MethodKind: "Instance"
+    SwiftName: "breedsNotFetchedFromNetwork(reason:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Selector: "clearingBreedViewModel"
+    MethodKind: "Instance"
+    SwiftName: "clearingBreedViewModel()"
+    ResultType: "void"
+  - Selector: "databaseCleared"
+    MethodKind: "Instance"
+    SwiftName: "databaseCleared()"
+    ResultType: "void"
+  - Selector: "displayingBreedsSize:"
+    MethodKind: "Instance"
+    SwiftName: "displayingBreeds(size:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+  - Selector: "displayingErrorMessage:"
+    MethodKind: "Instance"
+    SwiftName: "displayingError(message:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Selector: "favoriteClickedId:"
+    MethodKind: "Instance"
+    SwiftName: "favoriteClicked(id:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+  - Selector: "favoriteSavedId:favorite:"
+    MethodKind: "Instance"
+    SwiftName: "favoriteSaved(id:favorite:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+    - Position: 1
+      Type: "BOOL"
+  - Selector: "fetchingBreedsFromNetwork"
+    MethodKind: "Instance"
+    SwiftName: "fetchingBreedsFromNetwork()"
+    ResultType: "void"
+  - Selector: "insertingBreedsToDatabaseSize:"
+    MethodKind: "Instance"
+    SwiftName: "insertingBreedsToDatabase(size:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "int32_t"
+  - Selector: "refreshingBreeds"
+    MethodKind: "Instance"
+    SwiftName: "refreshingBreeds()"
+    ResultType: "void"
+  - Selector: "updatingBreedsErrorThrowable:"
+    MethodKind: "Instance"
+    SwiftName: "updatingBreedsError(throwable:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedKotlinThrowable * _Nonnull"
+- Name: "AllsharedBreedAnalyticsNotFetchedReason"
+  SwiftBridge: "__Bridge__BreedAnalytics_NotFetchedReason"
+  SwiftName: "BreedAnalytics.__NotFetchedReason"
+  SwiftPrivate: true
+  Properties:
+  - Name: "notstale"
+    PropertyKind: "Class"
+    SwiftName: "notStale"
+    Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Name: "networkerror"
+    PropertyKind: "Class"
+    SwiftName: "networkError"
+    Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Name: "randomfail"
+    PropertyKind: "Class"
+    SwiftName: "randomFail"
+    Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  Methods:
+  - Selector: "initWithName:ordinal:"
+    MethodKind: "Instance"
+    SwiftName: "init(name:ordinal:)"
+    Availability: "nonswift"
+- Name: "AllsharedAppAnalytics"
+  SwiftName: "AppAnalytics"
+  Methods:
+  - Selector: "appStarted"
+    MethodKind: "Instance"
+    SwiftName: "appStarted()"
+    ResultType: "void"
+- Name: "AllsharedAnalyticsKt"
+  SwiftName: "AnalyticsKt"
+  Methods:
+  - Selector: "doInitAnalyticsAnalytics:"
+    MethodKind: "Class"
+    SwiftName: "doInitAnalytics(analytics:)"
+    ResultType: "AllsharedAnalyticsHandle * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedAnalytics> _Nonnull"
+- Name: "AllsharedSkieColdFlowIterator"
+  SwiftName: "SkieColdFlowIterator"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "initWithFlow:"
+    MethodKind: "Instance"
+    SwiftName: "init(flow:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlow> _Nonnull"
+  - Selector: "cancel"
+    MethodKind: "Instance"
+    SwiftName: "cancel()"
+    ResultType: "void"
+  - Selector: "hasNextWithCompletionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__hasNext(completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "void (^ _Nonnull)(AllsharedBoolean * _Nullable, NSError * _Nullable)"
+  - Selector: "next"
+    MethodKind: "Instance"
+    SwiftName: "next()"
+    ResultType: "E _Nullable"
+- Name: "AllsharedSkieKotlinFlow"
+  SwiftBridge: "SkieSwiftFlow"
+  SwiftName: "SkieKotlinFlow"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkieKotlinMutableSharedFlow"
+  SwiftBridge: "SkieSwiftMutableSharedFlow"
+  SwiftName: "SkieKotlinMutableSharedFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<T> * _Nonnull"
+  - Name: "subscriptionCount"
+    PropertyKind: "Instance"
+    SwiftName: "subscriptionCount"
+    Type: "AllsharedSkieKotlinStateFlow<AllsharedInt *> * _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreMutableSharedFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "T _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "resetReplayCache"
+    MethodKind: "Instance"
+    SwiftName: "resetReplayCache()"
+    ResultType: "void"
+  - Selector: "tryEmitValue:"
+    MethodKind: "Instance"
+    SwiftName: "tryEmit(value:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nonnull"
+- Name: "AllsharedSkieKotlinMutableStateFlow"
+  SwiftBridge: "SkieSwiftMutableStateFlow"
+  SwiftName: "SkieKotlinMutableStateFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<T> * _Nonnull"
+  - Name: "subscriptionCount"
+    PropertyKind: "Instance"
+    SwiftName: "subscriptionCount"
+    Type: "AllsharedSkieKotlinStateFlow<AllsharedInt *> * _Nonnull"
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "T _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreMutableStateFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "compareAndSetExpect:update:"
+    MethodKind: "Instance"
+    SwiftName: "compareAndSet(expect:update:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nonnull"
+    - Position: 1
+      Type: "T _Nonnull"
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "T _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "resetReplayCache"
+    MethodKind: "Instance"
+    SwiftName: "resetReplayCache()"
+    ResultType: "void"
+  - Selector: "tryEmitValue:"
+    MethodKind: "Instance"
+    SwiftName: "tryEmit(value:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nonnull"
+- Name: "AllsharedSkieKotlinOptionalFlow"
+  SwiftBridge: "SkieSwiftOptionalFlow"
+  SwiftName: "SkieKotlinOptionalFlow"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkieKotlinOptionalMutableSharedFlow"
+  SwiftBridge: "SkieSwiftOptionalMutableSharedFlow"
+  SwiftName: "SkieKotlinOptionalMutableSharedFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<id> * _Nonnull"
+  - Name: "subscriptionCount"
+    PropertyKind: "Instance"
+    SwiftName: "subscriptionCount"
+    Type: "AllsharedSkieKotlinStateFlow<AllsharedInt *> * _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreMutableSharedFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "T _Nullable"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "resetReplayCache"
+    MethodKind: "Instance"
+    SwiftName: "resetReplayCache()"
+    ResultType: "void"
+  - Selector: "tryEmitValue:"
+    MethodKind: "Instance"
+    SwiftName: "tryEmit(value:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nullable"
+- Name: "AllsharedSkieKotlinOptionalMutableStateFlow"
+  SwiftBridge: "SkieSwiftOptionalMutableStateFlow"
+  SwiftName: "SkieKotlinOptionalMutableStateFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<id> * _Nonnull"
+  - Name: "subscriptionCount"
+    PropertyKind: "Instance"
+    SwiftName: "subscriptionCount"
+    Type: "AllsharedSkieKotlinStateFlow<AllsharedInt *> * _Nonnull"
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "T _Nullable"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreMutableStateFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "compareAndSetExpect:update:"
+    MethodKind: "Instance"
+    SwiftName: "compareAndSet(expect:update:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nullable"
+    - Position: 1
+      Type: "T _Nullable"
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "T _Nullable"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "resetReplayCache"
+    MethodKind: "Instance"
+    SwiftName: "resetReplayCache()"
+    ResultType: "void"
+  - Selector: "tryEmitValue:"
+    MethodKind: "Instance"
+    SwiftName: "tryEmit(value:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "T _Nullable"
+- Name: "AllsharedSkieKotlinOptionalSharedFlow"
+  SwiftBridge: "SkieSwiftOptionalSharedFlow"
+  SwiftName: "SkieKotlinOptionalSharedFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<id> * _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreSharedFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkieKotlinOptionalStateFlow"
+  SwiftBridge: "SkieSwiftOptionalStateFlow"
+  SwiftName: "SkieKotlinOptionalStateFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<id> * _Nonnull"
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "T _Nullable"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreStateFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkieKotlinSharedFlow"
+  SwiftBridge: "SkieSwiftSharedFlow"
+  SwiftName: "SkieKotlinSharedFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<T> * _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreSharedFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkieKotlinStateFlow"
+  SwiftBridge: "SkieSwiftStateFlow"
+  SwiftName: "SkieKotlinStateFlow"
+  SwiftPrivate: true
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<T> * _Nonnull"
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "T _Nonnull"
+  Methods:
+  - Selector: "initWithDelegate:"
+    MethodKind: "Instance"
+    SwiftName: "init(_:)"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreStateFlow> _Nonnull"
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedSkie_CancellationHandler"
+  SwiftName: "Skie_CancellationHandler"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "init"
+    MethodKind: "Instance"
+    SwiftName: "init()"
+  - Selector: "cancel"
+    MethodKind: "Instance"
+    SwiftName: "cancel()"
+    ResultType: "void"
+- Name: "AllsharedSkie_SuspendHandler"
+  SwiftName: "Skie_SuspendHandler"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "initWithCancellationHandler:dispatcherDelegate:onResult:"
+    MethodKind: "Instance"
+    SwiftName: "init(cancellationHandler:dispatcherDelegate:onResult:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedSkie_CancellationHandler * _Nonnull"
+    - Position: 1
+      Type: "id<AllsharedSkie_DispatcherDelegate> _Nonnull"
+    - Position: 2
+      Type: "void (^ _Nonnull)(AllsharedSkie_SuspendResult * _Nonnull)"
+- Name: "AllsharedSkie_SuspendResult"
+  SwiftName: "Skie_SuspendResult"
+  SwiftPrivate: true
+- Name: "AllsharedSkie_SuspendResultSuccess"
+  SwiftName: "Skie_SuspendResult.Success"
+  SwiftPrivate: true
+  Properties:
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "id _Nullable"
+  Methods:
+  - Selector: "initWithValue:"
+    MethodKind: "Instance"
+    SwiftName: "init(value:)"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "doCopyValue:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(value:)"
+    ResultType: "AllsharedSkie_SuspendResultSuccess * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedSkie_SuspendResultError"
+  SwiftName: "Skie_SuspendResult.Error"
+  SwiftPrivate: true
+  Properties:
+  - Name: "error"
+    PropertyKind: "Instance"
+    SwiftName: "error"
+    Type: "NSError * _Nonnull"
+  Methods:
+  - Selector: "initWithError:"
+    MethodKind: "Instance"
+    SwiftName: "init(error:)"
+    Parameters:
+    - Position: 0
+      Type: "NSError * _Nonnull"
+  - Selector: "doCopyError:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(error:)"
+    ResultType: "AllsharedSkie_SuspendResultError * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "NSError * _Nonnull"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedSkie_SuspendResultCanceled"
+  SwiftName: "Skie_SuspendResult.Canceled"
+  SwiftPrivate: true
+- Name: "AllsharedSDKHandle"
+  SwiftName: "SDKHandle"
+  Properties:
+  - Name: "appAnalytics"
+    PropertyKind: "Instance"
+    SwiftName: "appAnalytics"
+    Type: "AllsharedAppAnalytics * _Nonnull"
+  - Name: "breedAnalytics"
+    PropertyKind: "Instance"
+    SwiftName: "breedAnalytics"
+    Type: "AllsharedBreedAnalytics * _Nonnull"
+  - Name: "breedRepository"
+    PropertyKind: "Instance"
+    SwiftName: "breedRepository"
+    Type: "AllsharedBreedsBreedRepository * _Nonnull"
+  Methods:
+  - Selector: "initWithBreedRepository:appAnalytics:breedAnalytics:"
+    MethodKind: "Instance"
+    SwiftName: "init(breedRepository:appAnalytics:breedAnalytics:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedRepository * _Nonnull"
+    - Position: 1
+      Type: "AllsharedAppAnalytics * _Nonnull"
+    - Position: 2
+      Type: "AllsharedBreedAnalytics * _Nonnull"
+  - Selector: "doCopyBreedRepository:appAnalytics:breedAnalytics:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(breedRepository:appAnalytics:breedAnalytics:)"
+    ResultType: "AllsharedSDKHandle * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedRepository * _Nonnull"
+    - Position: 1
+      Type: "AllsharedAppAnalytics * _Nonnull"
+    - Position: 2
+      Type: "AllsharedBreedAnalytics * _Nonnull"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedStartSDKKt"
+  SwiftName: "StartSDKKt"
+  Methods:
+  - Selector: "sayHello"
+    MethodKind: "Class"
+    SwiftName: "sayHello()"
+    ResultType: "NSString * _Nonnull"
+  - Selector: "startSDKAnalytics:"
+    MethodKind: "Class"
+    SwiftName: "startSDK(analytics:)"
+    ResultType: "AllsharedSDKHandle * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedAnalytics> _Nonnull"
+- Name: "AllsharedBreedsBreedRepository"
+  SwiftName: "BreedsBreedRepository"
+  Properties:
+  - Name: "dataEvents"
+    PropertyKind: "Instance"
+    SwiftName: "dataEvents"
+    Type: "AllsharedSkieKotlinSharedFlow<AllsharedBreedsBreedDataEvent *> * _Nonnull"
+  - Name: "dataState"
+    PropertyKind: "Instance"
+    SwiftName: "dataState"
+    Type: "AllsharedSkieKotlinStateFlow<id<AllsharedBreedsBreedDataRefreshState>> * _Nonnull"
+  Methods:
+  - Selector: "getBreeds"
+    MethodKind: "Instance"
+    SwiftName: "getBreeds()"
+    ResultType: "AllsharedSkieKotlinFlow<NSArray<AllsharedBreedsBreed *> *> * _Nonnull"
+  - Selector: "refreshBreedsWithCompletionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__refreshBreeds(completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "refreshBreedsIfStaleWithCompletionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__refreshBreedsIfStale(completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "updateBreedFavoriteBreed:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__updateBreedFavorite(breed:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreed * _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedBreedsBreedRepositoryCompanion"
+  SwiftName: "BreedsBreedRepository.Companion"
+- Name: "AllsharedBreedsBreed"
+  SwiftName: "BreedsBreed"
+  Properties:
+  - Name: "favorite"
+    PropertyKind: "Instance"
+    SwiftName: "favorite"
+    Type: "BOOL"
+  - Name: "id"
+    PropertyKind: "Instance"
+    SwiftName: "id"
+    Type: "int64_t"
+  - Name: "name"
+    PropertyKind: "Instance"
+    SwiftName: "name"
+    Type: "NSString * _Nonnull"
+  Methods:
+  - Selector: "initWithId:name:favorite:"
+    MethodKind: "Instance"
+    SwiftName: "init(id:name:favorite:)"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+    - Position: 1
+      Type: "NSString * _Nonnull"
+    - Position: 2
+      Type: "BOOL"
+  - Selector: "doCopyId:name:favorite:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(id:name:favorite:)"
+    ResultType: "AllsharedBreedsBreed * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+    - Position: 1
+      Type: "NSString * _Nonnull"
+    - Position: 2
+      Type: "BOOL"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataEvent"
+  SwiftName: "BreedsBreedDataEvent"
+- Name: "AllsharedBreedsBreedDataEventError"
+  SwiftName: "BreedsBreedDataEvent.Error"
+  Properties:
+  - Name: "reason"
+    PropertyKind: "Instance"
+    SwiftName: "reason"
+    Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  Methods:
+  - Selector: "initWithReason:"
+    MethodKind: "Instance"
+    SwiftName: "init(reason:)"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Selector: "doCopyReason:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(reason:)"
+    ResultType: "AllsharedBreedsBreedDataEventError * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedAnalyticsNotFetchedReason * _Nonnull"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataEventInitial"
+  SwiftName: "BreedsBreedDataEvent.Initial"
+  Methods:
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataEventLoading"
+  SwiftName: "BreedsBreedDataEvent.Loading"
+  Methods:
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataEventRefreshedSuccess"
+  SwiftName: "BreedsBreedDataEvent.RefreshedSuccess"
+  Methods:
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataState"
+  SwiftName: "BreedsBreedDataState"
+- Name: "AllsharedBreedsBreedDataStateCached"
+  SwiftName: "BreedsBreedDataState.Cached"
+  Properties:
+  - Name: "lastRefresh"
+    PropertyKind: "Instance"
+    SwiftName: "lastRefresh"
+    Type: "int64_t"
+  Methods:
+  - Selector: "initWithLastRefresh:"
+    MethodKind: "Instance"
+    SwiftName: "init(lastRefresh:)"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+  - Selector: "doCopyLastRefresh:"
+    MethodKind: "Instance"
+    SwiftName: "doCopy(lastRefresh:)"
+    ResultType: "AllsharedBreedsBreedDataStateCached * _Nonnull"
+    Parameters:
+    - Position: 0
+      Type: "int64_t"
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "AllsharedBreedsBreedDataStateEmpty"
+  SwiftName: "BreedsBreedDataState.Empty"
+  Methods:
+  - Selector: "isEqual:"
+    MethodKind: "Instance"
+    SwiftName: "isEqual(_:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+  - Selector: "hash"
+    MethodKind: "Instance"
+    SwiftName: "hash()"
+    ResultType: "NSUInteger"
+  - Selector: "description"
+    MethodKind: "Instance"
+    SwiftName: "description()"
+    ResultType: "NSString * _Nonnull"
+- Name: "Allshared__SkieTypeExportsKt"
+  SwiftName: "__SkieTypeExportsKt"
+  Availability: "nonswift"
+  Methods:
+  - Selector: "skieTypeExports_0P0:p1:"
+    MethodKind: "Class"
+    SwiftName: "skieTypeExports_0(p0:p1:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedDataEvent * _Nonnull"
+    - Position: 1
+      Type: "id<AllsharedBreedsBreedDataRefreshState> _Nonnull"
+  - Selector: "skieTypeExports_1P0:p1:p2:p3:p4:p5:"
+    MethodKind: "Class"
+    SwiftName: "skieTypeExports_1(p0:p1:p2:p3:p4:p5:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedDataEventError * _Nonnull"
+    - Position: 1
+      Type: "AllsharedBreedsBreedDataEventInitial * _Nonnull"
+    - Position: 2
+      Type: "AllsharedBreedsBreedDataEventLoading * _Nonnull"
+    - Position: 3
+      Type: "AllsharedBreedsBreedDataEventRefreshedSuccess * _Nonnull"
+    - Position: 4
+      Type: "AllsharedBreedsBreedDataStateCached * _Nonnull"
+    - Position: 5
+      Type: "AllsharedBreedsBreedDataStateEmpty * _Nonnull"
+- Name: "Allshared__SkieSuspendWrappersKt"
+  SwiftName: "__SkieSuspendWrappersKt"
+  Availability: "nonswift"
+  Methods:
+  - Selector: "Skie_Suspend__0__hasNextDispatchReceiver:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__0__hasNext(dispatchReceiver:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedSkieColdFlowIterator<id> * _Nonnull"
+    - Position: 1
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+  - Selector: "Skie_Suspend__1__collectDispatchReceiver:collector:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__1__collect(dispatchReceiver:collector:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlow> _Nonnull"
+    - Position: 1
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 2
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+  - Selector: "Skie_Suspend__2__emitDispatchReceiver:value:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__2__emit(dispatchReceiver:value:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "id _Nullable"
+    - Position: 2
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+  - Selector: "Skie_Suspend__3__refreshBreedsDispatchReceiver:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__3__refreshBreeds(dispatchReceiver:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedRepository * _Nonnull"
+    - Position: 1
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+  - Selector: "Skie_Suspend__4__refreshBreedsIfStaleDispatchReceiver:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__4__refreshBreedsIfStale(dispatchReceiver:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedRepository * _Nonnull"
+    - Position: 1
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+  - Selector: "Skie_Suspend__5__updateBreedFavoriteDispatchReceiver:breed:suspendHandler:"
+    MethodKind: "Class"
+    SwiftName: "Skie_Suspend__5__updateBreedFavorite(dispatchReceiver:breed:suspendHandler:)"
+    Availability: "nonswift"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "AllsharedBreedsBreedRepository * _Nonnull"
+    - Position: 1
+      Type: "AllsharedBreedsBreed * _Nonnull"
+    - Position: 2
+      Type: "AllsharedSkie_SuspendHandler * _Nonnull"
+Protocols:
+- Name: "AllsharedKotlinIterator"
+  SwiftName: "KotlinIterator"
+  Methods:
+  - Selector: "hasNext"
+    MethodKind: "Instance"
+    SwiftName: "hasNext()"
+    ResultType: "BOOL"
+  - Selector: "next"
+    MethodKind: "Instance"
+    SwiftName: "next()"
+    ResultType: "id _Nullable"
+- Name: "AllsharedKotlinComparable"
+  SwiftName: "KotlinComparable"
+  Methods:
+  - Selector: "compareToOther:"
+    MethodKind: "Instance"
+    SwiftName: "compareTo(other:)"
+    ResultType: "int32_t"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+- Name: "AllsharedAnalytics"
+  SwiftName: "Analytics"
+  Methods:
+  - Selector: "sendEventEventName:eventArgs:"
+    MethodKind: "Instance"
+    SwiftName: "sendEvent(eventName:eventArgs:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "NSString * _Nonnull"
+    - Position: 1
+      Type: "NSDictionary<NSString *, id> * _Nonnull"
+- Name: "AllsharedSkie_DispatcherDelegate"
+  SwiftName: "Skie_DispatcherDelegate"
+  SwiftPrivate: true
+  Methods:
+  - Selector: "dispatchBlock:"
+    MethodKind: "Instance"
+    SwiftName: "dispatch(block:)"
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreRunnable> _Nonnull"
+- Name: "AllsharedKotlinx_coroutines_coreFlow"
+  SwiftName: "Kotlinx_coroutines_coreFlow"
+  Methods:
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedKotlinx_coroutines_coreFlowCollector"
+  SwiftName: "Kotlinx_coroutines_coreFlowCollector"
+  Methods:
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedKotlinx_coroutines_coreStateFlow"
+  SwiftName: "Kotlinx_coroutines_coreStateFlow"
+  Properties:
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "id _Nullable"
+- Name: "AllsharedKotlinx_coroutines_coreSharedFlow"
+  SwiftName: "Kotlinx_coroutines_coreSharedFlow"
+  Properties:
+  - Name: "replayCache"
+    PropertyKind: "Instance"
+    SwiftName: "replayCache"
+    Type: "NSArray<id> * _Nonnull"
+  Methods:
+  - Selector: "collectCollector:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__collect(collector:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id<AllsharedKotlinx_coroutines_coreFlowCollector> _Nonnull"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+- Name: "AllsharedKotlinx_coroutines_coreMutableSharedFlow"
+  SwiftName: "Kotlinx_coroutines_coreMutableSharedFlow"
+  Properties:
+  - Name: "subscriptionCount"
+    PropertyKind: "Instance"
+    SwiftName: "subscriptionCount"
+    Type: "AllsharedSkieKotlinStateFlow<AllsharedInt *> * _Nonnull"
+  Methods:
+  - Selector: "emitValue:completionHandler:"
+    MethodKind: "Instance"
+    SwiftName: "__emit(value:completionHandler:)"
+    SwiftPrivate: true
+    ResultType: "void"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+    - Position: 1
+      Type: "void (^ _Nonnull)(NSError * _Nullable)"
+  - Selector: "resetReplayCache"
+    MethodKind: "Instance"
+    SwiftName: "resetReplayCache()"
+    ResultType: "void"
+  - Selector: "tryEmitValue:"
+    MethodKind: "Instance"
+    SwiftName: "tryEmit(value:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+- Name: "AllsharedKotlinx_coroutines_coreMutableStateFlow"
+  SwiftName: "Kotlinx_coroutines_coreMutableStateFlow"
+  Properties:
+  - Name: "value"
+    PropertyKind: "Instance"
+    SwiftName: "value"
+    Type: "id _Nullable"
+  Methods:
+  - Selector: "compareAndSetExpect:update:"
+    MethodKind: "Instance"
+    SwiftName: "compareAndSet(expect:update:)"
+    ResultType: "BOOL"
+    Parameters:
+    - Position: 0
+      Type: "id _Nullable"
+    - Position: 1
+      Type: "id _Nullable"
+- Name: "AllsharedKotlinx_coroutines_coreRunnable"
+  SwiftName: "Kotlinx_coroutines_coreRunnable"
+  Methods:
+  - Selector: "run"
+    MethodKind: "Instance"
+    SwiftName: "run()"
+    ResultType: "void"
+- Name: "AllsharedBreedsBreedDataRefreshState"
+  SwiftName: "BreedsBreedDataRefreshState"

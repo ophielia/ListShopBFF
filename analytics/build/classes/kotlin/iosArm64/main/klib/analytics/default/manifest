@@ -1,0 +1,9 @@
+abi_version=1.201.0
+builtins_platform=NATIVE
+compiler_version=2.1.0
+depends=stdlib co.touchlab\:stately-strict co.touchlab\:stately-concurrency
+ir_signature_versions=1,2
+metadata_version=1.4.1
+native_targets=ios_arm64
+short_name=analytics
+unique_name=meg.listshop.bff\:analytics

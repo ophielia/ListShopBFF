@@ -1,0 +1,142 @@
+{
+  "projectStructure": {
+    "formatVersion": "0.3.3",
+    "isPublishedAsRoot": "true",
+    "variants": [
+      {
+        "name": "debugApiElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      },
+      {
+        "name": "debugRuntimeElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      },
+      {
+        "name": "releaseApiElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      },
+      {
+        "name": "releaseRuntimeElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      },
+      {
+        "name": "iosArm64ApiElements",
+        "sourceSet": [
+          "iosMain",
+          "appleMain",
+          "nativeMain",
+          "commonMain"
+        ]
+      },
+      {
+        "name": "iosSimulatorArm64ApiElements",
+        "sourceSet": [
+          "iosMain",
+          "appleMain",
+          "nativeMain",
+          "commonMain"
+        ]
+      },
+      {
+        "name": "iosX64ApiElements",
+        "sourceSet": [
+          "iosMain",
+          "appleMain",
+          "nativeMain",
+          "commonMain"
+        ]
+      }
+    ],
+    "sourceSets": [
+      {
+        "name": "appleMain",
+        "dependsOn": [
+          "nativeMain"
+        ],
+        "moduleDependency": [
+          "app.cash.sqldelight:runtime",
+          "org.jetbrains.kotlin:kotlin-stdlib",
+          "meg.listshop.bff:analytics",
+          "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+          "io.ktor:ktor-client-core",
+          "io.ktor:ktor-client-logging",
+          "io.ktor:ktor-serialization-kotlinx-json",
+          "io.ktor:ktor-client-content-negotiation",
+          "com.russhwolf:multiplatform-settings",
+          "org.jetbrains.kotlinx:kotlinx-datetime",
+          "co.touchlab:kermit",
+          "app.cash.sqldelight:coroutines-extensions"
+        ],
+        "sourceSetCInteropMetadataDirectory": "appleMain-cinterop",
+        "binaryLayout": "klib",
+        "hostSpecific": "true"
+      },
+      {
+        "name": "commonMain",
+        "dependsOn": [],
+        "moduleDependency": [
+          "app.cash.sqldelight:runtime",
+          "org.jetbrains.kotlin:kotlin-stdlib"
+        ],
+        "binaryLayout": "klib"
+      },
+      {
+        "name": "iosMain",
+        "dependsOn": [
+          "appleMain"
+        ],
+        "moduleDependency": [
+          "app.cash.sqldelight:runtime",
+          "org.jetbrains.kotlin:kotlin-stdlib",
+          "meg.listshop.bff:analytics",
+          "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+          "io.ktor:ktor-client-core",
+          "io.ktor:ktor-client-logging",
+          "io.ktor:ktor-serialization-kotlinx-json",
+          "io.ktor:ktor-client-content-negotiation",
+          "com.russhwolf:multiplatform-settings",
+          "org.jetbrains.kotlinx:kotlinx-datetime",
+          "co.touchlab:kermit",
+          "app.cash.sqldelight:coroutines-extensions",
+          "co.touchlab:stately-common",
+          "app.cash.sqldelight:native-driver",
+          "io.ktor:ktor-client-ios"
+        ],
+        "sourceSetCInteropMetadataDirectory": "iosMain-cinterop",
+        "binaryLayout": "klib",
+        "hostSpecific": "true"
+      },
+      {
+        "name": "nativeMain",
+        "dependsOn": [
+          "commonMain"
+        ],
+        "moduleDependency": [
+          "app.cash.sqldelight:runtime",
+          "org.jetbrains.kotlin:kotlin-stdlib",
+          "meg.listshop.bff:analytics",
+          "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+          "io.ktor:ktor-client-core",
+          "io.ktor:ktor-client-logging",
+          "io.ktor:ktor-serialization-kotlinx-json",
+          "io.ktor:ktor-client-content-negotiation",
+          "com.russhwolf:multiplatform-settings",
+          "org.jetbrains.kotlinx:kotlinx-datetime",
+          "co.touchlab:kermit",
+          "app.cash.sqldelight:coroutines-extensions"
+        ],
+        "sourceSetCInteropMetadataDirectory": "nativeMain-cinterop",
+        "binaryLayout": "klib",
+        "hostSpecific": "true"
+      }
+    ]
+  }
+}
