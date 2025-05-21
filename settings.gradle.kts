@@ -16,4 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-include("breeds", "analytics", "allshared", ":testapps:android")
+
+include("breeds", "listshop", "analytics", "allshared", ":testapps:android")

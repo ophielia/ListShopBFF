@@ -1,0 +1,26 @@
+CREATE TABLE UserInfoEntity (
+    userName TEXT,
+    userToken TEXT,
+    userCreated TEXT,
+    userLastSeen TEXT,
+    userLastSignedIn TEXT
+);
+
+insertIntoUserInfo:
+INSERT INTO UserInfoEntity(userName, userToken, userCreated, userLastSeen, userLastSignedIn )
+VALUES (?, ?,?,?,?);
+
+
+updateUserInfo:
+UPDATE UserInfoEntity
+  SET userName = ?,
+      userToken = ?,
+      userCreated = ?,
+      userLastSeen = ?,
+      userLastSignedIn = ?;
+
+selectAllUserInfos:
+SELECT UserInfoEntity.* FROM UserInfoEntity;
+
+removeAllUserInfo:
+DELETE FROM UserInfoEntity;

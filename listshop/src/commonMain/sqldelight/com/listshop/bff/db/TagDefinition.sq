@@ -1,0 +1,24 @@
+import kotlin.Boolean;
+
+CREATE TABLE TagLookupEntity (
+    externalId TEXT,
+    isGroup INTEGER AS Boolean NOT NULL,
+    name TEXT,
+    parentId TEXT,
+    power TEXT,
+    tagType TEXT,
+    userId TEXT
+
+);
+
+insertIntoTagLookup:
+INSERT INTO TagLookupEntity(externalId, isGroup, name, parentId, power, tagType, userId)
+VALUES (?,?,?,?,?,?,?);
+
+
+removeAllTagLookups:
+DELETE FROM TagLookupEntity;
+
+selectAllTagLookups:
+SELECT TagLookupEntity.*
+FROM TagLookupEntity;
