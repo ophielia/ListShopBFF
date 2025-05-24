@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.android.library)
+    id("dev.mokkery")
     `maven-publish`
 }
 
@@ -24,9 +25,26 @@ kotlin {
             implementation(libs.touchlab.kermit)
             implementation(libs.sqlDelight.coroutinesExt)
         }
+        commonTest.dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                implementation(libs.coroutines.test)
+                implementation(libs.kotest.framework.engine)
+                implementation(libs.kotest.assertions.core)
+                implementation("com.goncalossilva:resources:0.4.0")
+        }
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)
             implementation(libs.ktor.client.okHttp)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(kotlin("test-junit"))
+            implementation(libs.junit)
+            implementation(libs.sqldelight.jdbc.driver)
+            implementation(libs.sqldelight.sqlite.driver)
+            implementation(libs.mock.server)
+            implementation(libs.google.gson)
         }
         iosMain.dependencies {
             implementation(libs.touchlab.stately.common)
@@ -34,6 +52,7 @@ kotlin {
             implementation(libs.ktor.client.ios)
         }
     }
+    task("testClasses")
 }
 
 android {

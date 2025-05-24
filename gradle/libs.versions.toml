@@ -12,6 +12,7 @@ coroutines = "1.10.1"
 kotlinx-datetime = "0.6.1"
 ktor = "3.0.1"
 
+
 stately = "2.1.0"
 kermit = "2.0.5"
 skie = "0.10.0"
@@ -21,6 +22,12 @@ sqlDelight = "2.0.2"
 
 compose = "1.7.6"
 composeCompiler = "1.5.15"
+
+# Test
+mokkery = "2.6.0"
+gson = "2.11.0"
+mock-server = "4.12.0"
+kotest = "5.8.1"
 
 # Sample - Android
 androidx-core = "1.15.0"
@@ -52,6 +59,16 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 touchlab-stately-common = { module = "co.touchlab:stately-common", version.ref = "stately" }
 touchlab-stately-concurrency = { module = "co.touchlab:stately-concurrency", version.ref = "stately" }
+
+# Test
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+mock-server = { module = "com.squareup.okhttp3:mockwebserver" , version.ref = "mock-server"}
+google-gson =  { module = "com.google.code.gson:gson", version.ref = "gson"}
+sqldelight-jdbc-driver = { module = "app.cash.sqldelight:jdbc-driver", version.ref = "sqlDelight" }
+sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 
 # Sample - Android
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }

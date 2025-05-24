@@ -23,6 +23,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":breeds"))
+            implementation(project(":listshop"))
             api(project(":analytics"))
         }
     }

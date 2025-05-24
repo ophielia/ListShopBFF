@@ -1,0 +1,8 @@
+{
+  "label": "loginSuccess",
+  "requestMethod": "POST",
+  "requestPath": "/auth",
+  "requestBodyFilename": "loginSuccessRequest.json",
+  "responseStatus": 200,
+  "responseBodyFilename": "loginSuccessResponse.json"
+}

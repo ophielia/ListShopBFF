@@ -1,0 +1,8 @@
+{
+  "label": "getAllShoppingListsError",
+  "requestMethod": "GET",
+  "requestPath": "/shoppinglist",
+  "requestBodyFilename": "",
+  "responseStatus": 500,
+  "responseBodyFilename": "getAllShoppingListsErrorResponse.json"
+}

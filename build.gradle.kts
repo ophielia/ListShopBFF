@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.sqlDelight) apply false
     alias(libs.plugins.skie) apply false
     alias(libs.plugins.compose.compiler) apply false
+    id("dev.mokkery") version libs.versions.mokkery.get() apply false
 }
 
 subprojects {
