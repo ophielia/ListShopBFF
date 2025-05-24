@@ -1,0 +1,1276 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -Onone -module-name allshared
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_exported import allshared
+public enum Skie {
+  public enum RuntimeKotlin {
+    public enum SkieColdFlowIterator {
+      public typealias __Kotlin = allshared.SkieColdFlowIterator
+    }
+    public enum SkieKotlinFlow {
+      public typealias __Kotlin = allshared.SkieKotlinFlow
+    }
+    public enum SkieKotlinMutableSharedFlow {
+      public typealias __Kotlin = allshared.SkieKotlinMutableSharedFlow
+    }
+    public enum SkieKotlinMutableStateFlow {
+      public typealias __Kotlin = allshared.SkieKotlinMutableStateFlow
+    }
+    public enum SkieKotlinOptionalFlow {
+      public typealias __Kotlin = allshared.SkieKotlinOptionalFlow
+    }
+    public enum SkieKotlinOptionalMutableSharedFlow {
+      public typealias __Kotlin = allshared.SkieKotlinOptionalMutableSharedFlow
+    }
+    public enum SkieKotlinOptionalMutableStateFlow {
+      public typealias __Kotlin = allshared.SkieKotlinOptionalMutableStateFlow
+    }
+    public enum SkieKotlinOptionalSharedFlow {
+      public typealias __Kotlin = allshared.SkieKotlinOptionalSharedFlow
+    }
+    public enum SkieKotlinOptionalStateFlow {
+      public typealias __Kotlin = allshared.SkieKotlinOptionalStateFlow
+    }
+    public enum SkieKotlinSharedFlow {
+      public typealias __Kotlin = allshared.SkieKotlinSharedFlow
+    }
+    public enum SkieKotlinStateFlow {
+      public typealias __Kotlin = allshared.SkieKotlinStateFlow
+    }
+    public enum Skie_CancellationHandler {
+      public typealias __Kotlin = allshared.Skie_CancellationHandler
+    }
+    public enum Skie_DispatcherDelegate {
+      public typealias __Kotlin = allshared.Skie_DispatcherDelegate
+    }
+    public enum Skie_SuspendHandler {
+      public typealias __Kotlin = allshared.Skie_SuspendHandler
+    }
+    public enum Skie_SuspendResult {
+      public typealias __Kotlin = allshared.Skie_SuspendResult
+      public enum Success {
+        public typealias __Kotlin = allshared.Skie_SuspendResult.Success
+      }
+      public enum Error {
+        public typealias __Kotlin = allshared.Skie_SuspendResult.Error
+      }
+      public enum Canceled {
+        public typealias __Kotlin = allshared.Skie_SuspendResult.Canceled
+      }
+    }
+  }
+  public typealias co_touchlab_skie__runtime_kotlin = allshared.Skie.RuntimeKotlin
+  public enum KotlinxCoroutinesCore {
+    public enum Flow {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreFlow
+    }
+    public enum StateFlow {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreStateFlow
+    }
+    public enum SharedFlow {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreSharedFlow
+    }
+    public enum MutableSharedFlow {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreMutableSharedFlow
+    }
+    public enum MutableStateFlow {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreMutableStateFlow
+    }
+    public enum Runnable {
+      public typealias __Kotlin = allshared.Kotlinx_coroutines_coreRunnable
+    }
+  }
+  public typealias org_jetbrains_kotlinx__kotlinx_coroutines_core = allshared.Skie.KotlinxCoroutinesCore
+  public enum Listshop {
+    public enum TransitionViewState {
+    }
+  }
+  public typealias meg_listshop_bff__listshop = allshared.Skie.Listshop
+  public enum KotlinxSerializationCore {
+    public enum SerialKind {
+    }
+    public enum SerializersModule {
+    }
+    public enum PolymorphicKind {
+    }
+    public enum PrimitiveKind {
+    }
+    public enum StructureKind {
+    }
+  }
+  public typealias org_jetbrains_kotlinx__kotlinx_serialization_core = allshared.Skie.KotlinxSerializationCore
+}
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers public class SkieSwiftFlowIterator<T> : _Concurrency.AsyncIteratorProtocol {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func next() async -> T?
+  #endif
+  @objc deinit
+  public typealias Element = T
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+#if $PrimaryAssociatedTypes2
+public protocol SkieSwiftFlowProtocol<Element> : _Concurrency.AsyncSequence {
+  associatedtype Element
+  associatedtype Delegate : allshared.Kotlinx_coroutines_coreFlow
+  @_spi(SKIE) var delegate: Self.Delegate { get }
+}
+#else
+public protocol SkieSwiftFlowProtocol : _Concurrency.AsyncSequence {
+  associatedtype Element
+  associatedtype Delegate : allshared.Kotlinx_coroutines_coreFlow
+  @_spi(SKIE) var delegate: Self.Delegate { get }
+}
+#endif
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreFlow
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T>
+  public typealias Element = T
+  public typealias _ObjectiveCType = allshared.SkieKotlinFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftOptionalFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreFlow
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinOptionalFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T?>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T?>
+  public typealias Element = T?
+  public typealias _ObjectiveCType = allshared.SkieKotlinOptionalFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftSharedFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreSharedFlow
+  final public var replayCache: [T] {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftSharedFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftSharedFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinSharedFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinSharedFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T>
+  public typealias Element = T
+  public typealias _ObjectiveCType = allshared.SkieKotlinSharedFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreSharedFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftOptionalSharedFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreSharedFlow
+  final public var replayCache: [T?] {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalSharedFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalSharedFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalSharedFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinOptionalSharedFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T?>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T?>
+  public typealias Element = T?
+  public typealias _ObjectiveCType = allshared.SkieKotlinOptionalSharedFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreSharedFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftMutableSharedFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreMutableSharedFlow
+  final public var subscriptionCount: allshared.SkieSwiftStateFlow<allshared.KotlinInt> {
+    get
+  }
+  final public var replayCache: [T] {
+    get
+  }
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  final public func emit(value: T) async throws
+  #endif
+  final public func tryEmit(value: T) -> Swift.Bool
+  final public func resetReplayCache()
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftMutableSharedFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftMutableSharedFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableSharedFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinMutableSharedFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T>
+  public typealias Element = T
+  public typealias _ObjectiveCType = allshared.SkieKotlinMutableSharedFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreMutableSharedFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftOptionalMutableSharedFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreMutableSharedFlow
+  final public var subscriptionCount: allshared.SkieSwiftStateFlow<allshared.KotlinInt> {
+    get
+  }
+  final public var replayCache: [T?] {
+    get
+  }
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  final public func emit(value: T?) async throws
+  #endif
+  final public func tryEmit(value: T?) -> Swift.Bool
+  final public func resetReplayCache()
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalMutableSharedFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableSharedFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalMutableSharedFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableSharedFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinOptionalMutableSharedFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T?>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T?>
+  public typealias Element = T?
+  public typealias _ObjectiveCType = allshared.SkieKotlinOptionalMutableSharedFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreMutableSharedFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftStateFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreStateFlow
+  final public var value: T {
+    get
+  }
+  final public var replayCache: [T] {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftStateFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftStateFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinStateFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinStateFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T>
+  public typealias Element = T
+  public typealias _ObjectiveCType = allshared.SkieKotlinStateFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreStateFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftOptionalStateFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreStateFlow
+  final public var value: T? {
+    get
+  }
+  final public var replayCache: [T?] {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalStateFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalStateFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalStateFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinOptionalStateFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T?>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T?>
+  public typealias Element = T?
+  public typealias _ObjectiveCType = allshared.SkieKotlinOptionalStateFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreStateFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftMutableStateFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreMutableStateFlow
+  final public var value: T {
+    get
+    set(value)
+  }
+  final public var replayCache: [T] {
+    get
+  }
+  final public var subscriptionCount: allshared.SkieSwiftStateFlow<allshared.KotlinInt> {
+    get
+  }
+  final public func compareAndSet(expect: T, update: T) -> Swift.Bool
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  final public func emit(value: T) async throws
+  #endif
+  final public func tryEmit(value: T) -> Swift.Bool
+  final public func resetReplayCache()
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftMutableStateFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftMutableStateFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinMutableStateFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinMutableStateFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T>
+  public typealias Element = T
+  public typealias _ObjectiveCType = allshared.SkieKotlinMutableStateFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreMutableStateFlow
+  @objc deinit
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@_hasMissingDesignatedInitializers final public class SkieSwiftOptionalMutableStateFlow<T> : allshared.SkieSwiftFlowProtocol, Swift._ObjectiveCBridgeable {
+  @_spi(SKIE) final public let delegate: any allshared.Kotlinx_coroutines_coreMutableStateFlow
+  final public var value: T? {
+    get
+    set(value)
+  }
+  final public var replayCache: [T?] {
+    get
+  }
+  final public var subscriptionCount: allshared.SkieSwiftStateFlow<allshared.KotlinInt> {
+    get
+  }
+  final public func compareAndSet(expect: T?, update: T?) -> Swift.Bool
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  final public func emit(value: T?) async throws
+  #endif
+  final public func tryEmit(value: T?) -> Swift.Bool
+  final public func resetReplayCache()
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalMutableStateFlow<T>?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableStateFlow<Swift.AnyObject>, result: inout allshared.SkieSwiftOptionalMutableStateFlow<T>?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.SkieKotlinOptionalMutableStateFlow<Swift.AnyObject>?) -> Self
+  final public func _bridgeToObjectiveC() -> allshared.SkieKotlinOptionalMutableStateFlow<Swift.AnyObject>
+  final public func makeAsyncIterator() -> allshared.SkieSwiftFlowIterator<T?>
+  public typealias AsyncIterator = allshared.SkieSwiftFlowIterator<T?>
+  public typealias Element = T?
+  public typealias _ObjectiveCType = allshared.SkieKotlinOptionalMutableStateFlow<Swift.AnyObject>
+  public typealias Delegate = any allshared.Kotlinx_coroutines_coreMutableStateFlow
+  @objc deinit
+}
+#endif
+extension allshared.Skie.RuntimeKotlin.SkieColdFlowIterator {
+  public struct __Suspend<E> where E : AnyObject {
+    public let __kotlinObject: allshared.SkieColdFlowIterator<E>
+    public init(_ __kotlinObject: allshared.SkieColdFlowIterator<E>)
+  }
+}
+public func skie<E>(_ kotlinObject: allshared.SkieColdFlowIterator<E>) -> allshared.Skie.RuntimeKotlin.SkieColdFlowIterator.__Suspend<E> where E : AnyObject
+extension allshared.Skie.RuntimeKotlin.SkieColdFlowIterator.__Suspend {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func hasNext() async throws -> allshared.KotlinBoolean
+  #endif
+}
+extension allshared.Kotlinx_coroutines_coreFlow {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func collect(collector: any allshared.Kotlinx_coroutines_coreFlowCollector) async throws
+  #endif
+}
+extension allshared.Kotlinx_coroutines_coreFlowCollector {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func emit(value: Any?) async throws
+  #endif
+}
+extension allshared.ListshopDashboardUCP {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func logout() async throws -> allshared.ListshopBFFResult<allshared.ListshopTransitionViewState>
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func navigateToDashboard() async throws -> allshared.ListshopBFFResult<allshared.ListshopTransitionViewState>
+  #endif
+}
+extension allshared.ListshopOnboardingUCP {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func signIn(userName: Swift.String, password: Swift.String) async throws -> allshared.ListshopBFFResult<allshared.ListshopTransitionViewState>
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func systemGetLaunchScreen(connectionStatus: allshared.ListshopConnectionStatus) async throws -> allshared.ListshopBFFResult<allshared.ListshopTransitionViewState>
+  #endif
+}
+extension allshared.ListshopTagUCP {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, *)
+  public func getTags(forceReload: Swift.Bool) async throws -> [allshared.ListshopTag]
+  #endif
+}
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftFlow<T>) -> allshared.SkieKotlinFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftFlow<T>) -> allshared.SkieKotlinFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinSharedFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftSharedFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftSharedFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalSharedFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalSharedFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinMutableSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinMutableSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinMutableSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftMutableSharedFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftMutableSharedFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalMutableSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalMutableSharedFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableSharedFlow<T>(_ flow: allshared.SkieSwiftMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalMutableSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableSharedFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>) -> allshared.SkieKotlinOptionalMutableSharedFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalMutableSharedFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalMutableSharedFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableSharedFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableSharedFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinStateFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinStateFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftStateFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftStateFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftOptionalStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalStateFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalStateFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalStateFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinMutableStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinMutableStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinMutableStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftMutableStateFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftMutableStateFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalMutableStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableStateFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalMutableStateFlow<T> where T : AnyObject
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableStateFlow<T>(_ flow: allshared.SkieSwiftMutableStateFlow<T>) -> allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+public func SkieKotlinOptionalMutableStateFlow<T>(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>) -> allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType> where T : Swift._ObjectiveCBridgeable
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalMutableStateFlow where T : AnyObject {
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension allshared.SkieSwiftOptionalMutableStateFlow where T : Swift._ObjectiveCBridgeable {
+  convenience public init(_ flow: allshared.SkieKotlinMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieKotlinOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T._ObjectiveCType>)
+  convenience public init(_ flow: allshared.SkieSwiftMutableStateFlow<T>)
+  convenience public init(_ flow: allshared.SkieSwiftOptionalMutableStateFlow<T>)
+}
+#endif
+extension allshared.ListShopAnalytics {
+  public typealias NotFetchedReason = allshared.__Bridge__ListShopAnalytics_NotFetchedReason
+}
+extension allshared.__Bridge__ListShopAnalytics_NotFetchedReason {
+  public func toKotlinEnum() -> allshared.ListShopAnalytics.__NotFetchedReason
+}
+extension allshared.ListShopAnalytics.__NotFetchedReason {
+  public func toSwiftEnum() -> allshared.ListShopAnalytics.NotFetchedReason
+}
+@frozen public enum __Bridge__ListShopAnalytics_NotFetchedReason : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case notStale
+  case networkError
+  case randomFail
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.ListShopAnalytics.__NotFetchedReason, result: inout allshared.ListShopAnalytics.NotFetchedReason?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.ListShopAnalytics.__NotFetchedReason, result: inout allshared.ListShopAnalytics.NotFetchedReason?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.ListShopAnalytics.__NotFetchedReason?) -> allshared.__Bridge__ListShopAnalytics_NotFetchedReason
+  public func _bridgeToObjectiveC() -> allshared.ListShopAnalytics.__NotFetchedReason
+  public typealias _ObjectiveCType = allshared.ListShopAnalytics.__NotFetchedReason
+  public static func == (a: allshared.__Bridge__ListShopAnalytics_NotFetchedReason, b: allshared.__Bridge__ListShopAnalytics_NotFetchedReason) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.__Bridge__ListShopAnalytics_NotFetchedReason]
+  public static var allCases: [allshared.__Bridge__ListShopAnalytics_NotFetchedReason] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@frozen public enum ListshopUserSessionState : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case user
+  case userLoggedOut
+  case anon
+  case anonNoList
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopUserSessionState, result: inout allshared.ListshopUserSessionState?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopUserSessionState, result: inout allshared.ListshopUserSessionState?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopUserSessionState?) -> allshared.ListshopUserSessionState
+  public func _bridgeToObjectiveC() -> allshared.__ListshopUserSessionState
+  public typealias _ObjectiveCType = allshared.__ListshopUserSessionState
+  public static func == (a: allshared.ListshopUserSessionState, b: allshared.ListshopUserSessionState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopUserSessionState]
+  public static var allCases: [allshared.ListshopUserSessionState] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopUserSessionState {
+  public func toKotlinEnum() -> allshared.__ListshopUserSessionState
+}
+extension allshared.__ListshopUserSessionState {
+  public func toSwiftEnum() -> allshared.ListshopUserSessionState
+}
+@frozen public enum ListshopBFFErrorSubtype : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case cantLogin
+  case cantConnect
+  case unknown
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorSubtype, result: inout allshared.ListshopBFFErrorSubtype?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorSubtype, result: inout allshared.ListshopBFFErrorSubtype?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorSubtype?) -> allshared.ListshopBFFErrorSubtype
+  public func _bridgeToObjectiveC() -> allshared.__ListshopBFFErrorSubtype
+  public typealias _ObjectiveCType = allshared.__ListshopBFFErrorSubtype
+  public static func == (a: allshared.ListshopBFFErrorSubtype, b: allshared.ListshopBFFErrorSubtype) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopBFFErrorSubtype]
+  public static var allCases: [allshared.ListshopBFFErrorSubtype] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopBFFErrorSubtype {
+  public func toKotlinEnum() -> allshared.__ListshopBFFErrorSubtype
+}
+extension allshared.__ListshopBFFErrorSubtype {
+  public func toSwiftEnum() -> allshared.ListshopBFFErrorSubtype
+}
+@frozen public enum ListshopBFFErrorType : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case api
+  case authentication
+  case unknown
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorType, result: inout allshared.ListshopBFFErrorType?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorType, result: inout allshared.ListshopBFFErrorType?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopBFFErrorType?) -> allshared.ListshopBFFErrorType
+  public func _bridgeToObjectiveC() -> allshared.__ListshopBFFErrorType
+  public typealias _ObjectiveCType = allshared.__ListshopBFFErrorType
+  public static func == (a: allshared.ListshopBFFErrorType, b: allshared.ListshopBFFErrorType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopBFFErrorType]
+  public static var allCases: [allshared.ListshopBFFErrorType] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopBFFErrorType {
+  public func toKotlinEnum() -> allshared.__ListshopBFFErrorType
+}
+extension allshared.__ListshopBFFErrorType {
+  public func toSwiftEnum() -> allshared.ListshopBFFErrorType
+}
+@frozen public enum ListshopConnectionStatus : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case online
+  case offline
+  case unknown
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopConnectionStatus, result: inout allshared.ListshopConnectionStatus?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopConnectionStatus, result: inout allshared.ListshopConnectionStatus?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopConnectionStatus?) -> allshared.ListshopConnectionStatus
+  public func _bridgeToObjectiveC() -> allshared.__ListshopConnectionStatus
+  public typealias _ObjectiveCType = allshared.__ListshopConnectionStatus
+  public static func == (a: allshared.ListshopConnectionStatus, b: allshared.ListshopConnectionStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopConnectionStatus]
+  public static var allCases: [allshared.ListshopConnectionStatus] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopConnectionStatus {
+  public func toKotlinEnum() -> allshared.__ListshopConnectionStatus
+}
+extension allshared.__ListshopConnectionStatus {
+  public func toSwiftEnum() -> allshared.ListshopConnectionStatus
+}
+@frozen public enum ListshopDashboardViewState : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case accountView
+  case accountLoggedOut
+  case accountNoAccount
+  case changePassword
+  case delete
+  case deleteConfirm
+  case mainDashboard
+  case guidesAndSupport
+  case about
+  case aboutTheApp
+  case thirdParty
+  case privacy
+  case fullPrivacy
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopDashboardViewState, result: inout allshared.ListshopDashboardViewState?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopDashboardViewState, result: inout allshared.ListshopDashboardViewState?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopDashboardViewState?) -> allshared.ListshopDashboardViewState
+  public func _bridgeToObjectiveC() -> allshared.__ListshopDashboardViewState
+  public typealias _ObjectiveCType = allshared.__ListshopDashboardViewState
+  public static func == (a: allshared.ListshopDashboardViewState, b: allshared.ListshopDashboardViewState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopDashboardViewState]
+  public static var allCases: [allshared.ListshopDashboardViewState] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopDashboardViewState {
+  public func toKotlinEnum() -> allshared.__ListshopDashboardViewState
+}
+extension allshared.__ListshopDashboardViewState {
+  public func toSwiftEnum() -> allshared.ListshopDashboardViewState
+}
+@frozen public enum ListshopOnboardingViewState : Swift.Hashable, Swift.CaseIterable, Swift._ObjectiveCBridgeable {
+  case choose
+  case signIn
+  case signUp
+  case forgotPassword
+  case passwordProcessed
+  case loggedIn
+  public var name: Swift.String {
+    get
+  }
+  public var ordinal: Swift.Int32 {
+    get
+  }
+  public static func _forceBridgeFromObjectiveC(_ source: allshared.__ListshopOnboardingViewState, result: inout allshared.ListshopOnboardingViewState?)
+  public static func _conditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopOnboardingViewState, result: inout allshared.ListshopOnboardingViewState?) -> Swift.Bool
+  public static func _unconditionallyBridgeFromObjectiveC(_ source: allshared.__ListshopOnboardingViewState?) -> allshared.ListshopOnboardingViewState
+  public func _bridgeToObjectiveC() -> allshared.__ListshopOnboardingViewState
+  public typealias _ObjectiveCType = allshared.__ListshopOnboardingViewState
+  public static func == (a: allshared.ListshopOnboardingViewState, b: allshared.ListshopOnboardingViewState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [allshared.ListshopOnboardingViewState]
+  public static var allCases: [allshared.ListshopOnboardingViewState] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension allshared.ListshopOnboardingViewState {
+  public func toKotlinEnum() -> allshared.__ListshopOnboardingViewState
+}
+extension allshared.__ListshopOnboardingViewState {
+  public func toSwiftEnum() -> allshared.ListshopOnboardingViewState
+}
+extension allshared.Skie.RuntimeKotlin.Skie_SuspendResult {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case canceled(allshared.Skie_SuspendResult.Canceled)
+    case error(allshared.Skie_SuspendResult.Error)
+    case success(allshared.Skie_SuspendResult.Success)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.RuntimeKotlin.Skie_SuspendResult.__Sealed, b: allshared.Skie.RuntimeKotlin.Skie_SuspendResult.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.RuntimeKotlin.Skie_SuspendResult.__Sealed where __Sealed : allshared.Skie_SuspendResult
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.RuntimeKotlin.Skie_SuspendResult.__Sealed? where __Sealed : allshared.Skie_SuspendResult
+extension allshared.Skie.Listshop.TransitionViewState {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case dashboard(allshared.ListshopTransitionViewState.Dashboard)
+    case launching(allshared.ListshopTransitionViewState.Launching)
+    case listManagementScreen(allshared.ListshopTransitionViewState.ListManagementScreen)
+    case onboarding(allshared.ListshopTransitionViewState.Onboarding)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.Listshop.TransitionViewState.__Sealed, b: allshared.Skie.Listshop.TransitionViewState.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.Listshop.TransitionViewState.__Sealed where __Sealed : allshared.ListshopTransitionViewState
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.Listshop.TransitionViewState.__Sealed? where __Sealed : allshared.ListshopTransitionViewState
+extension allshared.Skie.KotlinxSerializationCore.SerialKind {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case polymorphicKind(allshared.Kotlinx_serialization_corePolymorphicKind)
+    case primitiveKind(allshared.Kotlinx_serialization_corePrimitiveKind)
+    case cONTEXTUAL(allshared.Kotlinx_serialization_coreSerialKind.CONTEXTUAL)
+    case eNUM(allshared.Kotlinx_serialization_coreSerialKind.ENUM)
+    case structureKind(allshared.Kotlinx_serialization_coreStructureKind)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.KotlinxSerializationCore.SerialKind.__Sealed, b: allshared.Skie.KotlinxSerializationCore.SerialKind.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.KotlinxSerializationCore.SerialKind.__Sealed where __Sealed : allshared.Kotlinx_serialization_coreSerialKind
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.KotlinxSerializationCore.SerialKind.__Sealed? where __Sealed : allshared.Kotlinx_serialization_coreSerialKind
+extension allshared.Skie.KotlinxSerializationCore.SerializersModule {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case `else`
+    public static func == (a: allshared.Skie.KotlinxSerializationCore.SerializersModule.__Sealed, b: allshared.Skie.KotlinxSerializationCore.SerializersModule.__Sealed) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.KotlinxSerializationCore.SerializersModule.__Sealed where __Sealed : allshared.Kotlinx_serialization_coreSerializersModule
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.KotlinxSerializationCore.SerializersModule.__Sealed? where __Sealed : allshared.Kotlinx_serialization_coreSerializersModule
+extension allshared.Skie.KotlinxSerializationCore.PolymorphicKind {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case oPEN(allshared.Kotlinx_serialization_corePolymorphicKind.OPEN)
+    case sEALED(allshared.Kotlinx_serialization_corePolymorphicKind.SEALED)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.KotlinxSerializationCore.PolymorphicKind.__Sealed, b: allshared.Skie.KotlinxSerializationCore.PolymorphicKind.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.KotlinxSerializationCore.PolymorphicKind.__Sealed where __Sealed : allshared.Kotlinx_serialization_corePolymorphicKind
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.KotlinxSerializationCore.PolymorphicKind.__Sealed? where __Sealed : allshared.Kotlinx_serialization_corePolymorphicKind
+extension allshared.Skie.KotlinxSerializationCore.PrimitiveKind {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case bOOLEAN(allshared.Kotlinx_serialization_corePrimitiveKind.BOOLEAN)
+    case bYTE(allshared.Kotlinx_serialization_corePrimitiveKind.BYTE)
+    case cHAR(allshared.Kotlinx_serialization_corePrimitiveKind.CHAR)
+    case dOUBLE(allshared.Kotlinx_serialization_corePrimitiveKind.DOUBLE)
+    case fLOAT(allshared.Kotlinx_serialization_corePrimitiveKind.FLOAT)
+    case iNT(allshared.Kotlinx_serialization_corePrimitiveKind.INT)
+    case lONG(allshared.Kotlinx_serialization_corePrimitiveKind.LONG)
+    case sHORT(allshared.Kotlinx_serialization_corePrimitiveKind.SHORT)
+    case sTRING(allshared.Kotlinx_serialization_corePrimitiveKind.STRING)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.KotlinxSerializationCore.PrimitiveKind.__Sealed, b: allshared.Skie.KotlinxSerializationCore.PrimitiveKind.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.KotlinxSerializationCore.PrimitiveKind.__Sealed where __Sealed : allshared.Kotlinx_serialization_corePrimitiveKind
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.KotlinxSerializationCore.PrimitiveKind.__Sealed? where __Sealed : allshared.Kotlinx_serialization_corePrimitiveKind
+extension allshared.Skie.KotlinxSerializationCore.StructureKind {
+  @frozen public enum __Sealed : Swift.Hashable {
+    case cLASS(allshared.Kotlinx_serialization_coreStructureKind.CLASS)
+    case lIST(allshared.Kotlinx_serialization_coreStructureKind.LIST)
+    case mAP(allshared.Kotlinx_serialization_coreStructureKind.MAP)
+    case oBJECT(allshared.Kotlinx_serialization_coreStructureKind.OBJECT)
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: allshared.Skie.KotlinxSerializationCore.StructureKind.__Sealed, b: allshared.Skie.KotlinxSerializationCore.StructureKind.__Sealed) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public func onEnum<__Sealed>(of sealed: __Sealed) -> allshared.Skie.KotlinxSerializationCore.StructureKind.__Sealed where __Sealed : allshared.Kotlinx_serialization_coreStructureKind
+@_disfavoredOverload public func onEnum<__Sealed>(of sealed: __Sealed?) -> allshared.Skie.KotlinxSerializationCore.StructureKind.__Sealed? where __Sealed : allshared.Kotlinx_serialization_coreStructureKind
+public var dummyAnalytics: (any allshared.Analytics)? {
+  get
+  set(value)
+}
+public var runAsDummy: Swift.Bool {
+  get
+  set(value)
+}
+public func doInitAnalytics(analytics: any allshared.Analytics) -> allshared.AnalyticsHandle
+public func doInitDummyAnalytics(analytics: any allshared.Analytics) -> allshared.AnalyticsHandle
+public func startSDK(analytics: any allshared.Analytics, appInfo: allshared.AppInfo) -> allshared.SDKHandle
+extension allshared.__Bridge__ListShopAnalytics_NotFetchedReason : Swift.Sendable {}
+extension allshared.ListshopUserSessionState : Swift.Sendable {}
+extension allshared.ListshopBFFErrorSubtype : Swift.Sendable {}
+extension allshared.ListshopBFFErrorType : Swift.Sendable {}
+extension allshared.ListshopConnectionStatus : Swift.Sendable {}
+extension allshared.ListshopDashboardViewState : Swift.Sendable {}
+extension allshared.ListshopOnboardingViewState : Swift.Sendable {}
+extension allshared.Skie.KotlinxSerializationCore.SerializersModule.__Sealed : Swift.Sendable {}

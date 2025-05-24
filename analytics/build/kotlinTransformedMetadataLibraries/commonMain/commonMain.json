@@ -1,0 +1,12 @@
+[
+  {
+    "moduleId": "module org.jetbrains.kotlin:kotlin-stdlib:2.1.0",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/analytics/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlin-kotlin-stdlib-2.1.0-commonMain-ITmP6A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module co.touchlab:stately-concurrency:2.1.0",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/analytics/build/kotlinTransformedMetadataLibraries/commonMain/co.touchlab-stately-concurrency-2.1.0-commonMain-t1ZQYw.klib",
+    "sourceSetName": "commonMain"
+  }
+]

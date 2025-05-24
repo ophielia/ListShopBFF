@@ -1,0 +1,134 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../analytics/0.1.4/analytics-0.1.4.module",
+    "group": "meg.listshop.bff",
+    "module": "analytics",
+    "version": "0.1.4",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "analytics-release.aar",
+          "url": "analytics-android-0.1.4.aar",
+          "size": 11653,
+          "sha512": "fb89105ca97edbc1eda96e25c00dea1dd99b942a2cd6c6868d7dba01095896b2d78259292501cdc5dfe877e2c03c9ee38867237fc9f0fa473058a4c44633f0af",
+          "sha256": "0989148c3e5feceae154379aeda8f0ff71293e8405288d66b1b743063e494acc",
+          "sha1": "50d5b8792f1ba8843bb95a5822328988576bfd81",
+          "md5": "c767a9a76c07025633179c3b607967a7"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "co.touchlab",
+          "module": "stately-concurrency",
+          "version": {
+            "requires": "2.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "analytics-release.aar",
+          "url": "analytics-android-0.1.4.aar",
+          "size": 11653,
+          "sha512": "fb89105ca97edbc1eda96e25c00dea1dd99b942a2cd6c6868d7dba01095896b2d78259292501cdc5dfe877e2c03c9ee38867237fc9f0fa473058a4c44633f0af",
+          "sha256": "0989148c3e5feceae154379aeda8f0ff71293e8405288d66b1b743063e494acc",
+          "sha1": "50d5b8792f1ba8843bb95a5822328988576bfd81",
+          "md5": "c767a9a76c07025633179c3b607967a7"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "analytics-android-0.1.4-sources.jar",
+          "url": "analytics-android-0.1.4-sources.jar",
+          "size": 2998,
+          "sha512": "5c3dac1baad1c4e7d80f6abd2a5e4dd73016a656a1298b1b30c96bfbbf69c6cafb4eeabdd31a730758438983fcdf1df2600a5e18392a941d23f3310b8edae62d",
+          "sha256": "9419aa02008dc3cb0c30b6ee3838089dfe45ebcf690a37fef7deecdad9f20f49",
+          "sha1": "6fa4786cd0585ccd53845600c0e471d1cc844890",
+          "md5": "7d1507b50e8a5682856366463e6c2034"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "moduleId": "module app.cash.sqldelight:runtime:2.0.2",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/app.cash.sqldelight-runtime-2.0.2-commonMain-asQ-DQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlin:kotlin-stdlib:2.1.0",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlin-kotlin-stdlib-2.1.0-commonMain-ITmP6A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "project ::analytics",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/analytics/build/classes/kotlin/metadata/commonMain",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-coroutines-core-1.10.1-concurrentMain-KUhp4Q.klib",
+    "sourceSetName": "concurrentMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-coroutines-core-1.10.1-commonMain-KUhp4Q.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-client-core:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-client-core-3.0.1-commonMain-_X-3Yw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-client-logging:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-client-logging-3.0.1-commonMain-vW75RQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-serialization-kotlinx-json:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-serialization-kotlinx-json-3.0.1-commonMain-KZTXgg.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-client-content-negotiation:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-client-content-negotiation-3.0.1-commonMain-_r-fDQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module com.russhwolf:multiplatform-settings:1.2.0",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/com.russhwolf-multiplatform-settings-1.2.0-commonMain-bVdRsg.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-datetime:0.6.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-datetime-0.6.1-commonMain-ilTmRA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module co.touchlab:kermit:2.0.5",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/co.touchlab-kermit-2.0.5-commonMain-hrJqzQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module app.cash.sqldelight:coroutines-extensions:2.0.2",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/app.cash.sqldelight-coroutines-extensions-2.0.2-commonMain-OJPMWA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-http:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-http-3.0.1-commonMain-HJ2v3w.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-events:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-events-3.0.1-commonMain-EwGNrw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-websocket-serialization:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-websocket-serialization-3.0.1-commonMain-6RXyCg.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-sse:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-sse-3.0.1-commonMain-NhOpkw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-serialization-kotlinx:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-serialization-kotlinx-3.0.1-commonMain-Ie0iMQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-serialization-json-1.7.3-commonMain-O4ZS7Q.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-serialization-json-io:1.7.3",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-serialization-json-io-1.7.3-commonMain-w7DiNw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-serialization:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-serialization-3.0.1-commonMain-1bXsZA.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module co.touchlab:kermit-core:2.0.5",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/co.touchlab-kermit-core-2.0.5-commonMain-KXBffQ.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-utils:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-utils-3.0.1-commonMain-mRaY8g.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.3",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-serialization-core-1.7.3-commonMain-s2qClw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-websockets:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-websockets-3.0.1-commonMain-6r0LVg.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module io.ktor:ktor-io:3.0.1",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/io.ktor-ktor-io-3.0.1-commonMain-BYlo6A.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-io-core:0.5.4",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-io-core-0.5.4-commonMain-VZyyzw.klib",
+    "sourceSetName": "commonMain"
+  },
+  {
+    "moduleId": "module org.jetbrains.kotlinx:kotlinx-io-bytestring:0.5.4",
+    "file": "/Users/runner/work/ListShopBFF/ListShopBFF/listshop/build/kotlinTransformedMetadataLibraries/commonMain/org.jetbrains.kotlinx-kotlinx-io-bytestring-0.5.4-commonMain-ptgxIQ.klib",
+    "sourceSetName": "commonMain"
+  }
+]

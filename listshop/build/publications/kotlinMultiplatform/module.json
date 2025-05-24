@@ -1,0 +1,422 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "meg.listshop.bff",
+    "module": "listshop",
+    "version": "0.1.4",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "app.cash.sqldelight",
+          "module": "runtime",
+          "version": {
+            "requires": "2.0.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "meg.listshop.bff",
+          "module": "analytics",
+          "version": {
+            "requires": "0.1.4"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.10.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.0.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-logging",
+          "version": {
+            "requires": "3.0.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.0.1"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.0.1"
+          }
+        },
+        {
+          "group": "com.russhwolf",
+          "module": "multiplatform-settings",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-datetime",
+          "version": {
+            "requires": "0.6.1"
+          }
+        },
+        {
+          "group": "co.touchlab",
+          "module": "kermit",
+          "version": {
+            "requires": "2.0.5"
+          }
+        },
+        {
+          "group": "app.cash.sqldelight",
+          "module": "coroutines-extensions",
+          "version": {
+            "requires": "2.0.2"
+          }
+        },
+        {
+          "group": "co.touchlab",
+          "module": "stately-common",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "app.cash.sqldelight",
+          "module": "native-driver",
+          "version": {
+            "requires": "2.0.2"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-ios",
+          "version": {
+            "requires": "3.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "listshop-metadata-0.1.4.jar",
+          "url": "listshop-0.1.4.jar",
+          "size": 43464,
+          "sha512": "eff8a6e703e55ef1be700d70da570a8bbfdfa22a30c843fc8936f9993acbef76b2d5b841af79e91fb2502f3871c5d42aa7695259e3652fe4f3836cd780bb1c3f",
+          "sha256": "cc2204847a6c40e19b52083e138fd1d85df23c18647ea0f9ca228a31b19c8ba7",
+          "sha1": "71034e6bfd6e3efa7244c42feb5c907057a7981f",
+          "md5": "d6b86da682532e7a556dbfede42b102d"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "listshop-kotlin-0.1.4-sources.jar",
+          "url": "listshop-0.1.4-sources.jar",
+          "size": 33942,
+          "sha512": "0443638552d335ad37f08d0062ed269c9d818ef004b35339790ef7fd96ffc739ca8a41f07c0203df7d9b2f87ceb0f8af7f82d4630b18040216a3c6fafa8b1f53",
+          "sha256": "a381406f2037b6b2f93cad6367c69a03ba56c978f75027f02142bc44599af908",
+          "sha1": "af999e9c51f9180a1f57415a6541cd0e831a7dba",
+          "md5": "432a2c969adb6b071b4628c5595e5e80"
+        }
+      ]
+    },
+    {
+      "name": "debugApiElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android-debug/0.1.4/listshop-android-debug-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android-debug",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "debugRuntimeElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android-debug/0.1.4/listshop-android-debug-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android-debug",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "debugSourcesElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android-debug/0.1.4/listshop-android-debug-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android-debug",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android/0.1.4/listshop-android-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android/0.1.4/listshop-android-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "available-at": {
+        "url": "../../listshop-android/0.1.4/listshop-android-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-android",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosarm64/0.1.4/listshop-iosarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosarm64/0.1.4/listshop-iosarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosarm64/0.1.4/listshop-iosarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iossimulatorarm64/0.1.4/listshop-iossimulatorarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iossimulatorarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iossimulatorarm64/0.1.4/listshop-iossimulatorarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iossimulatorarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iossimulatorarm64/0.1.4/listshop-iossimulatorarm64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iossimulatorarm64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosx64/0.1.4/listshop-iosx64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosx64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosx64/0.1.4/listshop-iosx64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosx64",
+        "version": "0.1.4"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../listshop-iosx64/0.1.4/listshop-iosx64-0.1.4.module",
+        "group": "meg.listshop.bff",
+        "module": "listshop-iosx64",
+        "version": "0.1.4"
+      }
+    }
+  ]
+}
