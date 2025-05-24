@@ -1,0 +1,137 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../analytics/0.1.1/analytics-0.1.1.module",
+    "group": "meg.listshop.bff",
+    "module": "analytics",
+    "version": "0.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12"
+    }
+  },
+  "variants": [
+    {
+      "name": "debugApiElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "analytics-debug.aar",
+          "url": "analytics-android-debug-0.1.1.aar",
+          "size": 20442,
+          "sha512": "2de571636fba4c28571ab43077ab2534bacc608a0a784e2865c5d17633fb708a227e3e06f35b5ecea02327d429f6b4d9d9fac1ea509005699b791a0aba4b64a9",
+          "sha256": "4a9943e2a6f2a485e848832e0ffd303ad95dfa6fe98e9334485edd49bd050062",
+          "sha1": "b15d3421dec193ff5bb33077beaa52f94526d395",
+          "md5": "40616f1209bd4b7ea54f9f6fb1374572"
+        }
+      ]
+    },
+    {
+      "name": "debugRuntimeElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "co.touchlab",
+          "module": "stately-concurrency",
+          "version": {
+            "requires": "2.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "analytics-debug.aar",
+          "url": "analytics-android-debug-0.1.1.aar",
+          "size": 20442,
+          "sha512": "2de571636fba4c28571ab43077ab2534bacc608a0a784e2865c5d17633fb708a227e3e06f35b5ecea02327d429f6b4d9d9fac1ea509005699b791a0aba4b64a9",
+          "sha256": "4a9943e2a6f2a485e848832e0ffd303ad95dfa6fe98e9334485edd49bd050062",
+          "sha1": "b15d3421dec193ff5bb33077beaa52f94526d395",
+          "md5": "40616f1209bd4b7ea54f9f6fb1374572"
+        }
+      ]
+    },
+    {
+      "name": "debugSourcesElements-published",
+      "attributes": {
+        "com.android.build.api.attributes.BuildTypeAttr": "debug",
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "analytics-android-debug-0.1.1-sources.jar",
+          "url": "analytics-android-debug-0.1.1-sources.jar",
+          "size": 5282,
+          "sha512": "6c89fde4f19f0e6dbe764513cf6e1c7aaf291feb51265e4a73ac6f8e1e0d5292cfa31a2d470f51745c0b91081bd5bcd47e962d5eab0bfa634fcd8ac4534ffea3",
+          "sha256": "3b52a2f9036d32a39737c07cdfc4150f7b40f4ea877d8ffc03c22e599951bb43",
+          "sha1": "3fa7f2ae8901855dde359b4937bad9879055d9c9",
+          "md5": "dc6566c561acf3d6f1a1b47bff5991b7"
+        }
+      ]
+    }
+  ]
+}

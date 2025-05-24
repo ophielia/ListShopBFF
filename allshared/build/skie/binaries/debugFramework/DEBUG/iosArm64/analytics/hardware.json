@@ -1,0 +1,8 @@
+{
+    "chip_type": "Apple M1 (Virtual)",
+    "machine_model": "VirtualMac2,1",
+    "machine_name": "Apple Virtual Machine 1",
+    "model_number": "VM0001LL/A",
+    "number_processors": 3,
+    "physical_memory": "7 GB"
+}

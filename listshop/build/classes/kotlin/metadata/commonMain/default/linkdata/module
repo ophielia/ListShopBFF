@@ -1,0 +1,2 @@
+
+<listshop_commonMain>:com.listshop.bff:com.listshop.bff.data.bff:com.listshop.bff.data.model:com.listshop.bff.data.remote:com.listshop.bff.data.state:com.listshop.bff.db:com.listshop.bff.db.listshop:com.listshop.bff.exceptions:com.listshop.bff.remote:com.listshop.bff.remote.impl:com.listshop.bff.repositories:"com.listshop.bff.repositories.impl:com.listshop.bff.services:com.listshop.bff.services.impl:com.listshop.bff.tools:com.listshop.bff.ucp:com.listshop.bff.usecases
