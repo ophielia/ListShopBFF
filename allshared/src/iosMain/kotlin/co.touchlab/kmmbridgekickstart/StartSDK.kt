@@ -1,8 +1,8 @@
 package co.touchlab.kmmbridgekickstart
 
-fun startSDK(analytics: Analytics): SDKHandle {
+fun legacyStartSDK(analytics: Analytics): LegacySDKHandle {
     val analyticsHandle = initAnalytics(analytics)
-    return SDKHandle(
+    return LegacySDKHandle(
         breedRepository = breedStartup(analyticsHandle),
         appAnalytics = analyticsHandle.appAnalytics,
         breedAnalytics = analyticsHandle.breedAnalytics
