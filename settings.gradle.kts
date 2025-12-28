@@ -1,3 +1,5 @@
+rootProject.name = "listshop-bff"
+
 pluginManagement {
     repositories {
         google()
