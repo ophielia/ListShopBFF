@@ -8,7 +8,7 @@ import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserService
 import com.listshop.bff.services.UserSessionService
 import com.listshop.bff.usecases.LoginUseCase
-import com.listshop.bff.usecases.SystemGetLaunchScreenUseCase
+import com.listshop.bff.usecases.LegacySystemGetLaunchScreenUseCase
 
 class OnboardingUCP internal constructor(
     private val sessionService: UserSessionService,
@@ -19,7 +19,7 @@ class OnboardingUCP internal constructor(
 
     @Throws(Exception::class)
     suspend fun systemGetLaunchScreen(connectionStatus: ConnectionStatus): BFFResult<TransitionViewState> {
-        val useCase = SystemGetLaunchScreenUseCase(connectionStatus,sessionService,userService, listService)
+        val useCase = LegacySystemGetLaunchScreenUseCase(connectionStatus,sessionService,userService, listService)
         return useCase.process()
     }
 

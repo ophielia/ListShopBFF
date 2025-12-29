@@ -22,7 +22,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 
-class SystemGetLaunchScreenUseCaseTest {
+class LegacySystemGetLaunchScreenUseCaseTest {
 
     var useCaseProvider: OnboardingUCP? = null
 

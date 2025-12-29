@@ -2,6 +2,14 @@ package com.listshop.analytics
 
 class ListShopAnalytics internal constructor() {
 
+    fun loadingSession() {
+        sendEvent("loading_session")
+    }
+
+    fun error(message: String) {
+        sendEvent("error encountered", "message" to message)
+    }
+
     fun displayingTags(size: Int) {
         sendEvent("viewUpdatingWithTags", "size" to size)
     }
