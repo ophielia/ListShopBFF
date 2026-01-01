@@ -4,6 +4,7 @@ package com.listshop.bff.client.usecases
 import com.listshop.analytics.Analytics
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.AppInfo
+import com.listshop.analytics.ClientType
 import com.listshop.analytics.initDummyAnalytics
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
@@ -65,6 +66,7 @@ class LegacySystemGetLaunchScreenUseCaseTest {
             model = "model",
             os = "os",
             osVersion = "osVersion",
+            clientType = ClientType.IOS,
             clientVersion = "clientVersion",
             buildNumber = "buildNumber",
             deviceId = "deviceId"

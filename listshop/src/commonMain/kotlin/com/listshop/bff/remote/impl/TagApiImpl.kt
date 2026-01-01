@@ -1,6 +1,7 @@
 package com.listshop.bff.remote.impl
 
 import com.listshop.bff.data.model.Tag
+import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.data.remote.ApiTagLookupEmbedded
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.TagApi
@@ -20,6 +21,16 @@ internal class TagApiImpl(
         return result.embeddedList.tagLookupResourceList
             .map { et -> et.embeddedTag }
             .map { at -> Tag.create(at) }
+    }
+
+    override suspend fun retrieveApiTags(): List<ApiTag> {
+        val token = remoteApi.token()
+        val urlString = remoteApi.buildPath("/tag/user")
+        val result: ApiTagLookupEmbedded =
+            remoteApi.client(token).get(urlString).body()
+
+        return result.embeddedList.tagLookupResourceList
+            .map { et -> et.embeddedTag }
     }
 
 

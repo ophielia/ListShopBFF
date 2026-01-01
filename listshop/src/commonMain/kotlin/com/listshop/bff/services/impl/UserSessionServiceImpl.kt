@@ -1,8 +1,10 @@
 package com.listshop.bff.services.impl
 
 import com.listshop.analytics.AppInfo
+import com.listshop.bff.data.model.ListInfo
 import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.data.state.UserSessionState
+import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.services.UserSession
@@ -19,7 +21,7 @@ class UserSessionServiceImpl internal constructor(
         if (_userSession != null) {
             return _userSession!!
         }
-        initializeUserSession()
+        refreshOrInitializeUserSession()
         return _userSession!!
     }
 
@@ -31,7 +33,7 @@ class UserSessionServiceImpl internal constructor(
         val userInfo = getUserInfo()
         userInfo.userToken = token
         updateUserInfo(userInfo)
-        refreshUserSession()
+        refreshOrInitializeUserSession()
 
     }
 
@@ -39,7 +41,7 @@ class UserSessionServiceImpl internal constructor(
         val userInfo = getUserInfo()
         userInfo.userName = name
         updateUserInfo(userInfo)
-        refreshUserSession()
+        refreshOrInitializeUserSession()
     }
 
     override fun setUserLastSeenToNow() {
@@ -47,7 +49,7 @@ class UserSessionServiceImpl internal constructor(
         val now = Clock.System.now()
         userInfo.userLastSeen = now.toString()
         updateUserInfo(userInfo)
-        refreshUserSession()
+        refreshOrInitializeUserSession()
     }
 
     override fun setUserLastSignedInToNow() {
@@ -55,7 +57,27 @@ class UserSessionServiceImpl internal constructor(
         val now = Clock.System.now()
         userInfo.userLastSignedIn = now.toString()
         updateUserInfo(userInfo)
-        refreshUserSession()
+        refreshOrInitializeUserSession()
+    }
+
+    override fun setLookupDataLastSyncedToNow() {
+        val listInfo = getListInfo()
+        val now = Clock.System.now()
+        listInfo.lookupDataLastSynced = now.toString()
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
+
+
+    private fun getUserInfo(): UserInfo {
+        val userInfoEntity = getOrCreateUserInfoEntity()
+        return UserInfo.create(userInfoEntity)
+    }
+
+    private fun getListInfo(): ListInfo {
+        val listInfoEntity = getOrCreateListInfoEntity()
+        return ListInfo.create(listInfoEntity)
     }
 
     private fun updateUserInfo(userInfo: UserInfo) : UserInfo{
@@ -63,11 +85,10 @@ class UserSessionServiceImpl internal constructor(
         return getUserInfo()
     }
 
-    private fun getUserInfo(): UserInfo {
-        val userInfoEntity = getOrCreateUserInfoEntity()
-        return UserInfo.create(userInfoEntity)
+    private fun updateListInfo(listInfo: ListInfo) : ListInfo{
+        sessionRepo.updateListInfo(listInfo)
+        return getListInfo()
     }
-
 
     private fun getOrCreateUserInfoEntity(): UserInfoEntity {
         var userInfo = sessionRepo.getUserInfo()
@@ -78,10 +99,19 @@ class UserSessionServiceImpl internal constructor(
         return userInfo!!
     }
 
-    private fun refreshUserSession() {
+    private fun getOrCreateListInfoEntity() : ListInfoEntity {
+        var listInfo = sessionRepo.getListInfo()
+        if (listInfo != null) {
+            return listInfo
+        }
+        listInfo = sessionRepo.createListInfo()
+        return listInfo!!
+    }
+
+    private fun refreshOrInitializeUserSession() {
         val userInfo = getOrCreateUserInfoEntity()
-        //MM nfl - list info here
-        val sessionState = determineUserSessionState(userInfo)
+        val listInfo = getOrCreateListInfoEntity()
+        val sessionState = determineUserSessionState(userInfo,listInfo)
         _userSession = UserSession(
             userInfo.userName,
             userInfo.userToken,
@@ -95,31 +125,16 @@ class UserSessionServiceImpl internal constructor(
 
     }
 
-    private fun determineUserSessionState(userInfo: UserInfoEntity): UserSessionState {
+    private fun determineUserSessionState(userInfo: UserInfoEntity, listInfo: ListInfoEntity): UserSessionState {
         if (userInfo.userName != null && userInfo.userToken != null) {
             return UserSessionState.User
         }
         if (userInfo.userName != null) {
             return UserSessionState.UserLoggedOut
         }
-        //MM nfl (note for later) skipping local list right now
+        if (listInfo.localListUpdated != null) {
         return UserSessionState.Anon
+        }
+        return UserSessionState.AnonNoList
     }
-
-    private fun initializeUserSession() {
-        val userInfo = getOrCreateUserInfoEntity()
-        val sessionState = determineUserSessionState(userInfo)
-        _userSession = UserSession(
-            userInfo.userName,
-            userInfo.userToken,
-            userInfo.userLastSeen,
-            userInfo.userLastSignedIn,
-            sessionState,
-            appInfo.clientVersion ?: "unknown",
-            appInfo.buildNumber ?: "unknown",
-            appInfo.baseUrl
-        )
-    }
-
-
 }

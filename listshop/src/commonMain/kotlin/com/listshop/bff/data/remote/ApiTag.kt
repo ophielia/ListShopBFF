@@ -4,27 +4,27 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiTagLookup(
+data class ApiTag(
     @SerialName("tag_id")
     val externalId: String?,
     @SerialName("name")
     val name: String?,
     @SerialName("tag_type")
-    val tagType: String?,
+    val tagType: String? = null,
     @SerialName("parent_id")
-    val parentId: String?,
+    val parentId: String? = null,
     @SerialName("user_id")
-    val userId: String?,
+    val userId: String? = null,
     @SerialName("is_group")
-    val isgroup: Boolean?,
+    val isgroup: Boolean? = null,
     @SerialName("power")
-    val power: Double?
+    val power: Double? = null
 )
 
 @Serializable
 data class ApiTagLookupEmbeddedTag(
     @SerialName("tag")
-    val embeddedTag: ApiTagLookup
+    val embeddedTag: ApiTag
 )
 
 @Serializable

@@ -2,6 +2,7 @@ package com.listshop.bff.services.impl
 
 
 import com.listshop.analytics.AppInfo
+import com.listshop.analytics.ClientType
 import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.db.UserInfoEntity
@@ -31,6 +32,7 @@ class UserSessionServiceImplTest {
          model = "model",
          os = "os",
          osVersion = "osVersion",
+            clientType = ClientType.IOS,
          clientVersion = "clientVersion",
          buildNumber = "buildNumber",
          deviceId = "deviceId" )

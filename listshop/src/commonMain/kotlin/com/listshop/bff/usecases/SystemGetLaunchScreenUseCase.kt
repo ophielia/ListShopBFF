@@ -13,6 +13,7 @@ import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SyncService
+import com.listshop.bff.services.TagTree
 import com.listshop.bff.services.UserService
 import com.listshop.bff.services.UserSessionService
 
@@ -36,8 +37,11 @@ class SystemGetLaunchScreenUseCase(
             val message = "Current version " + sessionService.currentAppInfo().clientVersion + " is not compatible"
             listShopAnalytics.error(message)
             val bfferror = BFFError(BFFErrorType.LOADING, BFFErrorSubtype.UPGRADE_REQUIRED, message)
-            return BFFResult.error<Pair<TransitionViewState,String>>(  bfferror)
+            return BFFResult.error(  bfferror)
         }
+        // dummy return for compile
+     val singleList = ShoppingList.empty()
+        return BFFResult.success(Pair(TransitionViewState.ListScreen(singleList, ListShoppingList(emptyList())), "beep")) //MM go away
     }
 
     private suspend fun loadForSession() {
@@ -104,7 +108,8 @@ class SystemGetLaunchScreenUseCase(
         userService.authenticateUser()
         val listOfLists = listService.retrieveListOfLists()
         val wrappedLists = ListShoppingList(listOfLists)
-        return BFFResult.success(Pair(TransitionViewState.ListScreen(wrappedLists), "beep")) //MM go away
+        val singleList = listOfLists.get(0)
+        return BFFResult.success(Pair(TransitionViewState.ListScreen(singleList,wrappedLists), "beep")) //MM go away
     }
 
 

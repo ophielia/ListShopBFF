@@ -57,7 +57,7 @@ class UserServiceImpl internal constructor(
             appInfo.model,
             appInfo.os,
             appInfo.osVersion,
-            appInfo.clientType,
+            appInfo.clientType.name,
             appInfo.clientVersion,
             appInfo.buildNumber,
             appInfo.deviceId

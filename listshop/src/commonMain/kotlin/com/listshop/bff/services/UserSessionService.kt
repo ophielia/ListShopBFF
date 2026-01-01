@@ -16,5 +16,7 @@ interface UserSessionService {
 
     fun setUserLastSignedInToNow()
 
+    fun setLookupDataLastSyncedToNow()
+
 
 }

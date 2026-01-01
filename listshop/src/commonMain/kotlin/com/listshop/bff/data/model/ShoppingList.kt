@@ -47,6 +47,20 @@ data class ShoppingList(
                 null
             )
         }
+        fun empty(): ShoppingList {
+            return ShoppingList(
+                "empty",
+                "empty",
+                null,
+                null,
+                null,
+                null,
+                null,
+                false,
+                null,
+                null
+            )
+        }
     }
 
 }

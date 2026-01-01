@@ -16,7 +16,7 @@ import com.listshop.bff.remote.impl.TagApiImpl
 import com.listshop.bff.remote.impl.UserApiImpl
 import com.listshop.bff.repositories.ListShopDatabase
 import com.listshop.bff.repositories.SessionInfoRepository
-import com.listshop.bff.repositories.TagRepository
+import com.listshop.bff.repositories.TagRepositoryImpl
 import com.listshop.bff.repositories.impl.SessionInfoRepositoryImpl
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserService
@@ -101,8 +101,8 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         )
     }
 
-    private val tagRepository: TagRepository by lazy {
-        TagRepository(
+    private val tagRepository: TagRepositoryImpl by lazy {
+        TagRepositoryImpl(
             listShopDatabase = listShopDatabase
         )
     }
