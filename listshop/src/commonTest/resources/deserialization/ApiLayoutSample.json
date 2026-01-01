@@ -1,0 +1,71 @@
+{
+    "links": [
+        "http://localhost:8182/listlayout/5"
+    ],
+    "list_layout": {
+        "name": "RoughGrained",
+        "categories": [
+            {
+                "name": "Dairy",
+                "default": false,
+                "category_id": 7,
+                "display_order": 300,
+                "tags": [
+                    {
+                        "tag_id": "279",
+                        "name": "gruyere cheese",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "51769",
+                        "name": "Coby Jack shredded cheese",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "50895",
+                        "name": "provolone cheese",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "50736",
+                        "name": "comte cheese",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "203",
+                        "name": "sour cream",
+                        "is_group": false
+                    }
+                ],
+                "is_default": false
+            },
+            {
+                "name": "Not (yet) categorized",
+                "default": true,
+                "category_id": 52010,
+                "display_order": 700,
+                "tags": [
+                    {
+                        "tag_id": "50971",
+                        "name": "Dill pickle slices",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "50959",
+                        "name": "pita bread",
+                        "is_group": false
+                    },
+                    {
+                        "tag_id": "50953",
+                        "name": "canned chili with beans",
+                        "is_group": false
+                    }
+                ],
+                "is_default": true
+            }
+        ],
+        "layout_id": 5,
+        "is_default": true,
+        "user_id": null
+    }
+}
