@@ -56,7 +56,7 @@ class TagServiceImplTest {
 
 
     @Test
-    fun `when i call setUserToken the token is sent to save`() = runTest {
+    fun `when i call retrieveTagsAndSaveLocally the tags are retrieved and saved`() = runTest {
         val dummyTagList = dummyApiTagList()
         var deleteCallCount = 0
         var insertCallCount = 0

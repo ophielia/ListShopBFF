@@ -56,6 +56,14 @@ class SyncServiceImpl  internal constructor(
         // remote call to retrieve tag lookup data (array of ApiTagLookup objects)
         val apiTags = tagService.retrieveTagsAndSaveLocally()
 
+/*
+//MM next up
+    - method retrieve layouts
+        - create the api objects
+        - create the db objects
+        - call and save
+
+  */
         // remote call to retrieve layout data (array of ApiMappingLayouts objects)
         // process and save layouts
         layoutService.retrieveLayoutsAndSaveLocally()

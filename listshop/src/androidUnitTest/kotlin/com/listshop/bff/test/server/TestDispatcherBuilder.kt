@@ -9,7 +9,7 @@ class TestDispatcherBuilder(val testCaseName : String)  {
     val configFileNames: MutableList<String> = mutableListOf()
 
     val gson = Gson()
-    val RESOURCES_PATH = "src/commonTest/resources"
+    val RESOURCES_PATH = "src/androidUnitTest/resources"
     val CONFIG_SUBPATH = "/mock/config/"
     val JSON_SUBPATH = "/mock/json/"
 
