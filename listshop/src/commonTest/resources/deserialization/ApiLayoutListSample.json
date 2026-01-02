@@ -1,0 +1,202 @@
+{
+    "links": [
+        "https://nastyvarmits.fr/listlayout"
+    ],
+    "_embedded": {
+        "list_layout_list": [
+            {
+                "links": [],
+                "list_layout": {
+                    "name": "Default",
+                    "categories": [
+                        {
+                            "name": "Produce",
+                            "default": false,
+                            "category_id": 52018,
+                            "display_order": 100,
+                            "tags": [
+                                {
+                                    "tag_id": "51633",
+                                    "name": "Dried coco beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "452",
+                                    "name": "green onion",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Dry",
+                            "default": false,
+                            "category_id": 52019,
+                            "display_order": 400,
+                            "tags": [
+                                {
+                                    "tag_id": "51647",
+                                    "name": "cannelini beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51784",
+                                    "name": "ramen noodles",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51833",
+                                    "name": "Tomato soup",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50959",
+                                    "name": "pita bread",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "198",
+                                    "name": "corn tortillas",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51758",
+                                    "name": "kombu",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51757",
+                                    "name": "tofu",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51593",
+                                    "name": "italian seasoning",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51831",
+                                    "name": "phyllo sheets",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51756",
+                                    "name": "nori",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51740",
+                                    "name": "Table salt",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50634",
+                                    "name": "sweet pickles",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51708",
+                                    "name": "Canned cassolet",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51592",
+                                    "name": "Ramen soup",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51648",
+                                    "name": "anchovy filets",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51016",
+                                    "name": "lasagne",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51330",
+                                    "name": "white miso",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51687",
+                                    "name": "orzo",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52169",
+                                    "name": "Gingerbread house candy",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51759",
+                                    "name": "katsuobushi",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51755",
+                                    "name": "dashi",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        }
+                    ],
+                    "layout_id": 12,
+                    "is_default": true,
+                    "user_id": "20"
+                }
+            },
+            {
+                "links": [],
+                "list_layout": {
+                    "name": "Default Two",
+                    "categories": [
+                        {
+                            "name": "Dairy",
+                            "default": false,
+                            "category_id": 52022,
+                            "display_order": 300,
+                            "tags": [
+                                {
+                                    "tag_id": "51594",
+                                    "name": "parmesan reggiano cheese",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Dry",
+                            "default": false,
+                            "category_id": 52019,
+                            "display_order": 400,
+                            "tags": [
+                                {
+                                    "tag_id": "51647",
+                                    "name": "cannelini beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51784",
+                                    "name": "ramen noodles",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51755",
+                                    "name": "dashi",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        }
+                    ],
+                    "layout_id": 22,
+                    "is_default": true,
+                    "user_id": "20"
+                }
+            }
+        ]
+    }
+}

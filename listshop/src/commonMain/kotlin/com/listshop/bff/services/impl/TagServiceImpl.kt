@@ -6,7 +6,6 @@ import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.TagRepository
-import com.listshop.bff.repositories.TagRepositoryImpl
 import com.listshop.bff.services.TagService
 
 class TagServiceImpl internal constructor(

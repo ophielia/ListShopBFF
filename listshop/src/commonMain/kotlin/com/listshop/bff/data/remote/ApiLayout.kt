@@ -1,14 +1,8 @@
 package com.listshop.bff.data.remote
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class EmbeddedApiLayout(
-    @SerialName("list_layout")
-    val embeddedLayout: ApiLayout?
-)
 @Serializable
 data class ApiLayout(
     @SerialName("name")
@@ -38,8 +32,6 @@ data class ApiLayoutCategory(
 
 )
 
-
-
 @Serializable
 data class ApiLayoutTag(
     @SerialName("tag_id")
@@ -47,3 +39,24 @@ data class ApiLayoutTag(
     @SerialName("name")
     val name: String?
 )
+
+@Serializable
+data class EmbeddedApiLayoutList(
+    @SerialName("_embedded")
+    val embedded: ApiLayoutList?
+)
+
+@Serializable
+data class ApiLayoutList(
+    @SerialName("list_layout_list")
+    val layoutList: List<EmbeddedApiLayout>?
+)
+
+@Serializable
+data class EmbeddedApiLayout(
+    @SerialName("list_layout")
+    val embeddedLayout: ApiLayout?
+)
+
+
+

@@ -1,20 +1,22 @@
-package com.listshop.bff.repositories
+package com.listshop.bff.repositories.impl
 
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListshopDb
 import com.listshop.bff.db.TagEntity
+import com.listshop.bff.repositories.LayoutRepository
+import com.listshop.bff.repositories.ListShopDatabase
 
-class TagRepositoryImpl(
+class LayoutRepositoryImpl(
     private val listShopDatabase: ListShopDatabase
-) : TagRepository {
+) : LayoutRepository {
     private val dbRef: ListshopDb = listShopDatabase.db
 
     fun selectAllTags(): List<Tag> {
         listShopDatabase.analytics.fetchingTagsFromNetwork()
         val result: List<TagEntity> = dbRef.tagDefinitionQueries
             .selectAllTagLookups(::mapTagLookupSelecting).executeAsList()
-        return result.map { tle -> Tag.create(tle) }
+        return result.map { tle -> Tag.Factory.create(tle) }
     }
 
 
@@ -30,7 +32,7 @@ class TagRepositoryImpl(
         }
     }
 
-    override suspend fun insertApiTagsLocally(tags: List<ApiTag>) {
+    suspend fun insertApiTagsLocally(tags: List<ApiTag>) {
         listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
         dbRef.tagDefinitionQueries.transaction {
             tags.forEach { tag ->
@@ -43,7 +45,7 @@ class TagRepositoryImpl(
     }
 
 
-    override suspend fun deleteAll() {
+    suspend fun deleteAll() {
         listShopDatabase.analytics.databaseCleared()
         dbRef.tagDefinitionQueries.transaction {
             dbRef.tagDefinitionQueries.removeAllTagLookups()

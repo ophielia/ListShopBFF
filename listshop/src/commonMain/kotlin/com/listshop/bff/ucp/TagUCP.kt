@@ -3,7 +3,7 @@ package com.listshop.bff.ucp
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.remote.TagApi
-import com.listshop.bff.repositories.TagRepositoryImpl
+import com.listshop.bff.repositories.impl.TagRepositoryImpl
 
 class TagUCP internal constructor(
     private val dataRepo: TagRepositoryImpl,

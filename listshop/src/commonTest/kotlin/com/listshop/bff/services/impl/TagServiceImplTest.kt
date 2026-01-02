@@ -8,7 +8,7 @@ import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.TagRepository
-import com.listshop.bff.repositories.TagRepositoryImpl
+import com.listshop.bff.repositories.impl.TagRepositoryImpl
 import dev.mokkery.answering.calls
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.capture.Capture
