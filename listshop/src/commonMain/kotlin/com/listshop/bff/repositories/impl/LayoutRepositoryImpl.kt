@@ -1,9 +1,9 @@
 package com.listshop.bff.repositories.impl
 
-import com.listshop.bff.data.model.Tag
-import com.listshop.bff.data.remote.ApiTag
+import com.listshop.bff.data.remote.ApiLayout
+import com.listshop.bff.data.remote.ApiLayoutCategory
+import com.listshop.bff.db.LayoutCategoryMappingEntity
 import com.listshop.bff.db.ListshopDb
-import com.listshop.bff.db.TagEntity
 import com.listshop.bff.repositories.LayoutRepository
 import com.listshop.bff.repositories.ListShopDatabase
 
@@ -12,63 +12,67 @@ class LayoutRepositoryImpl(
 ) : LayoutRepository {
     private val dbRef: ListshopDb = listShopDatabase.db
 
-    fun selectAllTags(): List<Tag> {
-        listShopDatabase.analytics.fetchingTagsFromNetwork()
-        val result: List<TagEntity> = dbRef.tagDefinitionQueries
-            .selectAllTagLookups(::mapTagLookupSelecting).executeAsList()
-        return result.map { tle -> Tag.Factory.create(tle) }
+    override fun saveLayoutLocally(layout: ApiLayout) {
+
+        // try the tag mappings first
+        val layoutId = layout.externalId ?: 0
+        for (cat in layout.categories) {
+            val catId = cat.externalId.toString()
+            // insert category mappings into table
+            val mappings = cat.tags.map { tag -> tag.externalId }
+                .map { tid -> LayoutCategoryMappingEntity(catId, tid) }
+            insertLayoutMappings(catId, mappings)
+            // insert category
+            insertLayoutCategory(layoutId, cat)
+        }
+        // insert layout into table
+        insertLayout(layout)
+
     }
 
+    private fun insertLayoutMappings(
+        catId: String,
+        mappings: List<LayoutCategoryMappingEntity>
+    ) {
+        dbRef.layoutDefinitionQueries.transaction {
+            mappings.forEach { mappingEntity ->
+                dbRef.layoutDefinitionQueries
+                    .insertIntoLayoutCategoryMappingEntity(
+                        catId,
+                        mappingEntity.tagExternalId
+                    )
 
-    suspend fun insertTags(tags: List<Tag>) {
-        listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
-        dbRef.tagDefinitionQueries.transaction {
-            tags.forEach { tag ->
-                dbRef.tagDefinitionQueries.insertIntoTagLookup(
-                    tag.externalId,
-                    false, tag.name, tag.parentId, "0", tag.tagType, "0"
-                )
             }
         }
     }
 
-    suspend fun insertApiTagsLocally(tags: List<ApiTag>) {
-        listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
-        dbRef.tagDefinitionQueries.transaction {
-            tags.forEach { tag ->
-                dbRef.tagDefinitionQueries.insertIntoTagLookup(
-                    tag.externalId,
-                    false, tag.name, tag.parentId, "0", tag.tagType, tag.userId
-                )
-            }
-        }
+    private fun insertLayoutCategory(layoutId: Int, cat: ApiLayoutCategory) {
+        //MM add error or dont save if no external id
+        dbRef.layoutDefinitionQueries
+            .insertIntoLayoutCategoryEntity(
+                name = cat.name ?: "",
+                externalId = cat.externalId.toString(),
+                layoutExternalId = layoutId.toString(),
+                displayOrder = cat.displayOrder,
+                isDefault = cat.isDefault
+            )
+    }
+
+    private fun insertLayout(layout: ApiLayout) {
+        dbRef.layoutDefinitionQueries
+            .insertIntoLayoutEntity(
+                name = layout.name,
+                externalId = layout.externalId.toString(),
+                isDefault = layout.isDefault,
+                userId = layout.userId
+            )
     }
 
 
-    suspend fun deleteAll() {
-        listShopDatabase.analytics.databaseCleared()
-        dbRef.tagDefinitionQueries.transaction {
-            dbRef.tagDefinitionQueries.removeAllTagLookups()
-        }
+    override fun clearLayoutDataLocally() {
+        dbRef.layoutDefinitionQueries.removeAllLayoutCategoryMappingEntity()
+        dbRef.layoutDefinitionQueries.removeAllLayoutCategoryEntities()
+        dbRef.layoutDefinitionQueries.removeAllLayoutEntities()
     }
 
-    private fun mapTagLookupSelecting(
-        externalId: String?,
-        isGroup: Boolean?,
-        name: String?,
-        parentId: String?,
-        power: String?,
-        tagType: String?,
-        user_id: String?,
-    ): TagEntity {
-        return TagEntity(
-            externalId = externalId,
-            isGroup = isGroup == true,
-            name = name,
-            parentId = parentId,
-            power = power,
-            tagType = tagType,
-            userId = user_id
-        )
-    }
 }

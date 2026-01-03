@@ -11,14 +11,19 @@ CREATE TABLE TagEntity (
 
 );
 
-insertIntoTagLookup:
+insertIntoTag:
 INSERT INTO TagEntity(externalId, isGroup, name, parentId, power, tagType, userId)
 VALUES (?,?,?,?,?,?,?);
 
 
-removeAllTagLookups:
+removeAllTags:
 DELETE FROM TagEntity;
 
-selectAllTagLookups:
+selectAllTags:
 SELECT TagEntity.*
 FROM TagEntity;
+
+selectTagsByTagTypes:
+SELECT *
+FROM TagEntity
+WHERE tagType IN ?;

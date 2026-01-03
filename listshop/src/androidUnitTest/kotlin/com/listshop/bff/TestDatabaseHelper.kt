@@ -11,7 +11,7 @@ class TestDatabaseHelper(
 
     fun clearDatabase() {
         listShopDatabase.db.userSessionDefinitionQueries.removeAllUserInfo()
-        listShopDatabase.db.tagDefinitionQueries.removeAllTagLookups()
+        listShopDatabase.db.tagDefinitionQueries.removeAllTags()
     }
 
     fun standardUser():UserInfoEntity {

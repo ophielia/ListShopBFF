@@ -1,5 +1,7 @@
 package com.listshop.bff.data.remote
 
+import com.listshop.bff.data.model.TagType
+import com.listshop.bff.db.LayoutCategoryMappingEntity
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -63,7 +65,6 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         val categories = layout.categories
         assertEquals(2, categories.size, "category size is wrong")
 
-
         // second layout
         val secondLayout = layoutList?.get(1)?.embeddedLayout
         assertNotNull(secondLayout)
@@ -76,6 +77,14 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         // now check the categories
         val secondCategories = secondLayout.categories
         assertEquals(2, secondCategories.size, "category size is wrong")
+
+//PLAYGROUND
+        val typesForTreeAsStrings = TagType.entries.map { it.display }
+        assertNotNull(typesForTreeAsStrings)
+
+
+
+
     }
 
 

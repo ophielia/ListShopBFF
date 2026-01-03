@@ -54,16 +54,8 @@ class SyncServiceImpl  internal constructor(
         }
 
         // remote call to retrieve tag lookup data (array of ApiTagLookup objects)
-        val apiTags = tagService.retrieveTagsAndSaveLocally()
+        tagService.retrieveTagsAndSaveLocally()
 
-/*
-//MM next up
-    - method retrieve layouts
-        - create the api objects
-        - create the db objects
-        - call and save
-
-  */
         // remote call to retrieve layout data (array of ApiMappingLayouts objects)
         // process and save layouts
         layoutService.retrieveLayoutsAndSaveLocally()
@@ -73,7 +65,7 @@ class SyncServiceImpl  internal constructor(
 
         // use tag service to build tag tree and return
 //MM note - this guy could be synchronous with lookup data
-
+        val tagTree = tagService.buildTagTree()
         // return the tag tree
 //os_log("SyncServiceImpl - skipping syncLookupData - currently offline ", log: Log.service, type: .info)
 //os_log("SyncServiceImpl - syncLookupData - saved tags, now retrieving categories", log: Log.service, type: .debug)
@@ -84,7 +76,7 @@ class SyncServiceImpl  internal constructor(
 //os_log("SyncServiceImpl - syncLookupData - finished building tag tree", log: Log.service, type: .debug)
 
 
-        return TagTree()
+        return TagTree(lookups)
         }
 
     override suspend fun syncWithServerList(connectionStatus: ConnectionStatus): ShoppingList? {

@@ -1,9 +1,8 @@
 package com.listshop.bff.services
 
-import com.listshop.bff.data.remote.ApiTag
-
 interface TagService {
-    suspend fun retrieveTagsAndSaveLocally(): List<ApiTag>
+    suspend fun retrieveTagsAndSaveLocally()
+    suspend fun buildTagTree()
 
 
 }

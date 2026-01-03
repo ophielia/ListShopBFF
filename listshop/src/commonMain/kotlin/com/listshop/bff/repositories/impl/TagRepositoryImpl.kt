@@ -15,7 +15,7 @@ class TagRepositoryImpl(
     fun selectAllTags(): List<Tag> {
         listShopDatabase.analytics.fetchingTagsFromNetwork()
         val result: List<TagEntity> = dbRef.tagDefinitionQueries
-            .selectAllTagLookups(::mapTagLookupSelecting).executeAsList()
+            .selectAllTags(::mapTagLookupSelecting).executeAsList()
         return result.map { tle -> Tag.Factory.create(tle) }
     }
 
@@ -24,7 +24,7 @@ class TagRepositoryImpl(
         listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
         dbRef.tagDefinitionQueries.transaction {
             tags.forEach { tag ->
-                dbRef.tagDefinitionQueries.insertIntoTagLookup(
+                dbRef.tagDefinitionQueries.insertIntoTag(
                     tag.externalId,
                     false, tag.name, tag.parentId, "0", tag.tagType, "0"
                 )
@@ -36,7 +36,7 @@ class TagRepositoryImpl(
         listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
         dbRef.tagDefinitionQueries.transaction {
             tags.forEach { tag ->
-                dbRef.tagDefinitionQueries.insertIntoTagLookup(
+                dbRef.tagDefinitionQueries.insertIntoTag(
                     tag.externalId,
                     false, tag.name, tag.parentId, "0", tag.tagType, tag.userId
                 )
@@ -45,10 +45,17 @@ class TagRepositoryImpl(
     }
 
 
+    override suspend fun findTagsByTypes(typesForTreeAsStrings: List<String>) : List<TagEntity>{
+        return dbRef.tagDefinitionQueries
+            .selectTagsByTagTypes(typesForTreeAsStrings)
+            .executeAsList()
+    }
+
+
     override suspend fun deleteAll() {
         listShopDatabase.analytics.databaseCleared()
         dbRef.tagDefinitionQueries.transaction {
-            dbRef.tagDefinitionQueries.removeAllTagLookups()
+            dbRef.tagDefinitionQueries.removeAllTags()
         }
     }
 

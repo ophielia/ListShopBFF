@@ -1,0 +1,49 @@
+import kotlin.Boolean;
+
+CREATE TABLE LayoutEntity (
+    name TEXT,
+    externalId TEXT,
+    isDefault INTEGER AS Boolean NOT NULL,
+    userId INTEGER
+);
+
+CREATE TABLE LayoutCategoryEntity (
+    name TEXT,
+    externalId TEXT,
+    layoutExternalId TEXT,
+    displayOrder INTEGER ,
+    isDefault INTEGER AS Boolean NOT NULL
+);
+
+CREATE TABLE LayoutCategoryMappingEntity (
+    categoryExternalId TEXT,
+    tagExternalId TEXT
+);
+
+insertIntoLayoutEntity:
+INSERT INTO LayoutEntity(name, externalId, isDefault, userId)
+VALUES (?,?,?,?);
+
+removeAllLayoutEntities:
+DELETE FROM LayoutEntity;
+
+selectAllLayoutEntities:
+SELECT LayoutEntity.*
+FROM LayoutEntity;
+
+insertIntoLayoutCategoryEntity:
+INSERT INTO LayoutCategoryEntity(name, externalId, layoutExternalId, displayOrder, isDefault)
+VALUES (? ,?,?,?,?);
+
+removeAllLayoutCategoryEntities:
+DELETE FROM LayoutCategoryEntity;
+
+selectAllLayoutCategoryEntities:
+SELECT LayoutCategoryEntity.* FROM LayoutCategoryEntity;
+
+insertIntoLayoutCategoryMappingEntity:
+INSERT INTO LayoutCategoryMappingEntity ( categoryExternalId, tagExternalId)
+VALUES (?, ?);
+
+removeAllLayoutCategoryMappingEntity:
+DELETE FROM LayoutCategoryMappingEntity;

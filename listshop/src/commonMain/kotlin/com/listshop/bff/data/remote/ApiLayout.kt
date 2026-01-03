@@ -4,7 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiLayout(
+data class
+ApiLayout(
     @SerialName("name")
     val name: String?,
     @SerialName("layout_id")
@@ -12,23 +13,33 @@ data class ApiLayout(
     @SerialName("is_default")
     val isDefault: Boolean = false,
     @SerialName("user_id")
-    val userId: Int?,
+    val userId: Long?,
     @SerialName("categories")
-    val categories: List<ApiLayoutCategory>?,
-)
+    val categories: List<ApiLayoutCategory> = listOf()
+)  {
+    companion object {
+        fun empty(): ApiLayout = ApiLayout(
+            name = null,
+            externalId = null,
+            isDefault = false,
+            userId = null,
+            categories = listOf()
+        )
+    }
+}
 
 @Serializable
 data class ApiLayoutCategory(
     @SerialName("name")
     val name: String?,
     @SerialName("category_id")
-    val externalId: Int?,
+    val externalId: Int,
     @SerialName("display_order")
-    val displayOrder: Int = 0,
+    val displayOrder: Long = 0,
     @SerialName("is_default")
     val isDefault: Boolean = false,
     @SerialName("tags")
-    val tags: List<ApiLayoutTag>?
+    val tags: List<ApiLayoutTag> = listOf()
 
 )
 
