@@ -75,8 +75,7 @@ class SyncServiceImpl  internal constructor(
 //os_log("SyncServiceImpl - syncLookupData - returning empty tag tree", log: Log.service, type: .info)
 //os_log("SyncServiceImpl - syncLookupData - finished building tag tree", log: Log.service, type: .debug)
 
-
-        return TagTree(lookups)
+return tagTree
         }
 
     override suspend fun syncWithServerList(connectionStatus: ConnectionStatus): ShoppingList? {

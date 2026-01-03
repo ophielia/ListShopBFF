@@ -17,7 +17,7 @@ class TagServiceImpl internal constructor(
     val listShopAnalytics: ListShopAnalytics? = null
 ) : TagService {
 
-    override suspend fun retrieveTagsAndSaveLocally(){
+    override suspend fun retrieveTagsAndSaveLocally() {
         // get the list of api tags
         val apiTags = tagApi.retrieveApiTags()
 
@@ -28,32 +28,32 @@ class TagServiceImpl internal constructor(
         tagRepo.insertApiTagsLocally(apiTags)
     }
 
-    override suspend fun buildTagTree() {
+    override suspend fun buildTagTree(): TagTree {
         val typesForTreeAsStrings = TagType.entries.map { it.display }
         // get the saved tags
         val lookups = tagRepo.findTagsByTypes(typesForTreeAsStrings)
         val tagTree = TagTree(lookups)
-/*
-        do {
-            // get tag lookups for all types
-            let allTagTypes = [TagType.Ingredient, TagType.NonEdible, TagType.DishType, TagType.Rating, TagType.TagType]
+        /*
+                do {
+                    // get tag lookups for all types
+                    let allTagTypes = [TagType.Ingredient, TagType.NonEdible, TagType.DishType, TagType.Rating, TagType.TagType]
 
-            let lookups = try coreDataApi.findTags(with: allTagTypes)
-                // create tag tree
-                guard lookups.count > 0 else {
-                    let lse = ListShopError(type: .service, title: "can't make a TagTree")
-                    throw lse
-                }
-                // construct from tag lookups
-                let tagTree = TagTree()
-                tagTree.construct(from: lookups)
-                return Promise.value(tagTree)
-            } catch {
-                let lse = ListShopError(type: .service, title: "can't make a TagTree")
-                throw lse
-            }
-            */
-
+                    let lookups = try coreDataApi.findTags(with: allTagTypes)
+                        // create tag tree
+                        guard lookups.count > 0 else {
+                            let lse = ListShopError(type: .service, title: "can't make a TagTree")
+                            throw lse
+                        }
+                        // construct from tag lookups
+                        let tagTree = TagTree()
+                        tagTree.construct(from: lookups)
+                        return Promise.value(tagTree)
+                    } catch {
+                        let lse = ListShopError(type: .service, title: "can't make a TagTree")
+                        throw lse
+                    }
+                    */
+        return tagTree
     }
 
 }
