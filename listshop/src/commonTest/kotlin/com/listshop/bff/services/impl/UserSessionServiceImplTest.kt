@@ -5,6 +5,7 @@ import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ClientType
 import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.data.state.UserSessionState
+import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.repositories.SessionInfoRepository
 import dev.mokkery.answering.returns
@@ -48,7 +49,9 @@ class UserSessionServiceImplTest {
     @Test
     fun testCurrentSessionExistingUser() {
         var userInfo = dummyUserInfoEntity()
+        var listInfo = dummyListInfoEntity()
         every { repository.getUserInfo() } returns userInfo
+        every { repository.getListInfo() } returns listInfo
 
         val userSession = service?.currentSession()
         assertNotNull(userSession)
@@ -65,7 +68,9 @@ class UserSessionServiceImplTest {
     @Test
     fun `when i call setUserToken the token is sent to save`() = runTest {
         var userInfo =  dummyUserInfoEntity()
+        var listInfo =  dummyListInfoEntity()
         every { repository.getUserInfo() } returns userInfo
+        every { repository.getListInfo() } returns listInfo
 
         val savedUserInfo = Capture.slot<UserInfo>()
         every {repository.updateUserInfo(capture(savedUserInfo))} returns Unit
@@ -81,6 +86,20 @@ class UserSessionServiceImplTest {
             userLastSeen = "yesterday",
             userCreated = "a month ago",
             userLastSignedIn = "two weeks ago")
+        return userInfo
+    }
+
+    private fun dummyListInfoEntity(): ListInfoEntity? {
+        var userInfo = ListInfoEntity(
+            lastInternalUpdate = "",
+            lastUpdate = "",
+            localListUpdated = "",
+            serverListId = "",
+            lookupDataLastSynced = "",
+            statisticsLastSynced = "",
+            localLastSynced = "",
+            serverListLastSynced = ""
+        )
         return userInfo
     }
 

@@ -7,7 +7,8 @@ enum class TagType(val display: String) {
     DISH_TYPE(display = "DishType"),
     RATING(display = "Rating"),
     TAG_TYPE(display = "TagType"),
-    NON_EDIBLE(display = "NonEdible");
+    NON_EDIBLE(display = "NonEdible"),
+    EMPTY(display = "Empty");
 
     companion object {
         private val map = TagType.entries.associateBy(TagType::display)

@@ -1,50 +1,70 @@
 package com.listshop.bff.services
 
+import com.listshop.bff.data.model.TagTreeDisplay
+import com.listshop.bff.data.model.TagTreeNode
+import com.listshop.bff.data.model.TagType
 import com.listshop.bff.db.TagEntity
 
 public class TagTree() {
+    var lookupDictionary = hashMapOf<Long, TagTreeNode>()
+    val BASE_GROUP = 0L
 
     init {
         // will initialize private lookup dictionary to null
+        lookupDictionary = hashMapOf()
     }
 
     // secondary constructor
     constructor(tagList: List<TagEntity>) : this() {
         // will fill in object based on passed list
-        /*
-        ios code
-            func construct(from tagList: [TagLkupEntity]) {
-        lookupDictionary = [:]
-        let baseTag = TagTreeDisplay(name: "All", id: TagTree.BASE_GROUP, addedListCount: 0, addedDishCount: 0, tagType: "empty")
-        let baseNode = TagTreeNode(display: baseTag, parentId: -99)
-        lookupDictionary[TagTree.BASE_GROUP] = baseNode
+        val baseTag = TagTreeDisplay(
+            name = "All",
+            id = BASE_GROUP,
+            tagType = TagType.EMPTY
+        )
+        val baseNode = TagTreeNode(display = baseTag, parentId = -99L)
+        lookupDictionary.put(BASE_GROUP, baseNode)
 
-        for tagLkup in tagList {
-            let id = Int32(tagLkup.externalId)
-            // make TagTreeDisplay
-            let tagTreeDisplay = findOrCreateTagTreeDisplay(from: tagLkup)
-
-            // set in dictionary
-            let parentId = tagLkup.parentId
-            if let existingNode = lookupDictionary[id] {
-                existingNode.display = tagTreeDisplay
-                existingNode.parentId = parentId
-            } else {
-                lookupDictionary[id] = TagTreeNode(display: tagTreeDisplay,
-                        parentId: parentId)
-            }
-
-            // set in parent
-            setTagDisplayInParent(childOptional: lookupDictionary[id], parentId: parentId)
+        for (tag in tagList) {
+            val parentId = tag.parentId?.toLong() ?: -1L
+            val tagTreeNode = createOrUpdateNode(tag)
+            // set node in parent
+            addNodeToParent(tagTreeNode, parentId)
         }
 
-        // now, sift the tags in each of the nodes
-        lookupDictionary.forEach { id, treeNode in
-            treeNode.processChildren()
-        }
+        // sift tags in each of the nodes
+        lookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
+    }
 
+
+    private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: Long) {
+        // get parent node
+        if (!lookupDictionary.containsKey(parentId)) {
+            lookupDictionary[parentId] = TagTreeNode.empty()
+        }
+        val parentNode = lookupDictionary[parentId]!!
+
+        // add node to raw children
+        parentNode.addChild(tagTreeNode)
     }
-         */
+
+    private fun createOrUpdateNode(tag: TagEntity): TagTreeNode {
+        val tagId = tag.externalId?.toLong() ?: -1L
+        val parentId = tag.parentId?.toLong() ?: -1L
+        if (lookupDictionary.containsKey(tagId)) {
+            // node exists - update display
+            var node = lookupDictionary[tagId]
+            node?.display?.updateFromTag(tag)
+            node?.parentId = parentId
+        } else {
+            // no node - create one
+            val tagTreeDisplay = TagTreeDisplay.create(tag)
+            val tagTreeNode = TagTreeNode(display = tagTreeDisplay, parentId = parentId)
+            // set node in lookupDictionary
+            lookupDictionary[tagId] = tagTreeNode
+        }
+        return lookupDictionary.get(tagId)!!
     }
+
 
 }
