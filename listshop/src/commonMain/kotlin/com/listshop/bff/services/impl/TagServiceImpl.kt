@@ -33,26 +33,7 @@ class TagServiceImpl internal constructor(
         // get the saved tags
         val lookups = tagRepo.findTagsByTypes(typesForTreeAsStrings)
         val tagTree = TagTree(lookups)
-        /*
-                do {
-                    // get tag lookups for all types
-                    let allTagTypes = [TagType.Ingredient, TagType.NonEdible, TagType.DishType, TagType.Rating, TagType.TagType]
 
-                    let lookups = try coreDataApi.findTags(with: allTagTypes)
-                        // create tag tree
-                        guard lookups.count > 0 else {
-                            let lse = ListShopError(type: .service, title: "can't make a TagTree")
-                            throw lse
-                        }
-                        // construct from tag lookups
-                        let tagTree = TagTree()
-                        tagTree.construct(from: lookups)
-                        return Promise.value(tagTree)
-                    } catch {
-                        let lse = ListShopError(type: .service, title: "can't make a TagTree")
-                        throw lse
-                    }
-                    */
         return tagTree
     }
 

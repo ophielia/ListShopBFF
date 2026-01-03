@@ -3,12 +3,14 @@ package com.listshop.bff.services.impl
 
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ClientType
+import com.listshop.bff.data.model.TagType
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.TagRepository
 import com.listshop.bff.repositories.impl.TagRepositoryImpl
+import com.listshop.bff.services.TestUtils
 import dev.mokkery.answering.calls
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.capture.Capture
@@ -57,7 +59,7 @@ class TagServiceImplTest {
 
     @Test
     fun `when i call retrieveTagsAndSaveLocally the tags are retrieved and saved`() = runTest {
-        val dummyTagList = dummyApiTagList()
+        val dummyTagList = TestUtils.dummyApiTagList()
         var deleteCallCount = 0
         var insertCallCount = 0
         everySuspend { remoteApi.retrieveApiTags()  } calls { (_: Unit) ->
@@ -81,9 +83,24 @@ class TagServiceImplTest {
         assertEquals(dummyTagList.size, savedTagList.get().size, "same tags should be passed to save")
     }
 
+    @Test
+    fun `when i call buildTagTree a TagTree is returned`() = runTest {
+        val dummyTagList = TestUtils.dummyTagStructure()
+        val typesForTreeAsStrings = TagType.entries.map { it.display }
+
+        everySuspend { tagRepo.findTagsByTypes(typesForTreeAsStrings)  } calls { (_: Unit) ->
+            delay(500)
+            dummyTagList
+        }
+
+        val callResult = service?.buildTagTree()
+        // later, when accessing tag tree is possible, will need to check this list
+        assertNotNull(callResult)
+    }
 
 
-private fun dummyUserInfoEntity(): UserInfoEntity? {
+
+    private fun dummyUserInfoEntity(): UserInfoEntity? {
     var userInfo = UserInfoEntity(
         userName = "test",
         userToken = "testToken",
@@ -93,13 +110,5 @@ private fun dummyUserInfoEntity(): UserInfoEntity? {
     )
     return userInfo
 }
-
-private fun dummyApiTagList(): List<ApiTag> {
-    val tag1 = ApiTag("1", "tag1")
-    val tag2 = ApiTag("2", "tag2")
-    return listOf(tag1, tag2)
-}
-
-
 
 }

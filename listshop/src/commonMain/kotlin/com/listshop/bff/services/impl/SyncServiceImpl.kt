@@ -9,13 +9,9 @@ import com.listshop.bff.data.remote.ApiRequiredClientVersion
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.exceptions.OfflineException
 import com.listshop.bff.remote.UserApi
-import com.listshop.bff.services.LayoutService
-import com.listshop.bff.services.SyncService
-import com.listshop.bff.services.TagService
-import com.listshop.bff.services.TagTree
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.*
 
-class SyncServiceImpl  internal constructor(
+class SyncServiceImpl internal constructor(
     private val userSessionService: UserSessionService,
     private val userApi: UserApi,
     private val tagService: TagService,
@@ -27,7 +23,7 @@ class SyncServiceImpl  internal constructor(
         val currentVersionString = appInfo.clientVersion ?: "0"
         if (connectionStatus == ConnectionStatus.Online) {
             // get the required version
-            val requiredApi : ApiRequiredClientVersion  = userApi.retrieveRequiredClientVersion()
+            val requiredApi: ApiRequiredClientVersion = userApi.retrieveRequiredClientVersion()
             val requiredVersionString = requiredVersionForApp(requiredApi, appInfo.clientType)
             val required = SemanticVersion.create(requiredVersionString)
             val actual = SemanticVersion.create(currentVersionString)
@@ -39,14 +35,14 @@ class SyncServiceImpl  internal constructor(
     private fun requiredVersionForApp(
         requiredApi: ApiRequiredClientVersion,
         clientType: ClientType
-    ) : String {
-        return when (clientType)  {
+    ): String {
+        return when (clientType) {
             ClientType.IOS -> requiredApi.iosMinVersion ?: "0"
             ClientType.Android -> requiredApi.androidMinVersion ?: "0"
         }
     }
 
-    override suspend fun syncLookupData(connectionStatus: ConnectionStatus) : TagTree {
+    override suspend fun syncLookupData(connectionStatus: ConnectionStatus): TagTree {
         listShopAnalytics.debug("SyncServiceImpl - Begin retrieve Mapping Information sync lookup data")
         // error if offline
         if (connectionStatus == ConnectionStatus.Online) {
@@ -62,24 +58,13 @@ class SyncServiceImpl  internal constructor(
 
         // set last local data synced
         userSessionService.setLookupDataLastSyncedToNow()
-
         // use tag service to build tag tree and return
-//MM note - this guy could be synchronous with lookup data
-        val tagTree = tagService.buildTagTree()
-        // return the tag tree
-//os_log("SyncServiceImpl - skipping syncLookupData - currently offline ", log: Log.service, type: .info)
-//os_log("SyncServiceImpl - syncLookupData - saved tags, now retrieving categories", log: Log.service, type: .debug)
-//os_log("SyncServiceImpl - syncLookupData - retrieved layouts, now saving them", log: Log.service, type: .debug)
-//os_log("SyncServiceImpl - Finished saving syncLookupData", log: Log.service, type: .info)
-//os_log("SyncServiceImpl - syncLookupData - building tag tree", log: Log.service, type: .debug)
-//os_log("SyncServiceImpl - syncLookupData - returning empty tag tree", log: Log.service, type: .info)
-//os_log("SyncServiceImpl - syncLookupData - finished building tag tree", log: Log.service, type: .debug)
-
-return tagTree
-        }
+        return tagService.buildTagTree()
+    }
 
     override suspend fun syncWithServerList(connectionStatus: ConnectionStatus): ShoppingList? {
-        TODO("Not yet implemented")
+        //MM START HERE
+        return null
     }
 
     override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
