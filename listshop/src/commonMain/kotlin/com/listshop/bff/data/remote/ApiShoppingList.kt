@@ -36,7 +36,7 @@ data class ApiShoppingListCategory(
     @SerialName("category_id")
     val categoryId: Long?,
     @SerialName("displayOrder")
-    val displayOrder: Long?,
+    val displayOrder: Int?,
     @SerialName("items")
     val items: List<ApiShoppingListItem>
 )
@@ -56,9 +56,9 @@ data class ApiShoppingListItem(
     @SerialName("used_count")
     val usedCount: Long?,
     @SerialName("source_keys")
-    val displayOrder: List<String>?,
+    val sourceKeys: List<String>?,
     @SerialName("tag")
-    val tag: ApiShoppingListTag
+    val tag: ApiShoppingListTag,
 )
 
 @Serializable

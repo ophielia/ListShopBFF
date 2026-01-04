@@ -34,5 +34,32 @@ class ShoppingListTest {
 //MM up next - filling in categories, items (and tags) in ShoppingList from api.
 
         assertNotNull(testResult)
+        assertNotNull(testResult)
+        assertEquals("51167", testResult.externalId)
+        assertNotNull(testResult.created)
+        assertNotNull(testResult.updated)
+        assertEquals(34, testResult.itemCount)
+        assertEquals("12", testResult.layoutId)
+        assertEquals("Monop", testResult.name)
+        assertFalse(testResult.isStarterList ?: false)
+        assertEquals(3, testResult.categories.size)
+
+        // check category items - frozen, 1 crossed off
+        val frozen = testResult.categories.first { it.externalId == 10L }
+        assertEquals("Frozen", frozen.name)
+        assertEquals(600, frozen.displayOrder)
+        assertEquals(1, frozen.items.size)
+        // check item crossed off
+        assertNotNull(frozen.items.first().crossedOff)
+        // check dairy items - should be 5, feta should not be crossed off
+        val dairy = testResult.categories.first { it.externalId == 7L }
+        assertEquals("Dairy", dairy.name)
+        assertEquals(300, dairy.displayOrder)
+        assertEquals(5, dairy.items.size)
+        // check feta not crossed off
+        assertNull(dairy.items.first{it.externalId == 100976L }.crossedOff)
+
+        //MM STILL OPEN - legend tests
+
     }
 }
