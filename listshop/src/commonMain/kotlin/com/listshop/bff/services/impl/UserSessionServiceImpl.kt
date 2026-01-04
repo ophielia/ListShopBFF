@@ -68,6 +68,13 @@ class UserSessionServiceImpl internal constructor(
         refreshOrInitializeUserSession()
     }
 
+    override fun setServerListId(listId: String){
+        val listInfo = getListInfo()
+        listInfo.serverListId = listId
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
 
 
     private fun getUserInfo(): UserInfo {

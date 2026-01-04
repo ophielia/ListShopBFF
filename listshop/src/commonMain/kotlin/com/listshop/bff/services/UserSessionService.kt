@@ -18,5 +18,7 @@ interface UserSessionService {
 
     fun setLookupDataLastSyncedToNow()
 
+    fun setServerListId(listId: String)
+
 
 }

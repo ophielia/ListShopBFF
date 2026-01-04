@@ -16,13 +16,14 @@ class ListServiceImpl internal constructor(
 
     override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
         TODO("Not yet implemented")
-//MM START HERE!!!!!
-        // retrieve api list
+
+        // retrieve api list as bff model
         val shoppingList: ShoppingList = remoteApi.retrieveMostRecentList()
         // save server list id in session
-        // translate api list to model
+        sessionService.setServerListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
         // save as local list
+//MM START HERE!!!!! - save locally!!
         // return list
 
 
