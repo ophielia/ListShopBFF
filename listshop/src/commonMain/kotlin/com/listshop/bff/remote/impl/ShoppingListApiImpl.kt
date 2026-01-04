@@ -3,6 +3,7 @@ package com.listshop.bff.remote.impl
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbedded
+import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ShoppingListApi
@@ -31,4 +32,22 @@ internal class ShoppingListApiImpl(
             .map { el -> el.embeddedList}
             .map { el -> ShoppingList.create(apiValue = el) }
     }
+
+    override suspend fun retrieveMostRecentList(): ShoppingList {
+        val token = remoteApi.token()
+        val urlString = remoteApi.buildPath("/shoppinglist/mostrecent")
+        listShopAnalytics.debug("getting most recent list, the token is: " + token)
+
+        val response = remoteApi.getRequest(urlString)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            ApiException("get shopping list call failed with status: " + response.status.value)
+        )
+
+        val result : ApiShoppingListEmbeddedList = response.body()
+
+        return ShoppingList.create(apiValue = result.embeddedList)
+    }
+
 }

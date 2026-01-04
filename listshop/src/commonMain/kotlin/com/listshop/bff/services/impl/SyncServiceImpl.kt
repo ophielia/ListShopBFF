@@ -7,7 +7,6 @@ import com.listshop.bff.data.model.SemanticVersion
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiRequiredClientVersion
 import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.exceptions.OfflineException
 import com.listshop.bff.remote.UserApi
 import com.listshop.bff.services.*
 
@@ -46,28 +45,102 @@ class SyncServiceImpl internal constructor(
         listShopAnalytics.debug("SyncServiceImpl - Begin retrieve Mapping Information sync lookup data")
         // error if offline
         if (connectionStatus == ConnectionStatus.Online) {
-            throw OfflineException(message = "Can't reach the server - syncing lookup data")
+            // only refreshes data if we're online
+
+            // remote call to retrieve tag lookup data (array of ApiTagLookup objects)
+            tagService.retrieveTagsAndSaveLocally()
+
+            // remote call to retrieve layout data (array of ApiMappingLayouts objects)
+            // process and save layouts
+            layoutService.retrieveLayoutsAndSaveLocally()
+
+            // set last local data synced
+            userSessionService.setLookupDataLastSyncedToNow()
         }
 
-        // remote call to retrieve tag lookup data (array of ApiTagLookup objects)
-        tagService.retrieveTagsAndSaveLocally()
-
-        // remote call to retrieve layout data (array of ApiMappingLayouts objects)
-        // process and save layouts
-        layoutService.retrieveLayoutsAndSaveLocally()
-
-        // set last local data synced
-        userSessionService.setLookupDataLastSyncedToNow()
         // use tag service to build tag tree and return
+        // as long as tags are present locally, tag tree can be built
         return tagService.buildTagTree()
     }
 
-    override suspend fun syncWithServerList(connectionStatus: ConnectionStatus): ShoppingList? {
-        //MM START HERE
+    override suspend fun loadMergedShoppingList(connectionStatus: ConnectionStatus): ShoppingList? {
+        //MM START HERE!!!!!
         return null
+
+        /*
+        ios code
+
+                os_log("SyncServiceImpl - beginning syncServerList", log: Log.service, type: .info)
+        let userLoggedIn = checkUserLoggedIn()
+
+        if connectionStatus != .connected || !userLoggedIn {
+            return listService.retrieveLocalList()
+        } else {
+            return try doMergeLocalAndServerList()
+        }
+
+
+            private func checkUserLoggedIn() -> Bool {
+        var sessionState = userSessionService.userSession.sessionState
+        return sessionState == .User
+    }
+
+
+    public func retrieveLocalList() -> Promise<ShoppingList> {
+        firstly {
+            coreDataApi.retrieveList()
+        }
+                .map({ [weak self] coreList in
+                    var shoppingList = ShoppingList(localShoppingList: coreList)
+                    let modelList = coreList.listSourceKeys?.compactMap {
+                                $0 as? ListSourceKey
+                            }
+                            .map {
+                                ApiLegend(localSourceKey: $0)
+                            }
+                    let legend = self?.processLegend(api: modelList ?? [])
+                    shoppingList.legend = legend
+                    return shoppingList
+                })
+    }
+
+
+    private func doSyncFromLocalList(shoppingList: ShoppingList, check userTagConflict: Bool) throws -> Promise<ShoppingList> {
+
+        // not previously updated - merge this
+        let postData = transformToMergePost(localList: shoppingList, check: userTagConflict)
+
+        let promise = try remoteApi.mergeList(postData: postData)
+                .then { apiShoppingList -> Promise<ShoppingList> in
+                    var shoppingList = ShoppingList(networkShoppingList: apiShoppingList)
+                    let apiLegendEntries = apiShoppingList.legend ?? []
+                    let legend = self.listService.processLegend(api: apiLegendEntries)
+                    shoppingList.legend = legend
+                    self.userSessionService.setLocalListMerged()
+
+                    // fire and forget saving list locally
+                    _ = self.listService.replaceLocalList(shoppingList: shoppingList).done({ _ in
+                        // do nothing - fire and forget
+                    })
+
+                    // process result
+                    os_log("SyncServiceImpl - end createListFromLocal", log: Log.service, type: .info)
+
+                    return Promise<ShoppingList>.value(shoppingList)
+                }
+        promise.catch { error in
+            os_log("SyncServiceImpl - unable to sync local list:", log: Log.service, type: .error, error.localizedDescription)
+        }
+        return promise
+    }
+
+         */
     }
 
     override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
         TODO("Not yet implemented")
+        //MM will be implemented in list service instead
+
+
     }
 }
