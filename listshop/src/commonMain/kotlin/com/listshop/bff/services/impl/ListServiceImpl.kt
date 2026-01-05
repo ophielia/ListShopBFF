@@ -3,11 +3,13 @@ package com.listshop.bff.services.impl
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.remote.ShoppingListApi
+import com.listshop.bff.repositories.ListRepository
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserSessionService
 
 class ListServiceImpl internal constructor(
     private val remoteApi: ShoppingListApi,
+    private val listRepo: ListRepository,
     private val sessionService: UserSessionService
 ) : ListService {
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
@@ -23,9 +25,11 @@ class ListServiceImpl internal constructor(
         sessionService.setServerListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
         // save as local list
-//MM START HERE!!!!! - save locally!!
+        listRepo.clearLocalListData()
+        listRepo.saveListLocally(shoppingList)
         // return list
-
+        return shoppingList
+    }
 
         /*
         list service - most recent list
@@ -54,7 +58,7 @@ class ListServiceImpl internal constructor(
     }
 
          */
-    }
+
 
 
 }

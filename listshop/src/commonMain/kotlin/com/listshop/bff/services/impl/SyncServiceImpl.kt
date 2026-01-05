@@ -64,7 +64,6 @@ class SyncServiceImpl internal constructor(
     }
 
     override suspend fun loadMergedShoppingList(connectionStatus: ConnectionStatus): ShoppingList? {
-        //MM START HERE!!!!!
         return null
 
         /*

@@ -15,7 +15,7 @@ data class ShoppingList(
     var itemCount: Int?,
 
     val isStarterList: Boolean?,
-    //val legend: ShoppingListLegend?
+    val legend: ShoppingListLegend?,
     val loading: Boolean,
     val lastLocalChange: String?,
     val lastSynced: String?
@@ -35,7 +35,8 @@ data class ShoppingList(
                 isStarterList = apiValue.isStarter,
                 loading = false,
                 lastLocalChange = null,
-                lastSynced = null
+                lastSynced = null,
+                legend = ShoppingListLegend()
             )
         }
 
@@ -52,6 +53,7 @@ data class ShoppingList(
                 loading = false,
                 lastLocalChange = null,
                 lastSynced = null,
+                legend = ShoppingListLegend()
             )
         }
     }
@@ -132,11 +134,27 @@ data class ShoppingListTag(
         }
     }
 }
+
+
 data class ShoppingListLegend(
-    var unknown: String?
+    var legendLkup: Map<String, LegendPoint> = emptyMap(),
+    var legendKeys: List<LegendPoint> = emptyList()
+    )
+
+data class LegendPointSource(
+    var color: String,
+    var icon: String
+)
+
+data class LegendPoint(
+    var key: String,
+    var display: String?,
+    var iconSource: LegendPointSource?
+)
 
 
-) /*
+
+/*
 //MM legend is open
 
 currently, provides map and keys
