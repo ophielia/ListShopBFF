@@ -8,7 +8,8 @@ CREATE TABLE ShoppingListEntity (
     lastLocalChange TEXT,
     lastSync TEXT,
     itemCount INTEGER,
-    layoutId TEXT
+    layoutId TEXT,
+    isStarter  INTEGER AS Boolean NOT NULL
 );
 
 
@@ -26,21 +27,24 @@ CREATE TABLE ListItemEntity (
     added TEXT,
     removed TEXT,
     updatedOn TEXT,
+    crossedOff TEXT,
     usedCount INTEGER,
+    tagName TEXT,
+    tagType TEXT,
     legendKeys TEXT
 );
 
 insertIntoShoppingListEntity:
-INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastLocalChange,lastSync,itemCount,layoutId  )
-VALUES (?,?,?,?, ?, ?, ?, ?);
+INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastLocalChange,lastSync,itemCount,layoutId  , isStarter)
+VALUES (?,?,?,?, ?, ?, ?, ?, ?);
 
 insertIntoListCategoryEntity:
 INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
 VALUES (?, ?, ?, ?);
 
 insertIntoListItemEntity:
-INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, updatedOn, usedCount, legendKeys)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, tagType, legendKeys)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 removeAllShoppingListEntities:
 DELETE FROM ShoppingListEntity;
@@ -50,3 +54,17 @@ DELETE FROM ListCategoryEntity;
 
 removeAllListItemEntities:
 DELETE FROM ListItemEntity;
+
+selectAllLists:
+SELECT ShoppingListEntity.*
+FROM ShoppingListEntity;
+
+selectAllCategoriesForList:
+SELECT *
+FROM ListCategoryEntity
+WHERE listExternalId = ?;
+
+selectAllItemsForCategory:
+SELECT *
+FROM ListItemEntity
+WHERE categoryExternalId = ?;

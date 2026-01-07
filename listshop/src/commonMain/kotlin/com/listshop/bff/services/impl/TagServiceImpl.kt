@@ -4,13 +4,12 @@ import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.remote.TagApi
-import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.TagRepository
 import com.listshop.bff.services.TagService
 import com.listshop.bff.services.TagTree
 
 class TagServiceImpl internal constructor(
-    private val sessionRepo: SessionInfoRepository,
+
     private val tagApi: TagApi,
     private val tagRepo: TagRepository,
     val appInfo: AppInfo,

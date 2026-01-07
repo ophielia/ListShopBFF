@@ -4,11 +4,14 @@ import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListCategory
 import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
+import com.listshop.bff.db.ListCategoryEntity
+import com.listshop.bff.db.ListItemEntity
+import com.listshop.bff.db.ShoppingListEntity
 
 data class ShoppingList(
     var externalId: String?,
     val name: String?,
-    val categories : List<ShoppingListCategory> = emptyList(),
+    val categories: List<ShoppingListCategory> = emptyList(),
     var created: String?,
     var updated: String?,
     var layoutId: String?,
@@ -42,8 +45,8 @@ data class ShoppingList(
 
         fun empty(): ShoppingList {
             return ShoppingList(
-                "empty",
-                "empty",
+                "",
+                "",
                 categories = emptyList(),
                 created = null,
                 updated = null,
@@ -54,6 +57,23 @@ data class ShoppingList(
                 lastLocalChange = null,
                 lastSynced = null,
                 legend = ShoppingListLegend()
+            )
+        }
+
+        fun create(dbValue: ShoppingListEntity, modelCategories: List<ShoppingListCategory>): ShoppingList {
+            return ShoppingList(
+                externalId = dbValue.externalId,
+                name = dbValue.name,
+                categories = modelCategories,
+                created = dbValue.createdOn,
+                updated = dbValue.updatedOn,
+                layoutId = dbValue.layoutId,
+                itemCount = dbValue.itemCount?.toInt() ?: 0,
+                isStarterList = dbValue.isStarter,
+                legend = ShoppingListLegend(),
+                loading = false,
+                lastLocalChange = dbValue.lastLocalChange,
+                lastSynced = dbValue.lastSync
             )
         }
     }
@@ -82,6 +102,16 @@ data class ShoppingListCategory(
             )
         }
 
+        fun create(dbValue: ListCategoryEntity, dbItems: List<ListItemEntity>): ShoppingListCategory {
+            val items = dbItems.map { ShoppingListItem.create(it) }
+            return ShoppingListCategory(
+                name = dbValue.name ?: "",
+                displayOrder = dbValue.displayOrder?.toInt() ?: 0,
+                items = items,
+                externalId = dbValue.externalId?.toLong() ?: 0
+            )
+        }
+
     }
 }
 
@@ -105,9 +135,23 @@ data class ShoppingListItem(
                 removed = null,
                 updatedOn = apiValue.updated,
                 crossedOff = apiValue.crossedOff,
-                usedCount = apiValue.usedCount?.toInt() ?: 0,
+                usedCount = apiValue.usedCount ?: 0,
                 tag = ShoppingListTag.create(apiValue = apiValue.tag),
                 legendKeys = apiValue.sourceKeys ?: emptyList(),
+            )
+        }
+
+        fun create(dbValue: ListItemEntity): ShoppingListItem {
+            val tag = ShoppingListTag.create(dbValue)
+            return ShoppingListItem(
+                externalId = dbValue.externalId?.toLong() ?: 0,
+                added = dbValue.added ?: "",
+                removed = dbValue.removed ?: "",
+                updatedOn = dbValue.updatedOn ?: "",
+                crossedOff = dbValue.crossedOff,
+                usedCount = dbValue.usedCount?.toInt() ?: 0,
+                tag = tag,
+                legendKeys = emptyList()
             )
         }
     }
@@ -121,15 +165,25 @@ data class ShoppingListTag(
     var isUser: Boolean?,
 
 
-) {
+    ) {
     companion object {
-        fun create(apiValue: ApiShoppingListTag)  : ShoppingListTag {
+        fun create(apiValue: ApiShoppingListTag): ShoppingListTag {
             return ShoppingListTag(
                 externalId = apiValue.tagId ?: "",
                 display = apiValue.name ?: "",
                 tagType = apiValue.tagType ?: TagType.INGREDIENT.display,
                 categoryId = null,
                 isUser = null,
+            )
+        }
+
+        fun create(dbValue: ListItemEntity): ShoppingListTag {
+            return ShoppingListTag(
+                externalId = dbValue.externalId ?: "",
+                display = dbValue.tagName ?: "",
+                tagType = dbValue.tagType ?: "",
+                categoryId = dbValue.categoryExternalId,
+                isUser = null
             )
         }
     }
@@ -139,7 +193,7 @@ data class ShoppingListTag(
 data class ShoppingListLegend(
     var legendLkup: Map<String, LegendPoint> = emptyMap(),
     var legendKeys: List<LegendPoint> = emptyList()
-    )
+)
 
 data class LegendPointSource(
     var color: String,
@@ -151,7 +205,6 @@ data class LegendPoint(
     var display: String?,
     var iconSource: LegendPointSource?
 )
-
 
 
 /*

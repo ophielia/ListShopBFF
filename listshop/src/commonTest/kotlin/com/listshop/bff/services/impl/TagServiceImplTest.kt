@@ -5,11 +5,8 @@ import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ClientType
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.data.remote.ApiTag
-import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.remote.TagApi
-import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.TagRepository
-import com.listshop.bff.repositories.impl.TagRepositoryImpl
 import com.listshop.bff.services.TestUtils
 import dev.mokkery.answering.calls
 import dev.mokkery.everySuspend
@@ -26,7 +23,6 @@ import kotlin.test.assertNotNull
 
 class TagServiceImplTest {
 
-    val sessionRepo = mock<SessionInfoRepository>()
     val tagRepo = mock<TagRepository>()
     val remoteApi = mock<TagApi>()
 
@@ -46,7 +42,9 @@ class TagServiceImplTest {
             deviceId = "deviceId"
         )
         service = TagServiceImpl(
-            sessionRepo, remoteApi, tagRepo, appInfo
+            tagApi = remoteApi,
+            tagRepo = tagRepo,
+            appInfo = appInfo
         )
     }
 
@@ -62,7 +60,7 @@ class TagServiceImplTest {
         val dummyTagList = TestUtils.dummyApiTagList()
         var deleteCallCount = 0
         var insertCallCount = 0
-        everySuspend { remoteApi.retrieveApiTags()  } calls { (_: Unit) ->
+        everySuspend { remoteApi.retrieveApiTags() } calls { (_: Unit) ->
             delay(500)
             dummyTagList
         }
@@ -88,7 +86,7 @@ class TagServiceImplTest {
         val dummyTagList = TestUtils.dummyTagStructure()
         val typesForTreeAsStrings = TagType.entries.map { it.display }
 
-        everySuspend { tagRepo.findTagsByTypes(typesForTreeAsStrings)  } calls { (_: Unit) ->
+        everySuspend { tagRepo.findTagsByTypes(typesForTreeAsStrings) } calls { (_: Unit) ->
             delay(500)
             dummyTagList
         }
@@ -98,17 +96,5 @@ class TagServiceImplTest {
         assertNotNull(callResult)
     }
 
-
-
-    private fun dummyUserInfoEntity(): UserInfoEntity? {
-    var userInfo = UserInfoEntity(
-        userName = "test",
-        userToken = "testToken",
-        userLastSeen = "yesterday",
-        userCreated = "a month ago",
-        userLastSignedIn = "two weeks ago"
-    )
-    return userInfo
-}
 
 }

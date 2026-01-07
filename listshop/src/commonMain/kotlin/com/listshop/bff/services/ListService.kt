@@ -7,4 +7,6 @@ interface ListService {
 
     suspend fun retrieveListOfLists(): List<ShoppingList>
     suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList?
+    suspend fun retrieveLocalList(): ShoppingList?
+    suspend fun mergeLocalWithServerList(): ShoppingList?
 }

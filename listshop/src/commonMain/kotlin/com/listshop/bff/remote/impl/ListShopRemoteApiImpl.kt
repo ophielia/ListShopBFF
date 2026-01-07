@@ -8,41 +8,30 @@ import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ListShopUrl
 import com.listshop.bff.services.UserSessionService
 import com.listshop.bff.tools.StringUtils
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logger
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.logging.SIMPLE
-import io.ktor.client.request.accept
-import io.ktor.client.request.get
-import io.ktor.client.request.headers
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.URLProtocol
-import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.*
+import io.ktor.client.engine.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
 internal class ListShopRemoteApiImpl(
     private val engine: HttpClientEngine,
-    private val sessionService : UserSessionService,
+    private val sessionService: UserSessionService,
     private val appInfo: AppInfo,
     private val httpClientAnalytics: HttpClientAnalytics,
     private val listShopAnalytics: ListShopAnalytics
 ) : ListShopRemoteApi {
 
     private var _currentClientToken: String? = "init"
+    private val REQUEST_FAILURE_MESSAGE = "request failed with message: "
+    private var _listshopUrl: ListShopUrl = StringUtils.buildUrl(appInfo.baseUrl)
 
-    private var _listshopUrl : ListShopUrl = StringUtils.buildUrl(appInfo.baseUrl)
-
-    private var  _client = HttpClient(engine) {
+    private var _client = HttpClient(engine) {
         expectSuccess = true
         install(ContentNegotiation) {
             json(Json {
@@ -173,7 +162,7 @@ internal class ListShopRemoteApiImpl(
     }
 
     override fun buildPath(path: String): String {
-            return _listshopUrl.pathSegments + path
+        return _listshopUrl.pathSegments + path
     }
 
     override suspend fun postRequest(urlString: String, body: String?): HttpResponse {
@@ -185,7 +174,20 @@ internal class ListShopRemoteApiImpl(
                 }
             return response
         } catch (e: Exception) {
-            throw HttpClientException("post request failed with message: " + e.message)
+            throw HttpClientException(REQUEST_FAILURE_MESSAGE + e.message)
+        }
+    }
+
+    override suspend fun putRequest(urlString: String, body: String?): HttpResponse {
+        try {
+            val response: HttpResponse = client(token())
+                .put(urlString) {
+                    contentType(ContentType.Application.Json)
+                    setBody(body)
+                }
+            return response
+        } catch (e: Exception) {
+            throw HttpClientException(REQUEST_FAILURE_MESSAGE + e.message)
         }
     }
 
@@ -194,7 +196,7 @@ internal class ListShopRemoteApiImpl(
             val response: HttpResponse = client(token()).get(urlString)
             return response
         } catch (e: Exception) {
-            throw HttpClientException("post request failed with message: " + e.message)
+            throw HttpClientException(REQUEST_FAILURE_MESSAGE + e.message)
         }
     }
 

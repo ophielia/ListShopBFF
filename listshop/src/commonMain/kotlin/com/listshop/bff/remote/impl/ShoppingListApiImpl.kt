@@ -4,10 +4,13 @@ import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbedded
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
+import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ShoppingListApi
 import io.ktor.client.call.body
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 internal class ShoppingListApiImpl(
     val remoteApi: ListShopRemoteApi,
@@ -21,7 +24,8 @@ internal class ShoppingListApiImpl(
 
         val response = remoteApi.getRequest(urlString)
 
-        remoteApi.mapNonSuccessToException(response.status.value,
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
             ApiException("get shopping list call failed with status: " + response.status.value)
         )
 
@@ -43,6 +47,26 @@ internal class ShoppingListApiImpl(
         remoteApi.mapNonSuccessToException(
             response.status.value,
             ApiException("get shopping list call failed with status: " + response.status.value)
+        )
+
+        val result : ApiShoppingListEmbeddedList = response.body()
+
+        return ShoppingList.create(apiValue = result.embeddedList)
+    }
+
+    override suspend fun mergeLocalListWithServer(listMergeRequest: PutMergeRequest) : ShoppingList {
+        val token = remoteApi.token()
+        val urlString = remoteApi.buildPath("/shoppinglist/shared")
+        listShopAnalytics.debug("merging the local list with the server list, the token is: " + token)
+
+        // convert object to json payload
+        val payload = Json.encodeToString(listMergeRequest)
+
+        val response = remoteApi.putRequest(urlString, payload)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            ApiException("merge shopping list call failed with status: " + response.status.value)
         )
 
         val result : ApiShoppingListEmbeddedList = response.body()

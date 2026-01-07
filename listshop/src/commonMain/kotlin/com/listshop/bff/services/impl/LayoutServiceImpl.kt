@@ -5,11 +5,9 @@ import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.remote.ApiLayout
 import com.listshop.bff.remote.LayoutApi
 import com.listshop.bff.repositories.LayoutRepository
-import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.services.LayoutService
 
 class LayoutServiceImpl internal constructor(
-    private val sessionRepo: SessionInfoRepository,
     private val layoutApi: LayoutApi,
     private val layoutRepo: LayoutRepository,
     val appInfo: AppInfo,

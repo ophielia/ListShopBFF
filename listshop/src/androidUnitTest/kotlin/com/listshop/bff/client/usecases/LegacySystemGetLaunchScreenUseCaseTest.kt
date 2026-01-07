@@ -94,7 +94,7 @@ class LegacySystemGetLaunchScreenUseCaseTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        var result = useCaseProvider?.legacySystemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         assertTrue(result.value is TransitionViewState)
@@ -110,7 +110,7 @@ class LegacySystemGetLaunchScreenUseCaseTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        var result = useCaseProvider?.legacySystemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         assertTrue(result.value is TransitionViewState)
@@ -131,7 +131,7 @@ class LegacySystemGetLaunchScreenUseCaseTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        var result = useCaseProvider?.legacySystemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         assertTrue(result.value is TransitionViewState)

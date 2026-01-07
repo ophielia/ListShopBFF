@@ -20,5 +20,13 @@ interface UserSessionService {
 
     fun setServerListId(listId: String)
 
+    fun setLocalListUpdated(updateString: String)
+
+    fun setLocalListUpdated()
+
+    fun setLocalLastSynced()
+
+    fun setServerListLastSynced()
+
 
 }

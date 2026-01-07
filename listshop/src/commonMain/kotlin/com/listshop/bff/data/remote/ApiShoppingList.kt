@@ -54,7 +54,7 @@ data class ApiShoppingListItem(
     @SerialName("tag_name")
     val tagName: String?,
     @SerialName("used_count")
-    val usedCount: Long?,
+    val usedCount: Int?,
     @SerialName("source_keys")
     val sourceKeys: List<String>?,
     @SerialName("tag")

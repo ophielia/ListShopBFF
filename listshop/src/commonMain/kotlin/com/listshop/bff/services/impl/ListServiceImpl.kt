@@ -1,6 +1,8 @@
 package com.listshop.bff.services.impl
 
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.MergeItem
+import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.remote.ShoppingListApi
 import com.listshop.bff.repositories.ListRepository
@@ -17,48 +19,56 @@ class ListServiceImpl internal constructor(
     }
 
     override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
-        TODO("Not yet implemented")
-
         // retrieve api list as bff model
         val shoppingList: ShoppingList = remoteApi.retrieveMostRecentList()
         // save server list id in session
         sessionService.setServerListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
+        return saveLocallyAndReturnList(shoppingList)
+
+    }
+
+    private fun saveLocallyAndReturnList(shoppingList: ShoppingList): ShoppingList? {
         // save as local list
-        listRepo.clearLocalListData()
         listRepo.saveListLocally(shoppingList)
+        // update session info
+        sessionService.setServerListId(shoppingList.externalId ?: "")
+        sessionService.setLocalListUpdated()
         // return list
         return shoppingList
     }
 
-        /*
-        list service - most recent list
-
-            public func retrieveMostRecentList() -> Promise<ShoppingList> {
-        os_log("beginning retrieveMostRecentList()", log: Log.service, type: .info)
-
-        return firstly {
-            try remoteApi.retrieveMostRecentList()
-        }
-                .map { [weak self] apiList in
-                    if let listId = apiList.externalId {
-                        self?.userSessionService.setServerListId(list: listId)
-                    }
-                    var shoppingList = ShoppingList(networkShoppingList: apiList)
-                    let apiLegendEntries = apiList.legend ?? []
-                    let legend = self?.processLegend(api: apiLegendEntries)
-                    shoppingList.legend = legend
-                    // fire and forget saving list locally
-                    _ = self?.replaceLocalList(shoppingList: shoppingList).done({ _ in
-                        // do nothing - fire and forget
-                    })
-                    os_log("ending retrieveMostRecentList()", log: Log.service, type: .info)
-                    return shoppingList
-                }
+    override suspend fun retrieveLocalList(): ShoppingList? {
+        return listRepo.retrieveLocalList()
     }
 
-         */
+    override suspend fun mergeLocalWithServerList(): ShoppingList? {
+        // pull local list
+        val shoppingList = retrieveLocalList()
+        if (shoppingList == null) {
+            return null;
+        }
+        // convert into PutMergeRequest
+        val listId = shoppingList.externalId ?: "0"
+        val mergeItemList =
+            shoppingList.categories.flatMap { it.items }.map { MergeItem.create(modelItem = it, listId = listId) }
+        val listMergeRequest = PutMergeRequest(
+            listId = listId.toLong(),
+            lastChanged = shoppingList.lastLocalChange,
+            layoutId = shoppingList.layoutId?.toLong() ?: 0,
+            mergeItems = mergeItemList
+        )
 
+        // make call to merge
+        val mergedList = remoteApi.mergeLocalListWithServer(listMergeRequest)
+
+        // update list info
+        sessionService.setLocalLastSynced()
+        sessionService.setServerListLastSynced()
+
+        // save result locally and return
+        return saveLocallyAndReturnList(mergedList)
+    }
 
 
 }

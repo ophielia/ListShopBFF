@@ -10,4 +10,5 @@ sealed class TransitionViewState {
     data class ListScreen(val shoppingList: ShoppingList, val shoppingLists: ListShoppingList) : TransitionViewState()
     data class Onboarding(val state: OnboardingViewState) : TransitionViewState()
     data class Dashboard(val state: DashboardViewState) : TransitionViewState()
+    object Guides : TransitionViewState()
 }

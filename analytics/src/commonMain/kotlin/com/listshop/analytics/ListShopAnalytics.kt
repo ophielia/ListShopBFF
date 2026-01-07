@@ -38,7 +38,7 @@ class ListShopAnalytics internal constructor() {
         sendEvent("tagsFetched", "size" to size)
     }
 
-    enum class NotFetchedReason{
+    enum class NotFetchedReason {
         NotStale, NetworkError, RandomFail
     }
 
@@ -58,3 +58,4 @@ class ListShopAnalytics internal constructor() {
         sendEvent(text)
     }
 }
+

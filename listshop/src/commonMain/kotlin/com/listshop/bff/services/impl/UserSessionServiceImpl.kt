@@ -68,13 +68,41 @@ class UserSessionServiceImpl internal constructor(
         refreshOrInitializeUserSession()
     }
 
-    override fun setServerListId(listId: String){
+    override fun setServerListId(listId: String) {
         val listInfo = getListInfo()
         listInfo.serverListId = listId
         updateListInfo(listInfo)
         refreshOrInitializeUserSession()
     }
 
+    override fun setLocalListUpdated(updateString: String) {
+        val listInfo = getListInfo()
+        listInfo.localListUpdated = updateString
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
+
+    override fun setLocalListUpdated() {
+        val listInfo = getListInfo()
+        listInfo.localListUpdated = Clock.System.now().toString()
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
+    override fun setLocalLastSynced() {
+        val listInfo = getListInfo()
+        listInfo.localLastSynced = Clock.System.now().toString()
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
+    override fun setServerListLastSynced() {
+        val listInfo = getListInfo()
+        listInfo.serverListLastSynced = Clock.System.now().toString()
+        updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
 
 
     private fun getUserInfo(): UserInfo {
@@ -87,12 +115,12 @@ class UserSessionServiceImpl internal constructor(
         return ListInfo.create(listInfoEntity)
     }
 
-    private fun updateUserInfo(userInfo: UserInfo) : UserInfo{
+    private fun updateUserInfo(userInfo: UserInfo): UserInfo {
         sessionRepo.updateUserInfo(userInfo)
         return getUserInfo()
     }
 
-    private fun updateListInfo(listInfo: ListInfo) : ListInfo{
+    private fun updateListInfo(listInfo: ListInfo): ListInfo {
         sessionRepo.updateListInfo(listInfo)
         return getListInfo()
     }
@@ -106,7 +134,7 @@ class UserSessionServiceImpl internal constructor(
         return userInfo!!
     }
 
-    private fun getOrCreateListInfoEntity() : ListInfoEntity {
+    private fun getOrCreateListInfoEntity(): ListInfoEntity {
         var listInfo = sessionRepo.getListInfo()
         if (listInfo != null) {
             return listInfo
@@ -118,7 +146,7 @@ class UserSessionServiceImpl internal constructor(
     private fun refreshOrInitializeUserSession() {
         val userInfo = getOrCreateUserInfoEntity()
         val listInfo = getOrCreateListInfoEntity()
-        val sessionState = determineUserSessionState(userInfo,listInfo)
+        val sessionState = determineUserSessionState(userInfo, listInfo)
         _userSession = UserSession(
             userInfo.userName,
             userInfo.userToken,
@@ -140,7 +168,7 @@ class UserSessionServiceImpl internal constructor(
             return UserSessionState.UserLoggedOut
         }
         if (listInfo.localListUpdated != null) {
-        return UserSessionState.Anon
+            return UserSessionState.Anon
         }
         return UserSessionState.AnonNoList
     }
