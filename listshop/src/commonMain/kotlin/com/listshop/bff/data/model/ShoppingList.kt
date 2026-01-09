@@ -26,11 +26,11 @@ data class ShoppingList(
 ) {
     companion object Factory {
         fun create(apiValue: ApiShoppingList): ShoppingList {
-            val categories = apiValue.categories.map { ShoppingListCategory.create(it) }
+            val categories = apiValue.categories?.map { ShoppingListCategory.create(it) }
             return ShoppingList(
                 apiValue.externalId.toString(),
                 apiValue.name,
-                categories,
+                categories ?: emptyList(),
                 created = apiValue.created,
                 updated = apiValue.updated,
                 layoutId = apiValue.layoutId,

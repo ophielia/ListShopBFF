@@ -2,9 +2,9 @@ package com.listshop.bff.services
 
 import com.listshop.analytics.AppInfo
 
-interface UserSessionService {
+interface SessionService {
 
-    fun currentSession(): UserSession
+    fun currentUserSession(): UserSession
 
     fun currentAppInfo(): AppInfo
 
@@ -29,4 +29,5 @@ interface UserSessionService {
     fun setServerListLastSynced()
 
 
+    fun currentListSession(): ListSession
 }

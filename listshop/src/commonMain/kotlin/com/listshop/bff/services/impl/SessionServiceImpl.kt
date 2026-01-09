@@ -7,23 +7,34 @@ import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.repositories.SessionInfoRepository
+import com.listshop.bff.services.ListSession
 import com.listshop.bff.services.UserSession
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
 
-class UserSessionServiceImpl internal constructor(
+class SessionServiceImpl internal constructor(
     private val sessionRepo: SessionInfoRepository,
     val appInfo: AppInfo
-) : UserSessionService {
+) : SessionService {
     private var _userSession: UserSession? = null
+    private var _listSession: ListSession? = null
 
-    override fun currentSession(): UserSession {
+    override fun currentUserSession(): UserSession {
         if (_userSession != null) {
             return _userSession!!
         }
         refreshOrInitializeUserSession()
         return _userSession!!
     }
+
+    override fun currentListSession(): ListSession {
+        if (_listSession != null) {
+            return _listSession!!
+        }
+        refreshOrInitializeListSession()
+        return _listSession!!
+    }
+
 
     override fun currentAppInfo(): AppInfo {
         return appInfo
@@ -156,6 +167,19 @@ class UserSessionServiceImpl internal constructor(
             appInfo.clientVersion ?: "unknown",
             appInfo.buildNumber ?: "unknown",
             appInfo.baseUrl
+        )
+
+    }
+
+    private fun refreshOrInitializeListSession() {
+        val listInfo = getOrCreateListInfoEntity()
+        _listSession = ListSession(
+            lastInternalUpdate = listInfo.lastInternalUpdate,
+            localListUpdated = listInfo.localListUpdated,
+            serverListId = listInfo.serverListId,
+            lookupDataLastSynced = listInfo.lookupDataLastSynced,
+            localLastSynced = listInfo.localLastSynced,
+            serverListLastSynced = listInfo.serverListLastSynced
         )
 
     }

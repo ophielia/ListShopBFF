@@ -6,7 +6,7 @@ import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.AppInfo
 import com.listshop.bff.client.MySettingsImpl
 import com.listshop.bff.db.ListshopDb
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.OnboardingUCP
 import com.listshop.bff.ucp.TagUCP
@@ -31,7 +31,7 @@ internal fun dashboardUCPStartup(
     val locator = TestServiceLocator( analyticsHandle, appInfo)
     return locator.dashboardUCP
 }
-internal fun sessionServiceStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): UserSessionService {
+internal fun sessionServiceStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): SessionService {
     val locator = TestServiceLocator( analyticsHandle, appInfo)
     return locator.sessionService
 }

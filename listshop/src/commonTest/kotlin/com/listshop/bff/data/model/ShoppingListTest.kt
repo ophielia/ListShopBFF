@@ -2,15 +2,8 @@ package com.listshop.bff.data.model
 
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.services.TestSampleProvider
-import com.listshop.bff.services.TestUtils
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class ShoppingListTest {
 
@@ -26,12 +19,10 @@ class ShoppingListTest {
 
     @Test
     fun `when i create a ShoppingList from the api object, mapping is correct`() = runTest {
-        val sampleProvider = TestSampleProvider()
+        val sampleProvider = TestSampleProvider("src/commonTest/resources/deserialization")
 
-        val testApiObject = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("ApiShoppingListSample")
+        val testApiObject = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("ApiShoppingListSample",)
         val testResult = ShoppingList.create(apiValue = testApiObject.embeddedList)
-
-//MM up next - filling in categories, items (and tags) in ShoppingList from api.
 
         assertNotNull(testResult)
         assertNotNull(testResult)
@@ -57,7 +48,7 @@ class ShoppingListTest {
         assertEquals(300, dairy.displayOrder)
         assertEquals(5, dairy.items.size)
         // check feta not crossed off
-        assertNull(dairy.items.first{it.externalId == 100976L }.crossedOff)
+        assertNull(dairy.items.first { it.externalId == 100976L }.crossedOff)
 
         //MM STILL OPEN - legend tests
 

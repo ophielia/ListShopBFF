@@ -23,7 +23,7 @@ internal class LayoutApiImpl(
 
     override suspend fun retrieveUserLayouts(): List<ApiLayout>? {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/layout/default")
+        val urlString = remoteApi.buildPath("/layout/user")
         val result: EmbeddedApiLayoutList =
             remoteApi.client(token).get(urlString).body()
 

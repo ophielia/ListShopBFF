@@ -23,9 +23,9 @@ class LayoutServiceImpl internal constructor(
         val userLayouts = layoutApi.retrieveUserLayouts()
         // save all layouts
         layoutRepo.saveLayoutLocally(defaultLayout)
-        listOf(userLayouts)
-            .map { layout -> layout ?: ApiLayout.empty() }
-            .forEach { layout -> layoutRepo.saveLayoutLocally(layout as ApiLayout) }
+        userLayouts
+            ?.map { layout -> layout ?: ApiLayout.empty() }
+            ?.forEach { layout -> layoutRepo.saveLayoutLocally(layout as ApiLayout) }
     }
 
 

@@ -15,7 +15,7 @@ import com.listshop.bff.services.*
 
 class SystemGetLaunchScreenUseCase(
     private val connectionStatus: ConnectionStatus,
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val listService: ListService,
     private val syncService: SyncService,
     private val listShopAnalytics: ListShopAnalytics
@@ -37,7 +37,7 @@ class SystemGetLaunchScreenUseCase(
 
     private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
         // determine logged in state of user
-        val session = sessionService.currentSession()
+        val session = sessionService.currentUserSession()
         val firstTimeUser = session.userLastSeen != null
         val isOnline = connectionStatus == ConnectionStatus.Online
 
@@ -72,13 +72,16 @@ class SystemGetLaunchScreenUseCase(
                     destinationLocalList()
 
                 UserSessionState.AnonNoList ->
-                    // greeting
-                    if (firstTimeUser) {
+                {
+                    // greeting if first time or no list
+                    val listNotAvailable = sessionService.currentListSession().localListUpdated == null
+                    if (firstTimeUser || listNotAvailable) {
                         destinationGreeting()
                     } else {
                         destinationLocalList()
                     }
 
+                }
             }
 
             return BFFResult.success(Pair(viewState, tagTree ?: TagTree()))
@@ -97,7 +100,7 @@ class SystemGetLaunchScreenUseCase(
 
     private suspend fun destinationLocalList(): TransitionViewState {
         val wrappedLists = ListShoppingList(emptyList())
-        val shoppingList = listService.retrieveLocalList()
+        val shoppingList = listService.retrieveOrCreateLocalList()
 
         // error if shopping list is still null - shouldn't happen
         if (shoppingList == null) {

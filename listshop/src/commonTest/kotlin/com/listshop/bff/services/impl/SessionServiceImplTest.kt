@@ -20,11 +20,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class UserSessionServiceImplTest {
+class SessionServiceImplTest {
 
     val repository = mock<SessionInfoRepository>()
 
-    var service: UserSessionServiceImpl? = null
+    var service: SessionServiceImpl? = null
 
     @BeforeTest
     fun setUp() {
@@ -37,7 +37,7 @@ class UserSessionServiceImplTest {
          clientVersion = "clientVersion",
          buildNumber = "buildNumber",
          deviceId = "deviceId" )
-        service = UserSessionServiceImpl(repository, appInfo)
+        service = SessionServiceImpl(repository, appInfo)
     }
 
     @Test
@@ -53,7 +53,7 @@ class UserSessionServiceImplTest {
         every { repository.getUserInfo() } returns userInfo
         every { repository.getListInfo() } returns listInfo
 
-        val userSession = service?.currentSession()
+        val userSession = service?.currentUserSession()
         assertNotNull(userSession)
         assertEquals(userSession.userName,"test")
         assertEquals(userSession.userToken,"testToken")

@@ -4,12 +4,11 @@ import com.goncalossilva.resources.Resource
 import kotlinx.serialization.json.Json
 
 
-open class TestSampleProvider {
-    val DESERIALIZATION_RESOURCES_PATH = "src/commonTest/resources/deserialization"
+open class TestSampleProvider( val sourcePath: String) {
 
     inline fun <reified T> fillSample(sampleFile: String): T {
         val fullPath = if (!sampleFile.isEmpty()) {
-            DESERIALIZATION_RESOURCES_PATH + "/" + sampleFile + ".json"
+                "$sourcePath/$sampleFile.json"
         } else {
             "bad path"
         }

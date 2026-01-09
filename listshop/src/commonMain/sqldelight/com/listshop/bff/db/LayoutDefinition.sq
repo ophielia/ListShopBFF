@@ -38,6 +38,11 @@ VALUES (? ,?,?,?,?);
 removeAllLayoutCategoryEntities:
 DELETE FROM LayoutCategoryEntity;
 
+removeAllData:
+DELETE FROM LayoutEntity;
+DELETE FROM LayoutCategoryEntity;
+DELETE FROM LayoutCategoryMappingEntity;
+
 selectAllLayoutCategoryEntities:
 SELECT LayoutCategoryEntity.* FROM LayoutCategoryEntity;
 

@@ -8,11 +8,11 @@ import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserService
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 
 class LegacySystemGetLaunchScreenUseCase(
     private val connectionStatus: ConnectionStatus,
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val userService: UserService,
     private val listService: ListService
 ) {
@@ -20,7 +20,7 @@ class LegacySystemGetLaunchScreenUseCase(
     suspend fun process(): BFFResult<TransitionViewState> {
          //MM nfl - skipping checking api compatibility for now
         //        - skipping first seen (will need userLastSeen)
-        val session = sessionService.currentSession()
+        val session = sessionService.currentUserSession()
 
         return when (session.sessionState) {
             UserSessionState.Anon, UserSessionState.UserLoggedOut, UserSessionState.AnonNoList -> {

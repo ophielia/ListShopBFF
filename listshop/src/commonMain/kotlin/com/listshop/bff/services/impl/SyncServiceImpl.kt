@@ -11,7 +11,7 @@ import com.listshop.bff.remote.UserApi
 import com.listshop.bff.services.*
 
 class SyncServiceImpl internal constructor(
-    private val userSessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val userApi: UserApi,
     private val tagService: TagService,
     private val listService: ListService,
@@ -56,7 +56,7 @@ class SyncServiceImpl internal constructor(
             layoutService.retrieveLayoutsAndSaveLocally()
 
             // set last local data synced
-            userSessionService.setLookupDataLastSyncedToNow()
+            sessionService.setLookupDataLastSyncedToNow()
         }
 
         // use tag service to build tag tree and return

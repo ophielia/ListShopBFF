@@ -6,7 +6,7 @@ import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.exceptions.HttpClientException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ListShopUrl
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.tools.StringUtils
 import io.ktor.client.*
 import io.ktor.client.engine.*
@@ -21,7 +21,7 @@ import kotlinx.serialization.json.Json
 
 internal class ListShopRemoteApiImpl(
     private val engine: HttpClientEngine,
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val appInfo: AppInfo,
     private val httpClientAnalytics: HttpClientAnalytics,
     private val listShopAnalytics: ListShopAnalytics
@@ -158,7 +158,7 @@ internal class ListShopRemoteApiImpl(
     }
 
     override fun token(): String? {
-        return sessionService.currentSession().userToken
+        return sessionService.currentUserSession().userToken
     }
 
     override fun buildPath(path: String): String {

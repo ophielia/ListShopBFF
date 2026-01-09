@@ -8,14 +8,14 @@ import com.listshop.bff.db.ListshopDb
 import com.listshop.bff.db.ShoppingListEntity
 import com.listshop.bff.repositories.ListRepository
 import com.listshop.bff.repositories.ListShopDatabase
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 class ListRepositoryImpl(
     private val listShopDatabase: ListShopDatabase,
-    private val sessionService: UserSessionService
+    private val sessionService: SessionService
 ) : ListRepository {
     private val dbRef: ListshopDb = listShopDatabase.db
 
@@ -25,11 +25,10 @@ class ListRepositoryImpl(
         dbRef.listDefinitionQueries.removeAllShoppingListEntities()
     }
 
-    override fun retrieveLocalList(): ShoppingList {
+    override fun retrieveLocalList(): ShoppingList? {
         val localLists = dbRef.listDefinitionQueries.selectAllLists().executeAsList()
         if (localLists.isEmpty()) {
-            // create and return an empty list
-            return createAndSaveLocalList()
+            return null;
         }
         val localList = localLists.first()
         val localListId = localList.externalId
@@ -46,7 +45,7 @@ class ListRepositoryImpl(
     }
 
 
-    private fun createAndSaveLocalList(): ShoppingList {
+    override public fun createAndSaveLocalList(): ShoppingList {
         // get empty list
         val shoppingList: ShoppingList = ShoppingList.empty()
         // add created, set session

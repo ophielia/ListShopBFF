@@ -22,7 +22,7 @@ data class ApiShoppingList(
     @SerialName("is_starter_list")
     val isStarter: Boolean?,
     @SerialName("categories")
-    val categories : List<ApiShoppingListCategory>,
+    var categories : List<ApiShoppingListCategory>? = emptyList(),
     @SerialName("legend")
     val legend : List<ApiLegendItems>
 )

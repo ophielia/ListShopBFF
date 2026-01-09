@@ -10,7 +10,7 @@ import com.listshop.bff.usecases.LoginUseCase
 import com.listshop.bff.usecases.SystemGetLaunchScreenUseCase
 
 class OnboardingUCP internal constructor(
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val listService: ListService,
     private val userService: UserService,
     private val syncService: SyncService,

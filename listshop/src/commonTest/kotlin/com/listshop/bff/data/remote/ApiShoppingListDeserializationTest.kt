@@ -58,22 +58,22 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         assertEquals("12", list.layoutId)
         assertEquals("Monop", list.name)
         assertFalse(list.isStarter ?: false)
-        assertEquals(3, list.categories.size)
+        assertEquals(3, list.categories?.size)
         assertEquals(12, list.legend.size)
         // check category items - frozen, 1 crossed off
-        val frozen = list.categories.first { it.categoryId == 10L }
-        assertEquals("Frozen", frozen.name)
-        assertEquals(600, frozen.displayOrder)
-        assertEquals(1, frozen.items.size)
+        val frozen = list.categories?.first { it.categoryId == 10L }
+        assertEquals("Frozen", frozen?.name)
+        assertEquals(600, frozen?.displayOrder)
+        assertEquals(1, frozen?.items?.size)
         // check item crossed off
-        assertNotNull(frozen.items.first().crossedOff)
+        assertNotNull(frozen?.items?.first()?.crossedOff)
         // check dairy items - should be 5, feta should not be crossed off
-        val dairy = list.categories.first { it.categoryId == 7L }
-        assertEquals("Dairy", dairy.name)
-        assertEquals(300, dairy.displayOrder)
-        assertEquals(5, dairy.items.size)
+        val dairy = list.categories?.first { it.categoryId == 7L }
+        assertEquals("Dairy", dairy?.name)
+        assertEquals(300, dairy?.displayOrder)
+        assertEquals(5, dairy?.items?.size)
         // check feta not crossed off
-        assertNull(dairy.items.first{it.itemId == 100976L }.crossedOff)
+        assertNull(dairy?.items?.first{it.itemId == 100976L }?.crossedOff)
 
     }
 

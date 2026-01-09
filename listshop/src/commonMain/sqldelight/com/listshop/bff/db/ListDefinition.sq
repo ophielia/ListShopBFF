@@ -55,6 +55,11 @@ DELETE FROM ListCategoryEntity;
 removeAllListItemEntities:
 DELETE FROM ListItemEntity;
 
+removeAllData:
+DELETE FROM ShoppingListEntity;
+DELETE FROM ListCategoryEntity;
+DELETE FROM ListItemEntity;
+
 selectAllLists:
 SELECT ShoppingListEntity.*
 FROM ShoppingListEntity;

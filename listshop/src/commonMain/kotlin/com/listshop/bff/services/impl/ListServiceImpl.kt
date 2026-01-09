@@ -7,12 +7,12 @@ import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.remote.ShoppingListApi
 import com.listshop.bff.repositories.ListRepository
 import com.listshop.bff.services.ListService
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 
 class ListServiceImpl internal constructor(
     private val remoteApi: ShoppingListApi,
     private val listRepo: ListRepository,
-    private val sessionService: UserSessionService
+    private val sessionService: SessionService
 ) : ListService {
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
         return remoteApi.getAllShoppingLists()
@@ -38,13 +38,17 @@ class ListServiceImpl internal constructor(
         return shoppingList
     }
 
-    override suspend fun retrieveLocalList(): ShoppingList? {
-        return listRepo.retrieveLocalList()
+    override suspend fun retrieveOrCreateLocalList(): ShoppingList? {
+        val shoppingList =  listRepo.retrieveLocalList()
+        if (shoppingList == null) {
+            return listRepo.createAndSaveLocalList()
+        }
+        return shoppingList
     }
 
     override suspend fun mergeLocalWithServerList(): ShoppingList? {
         // pull local list
-        val shoppingList = retrieveLocalList()
+        val shoppingList = listRepo.retrieveLocalList()
         if (shoppingList == null) {
             return null;
         }
