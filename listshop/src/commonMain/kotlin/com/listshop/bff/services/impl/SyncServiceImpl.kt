@@ -32,6 +32,17 @@ class SyncServiceImpl internal constructor(
         return true
     }
 
+    override suspend fun getClientRequiredVersion(connectionStatus: ConnectionStatus): String {
+        val currentVersionString = appInfo.clientVersion ?: "0"
+        if (connectionStatus == ConnectionStatus.Online) {
+            // get the required version
+            val requiredApi: ApiRequiredClientVersion = userApi.retrieveRequiredClientVersion()
+            val requiredVersionString = requiredVersionForApp(requiredApi, appInfo.clientType)
+            return requiredVersionString
+        }
+        return "unknown"
+    }
+
     private fun requiredVersionForApp(
         requiredApi: ApiRequiredClientVersion,
         clientType: ClientType

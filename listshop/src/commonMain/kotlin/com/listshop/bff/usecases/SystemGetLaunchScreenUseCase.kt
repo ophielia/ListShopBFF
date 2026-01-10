@@ -29,7 +29,8 @@ class SystemGetLaunchScreenUseCase(
             return loadForSession()
         }
         // construct result with failure
-        val message = "Current version " + sessionService.currentAppInfo().clientVersion + " is not compatible"
+        val requiredVersion = syncService.getClientRequiredVersion(connectionStatus)
+        val message = "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
         listShopAnalytics.error(message)
         val bfferror = BFFError(BFFErrorType.LOADING, BFFErrorSubtype.UPGRADE_REQUIRED, message)
         return BFFResult.error(bfferror)

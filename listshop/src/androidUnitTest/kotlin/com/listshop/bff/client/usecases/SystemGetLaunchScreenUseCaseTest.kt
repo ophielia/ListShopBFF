@@ -101,7 +101,7 @@ class SystemGetLaunchScreenUseCaseTest {
 
         var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        assertEquals("Current version 1.1.0 is not compatible", result._error?.message)
+        assertEquals("Current version 1.1.0, Required Version 8.0", result._error?.message)
 
         // restore original dispatcher
     }
