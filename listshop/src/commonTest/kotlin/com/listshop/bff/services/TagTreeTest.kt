@@ -12,16 +12,13 @@ import kotlin.test.assertTrue
 
 class TagTreeTest {
 
-    //MM START HERE!!!
 
     @Test
     fun blowUpTest() {
-val tagList = TestUtils.dummyTagStructure()
+        val tagList = TestUtils.dummyTagStructure()
         val tagTree = TagTree(tagList)
         assertNotNull(tagTree)
-
     }
 
-
-
+    // until we have access methods on the TagTree, no way to test much on this
 }

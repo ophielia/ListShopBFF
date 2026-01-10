@@ -16,6 +16,7 @@ class TestUtils {
             --    -- apples 4
             --    -- banannas 5
             --   -- carrots 6
+            --  -- vegetables 11 (group no tags)
             -- household 7
             --   -- cleaning 8
             --      -- spray 9
@@ -31,7 +32,8 @@ class TestUtils {
             val cleaning = buildTagEntity("cleaning", 8, 7, true)
             val spray = buildTagEntity("spray", 9, 8, false)
             val chair = buildTagEntity("chair", 10, 7, false)
-            val tagList = listOf(produce, fruit, apples, banannas, carrots, household, cleaning, spray, chair)
+            val vegetables = buildTagEntity("vegetables", 11, 1, true)
+            val tagList = listOf(produce, fruit, apples, banannas, carrots, household, cleaning, spray, chair, vegetables)
 
             return tagList
         }
