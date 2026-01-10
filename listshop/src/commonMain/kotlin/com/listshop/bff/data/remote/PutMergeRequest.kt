@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalSerializationApi::class)
+
 package com.listshop.bff.data.remote
 
 import com.listshop.bff.data.model.ShoppingListItem
