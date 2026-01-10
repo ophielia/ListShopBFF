@@ -4,7 +4,7 @@ CREATE TABLE LayoutEntity (
     name TEXT,
     externalId TEXT,
     isDefault INTEGER AS Boolean NOT NULL,
-    userId INTEGER
+    userId TEXT
 );
 
 CREATE TABLE LayoutCategoryEntity (

@@ -59,7 +59,7 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertEquals("Default", layout.name,"name is wrong")
         assertEquals(12, layout.externalId, "external id is wrong")
         assertEquals(true, layout.isDefault, "isDefault is wrong")
-        assertEquals(20,layout.userId, "user id is wrong")
+        assertEquals("20",layout.userId, "user id is wrong")
         assertNotNull(layout.categories)
         // now check the categories
         val categories = layout.categories
@@ -72,7 +72,7 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertEquals("Default Two", secondLayout.name,"name is wrong")
         assertEquals(22, secondLayout.externalId, "external id is wrong")
         assertEquals(true, secondLayout.isDefault, "isDefault is wrong")
-        assertEquals(20,secondLayout.userId, "user id is wrong")
+        assertEquals("20",secondLayout.userId, "user id is wrong")
         assertNotNull(secondLayout.categories)
         // now check the categories
         val secondCategories = secondLayout.categories
