@@ -31,7 +31,9 @@ kotlin {
                 implementation(libs.coroutines.test)
                 implementation(libs.kotest.framework.engine)
                 implementation(libs.kotest.assertions.core)
+                implementation(libs.mokkery.test.coroutines)
                 implementation("com.goncalossilva:resources:0.4.0")
+
         }
         androidMain.dependencies {
             implementation(libs.sqlDelight.android)

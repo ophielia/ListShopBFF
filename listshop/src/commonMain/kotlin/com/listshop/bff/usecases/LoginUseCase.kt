@@ -9,13 +9,13 @@ import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.exceptions.AuthenticationException
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserService
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 
 class LoginUseCase(
     private val userName: String,
     private val password: String,
     private val userService: UserService,
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val listService: ListService
 ) {
 

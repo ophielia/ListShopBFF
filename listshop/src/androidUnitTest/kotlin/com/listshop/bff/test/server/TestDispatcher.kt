@@ -20,15 +20,12 @@ class TestDispatcher constructor(val mappings: List<RequestMapping>): Dispatcher
                 .map { m -> m.response}
                 .first()
 
-            if (response != null) {
-                return response
-            }
+            return response
 
         } catch (e: NoSuchElementException) {
             println("COULDN'T MAP REQUEST: " + request.path)
             return MockResponse().setResponseCode(404)
         }
 
-        return MockResponse().setResponseCode(404)
     }
 }

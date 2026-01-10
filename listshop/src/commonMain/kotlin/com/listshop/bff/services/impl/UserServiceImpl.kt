@@ -5,16 +5,16 @@ import com.listshop.bff.data.remote.ApiDeviceInfo
 import com.listshop.bff.data.remote.PostUserLogin
 import com.listshop.bff.remote.UserApi
 import com.listshop.bff.services.UserService
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
 import kotlin.math.min
 
 class UserServiceImpl internal constructor(
     private val remoteApi: UserApi,
-    private val sessionService: UserSessionService,
+    private val sessionService: SessionService,
     private val listShopAnalytics : ListShopAnalytics
 ) : UserService {
     override suspend fun authenticateUser() {
-        if (sessionService.currentSession().userToken == null) {
+        if (sessionService.currentUserSession().userToken == null) {
             //MM errors! how to throw errors!!
         }
         val postDeviceInfo = buildDeviceInfo()
@@ -23,7 +23,7 @@ class UserServiceImpl internal constructor(
     }
 
     override suspend fun logoutUser() {
-        if (sessionService.currentSession().userToken == null) {
+        if (sessionService.currentUserSession().userToken == null) {
             return
         }
 
@@ -57,7 +57,7 @@ class UserServiceImpl internal constructor(
             appInfo.model,
             appInfo.os,
             appInfo.osVersion,
-            appInfo.clientType,
+            appInfo.clientType.name,
             appInfo.clientVersion,
             appInfo.buildNumber,
             appInfo.deviceId

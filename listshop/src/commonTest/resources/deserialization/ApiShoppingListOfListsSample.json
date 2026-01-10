@@ -1,0 +1,57 @@
+{
+    "links": [
+        "https://nastyvarmits.fr/shoppinglist"
+    ],
+    "_embedded": {
+        "shoppingListResourceList": [
+            {
+                "links": [],
+                "shopping_list": {
+                    "list_id": 51167,
+                    "categories": null,
+                    "created": "2026-01-03T12:58:14.015+00:00",
+                    "updated": "2026-01-03T14:15:51.695+00:00",
+                    "layout_type": null,
+                    "layout_id": "12",
+                    "item_count": 34,
+                    "legend": [],
+                    "user_id": 20,
+                    "is_starter_list": false,
+                    "name": "Monop"
+                }
+            },
+            {
+                "links": [],
+                "shopping_list": {
+                    "list_id": 51074,
+                    "categories": null,
+                    "created": "2024-09-07T08:20:53.570+00:00",
+                    "updated": "2026-01-03T13:08:42.566+00:00",
+                    "layout_type": null,
+                    "layout_id": "12",
+                    "item_count": 0,
+                    "legend": [],
+                    "user_id": 20,
+                    "is_starter_list": false,
+                    "name": "Spices"
+                }
+            },
+            {
+                "links": [],
+                "shopping_list": {
+                    "list_id": 50824,
+                    "categories": null,
+                    "created": "2021-11-13T09:27:33.902+00:00",
+                    "updated": "2025-09-06T08:35:10.920+00:00",
+                    "layout_type": null,
+                    "layout_id": null,
+                    "item_count": 0,
+                    "legend": [],
+                    "user_id": 20,
+                    "is_starter_list": false,
+                    "name": "Market list"
+                }
+            }
+        ]
+    }
+}
