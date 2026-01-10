@@ -1,4 +1,4 @@
-package co.touchlab.kampkit.android.ui.theme
+package com.meg.listshop.android.ui.theme.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

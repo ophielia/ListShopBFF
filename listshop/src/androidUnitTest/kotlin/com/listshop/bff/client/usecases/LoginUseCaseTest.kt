@@ -141,6 +141,14 @@ class LoginUseCaseTest {
         val userName = "meg@the-list-shop.com"
         val password = "sarrieb1357"
 
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("signIn")
+            .withConfigFile("loginSuccessConfig.json")
+            .withConfigFile("loginBadCredentialsConfig.json")
+            .withConfigFile("getAllShoppingListsConfig.json")
+            .build()
+
+        mockWebServer.dispatcher = originalDispatcher
         var result = useCaseProvider?.signIn(userName, password)
         assertNotNull(result)
         assertFalse(result.isFailure)

@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="co.touchlab.kampkit.android.MainApp"
+        android:name="com.meg.listshop.android.MainApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="DataExtractionRules">
         <activity
-            android:name="co.touchlab.kampkit.android.MainActivity"
+            android:name="com.meg.listshop.android.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
