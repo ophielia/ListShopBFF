@@ -4,6 +4,7 @@ import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbedded
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
+import com.listshop.bff.data.remote.MergeResult
 import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.remote.ListShopRemoteApi
@@ -69,9 +70,9 @@ internal class ShoppingListApiImpl(
             ApiException("merge shopping list call failed with status: " + response.status.value)
         )
 
-        val result : ApiShoppingListEmbeddedList = response.body()
+        val result : MergeResult = response.body()
 
-        return ShoppingList.create(apiValue = result.embeddedList)
+        return ShoppingList.create(apiValue = result.mergeResult.shoppingList)
     }
 
 }

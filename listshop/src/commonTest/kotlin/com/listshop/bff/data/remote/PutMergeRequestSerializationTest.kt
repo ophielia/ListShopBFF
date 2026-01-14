@@ -12,7 +12,7 @@ import kotlin.test.assertNotNull
 class PutMergeRequestSerializationTest : DeserializationBaseTest() {
 
     @Test
-    fun `when i deserialize the PutMergeRequestSample, I get a json object`() = runTest {
+    fun `when i deserialize the PutMergeRequestSample - I get a json object`() = runTest {
         val jsonString = loadJsonString("PutMergeRequestSample")
         val deserializer = Json { ignoreUnknownKeys = true }
         val putRequest = deserializer.decodeFromString<PutMergeRequest>(jsonString)
@@ -21,7 +21,7 @@ class PutMergeRequestSerializationTest : DeserializationBaseTest() {
     }
 
     @Test
-    fun `when i serialize the PutMergeRequestSample, it doesn't blow up`() = runTest {
+    fun `when i serialize the PutMergeRequestSample - it doesn't blow up`() = runTest {
         val listId = 110000L
         val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
 

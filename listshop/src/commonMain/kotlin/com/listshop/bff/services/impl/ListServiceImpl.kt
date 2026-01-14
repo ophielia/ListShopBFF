@@ -1,5 +1,6 @@
 package com.listshop.bff.services.impl
 
+import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.MergeItem
 import com.listshop.bff.data.remote.PutMergeRequest
@@ -12,7 +13,8 @@ import com.listshop.bff.services.SessionService
 class ListServiceImpl internal constructor(
     private val remoteApi: ShoppingListApi,
     private val listRepo: ListRepository,
-    private val sessionService: SessionService
+    private val sessionService: SessionService,
+    private val listShopAnalytics : ListShopAnalytics
 ) : ListService {
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
         return remoteApi.getAllShoppingLists()
@@ -49,18 +51,19 @@ class ListServiceImpl internal constructor(
     override suspend fun mergeLocalWithServerList(): ShoppingList? {
         // pull local list
         val shoppingList = listRepo.retrieveLocalList()
-        if (shoppingList == null) {
+        val listId = shoppingList?.externalId ?: ""
+
+        if (shoppingList == null || listId.trim().length == 0) {
             return null;
         }
         // convert into PutMergeRequest
-        val listId = shoppingList.externalId ?: "0"
         val mergeItemList =
-            shoppingList.categories.flatMap { it.items }.map { MergeItem.create(modelItem = it, listId = listId) }
+            shoppingList?.categories?.flatMap { it.items }?.map { MergeItem.create(modelItem = it, listId = listId) }
         val listMergeRequest = PutMergeRequest(
             listId = listId.toLong(),
-            lastChanged = shoppingList.lastLocalChange,
-            layoutId = shoppingList.layoutId?.toLong() ?: 0,
-            mergeItems = mergeItemList
+            lastChanged = shoppingList?.lastLocalChange,
+            layoutId = shoppingList?.layoutId?.toLong() ?: 0,
+            mergeItems = mergeItemList ?: emptyList()
         )
 
         // make call to merge

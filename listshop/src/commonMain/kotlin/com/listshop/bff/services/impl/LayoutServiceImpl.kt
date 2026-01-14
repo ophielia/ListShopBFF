@@ -24,8 +24,8 @@ class LayoutServiceImpl internal constructor(
         // save all layouts
         layoutRepo.saveLayoutLocally(defaultLayout)
         userLayouts
-            ?.map { layout -> layout ?: ApiLayout.empty() }
-            ?.forEach { layout -> layoutRepo.saveLayoutLocally(layout as ApiLayout) }
+            ?.map { layout -> layout  }
+            ?.forEach { layout -> layoutRepo.saveLayoutLocally(layout ) }
     }
 
 

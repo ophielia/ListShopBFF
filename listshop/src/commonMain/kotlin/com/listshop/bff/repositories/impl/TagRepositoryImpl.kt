@@ -32,10 +32,10 @@ class TagRepositoryImpl(
         }
     }
 
-    override suspend fun insertApiTagsLocally(tags: List<ApiTag>) {
-        listShopDatabase.analytics.insertingTagsToDatabase(tags.size)
+    override suspend fun insertApiTagsLocally(apiTags: List<ApiTag>) {
+        listShopDatabase.analytics.insertingTagsToDatabase(apiTags.size)
         dbRef.tagDefinitionQueries.transaction {
-            tags.forEach { tag ->
+            apiTags.forEach { tag ->
                 dbRef.tagDefinitionQueries.insertIntoTag(
                     tag.externalId,
                     false, tag.name, tag.parentId, "0", tag.tagType, tag.userId

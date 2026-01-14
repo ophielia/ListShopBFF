@@ -304,10 +304,10 @@ class SystemGetLaunchScreenUseCaseTest {
     }
 
     @Test
-    fun `launch with anonymous user, no list - go to greeting`(): Unit = runBlocking {
+    fun `launch with first time user, no list - go to greeting`(): Unit = runBlocking {
         // setup database / context
         initializeContext()
-        val loggedInUser = databaseTestHelper?.standardUser()?.copy(userName = null, userToken = null, userLastSeen = Clock.System.now().toString())
+        val loggedInUser = databaseTestHelper?.standardUser()?.copy(userName = null, userToken = null, userLastSeen = null)
         databaseTestHelper?.setUser(loggedInUser)
 
         val anonymousDispatcher = TestDispatcherBuilder("launchScreen")

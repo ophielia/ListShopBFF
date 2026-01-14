@@ -144,7 +144,6 @@ class LoginUseCaseTest {
         // restore original dispatcher
         val originalDispatcher = TestDispatcherBuilder("signIn")
             .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("loginBadCredentialsConfig.json")
             .withConfigFile("getAllShoppingListsConfig.json")
             .build()
 

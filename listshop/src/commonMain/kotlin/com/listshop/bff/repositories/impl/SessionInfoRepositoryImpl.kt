@@ -29,7 +29,7 @@ internal class SessionInfoRepositoryImpl(
             .insertIntoUserInfo(null,
                 null,
                 now.toString(),
-                now.toString(),
+                null,
                 null
             )
         return getUserInfo()

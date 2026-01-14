@@ -39,7 +39,7 @@ class SystemGetLaunchScreenUseCase(
     private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
         // determine logged in state of user
         val session = sessionService.currentUserSession()
-        val firstTimeUser = session.userLastSeen != null
+        val firstTimeUser = session.userLastSeen == null
         val isOnline = connectionStatus == ConnectionStatus.Online
 
         // I see you, user, even if you're not logged in
@@ -76,7 +76,9 @@ class SystemGetLaunchScreenUseCase(
                 {
                     // greeting if first time or no list
                     val listNotAvailable = sessionService.currentListSession().localListUpdated == null
-                    if (firstTimeUser || listNotAvailable) {
+                    //MM nfl - add the listNotAvailable - removing for now since we can't login from there
+					//if (firstTimeUser || listNotAvailable) {
+                    if (firstTimeUser) {
                         destinationGreeting()
                     } else {
                         destinationLocalList()
@@ -85,7 +87,7 @@ class SystemGetLaunchScreenUseCase(
                 }
             }
 
-            return BFFResult.success(Pair(viewState, tagTree ?: TagTree()))
+            return BFFResult.success(Pair(viewState, tagTree))
         } catch (e: Exception) {
             val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.CANT_LAUNCH, e.message.toString())
             return BFFResult.error(bfferror)

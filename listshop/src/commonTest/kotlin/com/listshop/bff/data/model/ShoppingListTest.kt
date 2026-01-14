@@ -18,7 +18,7 @@ class ShoppingListTest {
 
 
     @Test
-    fun `when i create a ShoppingList from the api object, mapping is correct`() = runTest {
+    fun `when i create a ShoppingList from the api object - mapping is correct`() = runTest {
         val sampleProvider = TestSampleProvider("src/commonTest/resources/deserialization")
 
         val testApiObject = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("ApiShoppingListSample",)

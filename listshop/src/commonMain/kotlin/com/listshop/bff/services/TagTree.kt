@@ -5,7 +5,7 @@ import com.listshop.bff.data.model.TagTreeNode
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.db.TagEntity
 
-public class TagTree() {
+class TagTree() {
     var lookupDictionary = hashMapOf<Long, TagTreeNode>()
     val BASE_GROUP = 0L
 
@@ -36,6 +36,9 @@ public class TagTree() {
         lookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
     }
 
+    fun isFilled() : Boolean {
+        return lookupDictionary.size > 0
+    }
 
     private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: Long) {
         // get parent node

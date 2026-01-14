@@ -37,6 +37,7 @@ internal class ListShopRemoteApiImpl(
             json(Json {
                 ignoreUnknownKeys = true
                 useAlternativeNames = false
+                isLenient = true
             })
         }
         install(Logging) {
@@ -69,7 +70,7 @@ internal class ListShopRemoteApiImpl(
             return _client
         }
         _currentClientToken = token
-        // token has changed, we need to re-construct the client
+        // token has changedwe need to re-construct the client
         if (token == null) {
             createClientWithoutToken()
         } else {
@@ -165,10 +166,10 @@ internal class ListShopRemoteApiImpl(
         return _listshopUrl.pathSegments + path
     }
 
-    override suspend fun postRequest(urlString: String, body: String?): HttpResponse {
+    override suspend fun postRequest(path: String, body: String?): HttpResponse {
         try {
             val response: HttpResponse = client(token())
-                .post(urlString) {
+                .post(path) {
                     contentType(ContentType.Application.Json)
                     setBody(body)
                 }
@@ -178,10 +179,10 @@ internal class ListShopRemoteApiImpl(
         }
     }
 
-    override suspend fun putRequest(urlString: String, body: String?): HttpResponse {
+    override suspend fun putRequest(path: String, body: String?): HttpResponse {
         try {
             val response: HttpResponse = client(token())
-                .put(urlString) {
+                .put(path) {
                     contentType(ContentType.Application.Json)
                     setBody(body)
                 }
@@ -191,9 +192,9 @@ internal class ListShopRemoteApiImpl(
         }
     }
 
-    override suspend fun getRequest(urlString: String): HttpResponse {
+    override suspend fun getRequest(path: String): HttpResponse {
         try {
-            val response: HttpResponse = client(token()).get(urlString)
+            val response: HttpResponse = client(token()).get(path)
             return response
         } catch (e: Exception) {
             throw HttpClientException(REQUEST_FAILURE_MESSAGE + e.message)

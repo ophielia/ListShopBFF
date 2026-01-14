@@ -102,7 +102,8 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         ListServiceImpl(
             remoteApi = shoppingListApi,
             sessionService = sessionService,
-            listRepo = listRepository
+            listRepo = listRepository,
+            listShopAnalytics = listShopAnalytics
         )
     }
 
