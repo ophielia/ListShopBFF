@@ -27,6 +27,7 @@ data class BFFError(
             )
             return BFFResult.error<T>(bfferror)
         }
+
     }
 
 }

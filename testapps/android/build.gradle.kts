@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "co.touchlab.kampkit.android"
+    namespace = "com.meg.listshop.android"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        applicationId = "co.touchlab.kampkit"
+        applicationId = "com.meg.listshop"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
@@ -64,6 +64,7 @@ dependencies {
         implementation("${GROUP}:analytics-android-debug:${LIBRARY_VERSION}")
     } else {
         implementation(project(":analytics"))
+        implementation(project(":listshop"))
     }
     implementation(libs.bundles.app.ui)
     implementation(libs.koin.android)

@@ -10,7 +10,7 @@ kmmBridge = "1.2.1"
 android-gradle-plugin = "8.8.0"
 coroutines = "1.10.1"
 kotlinx-datetime = "0.6.1"
-ktor = "3.0.1"
+ktor = "3.0.3"
 
 
 stately = "2.1.0"
@@ -64,6 +64,7 @@ touchlab-stately-concurrency = { module = "co.touchlab:stately-concurrency", ver
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+mokkery-test-coroutines = { module = "dev.mokkery:mokkery-coroutines", version.ref = "mokkery"}
 junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 mock-server = { module = "com.squareup.okhttp3:mockwebserver" , version.ref = "mock-server"}
 google-gson =  { module = "com.google.code.gson:gson", version.ref = "gson"}

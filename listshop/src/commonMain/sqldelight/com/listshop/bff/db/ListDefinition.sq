@@ -1,0 +1,75 @@
+import kotlin.Boolean;
+
+CREATE TABLE ShoppingListEntity (
+    name TEXT,
+    externalId TEXT,
+    createdOn TEXT,
+    updatedOn TEXT,
+    lastLocalChange TEXT,
+    lastSync TEXT,
+    itemCount INTEGER,
+    layoutId TEXT,
+    isStarter  INTEGER AS Boolean NOT NULL
+);
+
+
+CREATE TABLE ListCategoryEntity (
+    name TEXT,
+    externalId TEXT,
+    listExternalId TEXT,
+    displayOrder INTEGER
+);
+
+CREATE TABLE ListItemEntity (
+    externalId TEXT,
+    categoryExternalId TEXT,
+    tagExternalId TEXT,
+    added TEXT,
+    removed TEXT,
+    updatedOn TEXT,
+    crossedOff TEXT,
+    usedCount INTEGER,
+    tagName TEXT,
+    tagType TEXT,
+    legendKeys TEXT
+);
+
+insertIntoShoppingListEntity:
+INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastLocalChange,lastSync,itemCount,layoutId  , isStarter)
+VALUES (?,?,?,?, ?, ?, ?, ?, ?);
+
+insertIntoListCategoryEntity:
+INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
+VALUES (?, ?, ?, ?);
+
+insertIntoListItemEntity:
+INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, tagType, legendKeys)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+removeAllShoppingListEntities:
+DELETE FROM ShoppingListEntity;
+
+removeAllListCategoryEntities:
+DELETE FROM ListCategoryEntity;
+
+removeAllListItemEntities:
+DELETE FROM ListItemEntity;
+
+removeAllData:
+DELETE FROM ShoppingListEntity;
+DELETE FROM ListCategoryEntity;
+DELETE FROM ListItemEntity;
+
+selectAllLists:
+SELECT ShoppingListEntity.*
+FROM ShoppingListEntity;
+
+selectAllCategoriesForList:
+SELECT *
+FROM ListCategoryEntity
+WHERE listExternalId = ?;
+
+selectAllItemsForCategory:
+SELECT *
+FROM ListItemEntity
+WHERE categoryExternalId = ?;

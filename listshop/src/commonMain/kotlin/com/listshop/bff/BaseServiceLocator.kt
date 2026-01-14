@@ -6,24 +6,35 @@ import com.listshop.analytics.AppAnalytics
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.HttpClientAnalytics
 import com.listshop.analytics.ListShopAnalytics
+import com.listshop.bff.remote.LayoutApi
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ShoppingListApi
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.remote.UserApi
+import com.listshop.bff.remote.impl.LayoutApiImpl
 import com.listshop.bff.remote.impl.ListShopRemoteApiImpl
 import com.listshop.bff.remote.impl.ShoppingListApiImpl
 import com.listshop.bff.remote.impl.TagApiImpl
 import com.listshop.bff.remote.impl.UserApiImpl
+import com.listshop.bff.repositories.LayoutRepository
 import com.listshop.bff.repositories.ListShopDatabase
 import com.listshop.bff.repositories.SessionInfoRepository
-import com.listshop.bff.repositories.TagRepository
+import com.listshop.bff.repositories.impl.LayoutRepositoryImpl
+import com.listshop.bff.repositories.impl.ListRepositoryImpl
+import com.listshop.bff.repositories.impl.TagRepositoryImpl
 import com.listshop.bff.repositories.impl.SessionInfoRepositoryImpl
+import com.listshop.bff.services.LayoutService
 import com.listshop.bff.services.ListService
+import com.listshop.bff.services.SyncService
+import com.listshop.bff.services.TagService
 import com.listshop.bff.services.UserService
-import com.listshop.bff.services.UserSessionService
+import com.listshop.bff.services.SessionService
+import com.listshop.bff.services.impl.LayoutServiceImpl
 import com.listshop.bff.services.impl.ListServiceImpl
+import com.listshop.bff.services.impl.SyncServiceImpl
+import com.listshop.bff.services.impl.TagServiceImpl
 import com.listshop.bff.services.impl.UserServiceImpl
-import com.listshop.bff.services.impl.UserSessionServiceImpl
+import com.listshop.bff.services.impl.SessionServiceImpl
 import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.OnboardingUCP
 import com.listshop.bff.ucp.TagUCP
@@ -53,8 +64,9 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
     override val onboardingUCP: OnboardingUCP by lazy {
         OnboardingUCP(
             sessionService = sessionService,
-            listService = listService,  // remote repo
+            listService = listService,
             userService = userService,
+            syncService = syncService,
             listShopAnalytics = listShopAnalytics
         )
     }
@@ -67,8 +79,8 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         )
     }
 
-    override val sessionService: UserSessionService by lazy {
-        UserSessionServiceImpl(
+    override val sessionService: SessionService by lazy {
+        SessionServiceImpl(
             sessionRepo = sessionInfoRepository,
             appInfo = appInfo
         )
@@ -89,7 +101,9 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
     private val listService: ListService by lazy {
         ListServiceImpl(
             remoteApi = shoppingListApi,
-            sessionService = sessionService
+            sessionService = sessionService,
+            listRepo = listRepository,
+            listShopAnalytics = listShopAnalytics
         )
     }
 
@@ -101,9 +115,59 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         )
     }
 
-    private val tagRepository: TagRepository by lazy {
-        TagRepository(
+    private val syncService: SyncService by lazy {
+        SyncServiceImpl(
+            sessionService = sessionService,
+            userApi = userApi,
+            tagService = tagService,
+            listService = listService,
+            layoutService = layoutService,
+            appInfo = appInfo,
+            listShopAnalytics = listShopAnalytics
+        )
+    }
+
+    private val tagService: TagService by lazy {
+        TagServiceImpl(
+            tagApi = tagApi,
+            tagRepo = tagRepository,
+            appInfo = appInfo,
+            listShopAnalytics = listShopAnalytics
+        )
+    }
+
+    private val layoutService: LayoutService by lazy {
+        LayoutServiceImpl(
+            layoutApi = layoutApi,
+            layoutRepo = layoutRepository,
+            appInfo = appInfo,
+            listShopAnalytics = listShopAnalytics
+        )
+    }
+
+    private val layoutApi: LayoutApi by lazy {
+        LayoutApiImpl(
+            remoteApi = listShopRemoteApi
+        )
+    }
+
+    private val layoutRepository: LayoutRepository by lazy {
+        LayoutRepositoryImpl(
             listShopDatabase = listShopDatabase
+        )
+    }
+
+    private val tagRepository: TagRepositoryImpl by lazy {
+        TagRepositoryImpl(
+            listShopDatabase = listShopDatabase
+        )
+    }
+
+
+    private val listRepository: ListRepositoryImpl by lazy {
+        ListRepositoryImpl(
+            listShopDatabase = listShopDatabase,
+            sessionService = sessionService
         )
     }
 

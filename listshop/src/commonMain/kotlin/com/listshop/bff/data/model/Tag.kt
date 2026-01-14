@@ -1,7 +1,7 @@
 package com.listshop.bff.data.model
 
-import com.listshop.bff.data.remote.ApiTagLookup
-import com.listshop.bff.db.TagLookupEntity
+import com.listshop.bff.data.remote.ApiTag
+import com.listshop.bff.db.TagEntity
 
 data class Tag(
     val externalId: String?,
@@ -10,7 +10,7 @@ data class Tag(
     val tagType: String?,
 ) {
     companion object Factory {
-        fun create(apiValue: ApiTagLookup): Tag {
+        fun create(apiValue: ApiTag): Tag {
             return Tag(
                 apiValue.externalId,
                 apiValue.name,
@@ -19,7 +19,7 @@ data class Tag(
             )
         }
 
-        fun create(dbValue: TagLookupEntity): Tag {
+        fun create(dbValue: TagEntity): Tag {
             return Tag(
                 dbValue.externalId,
                 dbValue.name,

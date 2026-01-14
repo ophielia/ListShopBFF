@@ -1,0 +1,150 @@
+package com.listshop.bff.repositories.impl
+
+import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.model.ShoppingListCategory
+import com.listshop.bff.db.ListCategoryEntity
+import com.listshop.bff.db.ListItemEntity
+import com.listshop.bff.db.ListshopDb
+import com.listshop.bff.db.ShoppingListEntity
+import com.listshop.bff.repositories.ListRepository
+import com.listshop.bff.repositories.ListShopDatabase
+import com.listshop.bff.services.SessionService
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+
+class ListRepositoryImpl(
+    private val listShopDatabase: ListShopDatabase,
+    private val sessionService: SessionService
+) : ListRepository {
+    private val dbRef: ListshopDb = listShopDatabase.db
+
+    override fun clearLocalListData() {
+        dbRef.listDefinitionQueries.removeAllListItemEntities()
+        dbRef.listDefinitionQueries.removeAllListCategoryEntities()
+        dbRef.listDefinitionQueries.removeAllShoppingListEntities()
+    }
+
+    override fun retrieveLocalList(): ShoppingList? {
+        val localLists = dbRef.listDefinitionQueries.selectAllLists().executeAsList()
+        if (localLists.isEmpty()) {
+            return null;
+        }
+        val localList = localLists.first()
+        val localListId = localList.externalId
+        // get categories
+        val categories = dbRef.listDefinitionQueries.selectAllCategoriesForList(localListId).executeAsList()
+        val modelCategories = mutableListOf<ShoppingListCategory>()
+        for (category in categories) {
+            val items =
+                dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
+            modelCategories.add(ShoppingListCategory.create(category, items))
+        }
+
+        return ShoppingList.create(localList, modelCategories)
+    }
+
+
+    override public fun createAndSaveLocalList(): ShoppingList {
+        // get empty list
+        val shoppingList: ShoppingList = ShoppingList.empty()
+        // add created, set session
+        val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
+        shoppingList.created = now
+        shoppingList.updated = now
+        sessionService.setLocalListUpdated(now)
+        // save list
+        saveListLocally(shoppingList)
+        // return
+        return shoppingList
+    }
+
+    override fun saveListLocally(shoppingList: ShoppingList) {
+        clearLocalListData()
+        val listId = shoppingList.externalId ?: "0"
+        // go through all categories, pulling items
+        for (cat in shoppingList.categories) {
+            val catId = cat.externalId.toString()
+            val items = cat.items.map {
+                ListItemEntity(
+                    externalId = it.externalId.toString(),
+                    categoryExternalId = catId,
+                    tagExternalId = it.tag.externalId,
+                    added = it.added,
+                    removed = it.removed,
+                    crossedOff = it.crossedOff,
+                    updatedOn = it.updatedOn,
+                    usedCount = it.usedCount.toLong(),
+                    tagName = it.tag.display,
+                    tagType = it.tag.tagType,
+                    legendKeys = ""
+                )
+            }
+            insertListItems(items)
+            val categoryEntity =
+                ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder.toLong())
+            insertListCategory(categoryEntity)
+        }
+        // save list
+        val listEntity = ShoppingListEntity(
+            name = shoppingList.name,
+            externalId = listId,
+            createdOn = shoppingList.created,
+            updatedOn = shoppingList.updated,
+            lastLocalChange = shoppingList.lastLocalChange,
+            lastSync = shoppingList.lastSynced,
+            itemCount = shoppingList.itemCount?.toLong(),
+            layoutId = shoppingList.layoutId,
+            isStarter = shoppingList.isStarterList ?: false,
+        )
+        insertList(listEntity)
+    }
+
+    private fun insertList(listEntity: ShoppingListEntity) {
+        dbRef.listDefinitionQueries
+            .insertIntoShoppingListEntity(
+                listEntity.name,
+                listEntity.externalId,
+                listEntity.createdOn,
+                listEntity.updatedOn,
+                listEntity.lastLocalChange,
+                listEntity.lastSync,
+                listEntity.itemCount,
+                listEntity.layoutId,
+                listEntity.isStarter,
+            )
+    }
+
+    private fun insertListCategory(categoryEntity: ListCategoryEntity) {
+        dbRef.listDefinitionQueries
+            .insertIntoListCategoryEntity(
+                name = categoryEntity.name,
+                externalId = categoryEntity.externalId,
+                listExternalId = categoryEntity.listExternalId,
+                displayOrder = categoryEntity.displayOrder
+            )
+    }
+
+    private fun insertListItems(items: List<ListItemEntity>) {
+        dbRef.listDefinitionQueries.transaction {
+            items.forEach { listItemEntity ->
+                dbRef.listDefinitionQueries
+                    .insertIntoListItemEntity(
+                        externalId = listItemEntity.externalId,
+                        categoryExternalId = listItemEntity.categoryExternalId,
+                        tagExternalId = listItemEntity.tagExternalId,
+                        added = listItemEntity.added,
+                        removed = listItemEntity.removed,
+                        updatedOn = listItemEntity.updatedOn,
+                        crossedOff = listItemEntity.crossedOff,
+                        usedCount = listItemEntity.usedCount,
+                        tagName = listItemEntity.tagName,
+                        tagType = listItemEntity.tagType,
+                        legendKeys = listItemEntity.legendKeys,
+                    )
+            }
+        }
+    }
+
+
+}

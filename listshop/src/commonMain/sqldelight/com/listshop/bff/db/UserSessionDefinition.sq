@@ -24,3 +24,37 @@ SELECT UserInfoEntity.* FROM UserInfoEntity;
 
 removeAllUserInfo:
 DELETE FROM UserInfoEntity;
+
+
+CREATE TABLE ListInfoEntity (
+    lastInternalUpdate TEXT,
+    lastUpdate TEXT,
+    localListUpdated TEXT,
+    serverListId TEXT,
+    lookupDataLastSynced TEXT,
+    statisticsLastSynced TEXT,
+    localLastSynced TEXT,
+    serverListLastSynced TEXT
+);
+
+insertIntoListInfo:
+INSERT INTO ListInfoEntity(lastInternalUpdate , lastUpdate , localListUpdated , serverListId , lookupDataLastSynced , statisticsLastSynced , localLastSynced , serverListLastSynced)
+VALUES (?, ?, ?, ?, ?, ?, ?, ? );
+
+updateListInfo:
+UPDATE ListInfoEntity
+  SET lastInternalUpdate = ?,
+      lastUpdate = ?,
+      localListUpdated = ?,
+      serverListId = ?,
+      lookupDataLastSynced = ?,
+      statisticsLastSynced = ?,
+      localLastSynced = ?,
+      serverListLastSynced = ?;
+
+
+selectAllListInfos:
+SELECT ListInfoEntity.* FROM ListInfoEntity;
+
+removeAllListInfo:
+DELETE FROM ListInfoEntity;

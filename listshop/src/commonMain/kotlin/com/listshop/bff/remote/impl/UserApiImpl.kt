@@ -1,8 +1,10 @@
 package com.listshop.bff.remote.impl
 
 import com.listshop.bff.data.remote.ApiDeviceInfo
+import com.listshop.bff.data.remote.ApiRequiredClientVersion
 import com.listshop.bff.data.remote.ApiWrappedUser
 import com.listshop.bff.data.remote.PostUserLogin
+import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.exceptions.AuthenticationException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.UserApi
@@ -50,6 +52,17 @@ internal class UserApiImpl(
         val response = remoteApi.getRequest(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,AuthenticationException("logout call failed with status: " + response.status.value))
+    }
+
+    override suspend fun retrieveRequiredClientVersion(): ApiRequiredClientVersion {
+        val urlString = remoteApi.buildPath("/user/client/version")
+        val response = remoteApi.getRequest(urlString)
+
+        remoteApi.mapNonSuccessToException(response.status.value,
+            ApiException("get required version call failed with status: " + response.status.value)
+        )
+
+        return response.body()
     }
 
 
