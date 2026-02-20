@@ -7,12 +7,13 @@ import com.listshop.bff.data.model.TagType
 import com.listshop.bff.db.TagEntity
 
 class TagTree() {
-    var lookupDictionary = hashMapOf<Long, TagTreeNode>()
+    var stringLookupDictionary = hashMapOf<String, TagTreeNode>()
     val BASE_GROUP = 0L
+    val BASE_GROUP_STRING = "0"
 
     init {
         // will initialize private lookup dictionary to null
-        lookupDictionary = hashMapOf()
+        stringLookupDictionary = hashMapOf()
     }
 
     // secondary constructor
@@ -23,18 +24,17 @@ class TagTree() {
             id = BASE_GROUP,
             tagType = TagType.EMPTY
         )
-        val baseNode = TagTreeNode(display = baseTag, parentId = -99L)
-        lookupDictionary.put(BASE_GROUP, baseNode)
+        val baseNode = TagTreeNode(display = baseTag, parentId = "-99")
+        stringLookupDictionary.put(BASE_GROUP_STRING, baseNode)
 
         for (tag in tagList) {
-            val parentId = tag.parentId?.toLong() ?: -1L
             val tagTreeNode = createOrUpdateNode(tag)
             // set node in parent
-            addNodeToParent(tagTreeNode, parentId)
+            addNodeToParent(tagTreeNode, tag.parentId ?: "-1")
         }
 
         // sift tags in each of the nodes
-        lookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
+        stringLookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
     }
 
     fun append(tag: ShoppingListTag, parentId: String) {
@@ -42,7 +42,8 @@ class TagTree() {
         val tagIdAsLong = tag.externalId.toLongOrNull() ?: -1L
         if (parentIdAsLong < 0 ||
             tagIdAsLong < 0 ||
-            !lookupDictionary.containsKey(parentIdAsLong)) {
+            !stringLookupDictionary.containsKey(parentId)
+        ) {
             return
         }
         val newDisplay = TagTreeDisplay(
@@ -52,33 +53,33 @@ class TagTree() {
             isUserTag = tag.isUser ?: false,
             tagType = TagType.valueOf(tag.tagType),
         )
-        val newNode = TagTreeNode(newDisplay, parentIdAsLong)
-        lookupDictionary.put(tagIdAsLong, newNode)
-        val parentNode = lookupDictionary.get(parentIdAsLong)
+        val newNode = TagTreeNode(newDisplay, parentId)
+        stringLookupDictionary.put(tag.externalId, newNode)
+        val parentNode = stringLookupDictionary.get(parentId)
         parentNode?.tags += newNode
     }
 
-    fun isFilled() : Boolean {
-        return lookupDictionary.size > 0
+    fun isFilled(): Boolean {
+        return stringLookupDictionary.size > 0
     }
 
-    private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: Long) {
+    private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: String) {
         // get parent node
-        if (!lookupDictionary.containsKey(parentId)) {
-            lookupDictionary[parentId] = TagTreeNode.empty()
+        if (!stringLookupDictionary.containsKey(parentId)) {
+            stringLookupDictionary[parentId] = TagTreeNode.empty()
         }
-        val parentNode = lookupDictionary[parentId]!!
+        val parentNode = stringLookupDictionary[parentId]!!
 
         // add node to raw children
         parentNode.addChild(tagTreeNode)
     }
 
     private fun createOrUpdateNode(tag: TagEntity): TagTreeNode {
-        val tagId = tag.externalId?.toLong() ?: -1L
-        val parentId = tag.parentId?.toLong() ?: -1L
-        if (lookupDictionary.containsKey(tagId)) {
+        val tagId = tag.externalId ?: "-1"
+        val parentId = tag.parentId ?: "-1"
+        if (stringLookupDictionary.containsKey(tagId)) {
             // node exists - update display
-            var node = lookupDictionary[tagId]
+            var node = stringLookupDictionary[tagId]
             node?.display?.updateFromTag(tag)
             node?.parentId = parentId
         } else {
@@ -86,9 +87,9 @@ class TagTree() {
             val tagTreeDisplay = TagTreeDisplay.create(tag)
             val tagTreeNode = TagTreeNode(display = tagTreeDisplay, parentId = parentId)
             // set node in lookupDictionary
-            lookupDictionary[tagId] = tagTreeNode
+            stringLookupDictionary[tagId] = tagTreeNode
         }
-        return lookupDictionary.get(tagId)!!
+        return stringLookupDictionary.get(tagId)!!
     }
 
 

@@ -2,7 +2,7 @@ package com.listshop.bff.data.model
 
 class TagTreeNode(
     var display: TagTreeDisplay?,
-    var parentId: Long,
+    var parentId: String,
     var rawChildren: List<TagTreeNode> = emptyList(),
     var groups: List<TagTreeNode> = emptyList(),
     var tags: List<TagTreeNode> = emptyList()
@@ -38,7 +38,7 @@ class TagTreeNode(
         fun empty(): TagTreeNode {
             return TagTreeNode(
                 display = null,
-                parentId = 0,
+                parentId = "0",
                 rawChildren = emptyList(),
                 groups = emptyList(),
                 tags = emptyList()
