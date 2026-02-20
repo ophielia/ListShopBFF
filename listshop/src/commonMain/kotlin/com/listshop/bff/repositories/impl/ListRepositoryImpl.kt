@@ -19,7 +19,7 @@ class ListRepositoryImpl(
 ) : ListRepository {
     private val dbRef: ListshopDb = listShopDatabase.db
 
-    override fun clearLocalListData() {
+    private fun clearLocalListData() {
         dbRef.listDefinitionQueries.removeAllListItemEntities()
         dbRef.listDefinitionQueries.removeAllListCategoryEntities()
         dbRef.listDefinitionQueries.removeAllShoppingListEntities()
@@ -44,8 +44,26 @@ class ListRepositoryImpl(
         return ShoppingList.create(localList, modelCategories)
     }
 
+    override fun retrieveOrCreateLocalList(): ShoppingList {
+        val localLists = dbRef.listDefinitionQueries.selectAllLists().executeAsList()
+        if (localLists.isEmpty()) {
+            return createAndSaveLocalList()
+        }
+        val localList = localLists.first()
+        val localListId = localList.externalId
+        // get categories
+        val categories = dbRef.listDefinitionQueries.selectAllCategoriesForList(localListId).executeAsList()
+        val modelCategories = mutableListOf<ShoppingListCategory>()
+        for (category in categories) {
+            val items =
+                dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
+            modelCategories.add(ShoppingListCategory.create(category, items))
+        }
 
-    override public fun createAndSaveLocalList(): ShoppingList {
+        return ShoppingList.create(localList, modelCategories)
+    }
+
+    override fun createAndSaveLocalList(): ShoppingList {
         // get empty list
         val shoppingList: ShoppingList = ShoppingList.empty()
         // add created, set session
@@ -57,6 +75,14 @@ class ListRepositoryImpl(
         saveListLocally(shoppingList)
         // return
         return shoppingList
+    }
+
+    override fun deleteLocalList(){
+        clearLocalListData()
+    }
+
+    override fun setIdInLocalList(listId: String) {
+        dbRef.listDefinitionQueries.updateListId(listId)
     }
 
     override fun saveListLocally(shoppingList: ShoppingList) {

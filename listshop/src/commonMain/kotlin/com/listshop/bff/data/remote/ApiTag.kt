@@ -12,7 +12,7 @@ data class ApiTag(
     @SerialName("tag_type")
     val tagType: String? = null,
     @SerialName("parent_id")
-    val parentId: String? = null,
+    var parentId: String? = null,
     @SerialName("user_id")
     val userId: String? = null,
     @SerialName("is_group")

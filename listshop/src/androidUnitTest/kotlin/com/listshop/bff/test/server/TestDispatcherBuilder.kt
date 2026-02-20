@@ -36,11 +36,14 @@ class TestDispatcherBuilder(val testCaseName : String)  {
         // load request and response bodies, if necessary
         val requestBody = loadBodyData(configuration.requestBodyFilename)
         val responseBody = loadBodyData(configuration.responseBodyFilename)
+        val additionalHeaders = loadAdditionalHeaders(configuration.additionalHeaders)
         // create response
         val response =  MockResponse()
             .setBody(responseBody)
             .setResponseCode(configuration.responseStatus)
             .setHeader("Content-Type","application/json")
+        additionalHeaders.forEach { (key: String, value: String) -> response.setHeader(key, value) }
+
         // create RequestMapping and return
         val requestMapping = RequestMapping(configuration.requestPath,
             configuration.requestMethod,
@@ -48,6 +51,19 @@ class TestDispatcherBuilder(val testCaseName : String)  {
             response
             )
         return requestMapping
+    }
+
+    private fun loadAdditionalHeaders(additionalHeaders: String?) : Map<String, String>{
+       val  headers = mutableMapOf<String, String>()
+        if (additionalHeaders == null || additionalHeaders.isEmpty()) {
+            return headers
+        }
+        val pairs = additionalHeaders.split(";")
+        for (pair in pairs) {
+            val (key, value) = pair.split("=")
+            headers.put(key, value)
+        }
+        return headers
     }
 
     private fun loadBodyData(dataFilename: String): String {
@@ -61,7 +77,10 @@ class TestDispatcherBuilder(val testCaseName : String)  {
     private fun loadConfiguration(configFileName: String): RequestMappingConfig {
         var fullPath = RESOURCES_PATH + CONFIG_SUBPATH
         if (!testCaseName.isEmpty()) {
-            fullPath  += "/" + testCaseName + "/"
+            if (!fullPath.endsWith("/")) {
+                fullPath  += "/"
+            }
+            fullPath += testCaseName + "/"
         }
         fullPath += configFileName
         val jsonString =  Resource(fullPath).readText()

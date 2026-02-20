@@ -3,12 +3,14 @@ package com.listshop.bff.services.impl
 import com.listshop.analytics.AppInfo
 import com.listshop.bff.data.model.ListInfo
 import com.listshop.bff.data.model.UserInfo
+import com.listshop.bff.data.session.DishSessionMemory
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
+import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.services.ListSession
-import com.listshop.bff.services.UserSession
+import com.listshop.bff.data.session.UserSession
 import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
 
@@ -18,6 +20,7 @@ class SessionServiceImpl internal constructor(
 ) : SessionService {
     private var _userSession: UserSession? = null
     private var _listSession: ListSession? = null
+    private var _dishSessionMemory: DishSessionMemory? = null
 
     override fun currentUserSession(): UserSession {
         if (_userSession != null) {
@@ -33,6 +36,14 @@ class SessionServiceImpl internal constructor(
         }
         refreshOrInitializeListSession()
         return _listSession!!
+    }
+
+    override fun currentDishMemory(): DishSessionMemory {
+        if (_dishSessionMemory != null) {
+            return _dishSessionMemory!!
+        }
+        _dishSessionMemory = DishSessionMemory()
+        return _dishSessionMemory!!
     }
 
 
@@ -71,6 +82,14 @@ class SessionServiceImpl internal constructor(
         refreshOrInitializeUserSession()
     }
 
+    override fun setUserCreatedOnServerToNow() {
+        val userInfo = getUserInfo()
+        val now = Clock.System.now()
+        userInfo.userCreatedOnServer = now.toString()
+        updateUserInfo(userInfo)
+        refreshOrInitializeUserSession()
+    }
+
     override fun setLookupDataLastSyncedToNow() {
         val listInfo = getListInfo()
         val now = Clock.System.now()
@@ -90,6 +109,16 @@ class SessionServiceImpl internal constructor(
         val listInfo = getListInfo()
         listInfo.localListUpdated = updateString
         updateListInfo(listInfo)
+        refreshOrInitializeUserSession()
+    }
+
+    override fun setUserProperty(property: String, saveValue: String) {
+        sessionRepo.createOrReplaceUserProperty(property, saveValue)
+        refreshOrInitializeUserSession()
+    }
+
+    override fun setUserProperties(propertyMap: Map<String, String>) {
+        sessionRepo.replaceUserProperties(propertyMap)
         refreshOrInitializeUserSession()
     }
 
@@ -113,6 +142,21 @@ class SessionServiceImpl internal constructor(
         listInfo.serverListLastSynced = Clock.System.now().toString()
         updateListInfo(listInfo)
         refreshOrInitializeUserSession()
+    }
+
+    override fun clearUserSession() {
+        clearUserInfo()
+        clearListInfo()
+        clearUserProperties()
+        refreshOrInitializeUserSession()
+    }
+
+    private fun clearUserProperties() {
+        sessionRepo.deleteAllUserProperties()
+    }
+
+    private fun clearListInfo() {
+        sessionRepo.deleteListInfo()
     }
 
 
@@ -144,6 +188,9 @@ class SessionServiceImpl internal constructor(
         userInfo = sessionRepo.createUserInfo()
         return userInfo!!
     }
+    private fun clearUserInfo() {
+        sessionRepo.deleteUserInfo()
+    }
 
     private fun getOrCreateListInfoEntity(): ListInfoEntity {
         var listInfo = sessionRepo.getListInfo()
@@ -154,9 +201,24 @@ class SessionServiceImpl internal constructor(
         return listInfo!!
     }
 
+
+    private fun getUserPropertiesAsMap() : Map<String, String> {
+        val properties : List<UserPropertiesEntity> = sessionRepo.getUserProperties()
+        if (properties.isNullOrEmpty()) {
+            return emptyMap()
+        }
+
+        return properties
+            .filter{it.key != null}
+            .filter{it.property_value != null}
+            .map { it.key!! to it.property_value!! }.toMap()
+    }
+
     private fun refreshOrInitializeUserSession() {
         val userInfo = getOrCreateUserInfoEntity()
         val listInfo = getOrCreateListInfoEntity()
+        val dishMemory = currentDishMemory()
+        val userProperties = getUserPropertiesAsMap()
         val sessionState = determineUserSessionState(userInfo, listInfo)
         _userSession = UserSession(
             userInfo.userName,
@@ -164,12 +226,15 @@ class SessionServiceImpl internal constructor(
             userInfo.userLastSeen,
             userInfo.userLastSignedIn,
             sessionState,
+            userProperties,
+            dishMemory,
             appInfo.clientVersion ?: "unknown",
             appInfo.buildNumber ?: "unknown",
             appInfo.baseUrl
         )
 
     }
+
 
     private fun refreshOrInitializeListSession() {
         val listInfo = getOrCreateListInfoEntity()

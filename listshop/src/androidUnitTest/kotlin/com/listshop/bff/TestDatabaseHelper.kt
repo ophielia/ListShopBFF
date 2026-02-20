@@ -5,7 +5,9 @@ import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
+import com.listshop.bff.db.TagEntity
 import com.listshop.bff.db.UserInfoEntity
+import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.repositories.ListShopDatabase
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
@@ -31,15 +33,13 @@ class TestDatabaseHelper(
             "a randomized token",
                     created.toString(),
             lastSeen.toString(),
+            lastSignedIn.toString(),
             lastSignedIn.toString()
             )
     }
 
     fun standardListInfo(): ListInfoEntity {
         val now = Clock.System.now().toString()
-        val created = LocalDateTime.parse("2017-02-15T18:00:00.000")
-        val lastSeen = LocalDateTime.parse("2024-01-01T18:00:00.000")
-        val lastSignedIn = LocalDateTime.parse("2024-07-01T18:00:00.000")
 
         return ListInfoEntity(
             lastInternalUpdate = now,
@@ -60,8 +60,22 @@ class TestDatabaseHelper(
             return
         }
         listShopDatabase.db.userSessionDefinitionQueries.insertIntoUserInfo(
-            user.userName,user.userToken, user.userCreated, user.userLastSeen,user.userLastSignedIn
+            user.userName,user.userToken, user.userInfoCreated, user.userLastSeen,user.userLastSignedIn, user.userCreatedOnServer
         )
+    }
+
+    fun setTag(tag: TagEntity?) {
+        if (tag == null) {
+            return
+        }
+        listShopDatabase.db.tagDefinitionQueries.insertIntoTag(
+            tag.externalId,
+            tag.isGroup,
+            tag.name,
+            tag.parentId,
+            tag.power,
+            tag.tagType,
+            tag.userId)
     }
 
     fun setShoppingList(shoppingList: ShoppingList) {
@@ -149,7 +163,7 @@ class TestDatabaseHelper(
         }
     }
 
-    fun setList(list: ListInfoEntity?) {
+    fun setListInfo(list: ListInfoEntity?) {
         if (list == null) {
             return
         }
@@ -162,6 +176,34 @@ class TestDatabaseHelper(
             statisticsLastSynced = list.statisticsLastSynced,
             localLastSynced = list.localLastSynced,
             serverListLastSynced = list.serverListLastSynced
+        )
+    }
+
+    fun getUserProperties(): List<UserPropertiesEntity> {
+        return listShopDatabase.db.userSessionDefinitionQueries.selectAllUserProperties().executeAsList()
+    }
+
+    fun setUserProperty(key: String, value: String) {
+        listShopDatabase.db.userSessionDefinitionQueries.insertIntoUserProperties(key, value)
+    }
+
+    fun currentListInfo() : List<ListInfoEntity>{
+        return listShopDatabase.db.userSessionDefinitionQueries.selectAllListInfos().executeAsList()
+    }
+    fun currentUserInfo() : List<UserInfoEntity>{
+        return listShopDatabase.db.userSessionDefinitionQueries.selectAllUserInfos().executeAsList()
+    }
+
+    fun setServerListId(listId: String) {
+        listShopDatabase.db.userSessionDefinitionQueries.insertIntoListInfo(
+            lastInternalUpdate = null,
+            lastUpdate = null,
+            localListUpdated = null,
+            serverListId = listId,
+            lookupDataLastSynced =null,
+            statisticsLastSynced = null,
+            localLastSynced = null,
+            serverListLastSynced = null
         )
     }
 }

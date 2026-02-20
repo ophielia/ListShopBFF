@@ -3,6 +3,7 @@ package com.listshop.bff.services.impl
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.MergeItem
+import com.listshop.bff.data.remote.PostShoppingList
 import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.remote.ShoppingListApi
@@ -16,11 +17,13 @@ class ListServiceImpl internal constructor(
     private val sessionService: SessionService,
     private val listShopAnalytics : ListShopAnalytics
 ) : ListService {
+    val DEFAULT_LIST_NAME : String = "Shopping List"
+
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
         return remoteApi.getAllShoppingLists()
     }
 
-    override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
+    override suspend fun retrieveMostRecentList(): ShoppingList? {
         // retrieve api list as bff model
         val shoppingList: ShoppingList = remoteApi.retrieveMostRecentList()
         // save server list id in session
@@ -30,14 +33,27 @@ class ListServiceImpl internal constructor(
 
     }
 
-    private fun saveLocallyAndReturnList(shoppingList: ShoppingList): ShoppingList? {
-        // save as local list
-        listRepo.saveListLocally(shoppingList)
-        // update session info
-        sessionService.setServerListId(shoppingList.externalId ?: "")
-        sessionService.setLocalListUpdated()
-        // return list
-        return shoppingList
+    override suspend fun retrieveServerList(): ShoppingList? {
+        try {
+            val serverList = doRetrieveServerList()
+            if (serverList != null) {
+                return serverList
+            }
+        } catch (e: Exception) {
+            // swallowing this exception for now
+            listShopAnalytics.error("Error while retrieving server list - ${e.message}")
+        }
+        try {
+            return retrieveMostRecentList()
+        } catch (e: Exception) {
+            // swallowing this exception for now
+            listShopAnalytics.error("Error while retrieving most recent list - ${e.message}")
+        }
+        return ShoppingList.empty()
+    }
+
+    override suspend fun retrieveLocalList(): ShoppingList? {
+        return listRepo.retrieveLocalList()
     }
 
     override suspend fun retrieveOrCreateLocalList(): ShoppingList? {
@@ -77,5 +93,32 @@ class ListServiceImpl internal constructor(
         return saveLocallyAndReturnList(mergedList)
     }
 
+    override suspend fun clearLocalList() {
+        // pull local list
+        listRepo.deleteLocalList()
+    }
+
+    private suspend fun doRetrieveServerList(): ShoppingList? {
+        val serverId = sessionService.currentListSession().serverListId
+        // retrieve api list
+        val shoppingList: ShoppingList = remoteApi.retrieveListById(serverId ?: "0")
+        // save server list id in session
+        sessionService.setServerListId(shoppingList.externalId ?: "0")
+        // deal with legends (later....)
+        return saveLocallyAndReturnList(shoppingList)
+    }
+
+    private fun saveLocallyAndReturnList(shoppingList: ShoppingList): ShoppingList? {
+        // save as local list
+        listRepo.saveListLocally(shoppingList)
+        // update session info
+        sessionService.setServerListId(shoppingList.externalId ?: "")
+        sessionService.setLocalListUpdated()
+        // return list
+        return shoppingList
+    }
+
+
 
 }
+

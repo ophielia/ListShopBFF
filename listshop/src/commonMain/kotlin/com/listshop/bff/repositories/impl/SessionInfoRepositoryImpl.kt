@@ -4,6 +4,7 @@ import com.listshop.bff.data.model.ListInfo
 import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
+import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.repositories.ListShopDatabase
 import com.listshop.bff.repositories.SessionInfoRepository
 import kotlinx.datetime.Clock
@@ -30,9 +31,14 @@ internal class SessionInfoRepositoryImpl(
                 null,
                 now.toString(),
                 null,
-                null
+                null,
+                 null
             )
         return getUserInfo()
+    }
+
+    override fun deleteUserInfo() {
+        listShopDatabase.db.userSessionDefinitionQueries.removeAllUserInfo()
     }
 
     override fun updateUserInfo(userInfo: UserInfo) {
@@ -40,9 +46,10 @@ internal class SessionInfoRepositoryImpl(
             .updateUserInfo(
                 userInfo.userName,
                 userInfo.userToken,
-                userInfo.userCreated,
+                userInfo.userInfoCreated,
                 userInfo.userLastSeen,
-                userInfo.userLastSignedIn
+                userInfo.userLastSignedIn,
+                userInfo.userCreatedOnServer
             )
     }
 
@@ -58,6 +65,10 @@ internal class SessionInfoRepositoryImpl(
                 localLastSynced = listInfo.localLastSynced ,
                 serverListLastSynced = listInfo.serverListLastSynced
             )
+    }
+
+    override fun deleteListInfo() {
+        listShopDatabase.db.userSessionDefinitionQueries.removeAllListInfo()
     }
 
     override fun getListInfo(): ListInfoEntity? {
@@ -85,5 +96,32 @@ internal class SessionInfoRepositoryImpl(
             )
         return getListInfo()
     }
+
+    override fun getUserProperties(): List<UserPropertiesEntity> {
+        return listShopDatabase.db.userSessionDefinitionQueries
+            .selectAllUserProperties().executeAsList()
+    }
+
+    override fun deleteAllUserProperties() {
+        listShopDatabase.db.userSessionDefinitionQueries.removeAllUserProperties()
+    }
+
+    override fun createOrReplaceUserProperty(key: String, value: String) {
+        // delete property if it already exists
+        listShopDatabase.db.userSessionDefinitionQueries.deleteUserPropertyByKey(key)
+        // insert property
+        listShopDatabase.db.userSessionDefinitionQueries.insertIntoUserProperties(key, value)
+    }
+
+    override fun replaceUserProperties(propertyMap: Map<String, String>) {
+        // delete property if it already exists
+        listShopDatabase.db.userSessionDefinitionQueries.removeAllUserProperties()
+        // insert properties
+        for ((key, value) in propertyMap) {
+            listShopDatabase.db.userSessionDefinitionQueries.insertIntoUserProperties(key, value)
+        }
+
+    }
+
 
 }

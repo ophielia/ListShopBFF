@@ -1,5 +1,6 @@
 package com.listshop.bff.repositories.impl
 
+import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListshopDb
@@ -45,12 +46,20 @@ class TagRepositoryImpl(
     }
 
 
-    override suspend fun findTagsByTypes(typesForTreeAsStrings: List<String>) : List<TagEntity>{
+    override suspend fun findTagsByTypes(typesForTreeAsStrings: List<String>): List<TagEntity> {
         return dbRef.tagDefinitionQueries
             .selectTagsByTagTypes(typesForTreeAsStrings)
             .executeAsList()
     }
 
+    override suspend fun retrieveTagLocally(tagId: String): TagEntity {
+        return dbRef.tagDefinitionQueries.selectTagByTagId(tagId)
+            .executeAsOne()
+    }
+
+    override suspend fun updateApiTagLocally(tagId: String, tagName: String) {
+        dbRef.tagDefinitionQueries.updateTagName( tagName, tagId)
+    }
 
     override suspend fun deleteAll() {
         listShopDatabase.analytics.databaseCleared()

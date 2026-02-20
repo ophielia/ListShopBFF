@@ -4,6 +4,7 @@ import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListCategory
 import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
+import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
@@ -162,6 +163,7 @@ data class ShoppingListTag(
     var display: String,
     var tagType: String,
     var categoryId: String?,
+    var parentId: String? = null,
     var isUser: Boolean?,
 
 
@@ -184,6 +186,17 @@ data class ShoppingListTag(
                 tagType = dbValue.tagType ?: "",
                 categoryId = dbValue.categoryExternalId,
                 isUser = null
+            )
+        }
+
+        fun create(apiValue: ApiTag, isUser: Boolean): ShoppingListTag {
+            return ShoppingListTag(
+                externalId = apiValue.externalId ?: "",
+                display = apiValue.name ?: "",
+                tagType = apiValue.tagType ?: "",
+                categoryId = "",
+                parentId = apiValue.parentId ?: "",
+                isUser = isUser
             )
         }
     }

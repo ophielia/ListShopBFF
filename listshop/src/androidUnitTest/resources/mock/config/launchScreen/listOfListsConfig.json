@@ -1,8 +1,0 @@
-{
-  "label": "listOfLists",
-  "requestMethod": "GET",
-  "requestPath": "/shoppinglist",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "launchScreen/listOfShoppingLists.json"
-}

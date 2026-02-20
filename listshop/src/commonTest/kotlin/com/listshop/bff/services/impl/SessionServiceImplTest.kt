@@ -84,8 +84,9 @@ class SessionServiceImplTest {
         var userInfo = UserInfoEntity(     userName = "test",
             userToken = "testToken",
             userLastSeen = "yesterday",
-            userCreated = "a month ago",
-            userLastSignedIn = "two weeks ago")
+            userInfoCreated = "a month ago",
+            userLastSignedIn = "two weeks ago",
+            userCreatedOnServer = "a year ago")
         return userInfo
     }
 

@@ -5,4 +5,7 @@ enum class BFFErrorType {
     AUTHENTICATION,
     UNKNOWN,
     LOADING,
+    ONBOARDING,
+    DASHBOARD,
+    NAVIGATION
 }

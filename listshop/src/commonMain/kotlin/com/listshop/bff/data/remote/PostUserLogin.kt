@@ -8,7 +8,9 @@ data class PostUserLogin(
     val username: String?,
     val password: String?,
     @SerialName("device_info")
-    val deviceInfo: ApiDeviceInfo
+    val deviceInfo: ApiDeviceInfo,
+    @SerialName("create_list")
+    val createList: Boolean = true
 )
 
 

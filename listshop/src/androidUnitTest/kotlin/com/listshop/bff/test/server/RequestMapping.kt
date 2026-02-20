@@ -6,6 +6,8 @@ data class RequestMapping(
     val path: String,
     val method: String,
     val body: String,
-    val response: MockResponse
+    val response: MockResponse,
+    val headers: Map<String, String> = emptyMap(),
+
 ) {
 }

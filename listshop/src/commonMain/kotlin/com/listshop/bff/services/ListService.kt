@@ -6,7 +6,10 @@ import com.listshop.bff.data.state.ConnectionStatus
 interface ListService {
 
     suspend fun retrieveListOfLists(): List<ShoppingList>
-    suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList?
+    suspend fun retrieveServerList(): ShoppingList?
     suspend fun retrieveOrCreateLocalList(): ShoppingList?
     suspend fun mergeLocalWithServerList(): ShoppingList?
+    suspend fun clearLocalList()
+    suspend fun retrieveMostRecentList(): ShoppingList?
+    suspend fun retrieveLocalList(): ShoppingList?
 }

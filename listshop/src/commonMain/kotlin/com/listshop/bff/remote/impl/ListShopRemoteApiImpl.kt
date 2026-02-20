@@ -201,9 +201,26 @@ internal class ListShopRemoteApiImpl(
         }
     }
 
+    override suspend fun deleteRequest(path: String): HttpResponse {
+        try {
+            val response: HttpResponse = client(token()).delete(path)
+            return response
+        } catch (e: Exception) {
+            throw HttpClientException(REQUEST_FAILURE_MESSAGE + e.message)
+        }
+    }
+
     override fun mapNonSuccessToException(statusValue: Int, exception: Exception) {
         if (!(statusValue in 200..399)) {
             throw exception
         }
+    }
+
+    override fun pullLocation(response:HttpResponse): String {
+        val headers = response.headers
+        if (headers.contains(HttpHeaders.Location)) {
+            return headers.get(HttpHeaders.Location)!!
+        }
+        return ""
     }
 }

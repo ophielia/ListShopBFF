@@ -7,5 +7,6 @@ enum class BFFErrorSubtype {
     CANT_LAUNCH,
     UNKNOWN,
     UPGRADE_REQUIRED,
-    CANT_GET_LIST
+    CALL_FAILED,
+    CANT_SIGNUP
 }

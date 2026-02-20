@@ -1,8 +1,10 @@
 package com.listshop.analytics
 
-class HttpClientAnalytics internal constructor() {
+class HttpClientAnalytics internal constructor(private val showHttpLogs: Boolean) {
     
     fun logMessage(message: String) {
-        sendEvent("httpClientMessage", "message" to message)
+        if (showHttpLogs) {
+            sendEvent("httpClientMessage", "message" to message)
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.listshop.bff.services
 
 import com.listshop.analytics.AppInfo
+import com.listshop.bff.data.session.DishSessionMemory
+import com.listshop.bff.data.session.UserSession
 
 interface SessionService {
 
@@ -16,6 +18,8 @@ interface SessionService {
 
     fun setUserLastSignedInToNow()
 
+    fun setUserCreatedOnServerToNow()
+
     fun setLookupDataLastSyncedToNow()
 
     fun setServerListId(listId: String)
@@ -30,4 +34,11 @@ interface SessionService {
 
 
     fun currentListSession(): ListSession
+
+    fun setUserProperty(property: String, saveValue: String)
+
+    fun setUserProperties(propertyMap: Map<String, String>)
+
+    fun clearUserSession()
+    fun currentDishMemory(): DishSessionMemory
 }

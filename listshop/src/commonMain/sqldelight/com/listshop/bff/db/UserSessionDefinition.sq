@@ -1,23 +1,25 @@
 CREATE TABLE UserInfoEntity (
     userName TEXT,
     userToken TEXT,
-    userCreated TEXT,
+    userInfoCreated TEXT,
     userLastSeen TEXT,
-    userLastSignedIn TEXT
+    userLastSignedIn TEXT,
+    userCreatedOnServer TEXT
 );
 
 insertIntoUserInfo:
-INSERT INTO UserInfoEntity(userName, userToken, userCreated, userLastSeen, userLastSignedIn )
-VALUES (?, ?,?,?,?);
+INSERT INTO UserInfoEntity(userName, userToken, userInfoCreated, userLastSeen, userLastSignedIn , userCreatedOnServer)
+VALUES (?, ?,?,?,?, ?);
 
 
 updateUserInfo:
 UPDATE UserInfoEntity
   SET userName = ?,
       userToken = ?,
-      userCreated = ?,
+      userInfoCreated = ?,
       userLastSeen = ?,
-      userLastSignedIn = ?;
+      userLastSignedIn = ?,
+      userCreatedOnServer = ?;
 
 selectAllUserInfos:
 SELECT UserInfoEntity.* FROM UserInfoEntity;
@@ -58,3 +60,22 @@ SELECT ListInfoEntity.* FROM ListInfoEntity;
 
 removeAllListInfo:
 DELETE FROM ListInfoEntity;
+
+CREATE TABLE UserPropertiesEntity (
+    key TEXT,
+    property_value TEXT
+);
+
+insertIntoUserProperties:
+INSERT INTO UserPropertiesEntity(key, property_value )
+VALUES (?, ?);
+
+
+removeAllUserProperties:
+DELETE FROM UserPropertiesEntity;
+
+deleteUserPropertyByKey:
+DELETE FROM UserPropertiesEntity WHERE key = ?;
+
+selectAllUserProperties:
+SELECT UserPropertiesEntity.* FROM UserPropertiesEntity;

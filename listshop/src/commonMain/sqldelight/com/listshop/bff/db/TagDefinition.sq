@@ -27,3 +27,13 @@ selectTagsByTagTypes:
 SELECT *
 FROM TagEntity
 WHERE tagType IN ?;
+
+selectTagByTagId:
+SELECT *
+FROM TagEntity
+WHERE externalId = ?;
+
+updateTagName:
+UPDATE TagEntity
+SET name = ?
+WHERE externalId = ?;

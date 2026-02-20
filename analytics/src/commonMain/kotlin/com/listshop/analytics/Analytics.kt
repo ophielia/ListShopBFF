@@ -9,14 +9,14 @@ interface Analytics {
     fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
 }
 
-fun initAnalytics(analytics: Analytics): AnalyticsHandle {
+fun initAnalytics(analytics: Analytics, showHttpLogs: Boolean): AnalyticsHandle {
      if (!AnalyticsHandler.analyticsAtom.compareAndSet(null, analytics)) {
         throw IllegalStateException("Analytics can only be set once")
     }
     return AnalyticsHandle(
         appAnalytics = AppAnalytics(),
         listShopAnalytics = ListShopAnalytics(),
-        httpClientAnalytics = HttpClientAnalytics()
+        httpClientAnalytics = HttpClientAnalytics(showHttpLogs)
     )
 }
 
@@ -25,7 +25,7 @@ fun initDummyAnalytics(analytics: Analytics): AnalyticsHandle {
     return AnalyticsHandle(
         appAnalytics = AppAnalytics(),
         listShopAnalytics = ListShopAnalytics(),
-        httpClientAnalytics = HttpClientAnalytics()
+        httpClientAnalytics = HttpClientAnalytics(true)
     )
 }
 

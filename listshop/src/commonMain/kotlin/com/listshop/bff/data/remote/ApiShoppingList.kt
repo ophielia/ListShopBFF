@@ -18,7 +18,7 @@ data class ApiShoppingList(
     @SerialName("layout_id")
     val layoutId: String?,
     @SerialName("name")
-    val name: String?,
+    var name: String?,
     @SerialName("is_starter_list")
     val isStarter: Boolean?,
     @SerialName("categories")

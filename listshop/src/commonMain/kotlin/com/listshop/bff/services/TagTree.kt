@@ -1,5 +1,6 @@
 package com.listshop.bff.services
 
+import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.model.TagTreeDisplay
 import com.listshop.bff.data.model.TagTreeNode
 import com.listshop.bff.data.model.TagType
@@ -34,6 +35,27 @@ class TagTree() {
 
         // sift tags in each of the nodes
         lookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
+    }
+
+    fun append(tag: ShoppingListTag, parentId: String) {
+        val parentIdAsLong = parentId.toLongOrNull() ?: -1L
+        val tagIdAsLong = tag.externalId.toLongOrNull() ?: -1L
+        if (parentIdAsLong < 0 ||
+            tagIdAsLong < 0 ||
+            !lookupDictionary.containsKey(parentIdAsLong)) {
+            return
+        }
+        val newDisplay = TagTreeDisplay(
+            name = tag.display,
+            id = tagIdAsLong,
+            isGroup = false,
+            isUserTag = tag.isUser ?: false,
+            tagType = TagType.valueOf(tag.tagType),
+        )
+        val newNode = TagTreeNode(newDisplay, parentIdAsLong)
+        lookupDictionary.put(tagIdAsLong, newNode)
+        val parentNode = lookupDictionary.get(parentIdAsLong)
+        parentNode?.tags += newNode
     }
 
     fun isFilled() : Boolean {

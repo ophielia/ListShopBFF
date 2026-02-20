@@ -80,9 +80,10 @@ class SyncServiceImpl internal constructor(
 
     }
 
-    override suspend fun getMostRecentList(connectionStatus: ConnectionStatus): ShoppingList? {
-        return listService.getMostRecentList(connectionStatus)
-
-
+    override suspend fun mergeLocalListWithServer() {
+        val hasLocalList = sessionService.currentListSession().localListUpdated != null
+        if (hasLocalList) {
+            listService.mergeLocalWithServerList()
+        }
     }
 }

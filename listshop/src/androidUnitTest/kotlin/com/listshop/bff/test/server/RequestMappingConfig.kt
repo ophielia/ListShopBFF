@@ -6,5 +6,6 @@ data class RequestMappingConfig(
     val requestPath: String,
     val requestBodyFilename: String = "",
     val responseStatus: Int,
-    val responseBodyFilename: String = ""
+    val responseBodyFilename: String = "",
+    var additionalHeaders: String = ""
     )

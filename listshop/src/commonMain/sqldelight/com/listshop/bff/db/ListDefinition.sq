@@ -73,3 +73,13 @@ selectAllItemsForCategory:
 SELECT *
 FROM ListItemEntity
 WHERE categoryExternalId = ?;
+
+
+
+
+updateListId:
+UPDATE ShoppingListEntity
+SET externalId = ?;
+
+
+
