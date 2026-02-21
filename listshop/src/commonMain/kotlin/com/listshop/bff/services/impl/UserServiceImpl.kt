@@ -10,6 +10,7 @@ import com.listshop.bff.data.remote.PostChangePassword
 import com.listshop.bff.data.remote.PostTokenRequest
 import com.listshop.bff.data.remote.PostUserLogin
 import com.listshop.bff.exceptions.BadParameterException
+import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.UserApi
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.UserService
@@ -34,7 +35,7 @@ class UserServiceImpl internal constructor(
 
     override suspend fun logoutUser() {
         if (sessionService.currentUserSession().userToken == null) {
-            throw IllegalStateException("User cannot logout when not logged in")
+            throw LoggedOutException("User cannot logout when not logged in")
         }
 
         // logout on the server

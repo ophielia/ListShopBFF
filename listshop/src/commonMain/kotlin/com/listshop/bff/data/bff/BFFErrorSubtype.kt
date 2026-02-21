@@ -8,6 +8,7 @@ enum class BFFErrorSubtype {
     CANT_SIGNUP,
     DATA_NOT_FOUND,
     HTTP_CALL_ERROR,
+    NOT_LOGGGED_IN,
     INVALID_INPUT,
     OFFLINE,
     SERVER_ERROR,

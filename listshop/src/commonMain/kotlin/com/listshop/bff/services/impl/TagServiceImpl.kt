@@ -8,6 +8,7 @@ import com.listshop.bff.data.remote.PostApiTag
 import com.listshop.bff.data.remote.PutApiTag
 import com.listshop.bff.db.TagEntity
 import com.listshop.bff.exceptions.InternalDataException
+import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.repositories.TagRepository
 import com.listshop.bff.services.LayoutService
@@ -116,7 +117,7 @@ class TagServiceImpl internal constructor(
 
     private fun checkUserLoggedIn() {
         if (sessionService.currentUserSession().userToken == null) {
-            throw IllegalStateException("User cannot perform tag operation when not user is not logged in")
+            throw LoggedOutException("User cannot perform tag operation when not user is not logged in")
         }
     }
 

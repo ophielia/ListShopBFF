@@ -110,9 +110,9 @@ class LogoutTest {
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isFailure)
-        assertEquals("unable to logout user",result._error?.message)
-        assertEquals(BFFErrorType.UNKNOWN,result._error?.type)
-        assertEquals(BFFErrorSubtype.CALL_FAILED, result._error?.subType)
+        assertEquals("User cannot delete account while offline", result._error?.message)
+        assertEquals(BFFErrorType.OFFLINE, result._error?.type)
+        assertEquals(BFFErrorSubtype.OFFLINE, result._error?.subType)
     }
 
     @Test
@@ -127,14 +127,14 @@ class LogoutTest {
 
         mockWebServer.dispatcher = testDispatcher
 
-        val connectionStatus = ConnectionStatus.Offline
+        val connectionStatus = ConnectionStatus.Online
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isFailure)
-        assertEquals("unable to logout user",result._error?.message)
-        assertEquals(BFFErrorType.UNKNOWN,result._error?.type)
-        assertEquals(BFFErrorSubtype.CALL_FAILED, result._error?.subType)
+        assertEquals("User cannot logout when not logged in", result._error?.message)
+        assertEquals(BFFErrorType.AUTHENTICATION, result._error?.type)
+        assertEquals(BFFErrorSubtype.NOT_LOGGGED_IN, result._error?.subType)
     }
 
     @Test
@@ -162,9 +162,9 @@ class LogoutTest {
         // assert session is cleared
         val listInfo = databaseTestHelper?.currentListInfo()?.first()
         val userInfo = databaseTestHelper?.currentUserInfo()?.first()
-       assertNull(userInfo?.userName)
-       assertNull(userInfo?.userToken)
-       assertNull(listInfo?.serverListId)
+        assertNull(userInfo?.userName)
+        assertNull(userInfo?.userToken)
+        assertNull(listInfo?.serverListId)
     }
 
     @AfterTest

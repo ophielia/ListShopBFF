@@ -6,6 +6,7 @@ import com.listshop.bff.exceptions.BadParameterException
 import com.listshop.bff.exceptions.BadRequestException
 import com.listshop.bff.exceptions.HttpClientException
 import com.listshop.bff.exceptions.InternalDataException
+import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.exceptions.LoginException
 import com.listshop.bff.exceptions.LogoutException
 import com.listshop.bff.exceptions.OfflineException
@@ -30,6 +31,7 @@ data class BFFError(
                 is OfflineException ->  handleOfflineException(exception)
                 is AuthenticationException ->  handleAuthenticationException(exception)
                 is ApiException ->  handleApiException(exception)
+                is LoggedOutException ->  handleLoggedOutException(exception)
                 else ->  handleUnknownException(exception)
             }
             return BFFResult.error<T>(bfferror)
@@ -39,6 +41,9 @@ data class BFFError(
             return BFFError(BFFErrorType.UNKNOWN, BFFErrorSubtype.UNKNOWN, exception.message ?: "")
         }
 
+        private fun handleLoggedOutException(exception: LoggedOutException): BFFError {
+            return BFFError(BFFErrorType.AUTHENTICATION, BFFErrorSubtype.NOT_LOGGGED_IN, exception.message ?: "")
+        }
         private fun handleApiException(exception: ApiException): BFFError {
             val subtype = when (exception) {
                 is BadRequestException -> BFFErrorSubtype.BAD_REQUEST

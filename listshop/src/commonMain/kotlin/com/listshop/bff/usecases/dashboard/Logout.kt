@@ -8,6 +8,7 @@ import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
+import com.listshop.bff.exceptions.OfflineException
 import com.listshop.bff.services.SyncService
 import com.listshop.bff.services.UserService
 
@@ -39,7 +40,7 @@ class Logout(
 
     private fun checkOnlineStatus(connectionStatus: ConnectionStatus) {
         if (connectionStatus != ConnectionStatus.Online) {
-            throw IllegalStateException("User cannot delete account while offline")
+            throw OfflineException("User cannot delete account while offline")
         }
     }
 }
