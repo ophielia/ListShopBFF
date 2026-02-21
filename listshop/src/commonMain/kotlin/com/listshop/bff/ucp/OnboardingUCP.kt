@@ -36,7 +36,7 @@ class OnboardingUCP internal constructor(
             sessionService = sessionService,
             listService = listService,
             syncService = syncService,
-            listShopAnalytics = listShopAnalytics
+            analyticsHandle = analyticsHandle
         )
         return useCase.process()
     }

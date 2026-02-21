@@ -28,7 +28,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result: ApiShoppingListEmbedded =
@@ -48,7 +48,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result : ApiShoppingListEmbeddedList = response.body()
@@ -64,7 +64,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result : ApiShoppingListEmbeddedList = response.body()
@@ -78,7 +78,7 @@ internal class ShoppingListApiImpl(
         val response = remoteApi.postRequest(urlString, payload)
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("merge shopping list call failed with status: " + response.status.value)
+            "merge shopping list call failed with status: " + response.status.value
         )
         val location = remoteApi.pullLocation(response)
         val elements = location.split("/")
@@ -97,7 +97,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("merge shopping list call failed with status: " + response.status.value)
+            "merge shopping list call failed with status: " + response.status.value
         )
 
         val result : MergeResult = response.body()

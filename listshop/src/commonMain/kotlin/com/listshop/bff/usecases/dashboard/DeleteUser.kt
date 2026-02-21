@@ -1,15 +1,12 @@
 package com.listshop.bff.usecases.dashboard
 
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFErrorSubtype
-import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.services.LayoutService
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SyncService
-import com.listshop.bff.services.TagService
 import com.listshop.bff.services.UserService
 
 class DeleteUser(
@@ -20,18 +17,17 @@ class DeleteUser(
     private val analyticsHandle: AnalyticsHandle
 ) {
     suspend fun process(): BFFResult<Unit> {
-
+        analyticsHandle.debug("DeleteUser - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
             userService.deleteUser()
             listService.clearLocalList()
             syncService.syncLookupData(connectionStatus)
+            analyticsHandle.debug("DeleteUser - end use case")
             return BFFResult(value = null)
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("Error in CheckUserNameTaken call")
-            val bfferror = BFFError(BFFErrorType.DASHBOARD, BFFErrorSubtype.CALL_FAILED,
-                "unable to delete user")
-            return BFFResult.Companion.error(bfferror)
+            return BFFError.errorFromException(e)
         }
     }
 

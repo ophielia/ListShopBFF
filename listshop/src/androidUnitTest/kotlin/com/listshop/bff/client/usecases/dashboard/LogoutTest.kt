@@ -111,7 +111,7 @@ class LogoutTest {
         assertNotNull(result)
         assertTrue(result.isFailure)
         assertEquals("unable to logout user",result._error?.message)
-        assertEquals(BFFErrorType.ONBOARDING,result._error?.type)
+        assertEquals(BFFErrorType.UNKNOWN,result._error?.type)
         assertEquals(BFFErrorSubtype.CALL_FAILED, result._error?.subType)
     }
 
@@ -133,7 +133,7 @@ class LogoutTest {
         assertNotNull(result)
         assertTrue(result.isFailure)
         assertEquals("unable to logout user",result._error?.message)
-        assertEquals(BFFErrorType.ONBOARDING,result._error?.type)
+        assertEquals(BFFErrorType.UNKNOWN,result._error?.type)
         assertEquals(BFFErrorSubtype.CALL_FAILED, result._error?.subType)
     }
 

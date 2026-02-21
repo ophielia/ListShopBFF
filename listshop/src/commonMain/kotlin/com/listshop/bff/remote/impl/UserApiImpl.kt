@@ -10,6 +10,9 @@ import com.listshop.bff.data.remote.PostTokenRequest
 import com.listshop.bff.data.remote.PostUserLogin
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.exceptions.AuthenticationException
+import com.listshop.bff.exceptions.LoginException
+import com.listshop.bff.exceptions.LogoutException
+import com.listshop.bff.exceptions.SignUpException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.UserApi
 import io.ktor.client.call.body
@@ -42,7 +45,9 @@ internal class UserApiImpl(
         val userLoginPayload = Json.encodeToString(postLoginUser)
         val response = remoteApi.postRequest(urlString, userLoginPayload)
 
-        remoteApi.mapNonSuccessToException(response.status.value,AuthenticationException("login call failed with status: " + response.status.value))
+        remoteApi.mapNonSuccessToException(response.status.value,
+            LoginException("login call failed with status: " + response.status.value)
+        )
 
         val wrappedUser: ApiWrappedUser = response.body()
         return wrappedUser.user.token ?: "token"
@@ -54,7 +59,9 @@ internal class UserApiImpl(
         val userPayload = Json.encodeToString(postSignUpUser)
         val response = remoteApi.postRequest(urlString, userPayload)
 
-        remoteApi.mapNonSuccessToException(response.status.value,AuthenticationException("login call failed with status: " + response.status.value))
+        remoteApi.mapNonSuccessToException(response.status.value,
+            SignUpException("login call failed with status: " + response.status.value)
+        )
 
         val wrappedUser: ApiWrappedUser = response.body()
         return wrappedUser.user.token ?: "token"
@@ -65,7 +72,7 @@ internal class UserApiImpl(
         val urlString = remoteApi.buildPath("/auth/logout")
         val response = remoteApi.getRequest(urlString)
 
-        remoteApi.mapNonSuccessToException(response.status.value,AuthenticationException("logout call failed with status: " + response.status.value))
+        remoteApi.mapNonSuccessToException(response.status.value, LogoutException("logout call failed with status: " + response.status.value))
     }
 
     override suspend fun retrieveRequiredClientVersion(): ApiRequiredClientVersion {
@@ -73,7 +80,7 @@ internal class UserApiImpl(
         val response = remoteApi.getRequest(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("get required version call failed with status: " + response.status.value)
+            "get required version call failed with status: " + response.status.value
         )
 
         return response.body()
@@ -86,7 +93,7 @@ internal class UserApiImpl(
         val response = remoteApi.postRequest(urlString, jsonPayload)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("check user name call failed with status: " + response.status.value)
+            "check user name call failed with status: " + response.status.value
         )
 
         return response.body<Boolean>() ?: false
@@ -99,7 +106,7 @@ internal class UserApiImpl(
         val response = remoteApi.postRequest(urlString, jsonPayload)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("change password call failed with status: " + response.status.value)
+            "change password call failed with status: " + response.status.value
         )
     }
 
@@ -110,7 +117,7 @@ internal class UserApiImpl(
         val response = remoteApi.postRequest(urlString, jsonPayload)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("change password call failed with status: " + response.status.value)
+            "change password call failed with status: " + response.status.value
         )
     }
 
@@ -120,7 +127,7 @@ internal class UserApiImpl(
         val response = remoteApi.getRequest(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("retrieve properties failed with status: " + response.status.value)
+            "retrieve properties failed with status: " + response.status.value
         )
         return response.body()
     }
@@ -133,7 +140,7 @@ internal class UserApiImpl(
 
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("password reset request failed with status: " + response.status.value)
+            "password reset request failed with status: " + response.status.value
         )
     }
 
@@ -144,7 +151,7 @@ internal class UserApiImpl(
 
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("password reset request failed with status: " + response.status.value)
+            "password reset request failed with status: " + response.status.value
         )
     }
 

@@ -1,6 +1,7 @@
 package com.listshop.bff.usecases.onboarding
 
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
@@ -28,14 +29,13 @@ class SignUp(
 
     suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
         // validate input
+        analyticsHandle.debug("SignUp - begin use case")
         try {
             checkOnlineStatus()
             checkParameters()
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("parameters invalid or offline")
-            val bfferror = BFFError(BFFErrorType.AUTHENTICATION, BFFErrorSubtype.CANT_SIGNUP, "error while signing up")
-            return BFFResult.Companion.error(bfferror)
-
+            return BFFError.errorFromException(e)
         }
 
         // signup user - (setting all session stuff in method)
@@ -43,11 +43,11 @@ class SignUp(
             userService.signUpUser(userName, password)
         } catch (exception: Exception) {
             analyticsHandle.listShopAnalytics.error("call to signup failed")
-            val bfferror = BFFError(BFFErrorType.AUTHENTICATION, BFFErrorSubtype.CANT_SIGNUP, "error while signing up")
-            return BFFResult.Companion.error(bfferror)
+            return BFFError.errorFromException(exception)
         }
 
-        // (skipping statistics)
+        // (skipping statistics - for now)
+
         var shoppingList: ShoppingList?
         try {
             // merge local list with server
@@ -62,8 +62,8 @@ class SignUp(
             if (shoppingList == null || shoppingList.externalId == null) {
                 // this is an error - the user has to have a list
                 val bfferror = BFFError(
-                    BFFErrorType.ONBOARDING,
-                    BFFErrorSubtype.CALL_FAILED,
+                    BFFErrorType.DATABASE,
+                    BFFErrorSubtype.DATA_NOT_FOUND,
                     "error after signing up, list retrieval failed"
                 )
                 return BFFResult.Companion.error(bfferror)
@@ -82,6 +82,7 @@ class SignUp(
             // return tag tree, list, and list of lists
             val wrappedLists = ListShoppingList(listOfLists)
             val viewState = TransitionViewState.ListScreen(shoppingList ?: ShoppingList.empty(), wrappedLists)
+            analyticsHandle.debug("SignUp - end use case")
             return BFFResult.Companion.success(Pair(viewState, tagTree))
         } catch (e: Exception) {
             // we're swallowing errors here - the main thing is that the

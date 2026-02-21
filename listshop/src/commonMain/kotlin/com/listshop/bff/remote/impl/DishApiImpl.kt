@@ -39,7 +39,7 @@ internal class DishApiImpl(
 
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("password reset request failed with status: " + response.status.value)
+            "password reset request failed with status: " + response.status.value
         )
     }
 
@@ -52,7 +52,7 @@ internal class DishApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result: EmbeddedDishResourceList =

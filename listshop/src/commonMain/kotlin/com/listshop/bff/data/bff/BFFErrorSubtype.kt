@@ -1,12 +1,16 @@
 package com.listshop.bff.data.bff
 
 enum class BFFErrorSubtype {
-    CANT_LOGIN,
-    CANT_CONNECT,
-    CANT_RETRIEVE_DATA,
-    CANT_LAUNCH,
-    UNKNOWN,
-    UPGRADE_REQUIRED,
+    BAD_REQUEST,
     CALL_FAILED,
-    CANT_SIGNUP
+    CANT_LOGIN,
+    CANT_LOGOUT,
+    CANT_SIGNUP,
+    DATA_NOT_FOUND,
+    HTTP_CALL_ERROR,
+    INVALID_INPUT,
+    OFFLINE,
+    SERVER_ERROR,
+    UPGRADE_REQUIRED,
+    UNKNOWN,
 }

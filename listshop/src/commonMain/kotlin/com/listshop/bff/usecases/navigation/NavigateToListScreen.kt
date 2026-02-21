@@ -1,9 +1,9 @@
 package com.listshop.bff.usecases.navigation
 
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
+import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFErrorSubtype
-import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
@@ -21,6 +21,7 @@ class NavigateToListScreen(
 ) {
 
     suspend fun process(): BFFResult<TransitionViewState> {
+        analyticsHandle.debug("NavigateToListScreen - begin use case")
         sessionService.setUserLastSeenToNow()
 
         val isConnected = connectionStatus == ConnectionStatus.Online
@@ -34,27 +35,38 @@ class NavigateToListScreen(
         }
     }
 
-    private suspend fun goToServerList() : BFFResult<TransitionViewState> {
-        val serverList = listService.retrieveServerList() ?: ShoppingList.Factory.empty()
-        val wrappedLists = getListOfLists()
-        return BFFResult.Companion.success(TransitionViewState.ListScreen(serverList, wrappedLists))
+    private suspend fun goToServerList(): BFFResult<TransitionViewState> {
+        try {
+            val serverList = listService.retrieveServerList() ?: ShoppingList.Factory.empty()
+            val wrappedLists = getListOfLists()
+            analyticsHandle.debug("NavigateToListScreen - end use case")
+            return BFFResult.Companion.success(TransitionViewState.ListScreen(serverList, wrappedLists))
+
+        } catch (e: Exception) {
+            return BFFError.errorFromException(e)
+        }
     }
 
-    private suspend fun getListOfLists() : ListShoppingList {
+    private suspend fun getListOfLists(): ListShoppingList {
         try {
             val listOfLists = listService.retrieveListOfLists()
             return ListShoppingList(listOfLists)
         } catch (e: Exception) {
-            analyticsHandle.listShopAnalytics.error("Error while retrieving list of lists")
+            analyticsHandle.error("Error while retrieving list of lists")
             return ListShoppingList(emptyList())
         }
     }
 
-    private suspend fun goToLocalList() : BFFResult<TransitionViewState> {
+    private suspend fun goToLocalList(): BFFResult<TransitionViewState> {
+        try {
             val localList = listService.retrieveOrCreateLocalList() ?: ShoppingList.Factory.empty()
             val wrappedLists = getListOfLists()
+            analyticsHandle.debug("NavigateToListScreen - end use case")
             return BFFResult.Companion.success(TransitionViewState.ListScreen(localList, wrappedLists))
+        } catch (e: Exception) {
+            return BFFError.errorFromException(e)
         }
+    }
 
 
 }

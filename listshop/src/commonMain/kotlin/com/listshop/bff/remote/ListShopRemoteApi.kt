@@ -13,4 +13,5 @@ internal interface ListShopRemoteApi {
     suspend fun getRequest(path: String): HttpResponse
     fun mapNonSuccessToException(statusValue: Int, exception: Exception)
     fun pullLocation(response:HttpResponse): String
+    fun mapNonSuccessToException(statusValue: Int, message: String)
 }

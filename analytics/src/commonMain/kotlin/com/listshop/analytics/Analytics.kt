@@ -35,6 +35,16 @@ data class AnalyticsHandle(
     val httpClientAnalytics: HttpClientAnalytics
 )
 
+fun AnalyticsHandle.debug(message: String) {
+    //MM need log level here
+    listShopAnalytics.debug(message)
+}
+
+ fun AnalyticsHandle.error(message: String) {
+    //MM need log level here
+    listShopAnalytics.debug(message)
+}
+
 internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
     if (dummyAnalytics == null) {
     AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())

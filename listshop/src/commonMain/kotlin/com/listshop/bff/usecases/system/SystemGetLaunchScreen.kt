@@ -1,6 +1,8 @@
 package com.listshop.bff.usecases.system
 
-import com.listshop.analytics.ListShopAnalytics
+import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
+import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
@@ -21,25 +23,27 @@ class SystemGetLaunchScreen(
     private val sessionService: SessionService,
     private val listService: ListService,
     private val syncService: SyncService,
-    private val listShopAnalytics: ListShopAnalytics
+    private val analyticsHandle: AnalyticsHandle
 ) {
 
     suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
+        analyticsHandle.debug("SystemGetLaunchScreen - begin use case")
         val compatible = syncService.checkApiCompatibility(connectionStatus)
 
         if (compatible) {
-            listShopAnalytics.loadingSession()
             return loadForSession()
         }
         // construct result with failure
         val requiredVersion = syncService.getClientRequiredVersion(connectionStatus)
-        val message = "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
-        listShopAnalytics.error(message)
-        val bfferror = BFFError(BFFErrorType.LOADING, BFFErrorSubtype.UPGRADE_REQUIRED, message)
+        val message =
+            "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
+        analyticsHandle.error(message)
+        val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.UPGRADE_REQUIRED, message)
         return BFFResult.Companion.error(bfferror)
     }
 
     private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
+        analyticsHandle.debug("SystemGetLaunchScreen - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
         val firstTimeUser = session.userLastSeen == null
@@ -49,12 +53,11 @@ class SystemGetLaunchScreen(
         sessionService.setUserLastSeenToNow()
 
         // always sync local data if possible
-        var tagTree : TagTree?
+        var tagTree: TagTree?
         try {
-         tagTree = syncLookupData(connectionStatus)
-        } catch ( e : Exception ) {
-            val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.CANT_RETRIEVE_DATA, e.message.toString())
-            return BFFResult.Companion.error(bfferror)
+            tagTree = syncLookupData(connectionStatus)
+        } catch (e: Exception) {
+            return BFFError.errorFromException(e)
         }
 
         try {
@@ -75,11 +78,10 @@ class SystemGetLaunchScreen(
                     // lovsl lidz
                     destinationLocalList()
 
-                UserSessionState.AnonNoList ->
-                {
+                UserSessionState.AnonNoList -> {
                     // greeting if first time or no list
                     val listNotAvailable = sessionService.currentListSession().localListUpdated == null
-					if (firstTimeUser || listNotAvailable) {
+                    if (firstTimeUser || listNotAvailable) {
                         destinationGreeting()
                     } else {
                         destinationLocalList()
@@ -90,19 +92,18 @@ class SystemGetLaunchScreen(
 
             return BFFResult.Companion.success(Pair(viewState, tagTree))
         } catch (e: Exception) {
-            val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.CANT_LAUNCH, e.message.toString())
-            return BFFResult.Companion.error(bfferror)
+            return BFFError.errorFromException(e)
         }
-
-        // exception list
-        // throw OfflineException(message = "Can't reach the server - syncing lookup data")
     }
 
     private fun destinationGreeting(): TransitionViewState {
+        analyticsHandle.debug("SystemGetLaunchScreen - destination onboarding")
         return TransitionViewState.Guides
     }
 
     private suspend fun destinationLocalList(): TransitionViewState {
+        analyticsHandle.debug("SystemGetLaunchScreen - destination local list")
+
         val wrappedLists = ListShoppingList(emptyList())
         val shoppingList = listService.retrieveOrCreateLocalList()
 
@@ -111,13 +112,17 @@ class SystemGetLaunchScreen(
             throw UnexpectedEmptyException("No LocalList Found")
         }
         return TransitionViewState.ListScreen(shoppingList, wrappedLists)
+
+
     }
 
     private fun destinationOnboarding(): TransitionViewState {
+        analyticsHandle.debug("SystemGetLaunchScreen - destination onboarding")
         return TransitionViewState.Onboarding(OnboardingViewState.Choose)
     }
 
     private suspend fun destinationServerList(): TransitionViewState {
+        analyticsHandle.debug("SystemGetLaunchScreen - destination server list")
         val listOfLists = listService.retrieveListOfLists()
         val wrappedLists = ListShoppingList(listOfLists)
 

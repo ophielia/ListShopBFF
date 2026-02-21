@@ -18,6 +18,11 @@ class SystemUCP internal constructor(
     private val listService: ListService,
     private val analyticsHandle: AnalyticsHandle
 ) {
+    @Throws(Exception::class)
+    suspend fun navigateToDashboard(): BFFResult<TransitionViewState> {
+        val useCase = NavigateToDashboard(sessionService,analyticsHandle)
+        return useCase.process()
+    }
 
     @Throws(Exception::class)
     suspend fun navigateToListManagement(

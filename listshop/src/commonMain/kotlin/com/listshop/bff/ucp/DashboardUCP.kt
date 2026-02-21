@@ -7,10 +7,8 @@ import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.services.*
 import com.listshop.bff.usecases.dashboard.*
-import com.listshop.bff.usecases.navigation.NavigateToDashboard
 
 class DashboardUCP internal constructor(
-    private val sessionService: SessionService,
     private val userService: UserService,
     private val tagService: TagService,
     private val syncService: SyncService,
@@ -71,11 +69,6 @@ class DashboardUCP internal constructor(
         return useCase.process()
     }
 
-    @Throws(Exception::class)
-    suspend fun navigateToDashboard(): BFFResult<TransitionViewState> {
-        val useCase = NavigateToDashboard(sessionService)
-        return useCase.process()
-    }
 
     @Throws(Exception::class)
     suspend fun deleteUser(connectionStatus: ConnectionStatus): BFFResult<Unit> {

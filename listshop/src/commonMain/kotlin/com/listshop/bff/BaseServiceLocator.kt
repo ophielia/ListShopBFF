@@ -63,7 +63,6 @@ internal abstract class BaseServiceLocator(
 
     override val dashboardUCP: DashboardUCP by lazy {
         DashboardUCP(
-            sessionService = sessionService,
             userService = userService,
             tagService = tagService,
             syncService = syncService,

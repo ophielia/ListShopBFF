@@ -1,6 +1,7 @@
 package com.listshop.bff.usecases.dashboard
 
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
@@ -16,17 +17,19 @@ class CreateTag(
     private val analyticsHandle: AnalyticsHandle
 ) {
     suspend fun process(): BFFResult<ShoppingListTag> {
+        analyticsHandle.debug("CreateTag - begin use case")
         if (tagName.isBlank() || tagType.isBlank() || parentId.isBlank()) {
-            val bfferror = BFFError(BFFErrorType.DASHBOARD, BFFErrorSubtype.CALL_FAILED, "name, type or parentId is blank")
+            val bfferror =
+                BFFError(BFFErrorType.VALIDATION, BFFErrorSubtype.INVALID_INPUT, "name, type or parentId is blank")
             return BFFResult.Companion.error(bfferror)
         }
         try {
             val newTag = tagService.createTag(tagName, parentId, tagType)
+            analyticsHandle.debug("CreateTag - end use case")
             return BFFResult(newTag)
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("Error while creating tag")
-            val bfferror = BFFError(BFFErrorType.DASHBOARD, BFFErrorSubtype.CALL_FAILED, "unable to create tag")
-            return BFFResult.Companion.error(bfferror)
+            return BFFError.errorFromException(e)
         }
 
     }

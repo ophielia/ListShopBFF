@@ -25,7 +25,7 @@ internal class TagApiImpl(
         val response = remoteApi.client(token).get(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("get api tags call failed with status: " + response.status.value)
+            "get api tags call failed with status: " + response.status.value
         )
 
         val result: ApiTagLookupEmbedded = response.body()
@@ -40,7 +40,7 @@ internal class TagApiImpl(
         val response = remoteApi.client(token).get(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,
-            ApiException("get api tags call failed with status: " + response.status.value)
+            "get api tags call failed with status: " + response.status.value
         )
 
         val result: ApiTagLookupEmbedded = response.body()
@@ -54,7 +54,7 @@ internal class TagApiImpl(
         val postPayload = Json.encodeToString(payload)
         val response = remoteApi.postRequest(urlString, postPayload)
 
-        remoteApi.mapNonSuccessToException(response.status.value,ApiException("create tag call failed with status: " + response.status.value))
+        remoteApi.mapNonSuccessToException(response.status.value,"create tag call failed with status: " + response.status.value)
 
         val location = remoteApi.pullLocation(response)
         val elements = location.split("/")
@@ -67,7 +67,7 @@ internal class TagApiImpl(
         val putPayload = Json.encodeToString(payload)
         val response = remoteApi.putRequest(urlString, putPayload)
 
-        remoteApi.mapNonSuccessToException(response.status.value,ApiException("update tag call failed with status: " + response.status.value))
+        remoteApi.mapNonSuccessToException(response.status.value,"update tag call failed with status: " + response.status.value)
     }
 
 override suspend fun retrieveTag(newTagId: String) : ApiTag {
@@ -76,7 +76,7 @@ override suspend fun retrieveTag(newTagId: String) : ApiTag {
     val response = remoteApi.client(token).get(urlString)
 
     remoteApi.mapNonSuccessToException(response.status.value,
-        ApiException("get api tag call failed with status: " + response.status.value)
+        "get api tag call failed with status: " + response.status.value
     )
 
     val result: ApiTagLookupEmbeddedTag = response.body()

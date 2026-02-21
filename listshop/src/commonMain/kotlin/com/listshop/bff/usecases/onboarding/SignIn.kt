@@ -1,9 +1,9 @@
 package com.listshop.bff.usecases.onboarding
 
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.debug
+import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFErrorSubtype
-import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
@@ -27,15 +27,14 @@ class SignIn(
 
     suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
         // sign in user
+        analyticsHandle.debug("SignIn - begin use case")
         try {
             userService.signInUser(userName, password)
         } catch (exception: Exception) {
+            analyticsHandle.error("Error while signing in - ${exception.message}")
             if (exception is AuthenticationException) {
-                analyticsHandle.listShopAnalytics.error("Error while signing in - ${exception.message}")
                 // user couldn't sign in - return error
-                val bfferror =
-                    BFFError(BFFErrorType.AUTHENTICATION, BFFErrorSubtype.CANT_LOGIN, exception.message.toString())
-                return BFFResult.Companion.error(bfferror)
+                return BFFError.errorFromException(exception)
             }
             // otherwise, log the exception and continue
             // we don't want a user property exception to break the login
@@ -59,10 +58,11 @@ class SignIn(
 
             // return tag tree, list, and list of lists
             val viewState = TransitionViewState.ListScreen(shoppingList ?: ShoppingList.empty(), wrappedLists)
+            analyticsHandle.debug("SignIn - end use case")
             return BFFResult.Companion.success(Pair(viewState, tagTree))
 
         } catch (exception: Exception) {
-            analyticsHandle.listShopAnalytics.error("Error processing data after login - ${exception.message.toString()}")
+            analyticsHandle.error("Error processing data after login - ${exception.message.toString()}")
             // going to the list screen, with empties
             val wrappedLists = ListShoppingList(emptyList())
             val tagTree = TagTree()
