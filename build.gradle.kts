@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.skie) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.mokkery) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
 
 subprojects {
