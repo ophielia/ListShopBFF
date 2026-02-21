@@ -1,15 +1,23 @@
+import com.android.build.api.dsl.androidLibrary
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.sqlDelight)
-    alias(libs.plugins.android.library)
-    id("dev.mokkery")
+    //alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.mokkery)
     `maven-publish`
 }
 
 kotlin {
-    androidTarget {
+   /* androidTarget {
         publishAllLibraryVariants()
+    }*/
+    androidLibrary {
+        namespace = "com.listshop.bff"
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        compilations.getByName("main")
     }
     iosX64()
     iosArm64()
@@ -55,20 +63,6 @@ kotlin {
         }
     }
     task("testClasses")
-}
-
-android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
-    namespace = "com.listshop.bff"
 }
 
 // For publishing Android AAR files to GitHub Packages
