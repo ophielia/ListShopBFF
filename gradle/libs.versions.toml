@@ -97,6 +97,7 @@ skie = { id = "co.touchlab.skie", version.ref = "skie" }
 kmmbridge = { id = "co.touchlab.kmmbridge.github", version.ref = "kmmBridge" }
 cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-serialization", "ktor-client-contentNegotiation"]
