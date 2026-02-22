@@ -35,7 +35,7 @@ class SystemGetLaunchScreenTest {
     var analyticsHandle: AnalyticsHandle? = null
     var databaseTestHelper: TestDatabaseHelper? = null
 
-    val sampleProvider = TestSampleProvider("src/androidUnitTest/resources/mock/json/launchScreen")
+    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/launchScreen")
 
     @BeforeTest
     fun setUp() {

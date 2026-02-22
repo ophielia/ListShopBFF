@@ -3,13 +3,14 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kmmbridge) apply false
-    alias(libs.plugins.android.library) apply false
+    //alias(libs.plugins.android.library) apply false
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.cocoapods) apply false
     alias(libs.plugins.sqlDelight) apply false
     alias(libs.plugins.skie) apply false
     alias(libs.plugins.compose.compiler) apply false
-    id("dev.mokkery") version libs.versions.mokkery.get() apply false
+    alias(libs.plugins.mokkery) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
 
 subprojects {

@@ -1,38 +1,22 @@
 package com.listshop.bff.client.usecases.onboarding
 
-import com.listshop.analytics.Analytics
-import com.listshop.analytics.AnalyticsHandle
-import com.listshop.analytics.AppInfo
-import com.listshop.analytics.ClientType
-import com.listshop.analytics.initDummyAnalytics
-import com.listshop.bff.SDKHandle
+import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.dashboardUCPStartup
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
-import com.listshop.bff.onboardingUCPStartup
 import com.listshop.bff.services.TestSampleProvider
-import com.listshop.bff.sessionServiceStartup
-import com.listshop.bff.tagUCPStartup
-import com.listshop.bff.test.server.TestDispatcher
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.OnboardingUCP
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
-class SignInTest {
+class SignUpTest {
 
     var useCaseProvider: OnboardingUCP? = null
 
@@ -44,7 +28,7 @@ class SignInTest {
 
     var baseUrl: String = ""
 
-    val sampleProvider = TestSampleProvider("src/androidUnitTest/resources/mock/json/standards")
+    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/standards")
 
     @BeforeTest
     fun setUp() {
@@ -89,97 +73,194 @@ class SignInTest {
         mockWebServer.shutdown()
     }
 
+
     @Test
-    fun `i cant login with bad credentials`(): Unit = runBlocking {
+    fun `i can signup with valid credentials, and list is merged`(): Unit = runBlocking {
+        initializeContext()
+        saveLocalList()
+
+        val userName = "meg@the-list-shop.com"
+        val password = "sarrieb1357"
+
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .withConfigFile("createShoppingListConfig.json")
+            .withConfigFile("signUpSuccessConfig.json")
+            .withConfigFile("mergeListConfig.json")
+            .withConfigFile("getAllShoppingListsConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("defaultLayoutConfig.json")
+            .withConfigFile("standardTagConfig.json")
+            .build()
+
+        mockWebServer.dispatcher = originalDispatcher
+        val connectionStatus = ConnectionStatus.Online
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
+        assertNotNull(result)
+        assertFalse(result.isFailure)
+
+        // verify the result
+        val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
+        assertNotNull(shoppingLists)
+        assertEquals(4, shoppingLists.list.size)
+
+        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
+        assertNotNull(shoppingList)
+        assertEquals(3, shoppingList.categories.size)
+
+        val tagTree = result.value?.second
+        assertNotNull(tagTree)
+
+    }
+
+    @Test
+    fun `signup succeeds - no local list present`(): Unit = runBlocking {
         initializeContext()
 
         val userName = "meg@the-list-shop.com"
-        val password = "badPassword"
+        val password = "sarrieb1357"
 
-        val connectionStatus = ConnectionStatus.Online
-
-        val dispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("loginBadCredentialsConfig.json")
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .withConfigFile("createShoppingListConfig.json")
+            .withConfigFile("signUpSuccessConfig.json")
+            .withConfigFile("mergeListConfig.json")
             .withConfigFile("getAllShoppingListsConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("defaultLayoutConfig.json")
+            .withConfigFile("standardTagConfig.json")
             .build()
-        mockWebServer.dispatcher = dispatcher
 
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
+        mockWebServer.dispatcher = originalDispatcher
+        val connectionStatus = ConnectionStatus.Online
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
+        assertNotNull(result)
+        assertFalse(result.isFailure)
+
+        // verify the result
+        val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
+        assertNotNull(shoppingLists)
+        assertEquals(4, shoppingLists.list.size)
+
+        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
+        assertNotNull(shoppingList)
+        assertEquals(0, shoppingList.categories.size)
+
+        val tagTree = result.value?.second
+        assertNotNull(tagTree)
+
+    }
+
+    @Test
+    fun `i can't signup while offline`(): Unit = runBlocking {
+        initializeContext()
+
+        val userName = "meg@the-list-shop.com"
+        val password = "sarrieb1357"
+
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .build()
+
+        mockWebServer.dispatcher = originalDispatcher
+        val connectionStatus = ConnectionStatus.Offline
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
         assertTrue(result.isFailure)
-        // verify the error result
-        val error = result._error!!
-        assertEquals(BFFErrorType.AUTHENTICATION,error.type)
-        assertEquals(BFFErrorSubtype.CANT_LOGIN,error.subType)
-        assertEquals("login call failed with status: 401", error.message)
+
+        // verify the result
+        val error = result._error
+        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
+        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
+        assertEquals("error while signing up", error?.message)
+
+
     }
 
     @Test
-    fun `i can login with correct credentials`(): Unit = runBlocking {
+    fun `i can't signup with empty credentials`(): Unit = runBlocking {
         initializeContext()
-        val userName = "meg@the-list-shop.com"
-        val password = "sarrieb1357"
+
+        val userName = ""
+        val password = ""
 
         // restore original dispatcher
-        val originalDispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("getAllShoppingListsConfig.json")
-            .withConfigFile("standardTagConfig.json")
-            .withConfigFile("userLayoutConfig.json")
-            .withConfigFile("userPropertySuccess.json")
-            .withConfigFile("defaultLayoutConfig.json")
-            .withConfigFile("serverListMostRecentConfig.json")
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
             .build()
 
         mockWebServer.dispatcher = originalDispatcher
         val connectionStatus = ConnectionStatus.Online
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
+        assertTrue(result.isFailure)
+
         // verify the result
-        val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
-        assertNotNull(shoppingLists)
-        assertEquals(9, shoppingLists.list.size)
+        val error = result._error
+        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
+        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
+        assertEquals("error while signing up", error?.message)
 
-        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
-        assertNotNull(shoppingList)
-        assertEquals(3, shoppingList.categories.size)
 
-        val tagTree = result.value?.second
-        assertNotNull(tagTree)
     }
 
     @Test
-    fun `login works and no error if local list present`(): Unit = runBlocking {
+    fun `i can't signup with really long credentials`(): Unit = runBlocking {
+        initializeContext()
+
+        val userName = "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+        val password = "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .build()
+
+        mockWebServer.dispatcher = originalDispatcher
+        val connectionStatus = ConnectionStatus.Online
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
+        assertNotNull(result)
+        assertTrue(result.isFailure)
+
+        // verify the result
+        val error = result._error
+        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
+        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
+        assertEquals("error while signing up", error?.message)
+
+
+    }
+
+    @Test
+    fun `signup succeeds, but merge list fails - go to list screen with local lists`(): Unit = runBlocking {
         initializeContext()
         saveLocalList()
-        setLocalListUpdated()
 
         val userName = "meg@the-list-shop.com"
         val password = "sarrieb1357"
 
         // restore original dispatcher
-        val originalDispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("getAllShoppingListsConfig.json")
-            .withConfigFile("standardTagConfig.json")
-            .withConfigFile("userLayoutConfig.json")
-            .withConfigFile("userPropertySuccess.json")
-            .withConfigFile("defaultLayoutConfig.json")
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .withConfigFile("createShoppingListFailureConfig.json")
+            .withConfigFile("signUpSuccessConfig.json")
             .withConfigFile("mergeListConfig.json")
-            .withConfigFile("serverListMostRecentConfig.json")
+            .withConfigFile("getAllShoppingListsConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("userLayoutConfig.json")
+            .withConfigFile("defaultLayoutConfig.json")
+            .withConfigFile("standardTagConfig.json")
             .build()
 
         mockWebServer.dispatcher = originalDispatcher
         val connectionStatus = ConnectionStatus.Online
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
         assertFalse(result.isFailure)
+
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
-        assertEquals(9, shoppingLists.list.size)
+        assertEquals(4, shoppingLists.list.size)
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
@@ -189,119 +270,46 @@ class SignInTest {
         assertNotNull(tagTree)
     }
 
-
-
     @Test
-    fun `login works but error on retrieving lists - empty lists, tag tree`(): Unit = runBlocking {
-        val userName = "meg@the-list-shop.com"
-        val password = "sarrieb1357"
-
-        // swap out shopping list success with failure
-        val errorDispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("getAllShoppingListsConfig.json")
-            .withConfigFile("standardTagConfig.json")
-            .withConfigFile("userLayoutConfig.json")
-            .withConfigFile("userPropertySuccess.json")
-            .withConfigFile("defaultLayoutConfig.json")
-            .withConfigFile("serverListMostRecentFailureConfig.json")
-            .build()
-
-        mockWebServer.dispatcher = errorDispatcher
-
-        val connectionStatus = ConnectionStatus.Online
-
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
-        assertNotNull(result)
-        assertTrue(result.isSuccess)
-        val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
-        assertNotNull(shoppingLists)
-        assertEquals(0, shoppingLists.list.size)
-
-        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
-        assertNotNull(shoppingList)
-        assertEquals(0, shoppingList.categories.size)
-
-        val tagTree = result.value?.second
-        assertNotNull(tagTree)
-    }
-
-
-    @Test
-    fun `login works but error on syncing data - empty lists, tag tree`(): Unit = runBlocking {
-        val userName = "meg@the-list-shop.com"
-        val password = "sarrieb1357"
-
-        // swap out shopping list success with failure
-        val errorDispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("getAllShoppingListsConfig.json")
-            .withConfigFile("tagFailureConfig.json")
-            .withConfigFile("userLayoutConfig.json")
-            .withConfigFile("userPropertySuccess.json")
-            .withConfigFile("defaultLayoutConfig.json")
-            .withConfigFile("serverListMostRecentConfig.json")
-            .build()
-
-        mockWebServer.dispatcher = errorDispatcher
-
-        val connectionStatus = ConnectionStatus.Online
-
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
-        assertNotNull(result)
-        assertTrue(result.isSuccess)
-        val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
-        assertNotNull(shoppingLists)
-        assertEquals(0, shoppingLists.list.size)
-
-        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
-        assertNotNull(shoppingList)
-        assertEquals(0, shoppingList.categories.size)
-
-        val tagTree = result.value?.second
-        assertNotNull(tagTree)
-    }
-
-    @Test
-    fun `login works but error on merging list - empty lists, tag tree`(): Unit = runBlocking {
+    fun `signup succeeds, but retrieve list of lists fails - go to list screen with empty lists`(): Unit = runBlocking {
         initializeContext()
         saveLocalList()
-        setLocalListUpdated()
 
         val userName = "meg@the-list-shop.com"
         val password = "sarrieb1357"
 
-        // swap out shopping list success with failure
-        val errorDispatcher = TestDispatcherBuilder("onboarding/signIn")
-            .withConfigFile("loginSuccessConfig.json")
-            .withConfigFile("getAllShoppingListsConfig.json")
-            .withConfigFile("standardTagConfig.json")
+        // restore original dispatcher
+        val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
+            .withConfigFile("createShoppingListConfig.json")
+            .withConfigFile("signUpSuccessConfig.json")
+            .withConfigFile("mergeListConfig.json")
+            .withConfigFile("getAllShoppingListsFailureConfig.json")
             .withConfigFile("userLayoutConfig.json")
-            .withConfigFile("userPropertySuccess.json")
+            .withConfigFile("userLayoutConfig.json")
             .withConfigFile("defaultLayoutConfig.json")
-            .withConfigFile("mergeListFailureConfig.json")
-            .withConfigFile("serverListMostRecentConfig.json")
+            .withConfigFile("standardTagConfig.json")
             .build()
 
-        mockWebServer.dispatcher = errorDispatcher
-
+        mockWebServer.dispatcher = originalDispatcher
         val connectionStatus = ConnectionStatus.Online
-
-        var result = useCaseProvider?.signIn(userName, password, connectionStatus)
+        var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertFalse(result.isFailure)
+
+        // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         assertEquals(0, shoppingLists.list.size)
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
-        assertEquals(0, shoppingList.categories.size)
+        assertEquals(3, shoppingList.categories.size)
 
         val tagTree = result.value?.second
         assertNotNull(tagTree)
 
     }
+
 
     private fun saveLocalList() {
         var apiEmbedded = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("standardSingleList")
