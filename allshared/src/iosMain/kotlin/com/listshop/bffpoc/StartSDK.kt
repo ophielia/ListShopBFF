@@ -12,6 +12,7 @@ fun startSDK(analytics: Analytics, appInfo : AppInfo): SDKHandle {
         tagUCP = providerCollection.tagUCP,
         onboardingUCP = providerCollection.onboardingUCP,
         dashboardUCP = providerCollection.dashboardUCP,
+        systemUCP = providerCollection.systemUCP,
         sessionService = providerCollection.sessionService,
         appAnalytics = providerCollection.appAnalytics
     )
