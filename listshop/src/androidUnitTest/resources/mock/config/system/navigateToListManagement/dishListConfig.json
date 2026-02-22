@@ -1,8 +1,0 @@
-{
-  "label": "dishList",
-  "requestMethod": "GET",
-  "requestPath": "/dish?sortKey=CreatedOn&sortDirection=Descending",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "standards/dishList.json"
-}

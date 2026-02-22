@@ -12,7 +12,7 @@ kotlin {
         publishAllLibraryVariants()
     }*/
     androidLibrary {
-        namespace = "com.listshop.bff"
+        namespace = "com.listshop.bff.anayltics"
         compileSdk = libs.versions.compileSdk.get().toInt()
         compilations.getByName("main")
     }

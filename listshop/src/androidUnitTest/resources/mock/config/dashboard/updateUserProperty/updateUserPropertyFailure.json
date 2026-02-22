@@ -1,9 +1,0 @@
-{
-  "label": "updateUserPropertyFailure",
-  "requestMethod": "POST",
-  "requestPath": "/user/properties",
-  "requestBodyFilename": "dashboard/updateUserProperty/postUpdateProperty.json",
-  "responseStatus": 500,
-  "responseBodyFilename": "emptyResponse.json",
-  "additionalHeaders": ""
-}

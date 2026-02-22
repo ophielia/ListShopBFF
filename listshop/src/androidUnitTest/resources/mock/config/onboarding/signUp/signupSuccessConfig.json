@@ -1,9 +1,0 @@
-{
-  "label": "loginSuccess",
-  "requestMethod": "POST",
-  "requestPath": "/user",
-  "requestBodyFilename": "onboarding/signUp/signupSuccessRequest.json",
-  "responseStatus": 200,
-  "responseBodyFilename": "onboarding/signUp/signupSuccessResponse.json",
-  "additionalHeaders": "Location=99999;Hidden=abc;Rufus=34jk"
-}

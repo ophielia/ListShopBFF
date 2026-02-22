@@ -1,9 +1,0 @@
-{
-  "label": "createTagSuccess",
-  "requestMethod": "GET",
-  "requestPath": "/tag/9876",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "dashboard/createTag/retrieveTagResponse.json",
-  "additionalHeaders": "Location=9876;Hidden=abc;Rufus=34jk"
-}

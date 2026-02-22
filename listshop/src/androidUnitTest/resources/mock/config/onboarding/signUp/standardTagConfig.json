@@ -1,8 +1,0 @@
-{
-  "label": "SignUp: Standard Tags",
-  "requestMethod": "GET",
-  "requestPath": "/tag/user",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "standards/standardTags.json"
-}

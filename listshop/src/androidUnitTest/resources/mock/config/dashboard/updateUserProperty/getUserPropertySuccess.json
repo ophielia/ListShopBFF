@@ -1,9 +1,0 @@
-{
-  "label": "getUserPropertySuccess",
-  "requestMethod": "GET",
-  "requestPath": "/user/properties",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "dashboard/updateUserProperty/getUpdatePropertiesResponse.json",
-  "additionalHeaders": ""
-}

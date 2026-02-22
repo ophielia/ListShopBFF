@@ -1,9 +1,0 @@
-{
-  "label": "createTagFailure",
-  "requestMethod": "POST",
-  "requestPath": "/tag/1234/child",
-  "requestBodyFilename": "dashboard/createTag/postTagRequest.json",
-  "responseStatus": 500,
-  "responseBodyFilename": "",
-  "additionalHeaders": ""
-}

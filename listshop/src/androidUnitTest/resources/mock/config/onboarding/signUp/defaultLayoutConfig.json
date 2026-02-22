@@ -1,8 +1,0 @@
-{
-  "label": "signUp",
-  "requestMethod": "GET",
-  "requestPath": "/layout/default",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "standards/standardLayout.json"
-}

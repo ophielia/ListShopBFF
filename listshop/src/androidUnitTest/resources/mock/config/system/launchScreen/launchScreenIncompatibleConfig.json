@@ -1,8 +1,0 @@
-{
-  "label": "clientNotCompatible",
-  "requestMethod": "GET",
-  "requestPath": "/user/client/version",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "launchScreen/badCompatibilityResponse.json"
-}

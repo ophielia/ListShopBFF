@@ -1,9 +1,0 @@
-{
-  "label": "createList",
-  "requestMethod": "POST",
-  "requestPath": "/shoppinglist",
-  "requestBodyFilename": "onboarding/signUp/createServerListRequest.json",
-  "responseStatus": 500,
-  "responseBodyFilename": "emptyResponse.json"
-
-}

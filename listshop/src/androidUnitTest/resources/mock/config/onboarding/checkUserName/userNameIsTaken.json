@@ -1,8 +1,0 @@
-{
-  "label": "checkUserName",
-  "requestMethod": "POST",
-  "requestPath": "/user/name",
-  "requestBodyFilename": "checkUserName/checkUserNameRequest.json",
-  "responseStatus": 200,
-  "responseBodyFilename": "checkUserName/checkUserNameTakenResponse.json"
-}

@@ -1,8 +1,0 @@
-{
-  "label": "userPropertySuccess",
-  "requestMethod": "GET",
-  "requestPath": "/user/properties",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "standards/standardUserProperties.json"
-}

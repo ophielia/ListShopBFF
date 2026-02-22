@@ -1,9 +1,0 @@
-{
-  "label": "postLogoutUser",
-  "requestMethod": "GET",
-  "requestPath": "/auth/logout",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "emptyResponse.json",
-  "additionalHeaders": ""
-}

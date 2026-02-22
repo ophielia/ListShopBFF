@@ -1,8 +1,0 @@
-{
-  "label": "createTagSuccess",
-  "requestMethod": "PUT",
-  "requestPath": "/tag/1234",
-  "requestBodyFilename": "dashboard/updateTag/putTagRequest.json",
-  "responseStatus": 200,
-  "responseBodyFilename": "emptyResponse.json"
-}

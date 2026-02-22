@@ -1,8 +1,0 @@
-{
-  "label": "listOfLists",
-  "requestMethod": "GET",
-  "requestPath": "/shoppinglist",
-  "requestBodyFilename": "",
-  "responseStatus": 500,
-  "responseBodyFilename": "emptyResponse.json"
-}

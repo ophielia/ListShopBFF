@@ -21,6 +21,8 @@ kotlin {
         withHostTest {
             isIncludeAndroidResources = true
         }
+        minSdk = libs.versions.minSdk.get().toInt()
+
     }
     iosX64()
     iosArm64()

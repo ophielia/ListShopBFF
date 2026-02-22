@@ -1,8 +1,0 @@
-{
-  "label": "mergeList",
-  "requestMethod": "PUT",
-  "requestPath": "/shoppinglist/shared",
-  "requestBodyFilename": "onboarding/signIn/mergeListRequest.json",
-  "responseStatus": 200,
-  "responseBodyFilename": "onboarding/signIn/mergeListResponse.json"
-}
