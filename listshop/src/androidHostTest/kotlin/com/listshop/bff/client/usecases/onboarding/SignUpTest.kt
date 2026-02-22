@@ -172,9 +172,9 @@ class SignUpTest {
 
         // verify the result
         val error = result._error
-        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
-        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
-        assertEquals("error while signing up", error?.message)
+        assertEquals(BFFErrorType.OFFLINE, error?.type)
+        assertEquals(BFFErrorSubtype.OFFLINE, error?.subType)
+        assertEquals("User cannot signup while offline", error?.message)
 
 
     }
@@ -198,9 +198,9 @@ class SignUpTest {
 
         // verify the result
         val error = result._error
-        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
-        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
-        assertEquals("error while signing up", error?.message)
+        assertEquals(BFFErrorType.VALIDATION, error?.type)
+        assertEquals(BFFErrorSubtype.INVALID_INPUT, error?.subType)
+        assertEquals("userName or password is blank", error?.message)
 
 
     }
@@ -224,9 +224,9 @@ class SignUpTest {
 
         // verify the result
         val error = result._error
-        assertEquals(BFFErrorType.AUTHENTICATION, error?.type)
-        assertEquals(BFFErrorSubtype.CANT_SIGNUP, error?.subType)
-        assertEquals("error while signing up", error?.message)
+        assertEquals(BFFErrorType.VALIDATION, error?.type)
+        assertEquals(BFFErrorSubtype.INVALID_INPUT, error?.subType)
+        assertEquals("userName too long", error?.message)
 
 
     }

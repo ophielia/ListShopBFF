@@ -54,7 +54,7 @@ data class MergeItem @OptIn(ExperimentalSerializationApi::class) constructor(
             val tag = MergeTag.create(modelItem.tag)
             return MergeItem(
                 tag = tag,
-                itemId = modelItem.externalId,
+                itemId = modelItem.externalId.toLong(),
                 added = modelItem.added,
                 removed = modelItem.removed,
                 updated = modelItem.updatedOn,

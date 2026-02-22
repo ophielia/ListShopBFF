@@ -117,7 +117,7 @@ data class ShoppingListCategory(
 }
 
 data class ShoppingListItem(
-    var externalId: Long,
+    var externalId: String,
     var added: String,
     var removed: String?,
     var updatedOn: String?,
@@ -131,7 +131,7 @@ data class ShoppingListItem(
     companion object Factory {
         fun create(apiValue: ApiShoppingListItem): ShoppingListItem {
             return ShoppingListItem(
-                externalId = apiValue.itemId ?: 0,
+                externalId = apiValue.itemId.toString(),
                 added = apiValue.added ?: "",
                 removed = null,
                 updatedOn = apiValue.updated,
@@ -145,7 +145,7 @@ data class ShoppingListItem(
         fun create(dbValue: ListItemEntity): ShoppingListItem {
             val tag = ShoppingListTag.create(dbValue)
             return ShoppingListItem(
-                externalId = dbValue.externalId?.toLong() ?: 0,
+                externalId = dbValue.externalId ?: "0",
                 added = dbValue.added ?: "",
                 removed = dbValue.removed ?: "",
                 updatedOn = dbValue.updatedOn ?: "",
