@@ -1,0 +1,8 @@
+{
+  "label": "retrieveSingleTagSuccess",
+  "requestMethod": "GET",
+  "requestPath": "/tag/1234",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "dashboard/updateTag/retrieveOriginalTagResponse.json"
+}

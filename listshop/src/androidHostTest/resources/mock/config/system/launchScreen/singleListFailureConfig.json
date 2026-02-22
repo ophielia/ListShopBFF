@@ -1,0 +1,8 @@
+{
+  "label": "listOfLists",
+  "requestMethod": "GET",
+  "requestPath": "/shoppinglist/1234",
+  "requestBodyFilename": "",
+  "responseStatus": 404,
+  "responseBodyFilename": "emptyResponse.json"
+}

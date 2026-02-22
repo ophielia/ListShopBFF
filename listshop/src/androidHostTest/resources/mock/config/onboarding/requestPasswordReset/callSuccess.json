@@ -1,0 +1,9 @@
+{
+  "label": "requestPasswordReset",
+  "requestMethod": "POST",
+  "requestPath": "/user/token/tokenrequest",
+  "requestBodyFilename": "onboarding/requestPasswordReset/postPasswordRequest.json",
+  "responseStatus": 200,
+  "responseBodyFilename": "emptyResponse.json"
+
+}
