@@ -1,6 +1,5 @@
 package com.listshop.bff.repositories.impl
 
-import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListshopDb
@@ -59,6 +58,16 @@ class TagRepositoryImpl(
 
     override suspend fun updateApiTagLocally(tagId: String, tagName: String) {
         dbRef.tagDefinitionQueries.updateTagName( tagName, tagId)
+    }
+
+    override suspend fun searchTags(
+        fragment: String,
+        tagTypes: List<String>,
+        excludeGroups: Boolean
+    ): List<TagEntity> {
+        val wildcardFragment = "%$fragment%"
+        return dbRef.tagDefinitionQueries.searchTags(wildcardFragment, tagTypes, excludeGroups)
+            .executeAsList()
     }
 
     override suspend fun deleteAll() {

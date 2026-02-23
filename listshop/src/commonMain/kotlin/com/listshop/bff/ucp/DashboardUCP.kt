@@ -76,6 +76,13 @@ class DashboardUCP internal constructor(
         return useCase.process()
     }
 
+
+    @Throws(Exception::class)
+    suspend fun changePassword(oldPassword: String, newPassword: String): BFFResult<Unit> {
+        val useCase = ChangePassword(oldPassword, newPassword, userService, analyticsHandle = analyticsHandle)
+        return useCase.process()
+    }
+
 }
 
 

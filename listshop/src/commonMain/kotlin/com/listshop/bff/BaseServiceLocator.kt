@@ -57,6 +57,7 @@ internal abstract class BaseServiceLocator(
             sessionService = sessionService,
             listService = listService,
             dishService = dishService,
+            tagService = tagService,
             analyticsHandle = analyticsHandle
         )
     }
