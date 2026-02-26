@@ -1,31 +1,11 @@
 package com.listshop.bff.remote.impl
 
 import com.listshop.analytics.AnalyticsHandle
-import com.listshop.bff.data.model.ShoppingList
-import com.listshop.bff.data.remote.PostGenericPayload
-import com.listshop.bff.data.remote.ApiDeviceInfo
 import com.listshop.bff.data.remote.ApiDish
-import com.listshop.bff.data.remote.ApiRequiredClientVersion
-import com.listshop.bff.data.remote.ApiShoppingListEmbedded
-import com.listshop.bff.data.remote.ApiUserProperties
-import com.listshop.bff.data.remote.ApiWrappedUser
 import com.listshop.bff.data.remote.EmbeddedDishResourceList
-import com.listshop.bff.data.remote.PostChangePassword
-import com.listshop.bff.data.remote.PostTokenRequest
-import com.listshop.bff.data.remote.PostUserLogin
-import com.listshop.bff.exceptions.ApiException
-import com.listshop.bff.exceptions.AuthenticationException
 import com.listshop.bff.remote.DishApi
 import com.listshop.bff.remote.ListShopRemoteApi
-import com.listshop.bff.remote.UserApi
 import io.ktor.client.call.body
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 internal class DishApiImpl(
     val remoteApi: ListShopRemoteApi,

@@ -8,7 +8,9 @@ import com.listshop.bff.data.remote.ApiProperty
 import com.listshop.bff.data.remote.ApiUserProperties
 import com.listshop.bff.data.remote.PostChangePassword
 import com.listshop.bff.data.remote.PostTokenRequest
-import com.listshop.bff.data.remote.PostUserLogin
+import com.listshop.bff.data.remote.PostUser
+import com.listshop.bff.data.remote.PostUserSignin
+import com.listshop.bff.data.remote.PostUserSignup
 import com.listshop.bff.exceptions.BadParameterException
 import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.UserApi
@@ -50,7 +52,7 @@ class UserServiceImpl internal constructor(
     }
 
     override suspend fun signInUser(userName: String, password: String) {
-        val postLoginUser = prepareSignInOrUpObject(userName, password)
+        val postLoginUser = prepareUserSigninObject(userName, password)
 
         val token = remoteApi.signInUser(postLoginUser)
         analyticsHandle.listShopAnalytics.debug("the token is : " + token)
@@ -63,9 +65,11 @@ class UserServiceImpl internal constructor(
     }
 
     override suspend fun signUpUser(userName: String, password: String) {
-        val postSignupUser = prepareSignInOrUpObject(userName, password)
+        val postSignupUser = prepareUserObject(userName, password)
+        val postDeviceInfo = buildDeviceInfo()
+        val postSignUp = PostUserSignup(postSignupUser, postDeviceInfo, true)
 
-        val token = remoteApi.signUpUser(postSignupUser)
+        val token = remoteApi.signUpUser(postSignUp)
         analyticsHandle.listShopAnalytics.debug("the token is : " + token)
         // save results
         sessionService.setUserLastSignedInToNow()
@@ -152,11 +156,17 @@ class UserServiceImpl internal constructor(
         )
     }
 
-    private fun prepareSignInOrUpObject(userName: String, password: String): PostUserLogin {
+    private fun prepareUserObject(userName: String, password: String): PostUser {
+        val cleanedName = cleanStringForServer(userName, RemoteConstants.NORMAL_STRING_LENGTH)
+        val cleanedPassword = cleanStringForServer(password, RemoteConstants.NORMAL_STRING_LENGTH)
+        return PostUser(cleanedName, cleanedName, cleanedPassword)
+    }
+
+    private fun prepareUserSigninObject(userName: String, password: String): PostUserSignin {
         val cleanedName = cleanStringForServer(userName, RemoteConstants.NORMAL_STRING_LENGTH)
         val cleanedPassword = cleanStringForServer(password, RemoteConstants.NORMAL_STRING_LENGTH)
         val deviceInfo = buildDeviceInfo()
-        return PostUserLogin(cleanedName, cleanedPassword, deviceInfo)
+        return PostUserSignin(cleanedName, cleanedPassword, deviceInfo)
     }
 
     private fun cleanStringForServer(value: String, length: Int): String {

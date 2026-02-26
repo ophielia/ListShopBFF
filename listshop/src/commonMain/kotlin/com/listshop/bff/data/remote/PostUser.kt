@@ -4,13 +4,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PostUserLogin(
+data class PostUser(
+    @SerialName("user_name")
     val username: String?,
+    val email: String?,
     val password: String?,
-    @SerialName("device_info")
-    val deviceInfo: ApiDeviceInfo,
-    @SerialName("create_list")
-    val createList: Boolean = true
+
 )
 
 

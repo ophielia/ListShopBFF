@@ -1,0 +1,19 @@
+package com.listshop.bff.data.remote
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class PostUserSignin(
+    @SerialName("username")
+    val username: String?,
+    val password: String?,
+    @SerialName("device_info")
+    val deviceInfo: ApiDeviceInfo,
+    @SerialName("create_list")
+    val createList: Boolean = true
+)
+
+
+
+
