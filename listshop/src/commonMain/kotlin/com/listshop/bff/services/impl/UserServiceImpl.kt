@@ -14,6 +14,7 @@ import com.listshop.bff.data.remote.PostUserSignup
 import com.listshop.bff.exceptions.BadParameterException
 import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.UserApi
+import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.UserService
 import io.ktor.utils.io.core.toByteArray
@@ -23,6 +24,7 @@ import kotlin.math.min
 
 class UserServiceImpl internal constructor(
     private val remoteApi: UserApi,
+    private val listService: ListService,
     private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
 ) : UserService {
@@ -35,17 +37,17 @@ class UserServiceImpl internal constructor(
         //MM nfl - do properties here
     }
 
-    override suspend fun logoutUser() {
+    override suspend fun logoutUser(isOffline: Boolean) {
         if (sessionService.currentUserSession().userToken == null) {
             throw LoggedOutException("User cannot logout when not logged in")
         }
 
-        // logout on the server
-        try {
-            remoteApi.logoutUser()
-        } catch (e: Exception) {
-            analyticsHandle.listShopAnalytics.debug("remote call to logout failed. continuing logout on device. message: " + e.message)
+        if (!isOffline) {
+            logoutOnServer()
         }
+
+        // remove local list
+        listService.clearLocalList()
 
         // clear session
         sessionService.clearUserSession()
@@ -141,6 +143,15 @@ class UserServiceImpl internal constructor(
  
     }
 
+    private suspend fun logoutOnServer() {
+        // logout on the server
+        try {
+            remoteApi.logoutUser()
+        } catch (e: Exception) {
+            analyticsHandle.listShopAnalytics.debug("remote call to logout failed. continuing logout on device. message: " + e.message)
+        }
+
+    }
 
     private fun buildDeviceInfo(): ApiDeviceInfo {
         val appInfo = sessionService.currentAppInfo()

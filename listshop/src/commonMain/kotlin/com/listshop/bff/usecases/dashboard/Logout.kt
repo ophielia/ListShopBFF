@@ -21,10 +21,10 @@ class Logout(
     suspend fun process(): BFFResult<TransitionViewState> {
         analyticsHandle.debug("Logout - begin use case")
         try {
-            checkOnlineStatus(connectionStatus)
+            val isOffline = connectionStatus != ConnectionStatus.Online
 
             // logout User
-            userService.logoutUser()
+            userService.logoutUser(isOffline)
 
             // sync lookup data
             syncService.syncLookupData(connectionStatus)
