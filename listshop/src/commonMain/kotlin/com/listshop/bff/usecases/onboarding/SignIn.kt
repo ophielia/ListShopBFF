@@ -9,7 +9,6 @@ import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
-import com.listshop.bff.exceptions.AuthenticationException
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SyncService
 import com.listshop.bff.services.TagTree
@@ -32,13 +31,8 @@ class SignIn(
             userService.signInUser(userName, password)
         } catch (exception: Exception) {
             analyticsHandle.error("Error while signing in - ${exception.message}")
-            if (exception is AuthenticationException) {
-                // user couldn't sign in - return error
-                return BFFError.errorFromException(exception)
-            }
-            // otherwise, log the exception and continue
-            // we don't want a user property exception to break the login
-            analyticsHandle.listShopAnalytics.error("Non-Authentication error while signing in, continuing - ${exception.message}")
+            // user couldn't sign in - return error
+            return BFFError.errorFromException(exception)
         }
 
         // user successfully signed in
