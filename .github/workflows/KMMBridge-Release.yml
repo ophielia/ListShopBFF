@@ -2,7 +2,8 @@
 name: KMMBridge-Release
 on:
   workflow_dispatch:
-
+env:
+  GITHUB_TOKEN: ${{ github.token }}
 jobs:
   call-publish:
     uses: ./.github/workflows/Base-Publish.yml

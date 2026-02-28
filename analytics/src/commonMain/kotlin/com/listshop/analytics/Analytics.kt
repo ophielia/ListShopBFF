@@ -9,14 +9,14 @@ interface Analytics {
     fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
 }
 
-fun initAnalytics(analytics: Analytics): AnalyticsHandle {
+fun initAnalytics(analytics: Analytics, showHttpLogs: Boolean): AnalyticsHandle {
      if (!AnalyticsHandler.analyticsAtom.compareAndSet(null, analytics)) {
         throw IllegalStateException("Analytics can only be set once")
     }
     return AnalyticsHandle(
         appAnalytics = AppAnalytics(),
         listShopAnalytics = ListShopAnalytics(),
-        httpClientAnalytics = HttpClientAnalytics()
+        httpClientAnalytics = HttpClientAnalytics(showHttpLogs)
     )
 }
 
@@ -25,7 +25,7 @@ fun initDummyAnalytics(analytics: Analytics): AnalyticsHandle {
     return AnalyticsHandle(
         appAnalytics = AppAnalytics(),
         listShopAnalytics = ListShopAnalytics(),
-        httpClientAnalytics = HttpClientAnalytics()
+        httpClientAnalytics = HttpClientAnalytics(true)
     )
 }
 
@@ -34,6 +34,16 @@ data class AnalyticsHandle(
     val listShopAnalytics: ListShopAnalytics,
     val httpClientAnalytics: HttpClientAnalytics
 )
+
+fun AnalyticsHandle.debug(message: String) {
+    //MM need log level here
+    listShopAnalytics.debug(message)
+}
+
+ fun AnalyticsHandle.error(message: String) {
+    //MM need log level here
+    listShopAnalytics.debug(message)
+}
 
 internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
     if (dummyAnalytics == null) {

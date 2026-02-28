@@ -1,0 +1,73 @@
+{
+  "links": [
+    "https://nastyvarmits.fr/shoppinglist"
+  ],
+  "_embedded": {
+    "shoppingListResourceList": [
+      {
+        "links": [],
+        "shopping_list": {
+          "list_id": 51067,
+          "categories": null,
+          "created": "2024-07-07T07:29:49.863+00:00",
+          "updated": "2024-07-07T09:46:18.363+00:00",
+          "layout_type": null,
+          "layout_id": "12",
+          "item_count": 4,
+          "legend": [],
+          "user_id": 20,
+          "is_starter_list": false,
+          "name": "Shopping List"
+        }
+      },
+      {
+        "links": [],
+        "shopping_list": {
+          "list_id": 50944,
+          "categories": null,
+          "created": "2023-02-23T15:13:11.171+00:00",
+          "updated": "2024-07-07T08:17:06.888+00:00",
+          "layout_type": null,
+          "layout_id": "12",
+          "item_count": 3,
+          "legend": [],
+          "user_id": 20,
+          "is_starter_list": false,
+          "name": "Supermarket"
+        }
+      },
+      {
+        "links": [],
+        "shopping_list": {
+          "list_id": 50907,
+          "categories": null,
+          "created": "2022-10-07T19:00:36.074+00:00",
+          "updated": "2024-02-17T09:49:17.964+00:00",
+          "layout_type": null,
+          "layout_id": null,
+          "item_count": 5,
+          "legend": [],
+          "user_id": 20,
+          "is_starter_list": false,
+          "name": "Z dieting stuff"
+        }
+      },
+      {
+        "links": [],
+        "shopping_list": {
+          "list_id": 50824,
+          "categories": null,
+          "created": "2021-11-13T09:27:33.902+00:00",
+          "updated": "2023-11-06T05:53:04.751+00:00",
+          "layout_type": null,
+          "layout_id": null,
+          "item_count": 0,
+          "legend": [],
+          "user_id": 20,
+          "is_starter_list": false,
+          "name": "Market list"
+        }
+      }
+    ]
+  }
+}

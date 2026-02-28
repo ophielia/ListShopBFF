@@ -10,7 +10,7 @@ fun startSDK(analytics: Analytics, context: Context,
              appInfo : AppInfo
 ): SDKHandle {
 
-    val analyticsHandle = initAnalytics(analytics)
+    val analyticsHandle = initAnalytics(analytics, true)
     val locator = AndroidServiceLocator(context, analyticsHandle, appInfo)
 
     return SDKHandle(

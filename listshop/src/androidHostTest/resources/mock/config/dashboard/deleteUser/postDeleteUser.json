@@ -1,0 +1,9 @@
+{
+  "label": "postDeleteUser",
+  "requestMethod": "DELETE",
+  "requestPath": "/user",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "emptyResponse.json",
+  "additionalHeaders": ""
+}

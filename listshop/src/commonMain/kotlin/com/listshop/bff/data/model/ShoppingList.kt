@@ -4,6 +4,7 @@ import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListCategory
 import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
+import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
@@ -116,7 +117,7 @@ data class ShoppingListCategory(
 }
 
 data class ShoppingListItem(
-    var externalId: Long,
+    var externalId: String,
     var added: String,
     var removed: String?,
     var updatedOn: String?,
@@ -130,7 +131,7 @@ data class ShoppingListItem(
     companion object Factory {
         fun create(apiValue: ApiShoppingListItem): ShoppingListItem {
             return ShoppingListItem(
-                externalId = apiValue.itemId ?: 0,
+                externalId = apiValue.itemId.toString(),
                 added = apiValue.added ?: "",
                 removed = null,
                 updatedOn = apiValue.updated,
@@ -144,7 +145,7 @@ data class ShoppingListItem(
         fun create(dbValue: ListItemEntity): ShoppingListItem {
             val tag = ShoppingListTag.create(dbValue)
             return ShoppingListItem(
-                externalId = dbValue.externalId?.toLong() ?: 0,
+                externalId = dbValue.externalId ?: "0",
                 added = dbValue.added ?: "",
                 removed = dbValue.removed ?: "",
                 updatedOn = dbValue.updatedOn ?: "",
@@ -162,6 +163,7 @@ data class ShoppingListTag(
     var display: String,
     var tagType: String,
     var categoryId: String?,
+    var parentId: String? = null,
     var isUser: Boolean?,
 
 
@@ -184,6 +186,17 @@ data class ShoppingListTag(
                 tagType = dbValue.tagType ?: "",
                 categoryId = dbValue.categoryExternalId,
                 isUser = null
+            )
+        }
+
+        fun create(apiValue: ApiTag, isUser: Boolean): ShoppingListTag {
+            return ShoppingListTag(
+                externalId = apiValue.externalId ?: "",
+                display = apiValue.name ?: "",
+                tagType = apiValue.tagType ?: "",
+                categoryId = "",
+                parentId = apiValue.parentId ?: "",
+                isUser = isUser
             )
         }
     }

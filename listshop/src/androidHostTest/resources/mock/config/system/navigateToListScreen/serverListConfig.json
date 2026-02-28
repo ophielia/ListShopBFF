@@ -1,0 +1,8 @@
+{
+  "label": "navigateToListScreenWithId",
+  "requestMethod": "GET",
+  "requestPath": "/shoppinglist/1234",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "standards/standardSingleList.json"
+}

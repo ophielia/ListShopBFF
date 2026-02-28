@@ -5,6 +5,7 @@ import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbedded
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.remote.MergeResult
+import com.listshop.bff.data.remote.PostShoppingList
 import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.remote.ListShopRemoteApi
@@ -27,7 +28,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result: ApiShoppingListEmbedded =
@@ -47,12 +48,41 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("get shopping list call failed with status: " + response.status.value)
+            "get shopping list call failed with status: " + response.status.value
         )
 
         val result : ApiShoppingListEmbeddedList = response.body()
 
         return ShoppingList.create(apiValue = result.embeddedList)
+    }
+
+    override suspend fun retrieveListById(serverId: String): ShoppingList {
+        val urlString = remoteApi.buildPath("/shoppinglist/${serverId}")
+        listShopAnalytics.debug("getting most recent list, the id is: " + serverId)
+
+        val response = remoteApi.getRequest(urlString)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            "get shopping list call failed with status: " + response.status.value
+        )
+
+        val result : ApiShoppingListEmbeddedList = response.body()
+
+        return ShoppingList.create(apiValue = result.embeddedList)
+    }
+
+    override suspend fun createList(payload: PostShoppingList): String {
+        val payload = Json.encodeToString(payload)
+        val urlString = remoteApi.buildPath("/shoppinglist")
+        val response = remoteApi.postRequest(urlString, payload)
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            "merge shopping list call failed with status: " + response.status.value
+        )
+        val location = remoteApi.pullLocation(response)
+        val elements = location.split("/")
+        return elements.last()
     }
 
     override suspend fun mergeLocalListWithServer(listMergeRequest: PutMergeRequest) : ShoppingList {
@@ -67,7 +97,7 @@ internal class ShoppingListApiImpl(
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            ApiException("merge shopping list call failed with status: " + response.status.value)
+            "merge shopping list call failed with status: " + response.status.value
         )
 
         val result : MergeResult = response.body()

@@ -8,6 +8,7 @@ data class Tag(
     val name: String?,
     val parentId: String?,
     val tagType: String?,
+    val isUser: Boolean
 ) {
     companion object Factory {
         fun create(apiValue: ApiTag): Tag {
@@ -15,7 +16,8 @@ data class Tag(
                 apiValue.externalId,
                 apiValue.name,
                 apiValue.parentId,
-                apiValue.tagType
+                apiValue.tagType,
+                apiValue.userId != null
             )
         }
 
@@ -24,7 +26,8 @@ data class Tag(
                 dbValue.externalId,
                 dbValue.name,
                 dbValue.parentId,
-                dbValue.tagType
+                dbValue.tagType,
+                dbValue.userId != null
             )
         }
     }

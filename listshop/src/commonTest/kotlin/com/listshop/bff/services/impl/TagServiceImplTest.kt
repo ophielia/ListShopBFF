@@ -7,6 +7,8 @@ import com.listshop.bff.data.model.TagType
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.remote.TagApi
 import com.listshop.bff.repositories.TagRepository
+import com.listshop.bff.services.LayoutService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.TestUtils
 import dev.mokkery.answering.calls
 import dev.mokkery.everySuspend
@@ -25,6 +27,8 @@ class TagServiceImplTest {
 
     val tagRepo = mock<TagRepository>()
     val remoteApi = mock<TagApi>()
+    val layoutService = mock<LayoutService>()
+    val sessionService = mock<SessionService>()
 
     var service: TagServiceImpl? = null
 
@@ -44,6 +48,8 @@ class TagServiceImplTest {
         service = TagServiceImpl(
             tagApi = remoteApi,
             tagRepo = tagRepo,
+            layoutService = layoutService,
+            sessionService = sessionService,
             appInfo = appInfo
         )
     }

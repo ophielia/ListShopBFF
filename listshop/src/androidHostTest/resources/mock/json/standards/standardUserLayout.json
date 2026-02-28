@@ -1,0 +1,370 @@
+{
+    "links": [
+        "https://nastyvarmits.fr/listlayout"
+    ],
+    "_embedded": {
+        "list_layout_list": [
+            {
+                "links": [],
+                "list_layout": {
+                    "name": "Default",
+                    "categories": [
+                        {
+                            "name": "Other",
+                            "default": false,
+                            "category_id": 52025,
+                            "display_order": 500,
+                            "tags": [
+                                {
+                                    "tag_id": "51873",
+                                    "name": "Gummy bears",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Frozen",
+                            "default": false,
+                            "category_id": 52017,
+                            "display_order": 600,
+                            "tags": [
+                                {
+                                    "tag_id": "51736",
+                                    "name": "halibut",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "38",
+                                    "name": "salmon",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51834",
+                                    "name": "Ben and jerrys",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51308",
+                                    "name": "baaa baaa",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52061",
+                                    "name": "Lunch pasta",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52067",
+                                    "name": "Gazpacho",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "307",
+                                    "name": "frozen green beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51280",
+                                    "name": "Tuna steaks",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Dry",
+                            "default": false,
+                            "category_id": 52019,
+                            "display_order": 400,
+                            "tags": [
+                                {
+                                    "tag_id": "51647",
+                                    "name": "cannelini beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51784",
+                                    "name": "ramen noodles",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51833",
+                                    "name": "Tomato soup",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50959",
+                                    "name": "pita bread",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "198",
+                                    "name": "corn tortillas",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51758",
+                                    "name": "kombu",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51757",
+                                    "name": "tofu",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51593",
+                                    "name": "italian seasoning",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51831",
+                                    "name": "phyllo sheets",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51756",
+                                    "name": "nori",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51740",
+                                    "name": "Table salt",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50634",
+                                    "name": "sweet pickles",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51708",
+                                    "name": "Canned cassolet",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51592",
+                                    "name": "Ramen soup",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51648",
+                                    "name": "anchovy filets",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51016",
+                                    "name": "lasagne",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51330",
+                                    "name": "white miso",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51687",
+                                    "name": "orzo",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52169",
+                                    "name": "Gingerbread house candy",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51759",
+                                    "name": "katsuobushi",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51755",
+                                    "name": "dashi",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Dairy",
+                            "default": false,
+                            "category_id": 52022,
+                            "display_order": 300,
+                            "tags": [
+                                {
+                                    "tag_id": "51594",
+                                    "name": "parmesan reggiano cheese",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        },
+                        {
+                            "name": "Produce",
+                            "default": false,
+                            "category_id": 52018,
+                            "display_order": 100,
+                            "tags": [
+                                {
+                                    "tag_id": "456",
+                                    "name": "green lentils",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51265",
+                                    "name": "kohlrabi",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "55",
+                                    "name": "shallot",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51459",
+                                    "name": "fresh corn",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51263",
+                                    "name": "chard",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "349",
+                                    "name": "white mushrooms",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52155",
+                                    "name": "Pumpkins",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "208",
+                                    "name": "lemon zest",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52004",
+                                    "name": "parsnips",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51284",
+                                    "name": "Dry split peas",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51908",
+                                    "name": "Oyster mushrooms",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "52029",
+                                    "name": "Test tag",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51285",
+                                    "name": "Dried mogettes",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "310",
+                                    "name": "fresh pumpkin",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "33",
+                                    "name": "tomatoes",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51741",
+                                    "name": "Udame beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "19",
+                                    "name": "garlic",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51329",
+                                    "name": "Sesame seeds",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "247",
+                                    "name": "fresh parsley",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50615",
+                                    "name": "banana",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "212",
+                                    "name": "fresh ginger",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "50954",
+                                    "name": "ground red peppers",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "65",
+                                    "name": "apples",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51601",
+                                    "name": "fennel bulb",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51847",
+                                    "name": "celeriac",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "312",
+                                    "name": "diced green chilis",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51302",
+                                    "name": "marinara sauce",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "101",
+                                    "name": "fresh basil",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "51633",
+                                    "name": "Dried coco beans",
+                                    "is_group": false
+                                },
+                                {
+                                    "tag_id": "452",
+                                    "name": "green onion",
+                                    "is_group": false
+                                }
+                            ],
+                            "is_default": false
+                        }
+                    ],
+                    "layout_id": 12,
+                    "is_default": true,
+                    "user_id": "20"
+                }
+            }
+        ]
+    }
+}

@@ -7,6 +7,7 @@ import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
+import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.repositories.SessionInfoRepository
 import dev.mokkery.answering.returns
 import dev.mokkery.every
@@ -50,8 +51,10 @@ class SessionServiceImplTest {
     fun testCurrentSessionExistingUser() {
         var userInfo = dummyUserInfoEntity()
         var listInfo = dummyListInfoEntity()
+        var userProperties = dummyUserProperties()
         every { repository.getUserInfo() } returns userInfo
         every { repository.getListInfo() } returns listInfo
+        every { repository.getUserProperties() } returns userProperties
 
         val userSession = service?.currentUserSession()
         assertNotNull(userSession)
@@ -69,8 +72,10 @@ class SessionServiceImplTest {
     fun `when i call setUserToken the token is sent to save`() = runTest {
         var userInfo =  dummyUserInfoEntity()
         var listInfo =  dummyListInfoEntity()
+        var userProperties = dummyUserProperties()
         every { repository.getUserInfo() } returns userInfo
         every { repository.getListInfo() } returns listInfo
+        every { repository.getUserProperties() } returns userProperties
 
         val savedUserInfo = Capture.slot<UserInfo>()
         every {repository.updateUserInfo(capture(savedUserInfo))} returns Unit
@@ -84,8 +89,9 @@ class SessionServiceImplTest {
         var userInfo = UserInfoEntity(     userName = "test",
             userToken = "testToken",
             userLastSeen = "yesterday",
-            userCreated = "a month ago",
-            userLastSignedIn = "two weeks ago")
+            userInfoCreated = "a month ago",
+            userLastSignedIn = "two weeks ago",
+            userCreatedOnServer = "a year ago")
         return userInfo
     }
 
@@ -101,6 +107,11 @@ class SessionServiceImplTest {
             serverListLastSynced = ""
         )
         return userInfo
+    }
+
+    private fun dummyUserProperties(): List<UserPropertiesEntity> {
+
+        return emptyList()
     }
 
 

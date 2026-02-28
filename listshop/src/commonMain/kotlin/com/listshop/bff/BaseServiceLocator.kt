@@ -1,51 +1,31 @@
 package com.listshop.bff
 
 import app.cash.sqldelight.db.SqlDriver
-import com.listshop.analytics.AnalyticsHandle
-import com.listshop.analytics.AppAnalytics
-import com.listshop.analytics.AppInfo
-import com.listshop.analytics.HttpClientAnalytics
-import com.listshop.analytics.ListShopAnalytics
-import com.listshop.bff.remote.LayoutApi
-import com.listshop.bff.remote.ListShopRemoteApi
-import com.listshop.bff.remote.ShoppingListApi
-import com.listshop.bff.remote.TagApi
-import com.listshop.bff.remote.UserApi
-import com.listshop.bff.remote.impl.LayoutApiImpl
-import com.listshop.bff.remote.impl.ListShopRemoteApiImpl
-import com.listshop.bff.remote.impl.ShoppingListApiImpl
-import com.listshop.bff.remote.impl.TagApiImpl
-import com.listshop.bff.remote.impl.UserApiImpl
+import com.listshop.analytics.*
+import com.listshop.bff.remote.*
+import com.listshop.bff.remote.impl.*
 import com.listshop.bff.repositories.LayoutRepository
 import com.listshop.bff.repositories.ListShopDatabase
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.repositories.impl.LayoutRepositoryImpl
 import com.listshop.bff.repositories.impl.ListRepositoryImpl
-import com.listshop.bff.repositories.impl.TagRepositoryImpl
 import com.listshop.bff.repositories.impl.SessionInfoRepositoryImpl
-import com.listshop.bff.services.LayoutService
-import com.listshop.bff.services.ListService
-import com.listshop.bff.services.SyncService
-import com.listshop.bff.services.TagService
-import com.listshop.bff.services.UserService
-import com.listshop.bff.services.SessionService
-import com.listshop.bff.services.impl.LayoutServiceImpl
-import com.listshop.bff.services.impl.ListServiceImpl
-import com.listshop.bff.services.impl.SyncServiceImpl
-import com.listshop.bff.services.impl.TagServiceImpl
-import com.listshop.bff.services.impl.UserServiceImpl
-import com.listshop.bff.services.impl.SessionServiceImpl
+import com.listshop.bff.repositories.impl.TagRepositoryImpl
+import com.listshop.bff.services.*
+import com.listshop.bff.services.impl.*
 import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.OnboardingUCP
+import com.listshop.bff.ucp.SystemUCP
 import com.listshop.bff.ucp.TagUCP
 import com.russhwolf.settings.Settings
-import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.*
 
 internal const val SETTINGS_KEY = "KMMBridgeKickStartSettings"
 internal const val DB_NAME = "ListshopDb"
 
-internal abstract class BaseServiceLocator(private val analyticsHandle: AnalyticsHandle,
-                                           private val appInfo: AppInfo
+internal abstract class BaseServiceLocator(
+    private val analyticsHandle: AnalyticsHandle,
+    private val appInfo: AppInfo
 ) :
     ServiceLocator {
 
@@ -67,15 +47,28 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
             listService = listService,
             userService = userService,
             syncService = syncService,
-            listShopAnalytics = listShopAnalytics
+            listShopAnalytics = listShopAnalytics,
+            analyticsHandle = analyticsHandle
+        )
+    }
+
+    override val systemUCP: SystemUCP by lazy {
+        SystemUCP(
+            sessionService = sessionService,
+            listService = listService,
+            dishService = dishService,
+            tagService = tagService,
+            analyticsHandle = analyticsHandle
         )
     }
 
     override val dashboardUCP: DashboardUCP by lazy {
         DashboardUCP(
-            sessionService = sessionService,
             userService = userService,
-            listShopAnalytics = listShopAnalytics
+            tagService = tagService,
+            syncService = syncService,
+            analyticsHandle = analyticsHandle,
+            listService = listService
         )
     }
 
@@ -107,11 +100,20 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         )
     }
 
+    private val dishService: DishService by lazy {
+        DishServiceImpl(
+            remoteApi = dishApi,
+            sessionService = sessionService,
+            analyticsHandle = analyticsHandle
+        )
+    }
+
     private val userService: UserService by lazy {
         UserServiceImpl(
             remoteApi = userApi,
             sessionService = sessionService,
-            listShopAnalytics = listShopAnalytics
+            listService = listService,
+            analyticsHandle = analyticsHandle
         )
     }
 
@@ -131,6 +133,8 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
         TagServiceImpl(
             tagApi = tagApi,
             tagRepo = tagRepository,
+            layoutService = layoutService,
+            sessionService = sessionService,
             appInfo = appInfo,
             listShopAnalytics = listShopAnalytics
         )
@@ -141,6 +145,7 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
             layoutApi = layoutApi,
             layoutRepo = layoutRepository,
             appInfo = appInfo,
+            sessionService = sessionService,
             listShopAnalytics = listShopAnalytics
         )
     }
@@ -148,6 +153,13 @@ internal abstract class BaseServiceLocator(private val analyticsHandle: Analytic
     private val layoutApi: LayoutApi by lazy {
         LayoutApiImpl(
             remoteApi = listShopRemoteApi
+        )
+    }
+    private val dishApi: DishApi by lazy {
+        DishApiImpl(
+            remoteApi = listShopRemoteApi,
+            analyticsHandle = analyticsHandle
+
         )
     }
 

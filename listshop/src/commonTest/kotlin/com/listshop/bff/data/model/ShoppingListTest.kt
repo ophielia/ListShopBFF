@@ -48,7 +48,7 @@ class ShoppingListTest {
         assertEquals(300, dairy.displayOrder)
         assertEquals(5, dairy.items.size)
         // check feta not crossed off
-        assertNull(dairy.items.first { it.externalId == 100976L }.crossedOff)
+        assertNull(dairy.items.first { it.externalId == "100976" }.crossedOff)
 
         //MM STILL OPEN - legend tests
 

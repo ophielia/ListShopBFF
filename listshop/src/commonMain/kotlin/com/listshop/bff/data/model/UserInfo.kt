@@ -5,9 +5,10 @@ import com.listshop.bff.db.UserInfoEntity
 data class UserInfo(
     var userName: String?,
     var userToken: String?,
-    var userCreated: String?,
+    var userInfoCreated: String?,
     var userLastSeen: String?,
-    var userLastSignedIn: String?
+    var userLastSignedIn: String?,
+    var userCreatedOnServer: String?
 
 ) {
     companion object Factory {
@@ -15,9 +16,10 @@ data class UserInfo(
             return UserInfo(
                 dbValue.userName,
                 dbValue.userToken,
-                dbValue.userCreated,
+                dbValue.userInfoCreated,
                 dbValue.userLastSeen,
-                dbValue.userLastSignedIn
+                dbValue.userLastSignedIn,
+                dbValue.userCreatedOnServer
             )
         }
 

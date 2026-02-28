@@ -1,0 +1,8 @@
+{
+  "label": "getMostRecentList",
+  "requestMethod": "GET",
+  "requestPath": "/shoppinglist/mostrecent",
+  "requestBodyFilename": "",
+  "responseStatus": 500,
+  "responseBodyFilename": "emptyResponse.json"
+}

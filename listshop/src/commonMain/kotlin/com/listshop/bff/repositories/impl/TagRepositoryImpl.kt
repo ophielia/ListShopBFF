@@ -45,12 +45,30 @@ class TagRepositoryImpl(
     }
 
 
-    override suspend fun findTagsByTypes(typesForTreeAsStrings: List<String>) : List<TagEntity>{
+    override suspend fun findTagsByTypes(typesForTreeAsStrings: List<String>): List<TagEntity> {
         return dbRef.tagDefinitionQueries
             .selectTagsByTagTypes(typesForTreeAsStrings)
             .executeAsList()
     }
 
+    override suspend fun retrieveTagLocally(tagId: String): TagEntity {
+        return dbRef.tagDefinitionQueries.selectTagByTagId(tagId)
+            .executeAsOne()
+    }
+
+    override suspend fun updateApiTagLocally(tagId: String, tagName: String) {
+        dbRef.tagDefinitionQueries.updateTagName( tagName, tagId)
+    }
+
+    override suspend fun searchTags(
+        fragment: String,
+        tagTypes: List<String>,
+        excludeGroups: Boolean
+    ): List<TagEntity> {
+        val wildcardFragment = "%$fragment%"
+        return dbRef.tagDefinitionQueries.searchTags(wildcardFragment, tagTypes, excludeGroups)
+            .executeAsList()
+    }
 
     override suspend fun deleteAll() {
         listShopDatabase.analytics.databaseCleared()

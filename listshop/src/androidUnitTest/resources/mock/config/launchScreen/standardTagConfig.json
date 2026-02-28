@@ -1,8 +1,0 @@
-{
-  "label": "clientCompatible",
-  "requestMethod": "GET",
-  "requestPath": "/tag/user",
-  "requestBodyFilename": "",
-  "responseStatus": 200,
-  "responseBodyFilename": "launchScreen/standardTags.json"
-}
