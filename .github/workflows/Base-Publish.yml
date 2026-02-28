@@ -1,4 +1,6 @@
 name: Base-Publish
+env:
+  GITHUB_TOKEN: ${{ github.token }}
 on:
   workflow_call:
     inputs:
