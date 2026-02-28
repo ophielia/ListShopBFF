@@ -6,6 +6,8 @@ import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.state.ConnectionStatus
+import com.listshop.bff.data.state.OnboardingViewState
+import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
 import kotlinx.coroutines.runBlocking
@@ -109,10 +111,14 @@ class LogoutTest {
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
-        assertEquals("User cannot delete account while offline", result._error?.message)
-        assertEquals(BFFErrorType.OFFLINE, result._error?.type)
-        assertEquals(BFFErrorSubtype.OFFLINE, result._error?.subType)
+        assertFalse(result.isFailure)
+        val resultValue = result.value
+        assertNotNull(resultValue)
+        assertTrue(resultValue is TransitionViewState)
+        assertTrue(resultValue is TransitionViewState.Onboarding)
+        val viewStateValue = (resultValue as TransitionViewState.Onboarding).state
+        assertEquals(OnboardingViewState.Choose, viewStateValue)
+
     }
 
     @Test
