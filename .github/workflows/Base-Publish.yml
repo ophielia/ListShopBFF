@@ -2,6 +2,8 @@ name: Base-Publish
 on:
   workflow_call:
     inputs:
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
       build-debug:
         description: If set to true, the Xcode framework is debuggable. For release builds, setting to false produces more optimized binaries.
         required: true
