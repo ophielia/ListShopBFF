@@ -3,15 +3,15 @@ env:
   GITHUB_TOKEN: ${{ github.token }}
 on:
   workflow_call:
-      build-debug:
-        description: If set to true, the Xcode framework is debuggable. For release builds, setting to false produces more optimized binaries.
-        required: true
-        type: boolean
-      publish-tasks:
-        description: By default, the tasks will publish Android AARs and Xcode frameworks. For iOS-only builds, pass in 'kmmBridgePublish'.
-        required: false
-        default: "publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish"
-        type: string
+    build-debug:
+      description: If set to true, the Xcode framework is debuggable. For release builds, setting to false produces more optimized binaries.
+      required: true
+      type: boolean
+    publish-tasks:
+      description: By default, the tasks will publish Android AARs and Xcode frameworks. For iOS-only builds, pass in 'kmmBridgePublish'.
+      required: false
+      default: "publishKotlinMultiplatformPublicationToGitHubPackagesRepository publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository kmmBridgePublish"
+      type: string
 
 permissions:
   contents: write
