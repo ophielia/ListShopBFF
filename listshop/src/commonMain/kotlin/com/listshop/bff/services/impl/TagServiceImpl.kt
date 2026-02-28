@@ -3,6 +3,7 @@ package com.listshop.bff.services.impl
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingListTag
+import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.data.remote.PostApiTag
 import com.listshop.bff.data.remote.PutApiTag
@@ -104,6 +105,16 @@ class TagServiceImpl internal constructor(
         layoutService.retrieveLayoutsAndSaveLocally()
 
         return ShoppingListTag.create(updatedTag, true)
+    }
+
+    override suspend fun searchTags(
+        fragment: String,
+        tagTypes: List<String>,
+        excludeGroups: Boolean
+    ): List<Tag> {
+        val lowerCaseFragment = fragment.lowercase()
+        val tagEntities = tagRepo.searchTags(lowerCaseFragment, tagTypes, excludeGroups)
+        return tagEntities.map { Tag.create(it) }
     }
 
     private suspend fun getOriginalTagFromLocal(tagId: String) : TagEntity {

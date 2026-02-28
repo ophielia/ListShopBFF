@@ -13,5 +13,11 @@ data class Dish(
                 name = apiValue.name ?: ""
             )
         }
+        fun empty(): Dish {
+            return Dish(
+                externalId = "",
+                name = ""
+            )
+        }
     }
 }

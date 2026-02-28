@@ -27,7 +27,7 @@ class DeleteUser(
             analyticsHandle.debug("DeleteUser - end use case")
             return BFFResult(value = null)
         } catch (e: Exception) {
-            analyticsHandle.listShopAnalytics.error("Error in CheckUserNameTaken call")
+            analyticsHandle.listShopAnalytics.error("Error in Delete User call")
             return BFFError.errorFromException(e)
         }
     }

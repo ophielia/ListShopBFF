@@ -57,6 +57,7 @@ internal abstract class BaseServiceLocator(
             sessionService = sessionService,
             listService = listService,
             dishService = dishService,
+            tagService = tagService,
             analyticsHandle = analyticsHandle
         )
     }
@@ -111,6 +112,7 @@ internal abstract class BaseServiceLocator(
         UserServiceImpl(
             remoteApi = userApi,
             sessionService = sessionService,
+            listService = listService,
             analyticsHandle = analyticsHandle
         )
     }

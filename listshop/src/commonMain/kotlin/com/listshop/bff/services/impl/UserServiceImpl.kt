@@ -8,10 +8,13 @@ import com.listshop.bff.data.remote.ApiProperty
 import com.listshop.bff.data.remote.ApiUserProperties
 import com.listshop.bff.data.remote.PostChangePassword
 import com.listshop.bff.data.remote.PostTokenRequest
-import com.listshop.bff.data.remote.PostUserLogin
+import com.listshop.bff.data.remote.PostUser
+import com.listshop.bff.data.remote.PostUserSignin
+import com.listshop.bff.data.remote.PostUserSignup
 import com.listshop.bff.exceptions.BadParameterException
 import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.UserApi
+import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.UserService
 import io.ktor.utils.io.core.toByteArray
@@ -21,6 +24,7 @@ import kotlin.math.min
 
 class UserServiceImpl internal constructor(
     private val remoteApi: UserApi,
+    private val listService: ListService,
     private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
 ) : UserService {
@@ -33,24 +37,24 @@ class UserServiceImpl internal constructor(
         //MM nfl - do properties here
     }
 
-    override suspend fun logoutUser() {
+    override suspend fun logoutUser(isOffline: Boolean) {
         if (sessionService.currentUserSession().userToken == null) {
             throw LoggedOutException("User cannot logout when not logged in")
         }
 
-        // logout on the server
-        try {
-            remoteApi.logoutUser()
-        } catch (e: Exception) {
-            analyticsHandle.listShopAnalytics.debug("remote call to logout failed. continuing logout on device. message: " + e.message)
+        if (!isOffline) {
+            logoutOnServer()
         }
+
+        // remove local list
+        listService.clearLocalList()
 
         // clear session
         sessionService.clearUserSession()
     }
 
     override suspend fun signInUser(userName: String, password: String) {
-        val postLoginUser = prepareSignInOrUpObject(userName, password)
+        val postLoginUser = prepareUserSigninObject(userName, password)
 
         val token = remoteApi.signInUser(postLoginUser)
         analyticsHandle.listShopAnalytics.debug("the token is : " + token)
@@ -63,9 +67,11 @@ class UserServiceImpl internal constructor(
     }
 
     override suspend fun signUpUser(userName: String, password: String) {
-        val postSignupUser = prepareSignInOrUpObject(userName, password)
+        val postSignupUser = prepareUserObject(userName, password)
+        val postDeviceInfo = buildDeviceInfo()
+        val postSignUp = PostUserSignup(postSignupUser, postDeviceInfo, true)
 
-        val token = remoteApi.signUpUser(postSignupUser)
+        val token = remoteApi.signUpUser(postSignUp)
         analyticsHandle.listShopAnalytics.debug("the token is : " + token)
         // save results
         sessionService.setUserLastSignedInToNow()
@@ -137,6 +143,15 @@ class UserServiceImpl internal constructor(
  
     }
 
+    private suspend fun logoutOnServer() {
+        // logout on the server
+        try {
+            remoteApi.logoutUser()
+        } catch (e: Exception) {
+            analyticsHandle.listShopAnalytics.debug("remote call to logout failed. continuing logout on device. message: " + e.message)
+        }
+
+    }
 
     private fun buildDeviceInfo(): ApiDeviceInfo {
         val appInfo = sessionService.currentAppInfo()
@@ -152,11 +167,17 @@ class UserServiceImpl internal constructor(
         )
     }
 
-    private fun prepareSignInOrUpObject(userName: String, password: String): PostUserLogin {
+    private fun prepareUserObject(userName: String, password: String): PostUser {
+        val cleanedName = cleanStringForServer(userName, RemoteConstants.NORMAL_STRING_LENGTH)
+        val cleanedPassword = cleanStringForServer(password, RemoteConstants.NORMAL_STRING_LENGTH)
+        return PostUser(cleanedName, cleanedName, cleanedPassword)
+    }
+
+    private fun prepareUserSigninObject(userName: String, password: String): PostUserSignin {
         val cleanedName = cleanStringForServer(userName, RemoteConstants.NORMAL_STRING_LENGTH)
         val cleanedPassword = cleanStringForServer(password, RemoteConstants.NORMAL_STRING_LENGTH)
         val deviceInfo = buildDeviceInfo()
-        return PostUserLogin(cleanedName, cleanedPassword, deviceInfo)
+        return PostUserSignin(cleanedName, cleanedPassword, deviceInfo)
     }
 
     private fun cleanStringForServer(value: String, length: Int): String {

@@ -6,12 +6,14 @@ import com.listshop.bff.data.remote.ApiRequiredClientVersion
 import com.listshop.bff.data.remote.ApiUserProperties
 import com.listshop.bff.data.remote.PostChangePassword
 import com.listshop.bff.data.remote.PostTokenRequest
-import com.listshop.bff.data.remote.PostUserLogin
+import com.listshop.bff.data.remote.PostUser
+import com.listshop.bff.data.remote.PostUserSignin
+import com.listshop.bff.data.remote.PostUserSignup
 
 public interface UserApi {
 
     suspend fun authenticateUser(postDeviceInfo: ApiDeviceInfo)
-    suspend fun signInUser(postLoginUser: PostUserLogin): String
+    suspend fun signInUser(postLoginUser: PostUserSignin): String
     suspend fun logoutUser()
     suspend fun retrieveRequiredClientVersion(): ApiRequiredClientVersion
     suspend fun checkUserNameIsTaken(payload: PostGenericPayload): Boolean
@@ -20,6 +22,6 @@ public interface UserApi {
     suspend fun retrieveUserProperties(): ApiUserProperties
     suspend fun requestPasswordReset(payload: PostTokenRequest)
     suspend fun deleteUser()
-    suspend fun signUpUser(postSignupUser: PostUserLogin): String
+    suspend fun signUpUser(postSignupUser: PostUserSignup): String
 
 }

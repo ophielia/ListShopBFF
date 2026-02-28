@@ -7,9 +7,9 @@ import com.listshop.bff.data.remote.ApiUserProperties
 import com.listshop.bff.data.remote.ApiWrappedUser
 import com.listshop.bff.data.remote.PostChangePassword
 import com.listshop.bff.data.remote.PostTokenRequest
-import com.listshop.bff.data.remote.PostUserLogin
-import com.listshop.bff.exceptions.ApiException
-import com.listshop.bff.exceptions.AuthenticationException
+import com.listshop.bff.data.remote.PostUser
+import com.listshop.bff.data.remote.PostUserSignin
+import com.listshop.bff.data.remote.PostUserSignup
 import com.listshop.bff.exceptions.LoginException
 import com.listshop.bff.exceptions.LogoutException
 import com.listshop.bff.exceptions.SignUpException
@@ -39,7 +39,7 @@ internal class UserApiImpl(
         }
     }
 
-    override suspend fun signInUser(postLoginUser: PostUserLogin): String {
+    override suspend fun signInUser(postLoginUser: PostUserSignin): String {
 
         val urlString = remoteApi.buildPath("/auth")
         val userLoginPayload = Json.encodeToString(postLoginUser)
@@ -53,10 +53,10 @@ internal class UserApiImpl(
         return wrappedUser.user.token ?: "token"
     }
 
-    override suspend fun signUpUser(postSignUpUser: PostUserLogin): String {
+    override suspend fun signUpUser(postSignupUser: PostUserSignup): String {
 
         val urlString = remoteApi.buildPath("/user")
-        val userPayload = Json.encodeToString(postSignUpUser)
+        val userPayload = Json.encodeToString(postSignupUser)
         val response = remoteApi.postRequest(urlString, userPayload)
 
         remoteApi.mapNonSuccessToException(response.status.value,

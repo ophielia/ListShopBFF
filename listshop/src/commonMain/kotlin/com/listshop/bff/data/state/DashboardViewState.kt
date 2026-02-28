@@ -1,19 +1,21 @@
 package com.listshop.bff.data.state
 
 enum class DashboardViewState {
-     accountView,
+     about,
+     aboutTheApp,
      accountLoggedOut,
      accountNoAccount,
+     accountSettings,
+     accountView,
      changePassword,
      delete,
      deleteConfirm,
-     mainDashboard,
+     fullPrivacy,
      guidesAndSupport,
-     about,
-     aboutTheApp,
-     thirdParty,
+     mainDashboard,
+     manageTags,
      privacy,
-     fullPrivacy
+     thirdParty,
+     userPreferences
 }
-
 

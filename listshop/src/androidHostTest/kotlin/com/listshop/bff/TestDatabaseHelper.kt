@@ -1,6 +1,7 @@
 package com.listshop.bff
 
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.model.Tag
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.ListItemEntity
@@ -205,5 +206,18 @@ class TestDatabaseHelper(
             localLastSynced = null,
             serverListLastSynced = null
         )
+    }
+
+     fun setTags(tags: List<Tag>) {
+        tags.forEach { t ->
+            listShopDatabase.db.tagDefinitionQueries.insertIntoTag(
+                externalId = t.externalId,
+                isGroup = false,
+                name = t.name,
+                parentId = t.parentId,
+                power = "1",
+                tagType = t.tagType,
+                userId = null
+            ) }
     }
 }

@@ -1,35 +1,23 @@
 package com.listshop.bff.client.usecases.onboarding
 
-import com.listshop.analytics.Analytics
-import com.listshop.analytics.AnalyticsHandle
-import com.listshop.analytics.AppInfo
-import com.listshop.analytics.ClientType
-import com.listshop.analytics.initDummyAnalytics
-import com.listshop.bff.SDKHandle
-import com.listshop.bff.dashboardUCPStartup
-import com.listshop.bff.onboardingUCPStartup
-import com.listshop.bff.sessionServiceStartup
-import com.listshop.bff.tagUCPStartup
+import com.listshop.analytics.*
+import com.listshop.bff.*
 import com.listshop.bff.test.server.TestDispatcherBuilder
-import com.listshop.bff.ucp.OnboardingUCP
+import com.listshop.bff.ucp.DashboardUCP
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class ChangePasswordTest {
 
-    var useCaseProvider: OnboardingUCP? = null
+    var useCaseProvider: DashboardUCP? = null
 
     val mockWebServer = MockWebServer()
 
     var analyticsHandle: AnalyticsHandle? = null
 
     var testInitialized = false;
+
     @BeforeTest
     fun setUp() {
         if (testInitialized) {
@@ -38,7 +26,7 @@ class ChangePasswordTest {
 
         mockWebServer.start()
         var baseUrl = mockWebServer.url("").toString()
-        baseUrl = baseUrl.substring(0,baseUrl.length - 1)
+        baseUrl = baseUrl.substring(0, baseUrl.length - 1)
 
         val newAndBetterDispatcher = TestDispatcherBuilder("onboarding/signIn")
             .withConfigFile("loginSuccessConfig.json")
@@ -83,7 +71,7 @@ class ChangePasswordTest {
 
         )
 
-        useCaseProvider = sdkHandle.onboardingUCP
+        useCaseProvider = sdkHandle.dashboardUCP
         testInitialized = true;
     }
 

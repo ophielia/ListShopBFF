@@ -37,3 +37,10 @@ updateTagName:
 UPDATE TagEntity
 SET name = ?
 WHERE externalId = ?;
+
+searchTags:
+SELECT *
+FROM TagEntity
+WHERE lower(name) LIKE ?
+AND tagType IN ?
+AND isGroup = ?;
