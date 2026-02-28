@@ -31,7 +31,7 @@ class SytemLookupTagsTest {
 
     var baseUrl: String = ""
 
-    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/standards")
+    val sampleProvider = TestSampleProvider("src/androidUnitTest/resources/mock/json/standards")
 
     @BeforeTest
     fun setUp() {
