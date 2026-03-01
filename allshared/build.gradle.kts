@@ -16,6 +16,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             export(project(":analytics"))
+            export(project(":listshop"))
             isStatic = true
         }
     }
