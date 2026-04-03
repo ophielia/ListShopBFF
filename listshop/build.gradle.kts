@@ -22,7 +22,11 @@ kotlin {
             isIncludeAndroidResources = true
         }
         minSdk = libs.versions.minSdk.get().toInt()
-
+    }
+    targets.configureEach {
+        if (this.name == "android") {
+            (this as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget)?.publishLibraryVariants("release", "debug")
+        }
     }
     iosX64()
     iosArm64()

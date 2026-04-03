@@ -8,13 +8,15 @@ plugins {
 }
 
 kotlin {
-    /*androidTarget {
-        publishAllLibraryVariants()
-    }*/
     androidLibrary {
         namespace = "com.listshop.bff.anayltics"
         compileSdk = libs.versions.compileSdk.get().toInt()
         compilations.getByName("main")
+    }
+    targets.configureEach {
+        if (this.name == "android") {
+            (this as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget)?.publishLibraryVariants("release", "debug")
+        }
     }
     iosX64()
     iosArm64()
