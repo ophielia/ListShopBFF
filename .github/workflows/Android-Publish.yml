@@ -25,6 +25,7 @@ jobs:
       - name: Publish Android Release
         run: |
           ./gradlew publishAndroidPublicationToGitHubPackagesRepository \
+           -PNATIVE_BUILD_TYPE=DEBUG \
             -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             -PGITHUB_REPO=${{ github.repository }} \
             -PENABLE_PUBLISHING=true \
