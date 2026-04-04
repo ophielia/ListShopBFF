@@ -11,6 +11,7 @@ kotlin {
     androidLibrary {
         namespace = "com.listshop.bff.anayltics"
         compileSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
         compilations.getByName("main")
     }
     targets.configureEach {
