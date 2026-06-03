@@ -1,7 +1,6 @@
 package com.listshop.bff.data.remote
 
 import com.listshop.bff.data.model.TagType
-import com.listshop.bff.db.LayoutCategoryMappingEntity
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -17,10 +16,8 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
     fun `when i deserialize an ApiLayout there aren't any issues`() = runTest {
         val jsonString = loadJsonString("ApiLayoutSample")
         val deserializer = Json{ ignoreUnknownKeys = true }
-        val embeddedLayout = deserializer.decodeFromString<EmbeddedApiLayout>(jsonString)
+        val layout = deserializer.decodeFromString<ApiLayout>(jsonString)
 
-        assertNotNull(embeddedLayout)
-        val layout = embeddedLayout?.embeddedLayout
         assertNotNull(layout)
         // we'll check the basic information
         assertEquals("RoughGrained", layout.name,"name is wrong")
@@ -44,16 +41,14 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
     }
 
     @Test
-    fun `when i deserialize an EmbeddedApiLayoutList there aren't any issues`() = runTest {
+    fun `when i deserialize an ApiLayoutList there aren't any issues`() = runTest {
         val jsonString = loadJsonString("ApiLayoutListSample")
         val deserializer = Json{ ignoreUnknownKeys = true }
-        val embeddedList = deserializer.decodeFromString<EmbeddedApiLayoutList>(jsonString)
+        val layouts = deserializer.decodeFromString<ApiLayoutList>(jsonString)
 
-        assertNotNull(embeddedList)
-        val layoutList = embeddedList.embedded?.layoutList
-        assertEquals(2, layoutList?.size, "list size is wrong")
+        assertEquals(2, layouts?.layoutList?.size, "list size is wrong")
         // first layout
-        val layout = layoutList?.get(0)?.embeddedLayout
+        val layout = layouts?.layoutList?.get(1)
         assertNotNull(layout)
         // we'll check the basic information
         assertEquals("Default", layout.name,"name is wrong")
@@ -63,20 +58,19 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertNotNull(layout.categories)
         // now check the categories
         val categories = layout.categories
-        assertEquals(2, categories.size, "category size is wrong")
+        assertEquals(6, categories.size, "category size is wrong")
 
         // second layout
-        val secondLayout = layoutList?.get(1)?.embeddedLayout
+        val secondLayout = layouts?.layoutList?.get(0)
         assertNotNull(secondLayout)
         // we'll check the basic information
-        assertEquals("Default Two", secondLayout.name,"name is wrong")
-        assertEquals(22, secondLayout.externalId, "external id is wrong")
+        assertEquals("RoughGrained", secondLayout.name,"name is wrong")
+        assertEquals(5, secondLayout.externalId, "external id is wrong")
         assertEquals(true, secondLayout.isDefault, "isDefault is wrong")
-        assertEquals("20",secondLayout.userId, "user id is wrong")
         assertNotNull(secondLayout.categories)
         // now check the categories
         val secondCategories = secondLayout.categories
-        assertEquals(2, secondCategories.size, "category size is wrong")
+        assertEquals(7, secondCategories.size, "category size is wrong")
 
 //PLAYGROUND
         val typesForTreeAsStrings = TagType.entries.map { it.display }

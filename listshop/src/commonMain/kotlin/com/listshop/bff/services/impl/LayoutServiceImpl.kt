@@ -2,7 +2,6 @@ package com.listshop.bff.services.impl
 
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ListShopAnalytics
-import com.listshop.bff.data.remote.ApiLayout
 import com.listshop.bff.remote.LayoutApi
 import com.listshop.bff.repositories.LayoutRepository
 import com.listshop.bff.services.LayoutService
@@ -19,21 +18,16 @@ class LayoutServiceImpl internal constructor(
     override suspend fun retrieveLayoutsAndSaveLocally() {
         // clear all layouts
         layoutRepo.clearLayoutDataLocally()
-        retrieveAndSetDefaultLayout()
-        if (sessionService.currentUserSession().userToken == null) return
-        retrieveAndSetUserLayouts()
-    }
-
-    private suspend fun retrieveAndSetDefaultLayout() {
-        // get default layout
-        val defaultLayout = layoutApi.retrieveDefaultLayout() ?: ApiLayout.empty()
-        layoutRepo.saveLayoutLocally(defaultLayout)
+        retrieveAndSetAllLayouts()
 
     }
 
-    private suspend fun retrieveAndSetUserLayouts() {
-        // get user layouts
-        val userLayouts = layoutApi.retrieveUserLayouts()
+    /* This method always retrieves and saves the default layout.  If a user
+    is logged in, any layouts belonging to that user will also be retrieved and saved.
+     */
+    private suspend fun retrieveAndSetAllLayouts() {
+        // get all layouts
+        val userLayouts = layoutApi.retrieveAllLayouts()
         // save all layouts
         userLayouts
             ?.map { layout -> layout }
@@ -43,7 +37,7 @@ class LayoutServiceImpl internal constructor(
     override suspend fun clearUserLayouts() {
         // clear all layouts
         layoutRepo.clearLayoutDataLocally()
-        retrieveAndSetDefaultLayout()
+        retrieveAndSetAllLayouts()
     }
 
 

@@ -59,8 +59,8 @@ data class EmbeddedApiLayoutList(
 
 @Serializable
 data class ApiLayoutList(
-    @SerialName("list_layout_list")
-    val layoutList: List<EmbeddedApiLayout>?
+    @SerialName("list_layouts")
+    val layoutList: List<ApiLayout>?
 )
 
 @Serializable

@@ -3,18 +3,12 @@ package com.listshop.bff.client.usecases.system
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.data.bff.BFFResult
-import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.model.TagList
-import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
-import com.listshop.bff.data.remote.ApiTagLookupEmbedded
-import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.data.state.TransitionViewState
+import com.listshop.bff.data.remote.ApiTagList
 import com.listshop.bff.services.TestSampleProvider
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.SystemUCP
-import io.ktor.client.call.body
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import kotlin.test.*
@@ -110,9 +104,8 @@ class SytemLookupTagsTest {
     private fun saveLocalTags() {
 
 
-        val apiEmbedded: ApiTagLookupEmbedded = sampleProvider.fillSample<ApiTagLookupEmbedded>("standardTags")
-        val apiTagList =  apiEmbedded.embeddedList.tagLookupResourceList
-            .map { et -> et.embeddedTag }
+        val apiEmbedded: ApiTagList = sampleProvider.fillSample<ApiTagList>("standardTags")
+        val apiTagList =  apiEmbedded.tagList
         val tags = apiTagList.map { at -> Tag.create(at) }
 
         databaseTestHelper?.setTags(tags)

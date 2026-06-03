@@ -21,20 +21,10 @@ data class ApiTag(
     val power: Double? = null
 )
 
-@Serializable
-data class ApiTagLookupEmbeddedTag(
-    @SerialName("tag")
-    val embeddedTag: ApiTag
-)
+
 
 @Serializable
-data class ApiTagLookupResourceList(
-    @SerialName("tagResourceList")
-    val tagLookupResourceList: List<ApiTagLookupEmbeddedTag>
-)
-
-@Serializable
-data class ApiTagLookupEmbedded(
-    @SerialName("_embedded")
-    val embeddedList: ApiTagLookupResourceList
+data class ApiTagList(
+    @SerialName("tag_list")
+    val tagList: List<ApiTag>
 )
