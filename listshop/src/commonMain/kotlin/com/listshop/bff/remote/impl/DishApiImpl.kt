@@ -2,7 +2,7 @@ package com.listshop.bff.remote.impl
 
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.remote.ApiDish
-import com.listshop.bff.data.remote.EmbeddedDishResourceList
+import com.listshop.bff.data.remote.ApiDishList
 import com.listshop.bff.remote.DishApi
 import com.listshop.bff.remote.ListShopRemoteApi
 import io.ktor.client.call.body
@@ -12,16 +12,7 @@ internal class DishApiImpl(
     val analyticsHandle: AnalyticsHandle
 ) : DishApi {
 
-     suspend fun deleteUser() {
-        val urlString = remoteApi.buildPath("/user")
 
-        val response = remoteApi.deleteRequest(urlString)
-
-
-        remoteApi.mapNonSuccessToException(response.status.value,
-            "password reset request failed with status: " + response.status.value
-        )
-    }
 
     override suspend fun searchDishes(queryString: String? ): List<ApiDish> {
         val effectiveQueryString = queryString ?: ""
@@ -35,10 +26,10 @@ internal class DishApiImpl(
             "get shopping list call failed with status: " + response.status.value
         )
 
-        val result: EmbeddedDishResourceList =
+        val result: ApiDishList =
             response.body()
 
-        return result.embeddedList.dishResourceList.map { it.embeddedDish}
+        return result.dishes
     }
 
     /*

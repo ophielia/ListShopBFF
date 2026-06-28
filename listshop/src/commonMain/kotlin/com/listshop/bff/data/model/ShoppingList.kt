@@ -161,7 +161,6 @@ data class ShoppingListItem(
 data class ShoppingListTag(
     var externalId: String,
     var display: String,
-    var tagType: String,
     var categoryId: String?,
     var parentId: String? = null,
     var isUser: Boolean?,
@@ -173,7 +172,6 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = apiValue.tagId ?: "",
                 display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: TagType.INGREDIENT.display,
                 categoryId = null,
                 isUser = null,
             )
@@ -183,7 +181,6 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = dbValue.externalId ?: "",
                 display = dbValue.tagName ?: "",
-                tagType = dbValue.tagType ?: "",
                 categoryId = dbValue.categoryExternalId,
                 isUser = null
             )
@@ -193,7 +190,6 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = apiValue.externalId ?: "",
                 display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: "",
                 categoryId = "",
                 parentId = apiValue.parentId ?: "",
                 isUser = isUser
@@ -204,8 +200,7 @@ data class ShoppingListTag(
 
 
 data class ShoppingListLegend(
-    var legendLkup: Map<String, LegendPoint> = emptyMap(),
-    var legendKeys: List<LegendPoint> = emptyList()
+    var points: List<LegendPoint> = emptyList()
 )
 
 data class LegendPointSource(
@@ -216,122 +211,17 @@ data class LegendPointSource(
 data class LegendPoint(
     var key: String,
     var display: String?,
-    var iconSource: LegendPointSource?
+    var type: LegendPointType,
+    var iconSource: LegendPointSource? = null
 )
 
+enum class LegendPointType(val display: String) {
+    DISH("DISH"),
+    LIST("LIST");
 
-/*
-//MM legend is open
-
-currently, provides map and keys
-map contains LegendPoints - which haven't been coded yet
-
-model implemented like this in ios
-code for legendpoint, legend, and legendpointsource
-public struct LegendPointSource: Codable, Equatable {
-
-
-    let color: String
-    let icon: String
-
-    init(color: String, icon: String) {
-        self.color = color
-        self.icon = icon
-    }
-
-    func toPath(forCircle: Bool) -> String {
-        let base = forCircle ? "circles/" : ""
-        let source = base + color + "/@" + icon
-        return source
-    }
-
-    static public func overflowPoint() -> LegendPointSource {
-        LegendPointSource(color: "orange", icon: "placeholder")
-    }
-
-}
-
-public struct LegendPoint: Codable {
-
-
-    let key: String
-    let display: String
-    var iconSource: LegendPointSource?
-
-    init(key: String,
-         display: String) {
-        self.key = key
-        self.display = display
-        iconSource = nil
-    }
-
-    init(key: String,
-         display: String,
-         iconSource: LegendPointSource) {
-        self.key = key
-        self.display = display
-        self.iconSource = iconSource
-    }
-
-    init(key: String,
-         display: String,
-         icon: String,
-         color: String) {
-        self.key = key
-        self.display = display
-        iconSource = LegendPointSource(color: color, icon: icon)
-    }
-
-    init(networkLegend: ApiLegend) {
-        key = networkLegend.key
-        display = networkLegend.display
-    }
-
-
-}
-
-public struct ShoppingListLegend: Codable {
-    var legendLkup: Dictionary<String, LegendPoint>
-
-    var legendKeys: Array<LegendPoint> {
-        var legendPoints: Array<LegendPoint> = []
-        let itemKeys = legendLkup.keys
-        itemKeys.forEach { key in
-            if let legend = legendLkup[key] {
-                legendPoints.append(legend)
-            }
-        }
-        legendPoints.sort { (point: LegendPoint, point2: LegendPoint) in
-            point.display.capitalized < point2.display.capitalized
-        }
-        return legendPoints
-    }
-
-    init(legendPoints: [LegendPoint]) {
-        legendLkup = [:]
-        legendPoints.forEach { point in
-            legendLkup[point.key] = point
-        }
-
-    }
-
-    func isEmpty() -> Bool {
-        legendLkup.keys.count == 0
-    }
-}
-
-{
     companion object {
-        fun create(apiValue: ApiShoppingListLegend)  : ShoppingListLegend {
-            return ShoppingListLegend(
-                externalId = apiValue.tagId ?: "",
-                display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: TagType.INGREDIENT.display,
-                categoryId = null,
-                isUser = null,
-            )
-        }
+        private val map = entries.associateBy(LegendPointType::display)
+        fun fromDisplay(display: String) = map[display]
     }
 }
 
-*/

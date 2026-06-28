@@ -24,7 +24,26 @@ data class ApiShoppingList(
     @SerialName("categories")
     var categories : List<ApiShoppingListCategory>? = emptyList(),
     @SerialName("legend")
-    val legend : List<ApiLegendItems>
+    val legend : ApiShoppingListLegend
+)
+
+@Serializable
+data class ApiShoppingListLegend(
+
+    @SerialName("name")
+    val points: List<ApiShoppingListLegendPoint>?,
+
+    )
+
+@Serializable
+data class ApiShoppingListLegendPoint(
+
+    @SerialName("display")
+    val display: String?,
+    @SerialName("id")
+    val id: String?,
+    @SerialName("source_type")
+    val sourceType: String?,
 )
 
 @Serializable
@@ -51,14 +70,17 @@ data class ApiShoppingListItem(
     val updated: String? = null,
     @SerialName("crossed_off")
     val crossedOff: String? = null,
-    @SerialName("tag_name")
-    val tagName: String?,
     @SerialName("used_count")
     val usedCount: Int?,
-    @SerialName("source_keys")
+    @SerialName("sources")
     val sourceKeys: List<String>?,
+    @SerialName("amount_type")
+    val amountType: String?,
+
     @SerialName("tag")
     val tag: ApiShoppingListTag,
+    @SerialName("tag_name")
+    val tagName: String?,
 )
 
 @Serializable
@@ -66,12 +88,7 @@ data class ApiShoppingListTag(
     @SerialName("tag_id")
     val tagId: String?,
     @SerialName("name")
-    val name: String?,
-    @SerialName("tag_type")
-    val tagType: String?,
-    @SerialName("is_group")
-    val isGroup: Boolean = false,
-
+    val name: String?
 )
 
 @Serializable
@@ -98,7 +115,7 @@ data class ApiShoppingListResourceList(
 )
 
 @Serializable
-data class ApiShoppingListEmbedded  (
-    @SerialName("_embedded")
-    val embeddedList: ApiShoppingListResourceList
+data class ApiShoppingListList  (
+    @SerialName("list_of_lists")
+    val lists: List<ApiShoppingList>
 )

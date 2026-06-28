@@ -90,8 +90,7 @@ class PutMergeRequestSerializationTest : DeserializationBaseTest() {
     private fun buildTag(tagId: String, name: String, tagType: String): MergeItem.MergeTag {
         return MergeItem.MergeTag(
             tagId = tagId,
-            name = name,
-            tagType = tagType
+            name = name
         )
     }
 

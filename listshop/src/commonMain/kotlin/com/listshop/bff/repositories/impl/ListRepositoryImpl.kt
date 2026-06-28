@@ -102,7 +102,7 @@ class ListRepositoryImpl(
                     updatedOn = it.updatedOn,
                     usedCount = it.usedCount.toLong(),
                     tagName = it.tag.display,
-                    tagType = it.tag.tagType,
+                    tagType = "",  //MM REMOVE IF POSSIBLE
                     legendKeys = ""
                 )
             }

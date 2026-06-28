@@ -2,12 +2,11 @@ package com.listshop.bff.remote.impl
 
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
-import com.listshop.bff.data.remote.ApiShoppingListEmbedded
+import com.listshop.bff.data.remote.ApiShoppingListList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.remote.MergeResult
 import com.listshop.bff.data.remote.PostShoppingList
 import com.listshop.bff.data.remote.PutMergeRequest
-import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.remote.ListShopRemoteApi
 import com.listshop.bff.remote.ShoppingListApi
 import io.ktor.client.call.body
@@ -31,11 +30,10 @@ internal class ShoppingListApiImpl(
             "get shopping list call failed with status: " + response.status.value
         )
 
-        val result: ApiShoppingListEmbedded =
+        val result: ApiShoppingListList =
             response.body()
 
-        return result.embeddedList.shoppingListResourceList
-            .map { el -> el.embeddedList}
+        return result.lists
             .map { el -> ShoppingList.create(apiValue = el) }
     }
 

@@ -1,7 +1,5 @@
 package com.listshop.bff.data.remote
 
-import com.listshop.bff.data.model.TagType
-import com.listshop.bff.db.LayoutCategoryMappingEntity
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -9,7 +7,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
 
@@ -17,9 +14,9 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
     fun `when i deserialize a list of lists there aren't any issues`() = runTest {
         val jsonString = loadJsonString("ApiShoppingListOfListsSample")
         val deserializer = Json{ ignoreUnknownKeys = true }
-        val embeddedList = deserializer.decodeFromString<ApiShoppingListEmbedded>(jsonString)
+        val embeddedList = deserializer.decodeFromString<ApiShoppingListList>(jsonString)
 
-        val listOfLists : List<ApiShoppingList> = embeddedList.embeddedList.shoppingListResourceList.map { it.embeddedList}
+        val listOfLists : List<ApiShoppingList> = embeddedList.lists
         assertNotNull(listOfLists)
         assertFalse(listOfLists.isNullOrEmpty(), "list of lists is empty")
         assertEquals(3, listOfLists.size, "list size is not equal")
@@ -45,10 +42,8 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
     fun `when i deserialize a single list there aren't any issues`() = runTest {
         val jsonString = loadJsonString("ApiShoppingListSample")
         val deserializer = Json{ ignoreUnknownKeys = true }
-        val response = deserializer.decodeFromString<ApiShoppingListEmbeddedList>(jsonString)
+        val list = deserializer.decodeFromString<ApiShoppingList>(jsonString)
 
-        assertNotNull(response)
-        val list = response.embeddedList
         assertNotNull(list)
         assertEquals(51167, list.externalId)
         assertNotNull(list.created)
@@ -59,7 +54,6 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         assertEquals("Monop", list.name)
         assertFalse(list.isStarter ?: false)
         assertEquals(3, list.categories?.size)
-        assertEquals(12, list.legend.size)
         // check category items - frozen, 1 crossed off
         val frozen = list.categories?.first { it.categoryId == 10L }
         assertEquals("Frozen", frozen?.name)

@@ -62,8 +62,6 @@ class TagServiceImpl internal constructor(
 
         // retrieve new tag
         val newTag = tagApi.retrieveTag(newTagId)
-        // set parentid in tag (workaround, while endpoint still isnt returning parent id for single tag
-        newTag.parentId = parentId
 
         // save tag locally
         tagRepo.insertApiTagsLocally(listOf(newTag))
