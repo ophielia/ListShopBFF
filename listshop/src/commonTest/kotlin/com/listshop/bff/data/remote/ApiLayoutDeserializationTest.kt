@@ -21,7 +21,7 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertNotNull(layout)
         // we'll check the basic information
         assertEquals("RoughGrained", layout.name,"name is wrong")
-        assertEquals(5, layout.externalId, "external id is wrong")
+        assertEquals("5", layout.externalId, "external id is wrong")
         assertEquals(true, layout.isDefault, "isDefault is wrong")
         assertNull(layout.userId)
         assertNotNull(layout.categories)
@@ -52,7 +52,7 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertNotNull(layout)
         // we'll check the basic information
         assertEquals("Default", layout.name,"name is wrong")
-        assertEquals(12, layout.externalId, "external id is wrong")
+        assertEquals("12", layout.externalId, "external id is wrong")
         assertEquals(true, layout.isDefault, "isDefault is wrong")
         assertEquals("20",layout.userId, "user id is wrong")
         assertNotNull(layout.categories)
@@ -65,7 +65,7 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertNotNull(secondLayout)
         // we'll check the basic information
         assertEquals("RoughGrained", secondLayout.name,"name is wrong")
-        assertEquals(5, secondLayout.externalId, "external id is wrong")
+        assertEquals("5", secondLayout.externalId, "external id is wrong")
         assertEquals(true, secondLayout.isDefault, "isDefault is wrong")
         assertNotNull(secondLayout.categories)
         // now check the categories

@@ -2,6 +2,7 @@ package com.listshop.bff.services.impl
 
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.ListShopAnalytics
+import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.remote.LayoutApi
 import com.listshop.bff.repositories.LayoutRepository
 import com.listshop.bff.services.LayoutService
@@ -40,6 +41,15 @@ class LayoutServiceImpl internal constructor(
         retrieveAndSetAllLayouts()
     }
 
+    override suspend fun updateLayoutInformationForTag(newTag: ApiTag) {
+        if (newTag.externalId == null  ) {
+            return;
+        }
+
+        // get category for tag
+        val category = layoutApi.retrieveLayoutForTag(newTag.externalId )
+        layoutRepo.saveCategoryMappingLocally(newTag, category);
+    }
 
 }
 

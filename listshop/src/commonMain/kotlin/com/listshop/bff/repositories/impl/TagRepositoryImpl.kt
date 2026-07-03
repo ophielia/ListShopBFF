@@ -38,7 +38,7 @@ class TagRepositoryImpl(
             apiTags.forEach { tag ->
                 dbRef.tagDefinitionQueries.insertIntoTag(
                     tag.externalId,
-                    false, tag.name, tag.parentId, "0", tag.tagType, tag.userId
+                    tag.isgroup ?: false, tag.name, tag.parentId, "0", tag.tagType, tag.userId
                 )
             }
         }

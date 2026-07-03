@@ -16,8 +16,6 @@ class DishServiceImpl internal constructor(
 ) : DishService {
 
 
-    //MM on paper, we're ready for the test
-    // needs some last wiring for locator and UCP
     override suspend fun retrieveDishList(searchParameters: DishSearchParameters): List<Dish> {
         val queryStringParts = ArrayList<String>()
         if (!searchParameters.currentFilterList.isEmpty()) {

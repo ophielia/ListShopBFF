@@ -86,7 +86,7 @@ data class ShoppingListCategory(
     var name: String,
     var displayOrder: Int,
     var items: List<ShoppingListItem>,
-    var externalId: Long
+    var externalId: String
 
 ) {
 
@@ -99,7 +99,7 @@ data class ShoppingListCategory(
                 apiValue.name ?: "",
                 displayOrder = apiValue.displayOrder ?: 0,
                 items = items,
-                externalId = apiValue.categoryId ?: 0,
+                externalId = apiValue.categoryId ?: "",
             )
         }
 
@@ -109,7 +109,7 @@ data class ShoppingListCategory(
                 name = dbValue.name ?: "",
                 displayOrder = dbValue.displayOrder?.toInt() ?: 0,
                 items = items,
-                externalId = dbValue.externalId?.toLong() ?: 0
+                externalId = dbValue.externalId ?: ""
             )
         }
 

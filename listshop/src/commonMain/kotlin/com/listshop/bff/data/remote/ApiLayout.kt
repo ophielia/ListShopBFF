@@ -9,7 +9,7 @@ ApiLayout(
     @SerialName("name")
     val name: String?,
     @SerialName("layout_id")
-    val externalId: Int?,
+    val externalId: String?,
     @SerialName("is_default")
     val isDefault: Boolean = false,
     @SerialName("user_id")
@@ -33,7 +33,7 @@ data class ApiLayoutCategory(
     @SerialName("name")
     val name: String?,
     @SerialName("category_id")
-    val externalId: Int,
+    val externalId: String,
     @SerialName("display_order")
     val displayOrder: Long = 0,
     @SerialName("is_default")

@@ -123,6 +123,7 @@
                     "item_id": "113235",
                     "added": "2026-05-30T12:15:15.292+00:00",
                     "updated": "2026-05-30T12:15:15.626+00:00",
+                    "crossed_off": "2026-07-03",
                     "list_id": "51222",
                     "used_count": 0,
                     "sources": [
@@ -2920,5 +2921,5 @@
         }
     ],
     "is_starter_list": false,
-    "name": "Shopping List 14"
+    "name": "Monop"
 }

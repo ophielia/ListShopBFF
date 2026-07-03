@@ -1,5 +1,7 @@
 package com.listshop.bff.services
 
+import com.listshop.bff.data.remote.ApiLayout
+import com.listshop.bff.data.remote.ApiLayoutCategory
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.TagEntity
 
@@ -42,6 +44,27 @@ class TestUtils {
             val tag1 = ApiTag("1", "tag1")
             val tag2 = ApiTag("2", "tag2")
             return listOf(tag1, tag2)
+        }
+
+        fun dummyApiLayoutList(): List<ApiLayout> {
+            val layout1 = ApiLayout(
+                name = "layout1",
+                externalId = "layout1",
+                isDefault = true,
+                userId = "user1",
+                categories = listOf()
+            )
+            return listOf(layout1)
+        }
+
+        fun dummyApiLayoutCategory(): ApiLayoutCategory {
+            return ApiLayoutCategory(
+                name = "category1",
+                externalId = "cat1",
+                displayOrder = 1,
+                isDefault = false,
+                tags = listOf()
+            )
         }
 
         fun buildTagEntity(name: String, id: Long, parent: Long, isGroup: Boolean): TagEntity {

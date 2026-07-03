@@ -36,14 +36,14 @@ class ShoppingListTest {
         assertEquals(3, testResult.categories.size)
 
         // check category items - frozen, 1 crossed off
-        val frozen = testResult.categories.first { it.externalId == 10L }
+        val frozen = testResult.categories.first { it.externalId.equals("10") }
         assertEquals("Frozen", frozen.name)
         assertEquals(600, frozen.displayOrder)
         assertEquals(1, frozen.items.size)
         // check item crossed off
         assertNotNull(frozen.items.first().crossedOff)
         // check dairy items - should be 5, feta should not be crossed off
-        val dairy = testResult.categories.first { it.externalId == 7L }
+        val dairy = testResult.categories.first { it.externalId.equals("7") }
         assertEquals("Dairy", dairy.name)
         assertEquals(300, dairy.displayOrder)
         assertEquals(5, dairy.items.size)

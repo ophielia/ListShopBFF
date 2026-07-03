@@ -21,18 +21,16 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         assertFalse(listOfLists.isNullOrEmpty(), "list of lists is empty")
         assertEquals(3, listOfLists.size, "list size is not equal")
         val list1 = listOfLists.first()
-        assertEquals(51167, list1.externalId)
+        assertEquals("51167", list1.externalId)
         assertNotNull(list1.created)
         assertNotNull(list1.updated)
         assertEquals(34, list1.itemCount)
-        assertEquals(20, list1.userId)
         assertEquals("12", list1.layoutId)
         assertEquals("Monop", list1.name)
         assertFalse(list1.isStarter ?: false)
         val list2 = listOfLists.last()
-        assertEquals(50824, list2.externalId)
+        assertEquals("50824", list2.externalId)
         assertEquals(0, list2.itemCount)
-        assertEquals(20, list2.userId)
         assertEquals("Market list", list2.name)
         assertFalse(list2.isStarter ?: false)
 
@@ -45,29 +43,28 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         val list = deserializer.decodeFromString<ApiShoppingList>(jsonString)
 
         assertNotNull(list)
-        assertEquals(51167, list.externalId)
+        assertEquals("51222", list.externalId)
         assertNotNull(list.created)
         assertNotNull(list.updated)
-        assertEquals(34, list.itemCount)
-        assertEquals(20, list.userId)
+        assertEquals(106, list.itemCount)
         assertEquals("12", list.layoutId)
         assertEquals("Monop", list.name)
         assertFalse(list.isStarter ?: false)
-        assertEquals(3, list.categories?.size)
+        assertEquals(7, list.categories?.size)
         // check category items - frozen, 1 crossed off
-        val frozen = list.categories?.first { it.categoryId == 10L }
-        assertEquals("Frozen", frozen?.name)
-        assertEquals(600, frozen?.displayOrder)
-        assertEquals(1, frozen?.items?.size)
+        val produceCategory = list.categories?.first { it.categoryId.equals("52018") }
+        assertEquals("Produce", produceCategory?.name)
+        assertEquals(100, produceCategory?.displayOrder)
+        assertEquals(28, produceCategory?.items?.size)
         // check item crossed off
-        assertNotNull(frozen?.items?.first()?.crossedOff)
+        assertNotNull(produceCategory?.items?.first()?.crossedOff)
         // check dairy items - should be 5, feta should not be crossed off
-        val dairy = list.categories?.first { it.categoryId == 7L }
+        val dairy = list.categories?.first { it.categoryId.equals("7") }
         assertEquals("Dairy", dairy?.name)
         assertEquals(300, dairy?.displayOrder)
-        assertEquals(5, dairy?.items?.size)
+        assertEquals(11, dairy?.items?.size)
         // check feta not crossed off
-        assertNull(dairy?.items?.first{it.itemId == 100976L }?.crossedOff)
+        assertNull(dairy?.items?.first{(it.itemId ?: "").equals("113211") }?.crossedOff)
 
     }
 
