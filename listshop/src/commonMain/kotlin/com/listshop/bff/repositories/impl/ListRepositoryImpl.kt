@@ -2,6 +2,7 @@ package com.listshop.bff.repositories.impl
 
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.model.ShoppingListCategory
+import com.listshop.bff.data.model.ShoppingListItem
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ListshopDb
@@ -12,6 +13,7 @@ import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.text.toLong
 
 class ListRepositoryImpl(
     private val listShopDatabase: ListShopDatabase,
@@ -90,22 +92,12 @@ class ListRepositoryImpl(
         val listId = shoppingList.externalId ?: "0"
         // go through all categories, pulling items
         for (cat in shoppingList.categories) {
-            val catId = cat.externalId.toString()
-            val items = cat.items.map {
-                ListItemEntity(
-                    externalId = it.externalId.toString(),
-                    categoryExternalId = catId,
-                    tagExternalId = it.tag.externalId,
-                    added = it.added,
-                    removed = it.removed,
-                    crossedOff = it.crossedOff,
-                    updatedOn = it.updatedOn,
-                    usedCount = it.usedCount.toLong(),
-                    tagName = it.tag.display,
-                    tagType = "",  //MM REMOVE IF POSSIBLE
-                    legendKeys = ""
-                )
-            }
+            val catId = cat.externalId
+            val items = cat.items.map {mapShoppingListItem(it, catId)}
+
+
+
+
             insertListItems(items)
             val categoryEntity =
                 ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder.toLong())
@@ -124,6 +116,24 @@ class ListRepositoryImpl(
             isStarter = shoppingList.isStarterList ?: false,
         )
         insertList(listEntity)
+    }
+
+    private fun mapShoppingListItem(it: ShoppingListItem, catId: String): ListItemEntity {
+
+        return ListItemEntity(
+            externalId = it.externalId,
+            categoryExternalId = catId,
+            tagExternalId = it.tag.externalId,
+            added = it.added,
+            removed = it.removed,
+            crossedOff = it.crossedOff,
+            updatedOn = it.updatedOn,
+            usedCount = it.usedCount.toLong(),
+            tagName = it.tag.display,
+            quantity = it.amount?.quantity,
+            tagType = "",  //MM REMOVE IF POSSIBLE
+            legendKeys = ""
+        )
     }
 
     private fun insertList(listEntity: ShoppingListEntity) {
@@ -165,6 +175,7 @@ class ListRepositoryImpl(
                         crossedOff = listItemEntity.crossedOff,
                         usedCount = listItemEntity.usedCount,
                         tagName = listItemEntity.tagName,
+                        quantity = listItemEntity.quantity,
                         tagType = listItemEntity.tagType,
                         legendKeys = listItemEntity.legendKeys,
                     )

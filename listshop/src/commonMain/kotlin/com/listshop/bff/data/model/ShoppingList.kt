@@ -1,13 +1,16 @@
 package com.listshop.bff.data.model
 
 import com.listshop.bff.data.remote.ApiShoppingList
+import com.listshop.bff.data.remote.ApiShoppingListAmount
 import com.listshop.bff.data.remote.ApiShoppingListCategory
+import com.listshop.bff.data.remote.ApiShoppingListDetails
 import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
+import kotlinx.datetime.Clock
 
 data class ShoppingList(
     var externalId: String?,
@@ -28,8 +31,9 @@ data class ShoppingList(
     companion object Factory {
         fun create(apiValue: ApiShoppingList): ShoppingList {
             val categories = apiValue.categories?.map { ShoppingListCategory.create(it) }
+            val now = Clock.System.now().toString()
             return ShoppingList(
-                apiValue.externalId.toString(),
+                apiValue.externalId,
                 apiValue.name,
                 categories ?: emptyList(),
                 created = apiValue.created,
@@ -39,7 +43,7 @@ data class ShoppingList(
                 isStarterList = apiValue.isStarter,
                 loading = false,
                 lastLocalChange = null,
-                lastSynced = null,
+                lastSynced = now,
                 legend = ShoppingListLegend()
             )
         }
@@ -124,20 +128,27 @@ data class ShoppingListItem(
     var crossedOff: String?,
     var usedCount: Int,
     var tag: ShoppingListTag,
+    var amount: ListShopAmount?,
+    var details: List<ShoppingListDetail> = emptyList(),
+    var amountType: String? = null,
     var legendKeys: List<String> = emptyList()
 
 
 ) {
     companion object Factory {
         fun create(apiValue: ApiShoppingListItem): ShoppingListItem {
+            val details = apiValue.details.map { ShoppingListDetail.create(it) }
             return ShoppingListItem(
-                externalId = apiValue.itemId.toString(),
+                externalId = apiValue.itemId ?: "",
                 added = apiValue.added ?: "",
                 removed = null,
                 updatedOn = apiValue.updated,
                 crossedOff = apiValue.crossedOff,
                 usedCount = apiValue.usedCount ?: 0,
                 tag = ShoppingListTag.create(apiValue = apiValue.tag),
+                amount = ListShopAmount.create(apiValue = apiValue.amount),
+                details = details,
+                amountType = apiValue.amountType,
                 legendKeys = apiValue.sourceKeys ?: emptyList(),
             )
         }
@@ -152,6 +163,17 @@ data class ShoppingListItem(
                 crossedOff = dbValue.crossedOff,
                 usedCount = dbValue.usedCount?.toInt() ?: 0,
                 tag = tag,
+                amount = if (dbValue.quantity != null) {
+                    ListShopAmount(
+                        quantity = dbValue.quantity,
+                        wholeQuantity = null,
+                        roundedQuantity = null,
+                        quantityDisplay = null,
+                        unitId = null,
+                        unitDisplay = null,
+                        amountDisplay = null
+                    )
+                } else null,
                 legendKeys = emptyList()
             )
         }
@@ -173,7 +195,7 @@ data class ShoppingListTag(
                 externalId = apiValue.tagId ?: "",
                 display = apiValue.name ?: "",
                 categoryId = null,
-                isUser = null,
+                isUser = null ,
             )
         }
 
@@ -198,7 +220,51 @@ data class ShoppingListTag(
     }
 }
 
+data class ListShopAmount(
+    var quantity: Double?,
+    var wholeQuantity: Int?,
+    var roundedQuantity: Double?,
+    var quantityDisplay: String?,
+    var unitId: String?,
+    var unitDisplay: String?,
+    var amountDisplay: String?
+) {
+    companion object {
+        fun create(apiValue: ApiShoppingListAmount?) : ListShopAmount? {
+            if (apiValue == null) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = apiValue.quantity,
+                wholeQuantity = apiValue.wholeQuantity,
+                roundedQuantity = apiValue.roundedQuantity,
+                quantityDisplay = apiValue.quantityDisplay,
+                unitId = apiValue.unitId,
+                unitDisplay = apiValue.unitDisplay,
+                amountDisplay = apiValue.display
+            )
+        }
+    }
+}
 
+data class ShoppingListDetail(
+    var amount: ListShopAmount?,
+    var dishId: String?,
+    var listId: String?,
+    var containsUnspecified: Boolean = false
+)
+{
+    companion object {
+        fun create(apiValue: ApiShoppingListDetails): ShoppingListDetail {
+            return ShoppingListDetail(
+                amount = ListShopAmount.create(apiValue = apiValue.amount),
+                dishId = apiValue.linkedDishId,
+                listId = apiValue.linkedListId,
+                containsUnspecified = apiValue.containsUnspecified ?: false
+            )
+        }
+    }
+}
 data class ShoppingListLegend(
     var points: List<LegendPoint> = emptyList()
 )

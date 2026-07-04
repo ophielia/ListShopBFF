@@ -43,8 +43,8 @@ INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
 VALUES (?, ?, ?, ?);
 
 insertIntoListItemEntity:
-INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, tagType, legendKeys)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, quantity, tagType, legendKeys)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 removeAllShoppingListEntities:
 DELETE FROM ShoppingListEntity;

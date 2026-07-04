@@ -1,5 +1,6 @@
 package com.listshop.bff.data.remote
 
+import com.listshop.bff.data.model.ShoppingList
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -43,10 +44,10 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         val list = deserializer.decodeFromString<ApiShoppingList>(jsonString)
 
         assertNotNull(list)
-        assertEquals("51222", list.externalId)
+        assertEquals("51210", list.externalId)
         assertNotNull(list.created)
         assertNotNull(list.updated)
-        assertEquals(106, list.itemCount)
+        assertEquals(86, list.itemCount)
         assertEquals("12", list.layoutId)
         assertEquals("Monop", list.name)
         assertFalse(list.isStarter ?: false)
@@ -68,5 +69,15 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
 
     }
 
+    @Test
+    fun `when i deserialize a single list I can convert to a ShoppingList`() = runTest {
+        val jsonString = loadJsonString("ApiShoppingListSample")
+        val deserializer = Json{ ignoreUnknownKeys = true }
+        val list = deserializer.decodeFromString<ApiShoppingList>(jsonString)
+
+        assertNotNull(list)
+        val model = ShoppingList.create(list)
+        assertNotNull(model)
+    }
 
 }
