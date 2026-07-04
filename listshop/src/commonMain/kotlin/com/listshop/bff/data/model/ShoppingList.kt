@@ -8,9 +8,11 @@ import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListCategoryEntity
+import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
 import kotlinx.datetime.Clock
+import kotlin.jvm.JvmName
 
 data class ShoppingList(
     var externalId: String?,
@@ -107,6 +109,7 @@ data class ShoppingListCategory(
             )
         }
 
+        @JvmName("createFromDbEntities")
         fun create(dbValue: ListCategoryEntity, dbItems: List<ListItemEntity>): ShoppingListCategory {
             val items = dbItems.map { ShoppingListItem.create(it) }
             return ShoppingListCategory(
@@ -117,6 +120,14 @@ data class ShoppingListCategory(
             )
         }
 
+        fun create(dbValue: ListCategoryEntity, items: List<ShoppingListItem>): ShoppingListCategory {
+            return ShoppingListCategory(
+                name = dbValue.name ?: "",
+                displayOrder = dbValue.displayOrder?.toInt() ?: 0,
+                items = items,
+                externalId = dbValue.externalId ?: ""
+            )
+        }
     }
 }
 
@@ -174,6 +185,23 @@ data class ShoppingListItem(
                         amountDisplay = dbValue.amountDisplay
                     )
                 } else null,
+                legendKeys = dbValue.legendKeys?.split(",")?.filter { it.isNotEmpty() } ?: emptyList()
+            )
+        }
+
+        fun create(dbValue: ListItemEntity, details: List<ListItemDetailEntity>): ShoppingListItem {
+            val detailList = details.map { ShoppingListDetail.create(it) }
+            val tag = ShoppingListTag.create(dbValue)
+            return ShoppingListItem(
+                externalId = dbValue.externalId ?: "0",
+                added = dbValue.added ?: "",
+                removed = dbValue.removed ?: "",
+                updatedOn = dbValue.updatedOn ?: "",
+                crossedOff = dbValue.crossedOff,
+                usedCount = dbValue.usedCount?.toInt() ?: 0,
+                tag = tag,
+                amount = ListShopAmount.create(dbValue),
+                details = detailList,
                 legendKeys = dbValue.legendKeys?.split(",")?.filter { it.isNotEmpty() } ?: emptyList()
             )
         }
@@ -244,6 +272,37 @@ data class ListShopAmount(
                 amountDisplay = apiValue.display
             )
         }
+
+        fun create(dbListDetail: ListItemDetailEntity?) : ListShopAmount? {
+            if (dbListDetail == null || (dbListDetail.quantity == null && dbListDetail.wholeQuantity == null)) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = dbListDetail.quantity,
+                wholeQuantity = dbListDetail.wholeQuantity,
+                roundedQuantity = dbListDetail.roundedQuantity,
+                quantityDisplay = dbListDetail.quantityDisplay,
+                unitId = dbListDetail.unitId,
+                unitDisplay = dbListDetail.unitDisplay,
+                amountDisplay = dbListDetail.amountDisplay
+            )
+        }
+
+
+        fun create(dbListItem: ListItemEntity?) : ListShopAmount? {
+            if (dbListItem == null || (dbListItem.quantity == null && dbListItem.wholeQuantity == null)) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = dbListItem.quantity,
+                wholeQuantity = dbListItem.wholeQuantity,
+                roundedQuantity = dbListItem.roundedQuantity,
+                quantityDisplay = dbListItem.quantityDisplay,
+                unitId = dbListItem.unitId,
+                unitDisplay = dbListItem.unitDisplay,
+                amountDisplay = dbListItem.amountDisplay
+            )
+        }
     }
 }
 
@@ -261,6 +320,14 @@ data class ShoppingListDetail(
                 dishId = apiValue.linkedDishId,
                 listId = apiValue.linkedListId,
                 containsUnspecified = apiValue.containsUnspecified ?: false
+            )
+        }
+        fun create(dbValue: ListItemDetailEntity): ShoppingListDetail {
+            return ShoppingListDetail(
+                amount = ListShopAmount.create(dbValue),
+                dishId = dbValue.dishId,
+                listId = dbValue.listId,
+                containsUnspecified = dbValue.containsUnspecified
             )
         }
     }

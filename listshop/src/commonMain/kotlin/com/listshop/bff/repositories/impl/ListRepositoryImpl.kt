@@ -34,18 +34,25 @@ class ListRepositoryImpl(
         if (localLists.isEmpty()) {
             return null;
         }
+        // only one list is saved at a time
         val localList = localLists.first()
         val localListId = localList.externalId
         // get categories
         val categories = dbRef.listDefinitionQueries.selectAllCategoriesForList(localListId).executeAsList()
         val modelCategories = mutableListOf<ShoppingListCategory>()
         for (category in categories) {
-            val items =
-                dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
+            val items = retrieveListItems(category.externalId ?: "0")
             modelCategories.add(ShoppingListCategory.create(category, items))
         }
 
         return ShoppingList.create(localList, modelCategories)
+    }
+
+    fun retrieveListItems(listId: String): List<ShoppingListItem> {
+        val dbItems = dbRef.listDefinitionQueries.selectAllItemsForCategory(listId).executeAsList()
+        val dbItemDetails = dbRef.listDefinitionQueries.selectAllDetailsForCategory(listId).executeAsList()
+        val itemDetailMap = dbItemDetails.groupBy { it.itemExternalId }
+        return dbItems.map { ShoppingListItem.create(it, itemDetailMap[it.externalId] ?: emptyList()) }
     }
 
     override fun retrieveOrCreateLocalList(): ShoppingList {

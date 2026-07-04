@@ -104,12 +104,11 @@ SELECT *
 FROM ListItemEntity
 WHERE categoryExternalId = ?;
 
-selectAllDetailsForItem:
+selectAllDetailsForCategory:
 SELECT *
 FROM ListItemDetailEntity
-WHERE itemExternalId = ?;
-
-
+JOIN ListItemEntity ON ListItemEntity.externalId = ListItemDetailEntity.itemExternalId
+WHERE ListItemEntity.categoryExternalId = ?;
 
 
 updateListId:
