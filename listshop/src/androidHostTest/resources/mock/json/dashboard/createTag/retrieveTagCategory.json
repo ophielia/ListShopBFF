@@ -1,0 +1,14 @@
+{
+  "name": "Dairy",
+  "category_id": "7",
+  "display_order": 300,
+  "tags": [
+    {
+      "tag_id": "9876",
+      "name": "tagName"
+    }
+
+
+  ],
+  "is_default": false
+}

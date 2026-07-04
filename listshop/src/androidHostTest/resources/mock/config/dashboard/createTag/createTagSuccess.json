@@ -1,7 +1,7 @@
 {
   "label": "createTagSuccess",
   "requestMethod": "POST",
-  "requestPath": "/tag/1234/child",
+  "requestPath": "/v2/tag/1234/child",
   "requestBodyFilename": "dashboard/createTag/postTagRequest.json",
   "responseStatus": 200,
   "responseBodyFilename": "emptyResponse.json",
