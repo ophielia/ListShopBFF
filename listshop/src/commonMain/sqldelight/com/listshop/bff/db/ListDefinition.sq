@@ -1,4 +1,5 @@
 import kotlin.Boolean;
+import kotlin.Int;
 
 CREATE TABLE ShoppingListEntity (
     name TEXT,
@@ -7,7 +8,7 @@ CREATE TABLE ShoppingListEntity (
     updatedOn TEXT,
     lastLocalChange TEXT,
     lastSync TEXT,
-    itemCount INTEGER,
+    itemCount INTEGER AS Int,
     layoutId TEXT,
     isStarter  INTEGER AS Boolean NOT NULL
 );
@@ -17,7 +18,7 @@ CREATE TABLE ListCategoryEntity (
     name TEXT,
     externalId TEXT,
     listExternalId TEXT,
-    displayOrder INTEGER
+    displayOrder INTEGER AS Int
 );
 
 CREATE TABLE ListItemEntity (
@@ -28,10 +29,31 @@ CREATE TABLE ListItemEntity (
     removed TEXT,
     updatedOn TEXT,
     crossedOff TEXT,
-    usedCount INTEGER,
+    usedCount INTEGER AS Int,
     tagName TEXT,
+    quantity REAL,
+    wholeQuantity INTEGER AS Int,
+    roundedQuantity REAL,
+    quantityDisplay TEXT,
+    unitId TEXT,
+    unitDisplay TEXT,
+    amountDisplay TEXT,
     tagType TEXT,
     legendKeys TEXT
+);
+
+CREATE TABLE ListItemDetailEntity (
+    itemExternalId TEXT,
+    dishId TEXT,
+    listId TEXT,
+    containsUnspecified INTEGER AS Boolean NOT NULL,
+    quantity REAL,
+    wholeQuantity INTEGER AS Int,
+    roundedQuantity REAL,
+    quantityDisplay TEXT,
+    unitId TEXT,
+    unitDisplay TEXT,
+    amountDisplay TEXT
 );
 
 insertIntoShoppingListEntity:
@@ -43,8 +65,12 @@ INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
 VALUES (?, ?, ?, ?);
 
 insertIntoListItemEntity:
-INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, quantity, tagType, legendKeys)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, quantity, wholeQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay, tagType, legendKeys)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+insertIntoListItemDetailEntity:
+INSERT INTO ListItemDetailEntity(itemExternalId, dishId, listId, containsUnspecified, quantity, wholeQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 removeAllShoppingListEntities:
 DELETE FROM ShoppingListEntity;
@@ -55,10 +81,14 @@ DELETE FROM ListCategoryEntity;
 removeAllListItemEntities:
 DELETE FROM ListItemEntity;
 
+removeAllListItemDetailEntities:
+DELETE FROM ListItemDetailEntity;
+
 removeAllData:
 DELETE FROM ShoppingListEntity;
 DELETE FROM ListCategoryEntity;
 DELETE FROM ListItemEntity;
+DELETE FROM ListItemDetailEntity;
 
 selectAllLists:
 SELECT ShoppingListEntity.*
@@ -73,6 +103,11 @@ selectAllItemsForCategory:
 SELECT *
 FROM ListItemEntity
 WHERE categoryExternalId = ?;
+
+selectAllDetailsForItem:
+SELECT *
+FROM ListItemDetailEntity
+WHERE itemExternalId = ?;
 
 
 

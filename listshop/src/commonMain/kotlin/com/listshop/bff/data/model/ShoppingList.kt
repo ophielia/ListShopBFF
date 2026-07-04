@@ -163,18 +163,18 @@ data class ShoppingListItem(
                 crossedOff = dbValue.crossedOff,
                 usedCount = dbValue.usedCount?.toInt() ?: 0,
                 tag = tag,
-                amount = if (dbValue.quantity != null) {
+                amount = if (dbValue.quantity != null || dbValue.wholeQuantity != null) {
                     ListShopAmount(
                         quantity = dbValue.quantity,
-                        wholeQuantity = null,
-                        roundedQuantity = null,
-                        quantityDisplay = null,
-                        unitId = null,
-                        unitDisplay = null,
-                        amountDisplay = null
+                        wholeQuantity = dbValue.wholeQuantity?.toInt(),
+                        roundedQuantity = dbValue.roundedQuantity,
+                        quantityDisplay = dbValue.quantityDisplay,
+                        unitId = dbValue.unitId,
+                        unitDisplay = dbValue.unitDisplay,
+                        amountDisplay = dbValue.amountDisplay
                     )
                 } else null,
-                legendKeys = emptyList()
+                legendKeys = dbValue.legendKeys?.split(",")?.filter { it.isNotEmpty() } ?: emptyList()
             )
         }
     }
