@@ -14,7 +14,7 @@ data class ApiShoppingList(
     @SerialName("item_count")
     val itemCount: Int?,
     @SerialName("layout_id")
-    val layoutId: String?,
+    val layoutId: String? = "",
     @SerialName("name")
     var name: String?,
     @SerialName("is_starter_list")
@@ -22,7 +22,7 @@ data class ApiShoppingList(
     @SerialName("categories")
     var categories : List<ApiShoppingListCategory>? = emptyList(),
     @SerialName("legend")
-    val legend : List<ApiShoppingListLegendPoint>?
+    val legend : List<ApiShoppingListLegendPoint>? = emptyList()
 )
 
 @Serializable

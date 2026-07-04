@@ -18,7 +18,7 @@ internal class TagApiImpl(
 
     override suspend fun getAllTags(): List<Tag> {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/v2/tag/user")
+        val urlString = remoteApi.buildPath("/v2/tag")
         val response = remoteApi.client(token).get(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,
@@ -32,7 +32,7 @@ internal class TagApiImpl(
 
     override suspend fun retrieveApiTags(): List<ApiTag> {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/v2/tag/user")
+        val urlString = remoteApi.buildPath("/v2/tag")
         val response = remoteApi.client(token).get(urlString)
 
         remoteApi.mapNonSuccessToException(response.status.value,

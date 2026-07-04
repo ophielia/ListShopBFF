@@ -2,6 +2,7 @@ package com.listshop.bff.remote.impl
 
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.remote.MergeResult
@@ -20,7 +21,7 @@ internal class ShoppingListApiImpl(
 
     override suspend fun getAllShoppingLists(): List<ShoppingList> {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/shoppinglist")
+        val urlString = remoteApi.buildPath("/v2/shoppinglist")
         listShopAnalytics.debug("getting lists, the token is: " + token)
 
         val response = remoteApi.getRequest(urlString)
@@ -39,7 +40,7 @@ internal class ShoppingListApiImpl(
 
     override suspend fun retrieveMostRecentList(): ShoppingList {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/shoppinglist/mostrecent")
+        val urlString = remoteApi.buildPath("/v2/shoppinglist/mostrecent")
         listShopAnalytics.debug("getting most recent list, the token is: " + token)
 
         val response = remoteApi.getRequest(urlString)
@@ -49,9 +50,9 @@ internal class ShoppingListApiImpl(
             "get shopping list call failed with status: " + response.status.value
         )
 
-        val result : ApiShoppingListEmbeddedList = response.body()
+        val result : ApiShoppingList = response.body()
 
-        return ShoppingList.create(apiValue = result.embeddedList)
+        return ShoppingList.create(apiValue = result)
     }
 
     override suspend fun retrieveListById(serverId: String): ShoppingList {
@@ -85,7 +86,7 @@ internal class ShoppingListApiImpl(
 
     override suspend fun mergeLocalListWithServer(listMergeRequest: PutMergeRequest) : ShoppingList {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/shoppinglist/shared")
+        val urlString = remoteApi.buildPath("/v2/shoppinglist/shared")
         listShopAnalytics.debug("merging the local list with the server list, the token is: " + token)
 
         // convert object to json payload

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PutMergeRequest(
     @SerialName("list_id")
-    val listId: Long,
+    val listId: String,
     @SerialName("last_changed")
     val lastChanged: String?,
     @SerialName("layout_id")

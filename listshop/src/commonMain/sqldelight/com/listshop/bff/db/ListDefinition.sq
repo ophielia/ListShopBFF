@@ -105,7 +105,7 @@ FROM ListItemEntity
 WHERE categoryExternalId = ?;
 
 selectAllDetailsForCategory:
-SELECT *
+SELECT ListItemDetailEntity.*
 FROM ListItemDetailEntity
 JOIN ListItemEntity ON ListItemEntity.externalId = ListItemDetailEntity.itemExternalId
 WHERE ListItemEntity.categoryExternalId = ?;
