@@ -91,7 +91,7 @@ class NavigateToDishManagementTest {
         assertTrue(result.value is TransitionViewState.DishManagementScreen)
         val list = (result.value as TransitionViewState.DishManagementScreen).dishes
         assertNotNull(list)
-        assertEquals(9, list.dishes.size)
+        assertEquals(8, list.dishes.size)
 
 
     }

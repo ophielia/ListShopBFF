@@ -1,126 +1,37 @@
 {
-    "links": [
-        "https://nastyvarmits.fr/listlayout"
-    ],
-    "_embedded": {
-        "dishResourceList": [
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": "64",
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 56890,
-                    "name": "Roasted Tuna",
-                    "user_id": 20,
-                    "last_added": "2023-11-08T06:57:12.696+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": null,
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 97,
-                    "name": "mashed potatoes",
-                    "user_id": 20,
-                    "last_added": "2025-12-21T08:33:00.734+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": "86",
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 56817,
-                    "name": "spicy black bean empanada filling",
-                    "user_id": 20,
-                    "last_added": "2023-09-28T16:34:57.913+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": "4 servings - per serving - 489 calories; 23 grams fat; 7 grams saturated fat; 12 grams monounsaturated fat; 2 grams polyunsaturated fat; 49 grams carbohydrates; 11 grams dietary fiber; 2 grams sugars; 24 grams protein; 717 milligrams sodium",
-                    "reference": "180",
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 56877,
-                    "name": "Cheesy White Bean Tomato Bake",
-                    "user_id": 20,
-                    "last_added": "2025-10-25T12:03:08.463+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": null,
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 57690,
-                    "name": "Brookies by Louise",
-                    "user_id": 20,
-                    "last_added": "2025-03-30T08:03:42.355+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": null,
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 56671,
-                    "name": "Crock Pot Texas Hash",
-                    "user_id": 20,
-                    "last_added": "2024-05-18T12:04:45.049+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": "63",
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 56891,
-                    "name": "Slow-Cooker Butter Chicken",
-                    "user_id": 20,
-                    "last_added": "2023-06-26T18:01:22.819+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": "40",
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 61,
-                    "name": "Slow Cooker Beef Stew",
-                    "user_id": 20,
-                    "last_added": "2023-05-18T17:05:41.081+00:00"
-                }
-            },
-            {
-                "links": [],
-                "dish": {
-                    "description": null,
-                    "reference": null,
-                    "tags": [],
-                    "ingredients": [],
-                    "dish_id": 74,
-                    "name": "couscous",
-                    "user_id": 20,
-                    "last_added": "2025-03-01T08:43:19.162+00:00"
-                }
-            }
-        ]
-    }
+    "dish_list": [
+        {
+            "name": "turkish eggs",
+            "dish_id": "57793"
+        },
+        {
+            "name": "cheddar tomato mac n cheese",
+            "dish_id": "57792"
+        },
+        {
+            "name": "butternut squash and green curry soup",
+            "dish_id": "57791"
+        },
+        {
+            "name": "cheesy gnocchi",
+            "dish_id": "57790"
+        },
+        {
+            "name": "slow cooker winter soup",
+            "dish_id": "57789"
+        },
+        {
+            "name": "cream cheese frosting",
+            "dish_id": "57788"
+        },
+        {
+            "name": "ras el hanout chickpea stew",
+            "dish_id": "57787"
+        },
+        {
+            "name": "side of meat",
+            "dish_id": "57786"
+        }
+
+    ]
 }
