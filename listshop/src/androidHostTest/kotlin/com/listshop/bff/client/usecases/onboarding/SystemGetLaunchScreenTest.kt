@@ -8,6 +8,7 @@ import com.listshop.analytics.initDummyAnalytics
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
@@ -335,8 +336,8 @@ class SystemGetLaunchScreenTest {
 
 
     private fun loadStandardListLocally() {
-        val apiEmbedded = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("standardListAsApi")
-        val shoppingList = ShoppingList.Factory.create(apiEmbedded.embeddedList)
+        val apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardListAsApi")
+        val shoppingList = ShoppingList.Factory.create(apiEmbedded)
         databaseTestHelper?.setShoppingList(shoppingList)
     }
 

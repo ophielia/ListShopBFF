@@ -1,7 +1,7 @@
 {
   "label": "getMostRecentList",
   "requestMethod": "GET",
-  "requestPath": "/shoppinglist/mostrecent",
+  "requestPath": "/v2/shoppinglist/mostrecent",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "launchScreen/mostRecentShoppingList.json"
