@@ -27,15 +27,15 @@ class ApiLayoutDeserializationTest : DeserializationBaseTest() {
         assertNotNull(layout.categories)
         // now check the categories
         val categories = layout.categories
-        assertEquals(2, categories.size, "category size is wrong")
+        assertEquals(7, categories.size, "category size is wrong")
         val dairyCategory = categories.filter{ cat -> cat.name == "Dairy" }.first()
         assertNotNull(dairyCategory)
-        assertEquals(5, dairyCategory.tags?.size, "dairy category size is wrong")
+        assertEquals(83, dairyCategory.tags?.size, "dairy category size is wrong")
         assertEquals(300, dairyCategory.displayOrder, "external id is wrong")
         assertFalse(dairyCategory.isDefault, "isDefault is wrong")
         val noCatCategory = categories.filter{ cat -> cat.name == "Not (yet) categorized" }.first()
         assertNotNull(noCatCategory)
-        assertEquals(3, noCatCategory.tags?.size, "dairy category size is wrong")
+        assertEquals(20, noCatCategory.tags?.size, "uncategorized category size is wrong")
         assertEquals(700, noCatCategory.displayOrder, "external id is wrong")
         assertTrue(noCatCategory.isDefault, "isDefault is wrong")
     }

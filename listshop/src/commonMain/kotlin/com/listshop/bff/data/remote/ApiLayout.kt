@@ -13,7 +13,7 @@ ApiLayout(
     @SerialName("is_default")
     val isDefault: Boolean = false,
     @SerialName("user_id")
-    val userId: String?,
+    val userId: String? = null,
     @SerialName("categories")
     val categories: List<ApiLayoutCategory> = listOf()
 )  {
