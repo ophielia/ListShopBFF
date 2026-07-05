@@ -24,6 +24,7 @@ compose = "1.7.6"
 
 # Test
 mokkery = "2.9.0"
+kover = "0.9.8"
 gson = "2.11.0"
 mock-server = "4.12.0"
 kotest = "5.8.1"
@@ -96,6 +97,7 @@ cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotli
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "android-gradle-plugin" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
 
 [bundles]

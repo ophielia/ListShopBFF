@@ -142,6 +142,7 @@ class ListRepositoryImpl(
             tagName = it.tag.display,
             quantity = it.amount?.quantity,
             wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
             roundedQuantity = it.amount?.roundedQuantity,
             quantityDisplay = it.amount?.quantityDisplay,
             unitId = it.amount?.unitId,
@@ -164,6 +165,7 @@ class ListRepositoryImpl(
             unitDisplay = it.amount?.unitDisplay,
             amountDisplay = it.amount?.amountDisplay,
             wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
             roundedQuantity = it.amount?.roundedQuantity
         )
     }
@@ -209,6 +211,7 @@ class ListRepositoryImpl(
                         tagName = listItemEntity.tagName,
                         quantity = listItemEntity.quantity,
                         wholeQuantity = listItemEntity.wholeQuantity,
+                        fractionalQuantity = listItemEntity.fractionalQuantity,
                         roundedQuantity = listItemEntity.roundedQuantity,
                         quantityDisplay = listItemEntity.quantityDisplay,
                         unitId = listItemEntity.unitId,
@@ -232,6 +235,7 @@ class ListRepositoryImpl(
                         containsUnspecified = detailEntity.containsUnspecified,
                         quantity = detailEntity.quantity,
                         wholeQuantity = detailEntity.wholeQuantity,
+                        fractionalQuantity = detailEntity.fractionalQuantity,
                         roundedQuantity = detailEntity.roundedQuantity,
                         quantityDisplay = detailEntity.quantityDisplay,
                         unitId = detailEntity.unitId,

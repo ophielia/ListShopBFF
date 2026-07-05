@@ -125,6 +125,7 @@ class TestDatabaseHelper(
                         containsUnspecified = detailEntity.containsUnspecified,
                         quantity = detailEntity.quantity,
                         wholeQuantity = detailEntity.wholeQuantity,
+                        fractionalQuantity = detailEntity.fractionalQuantity,
                         roundedQuantity = detailEntity.roundedQuantity,
                         quantityDisplay = detailEntity.quantityDisplay,
                         unitId = detailEntity.unitId,
@@ -152,6 +153,7 @@ class TestDatabaseHelper(
             tagName = it.tag.display,
             quantity = it.amount?.quantity,
             wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
             roundedQuantity = it.amount?.roundedQuantity,
             quantityDisplay = it.amount?.quantityDisplay,
             unitId = it.amount?.unitId,
@@ -174,6 +176,7 @@ class TestDatabaseHelper(
             unitDisplay = it.amount?.unitDisplay,
             amountDisplay = it.amount?.amountDisplay,
             wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
             roundedQuantity = it.amount?.roundedQuantity
         )
     }
@@ -220,6 +223,7 @@ class TestDatabaseHelper(
                     amountDisplay = amount?.amountDisplay,
                     quantity = amount?.quantity,
                     wholeQuantity = amount?.wholeQuantity,
+                    fractionalQuantity = amount?.fractionalQuantity,
                     quantityDisplay = amount?.quantityDisplay,
                     roundedQuantity = amount?.roundedQuantity,
                     unitDisplay = amount?.unitDisplay,

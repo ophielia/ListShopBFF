@@ -55,17 +55,21 @@ class ApiShoppingListDeserializationTest : DeserializationBaseTest() {
         val produceCategory = list.categories?.first { it.categoryId.equals("52018") }
         assertEquals("Produce", produceCategory?.name)
         assertEquals(100, produceCategory?.displayOrder)
-        assertEquals(28, produceCategory?.items?.size)
+        assertEquals(17, produceCategory?.items?.size)
         // check item crossed off
         assertNotNull(produceCategory?.items?.first()?.crossedOff)
         // check dairy items - should be 5, feta should not be crossed off
-        val dairy = list.categories?.first { it.categoryId.equals("7") }
+        val dairy = list.categories?.filter { it.categoryId.equals("7") }?.first()
         assertEquals("Dairy", dairy?.name)
         assertEquals(300, dairy?.displayOrder)
-        assertEquals(11, dairy?.items?.size)
+        assertEquals(12, dairy?.items?.size)
         // check feta not crossed off
-        assertNull(dairy?.items?.first{(it.itemId ?: "").equals("113211") }?.crossedOff)
-
+        assertNull(dairy?.items?.first{(it.itemId ?: "").equals("110151") }?.crossedOff)
+        // check fractional quantity
+        val meat = list.categories?.filter { it.categoryId.equals("5") }?.first()
+        val lardons = meat?.items?.first{(it.itemId ?: "").equals("110109")}
+        assertNotNull(lardons)
+        assertEquals("ThreeQuarters", lardons?.amount?.fractionalQuantity)
     }
 
     @Test

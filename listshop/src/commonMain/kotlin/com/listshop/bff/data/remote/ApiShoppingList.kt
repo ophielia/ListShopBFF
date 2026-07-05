@@ -98,6 +98,8 @@ data class ApiShoppingListAmount(
     val quantity: Double? = null,
     @SerialName("whole_quantity")
     val wholeQuantity: Int? = null,
+    @SerialName("fractional_quantity")
+    val fractionalQuantity: String? = null,
     @SerialName("rounded_quantity")
     val roundedQuantity: Double? = null,
     @SerialName("quantity_display")

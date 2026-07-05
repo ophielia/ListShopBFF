@@ -255,7 +255,8 @@ data class ListShopAmount(
     var quantityDisplay: String?,
     var unitId: String?,
     var unitDisplay: String?,
-    var amountDisplay: String?
+    var amountDisplay: String?,
+    var fractionalQuantity: String? = null,
 ) {
     companion object {
         fun empty() = ListShopAmount(null, null, null, null, null, null, null)
@@ -266,6 +267,7 @@ data class ListShopAmount(
             return ListShopAmount(
                 quantity = apiValue.quantity,
                 wholeQuantity = apiValue.wholeQuantity,
+                fractionalQuantity = apiValue.fractionalQuantity,
                 roundedQuantity = apiValue.roundedQuantity,
                 quantityDisplay = apiValue.quantityDisplay,
                 unitId = apiValue.unitId,
@@ -281,6 +283,7 @@ data class ListShopAmount(
             return ListShopAmount(
                 quantity = dbListDetail.quantity,
                 wholeQuantity = dbListDetail.wholeQuantity,
+                fractionalQuantity = dbListDetail.fractionalQuantity,
                 roundedQuantity = dbListDetail.roundedQuantity,
                 quantityDisplay = dbListDetail.quantityDisplay,
                 unitId = dbListDetail.unitId,
@@ -297,6 +300,7 @@ data class ListShopAmount(
             return ListShopAmount(
                 quantity = dbListItem.quantity,
                 wholeQuantity = dbListItem.wholeQuantity,
+                fractionalQuantity = dbListItem.fractionalQuantity,
                 roundedQuantity = dbListItem.roundedQuantity,
                 quantityDisplay = dbListItem.quantityDisplay,
                 unitId = dbListItem.unitId,

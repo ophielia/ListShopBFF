@@ -7,6 +7,7 @@ plugins {
     //alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.mokkery)
+    alias(libs.plugins.kotlinx.kover)
     `maven-publish`
 }
 
