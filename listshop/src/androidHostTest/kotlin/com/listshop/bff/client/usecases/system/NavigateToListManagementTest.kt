@@ -91,7 +91,7 @@ class NavigateToListManagementTest {
         assertTrue(result.value is TransitionViewState.ListManagementScreen)
         val lists = (result.value as TransitionViewState.ListManagementScreen).shoppingLists
         assertNotNull(lists)
-        assertEquals(4, lists.list.size)
+        assertEquals(25, lists.list.size)
 
 
     }
