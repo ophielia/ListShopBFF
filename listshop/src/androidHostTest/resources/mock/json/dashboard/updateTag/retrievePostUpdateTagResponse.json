@@ -1,1 +1,1 @@
-{"links": [], "tag": {"tag_id": "1234", "name": "BRAND NEW NAME", "user_id": "20", "tag_type": "Ingredient", "is_group": false, "assign_select": true, "search_select": false, "to_delete": false}}
+{"name": "BRAND NEW NAME", "tag_id": "1234", "user_id": "null", "tag_type": "Ingredient", "is_group": false, "parent_id": "386"}

@@ -1,7 +1,7 @@
 {
   "label": "clientCompatible",
   "requestMethod": "GET",
-  "requestPath": "/layout/default",
+  "requestPath": "/v2/layout/default",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "standards/standardLayout.json"
