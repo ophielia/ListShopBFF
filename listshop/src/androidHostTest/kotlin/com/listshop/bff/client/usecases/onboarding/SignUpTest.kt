@@ -6,6 +6,7 @@ import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
@@ -103,11 +104,11 @@ class SignUpTest {
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
-        assertEquals(4, shoppingLists.list.size)
+        assertEquals(25, shoppingLists.list.size)
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
-        assertEquals(3, shoppingList.categories.size)
+        assertEquals(7, shoppingList.categories.size)
 
         val tagTree = result.value?.second
         assertNotNull(tagTree)
@@ -142,7 +143,7 @@ class SignUpTest {
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
-        assertEquals(4, shoppingLists.list.size)
+        assertEquals(25, shoppingLists.list.size)
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
@@ -243,7 +244,7 @@ class SignUpTest {
         val originalDispatcher = TestDispatcherBuilder("onboarding/signUp")
             .withConfigFile("createShoppingListFailureConfig.json")
             .withConfigFile("signUpSuccessConfig.json")
-            .withConfigFile("mergeListConfig.json")
+            .withConfigFile("mergeListFailureConfig.json")
             .withConfigFile("getAllShoppingListsConfig.json")
             .withConfigFile("userLayoutConfig.json")
             .withConfigFile("userLayoutConfig.json")
@@ -260,11 +261,11 @@ class SignUpTest {
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
-        assertEquals(4, shoppingLists.list.size)
+        assertEquals(25, shoppingLists.list.size)
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
-        assertEquals(3, shoppingList.categories.size)
+        assertEquals(7, shoppingList.categories.size)
 
         val tagTree = result.value?.second
         assertNotNull(tagTree)
@@ -303,7 +304,7 @@ class SignUpTest {
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
-        assertEquals(3, shoppingList.categories.size)
+        assertEquals(7, shoppingList.categories.size)
 
         val tagTree = result.value?.second
         assertNotNull(tagTree)
@@ -312,9 +313,9 @@ class SignUpTest {
 
 
     private fun saveLocalList() {
-        var apiEmbedded = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("standardSingleList")
-        apiEmbedded.embeddedList.name = "LOCAL LIST"
-        val shoppingList = ShoppingList.Factory.create(apiEmbedded.embeddedList)
+        var apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardSingleList")
+        apiEmbedded.name = "LOCAL LIST"
+        val shoppingList = ShoppingList.Factory.create(apiEmbedded)
 
         databaseTestHelper?.setShoppingList(shoppingList)
     }
