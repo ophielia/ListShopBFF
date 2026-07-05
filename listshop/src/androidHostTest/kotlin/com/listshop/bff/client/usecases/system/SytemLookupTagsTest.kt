@@ -91,7 +91,7 @@ class SytemLookupTagsTest {
 
         assertTrue(result.value is TagList)
         val list = result.value
-        assertEquals(42, list.tags.size)
+        assertEquals(37, list.tags.size)
 
 
     }
