@@ -19,9 +19,11 @@ internal class ShoppingListApiImpl(
     val listShopAnalytics: ListShopAnalytics
 ) : ShoppingListApi {
 
+    private val shoppingListPath = "/v2/shoppinglist"
+
     override suspend fun getAllShoppingLists(): List<ShoppingList> {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/v2/shoppinglist")
+        val urlString = remoteApi.buildPath(shoppingListPath)
         listShopAnalytics.debug("getting lists, the token is: " + token)
 
         val response = remoteApi.getRequest(urlString)
@@ -40,7 +42,7 @@ internal class ShoppingListApiImpl(
 
     override suspend fun retrieveMostRecentList(): ShoppingList {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/v2/shoppinglist/mostrecent")
+        val urlString = remoteApi.buildPath("$shoppingListPath/mostrecent")
         listShopAnalytics.debug("getting most recent list, the token is: " + token)
 
         val response = remoteApi.getRequest(urlString)
@@ -56,7 +58,7 @@ internal class ShoppingListApiImpl(
     }
 
     override suspend fun retrieveListById(serverId: String): ShoppingList {
-        val urlString = remoteApi.buildPath("/shoppinglist/${serverId}")
+        val urlString = remoteApi.buildPath("$shoppingListPath/${serverId}")
         listShopAnalytics.debug("getting most recent list, the id is: " + serverId)
 
         val response = remoteApi.getRequest(urlString)
@@ -66,14 +68,14 @@ internal class ShoppingListApiImpl(
             "get shopping list call failed with status: " + response.status.value
         )
 
-        val result : ApiShoppingListEmbeddedList = response.body()
+        val result : ApiShoppingList = response.body()
 
-        return ShoppingList.create(apiValue = result.embeddedList)
+        return ShoppingList.create(apiValue = result)
     }
 
     override suspend fun createList(payload: PostShoppingList): String {
         val payload = Json.encodeToString(payload)
-        val urlString = remoteApi.buildPath("/shoppinglist")
+        val urlString = remoteApi.buildPath(shoppingListPath)
         val response = remoteApi.postRequest(urlString, payload)
         remoteApi.mapNonSuccessToException(
             response.status.value,
@@ -86,7 +88,7 @@ internal class ShoppingListApiImpl(
 
     override suspend fun mergeLocalListWithServer(listMergeRequest: PutMergeRequest) : ShoppingList {
         val token = remoteApi.token()
-        val urlString = remoteApi.buildPath("/v2/shoppinglist/shared")
+        val urlString = remoteApi.buildPath("$shoppingListPath/shared")
         listShopAnalytics.debug("merging the local list with the server list, the token is: " + token)
 
         // convert object to json payload

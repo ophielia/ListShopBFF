@@ -1,7 +1,7 @@
 {
   "label": "listOfLists",
   "requestMethod": "GET",
-  "requestPath": "/shoppinglist",
+  "requestPath": "/v2/shoppinglist",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "standards/listOfShoppingLists.json"
