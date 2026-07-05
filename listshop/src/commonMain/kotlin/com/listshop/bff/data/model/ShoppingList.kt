@@ -258,6 +258,7 @@ data class ListShopAmount(
     var amountDisplay: String?
 ) {
     companion object {
+        fun empty() = ListShopAmount(null, null, null, null, null, null, null)
         fun create(apiValue: ApiShoppingListAmount?) : ListShopAmount? {
             if (apiValue == null) {
                 return null
