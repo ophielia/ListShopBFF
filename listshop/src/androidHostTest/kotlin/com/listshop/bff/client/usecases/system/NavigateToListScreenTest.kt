@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
@@ -99,11 +100,11 @@ class NavigateToListScreenTest {
         assertTrue(result.value is TransitionViewState.ListScreen)
         val list = (result.value as TransitionViewState.ListScreen).shoppingList
         assertNotNull(list)
-        assertEquals(3, list.categories.size)
+        assertEquals(7, list.categories.size)
 
         val listOfLists = (result.value as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(listOfLists)
-        assertEquals(4, listOfLists.list.size)
+        assertEquals(25, listOfLists.list.size)
     }
 
 
@@ -133,11 +134,11 @@ class NavigateToListScreenTest {
         assertTrue(result.value is TransitionViewState.ListScreen)
         val list = (result.value as TransitionViewState.ListScreen).shoppingList
         assertNotNull(list)
-        assertEquals(3, list.categories.size)
+        assertEquals(7, list.categories.size)
 
         val listOfLists = (result.value as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(listOfLists)
-        assertEquals(4, listOfLists.list.size)
+        assertEquals(25, listOfLists.list.size)
     }
 
     @Test
@@ -270,9 +271,9 @@ class NavigateToListScreenTest {
     }
 
     private fun saveLocalList() {
-         var apiEmbedded = sampleProvider.fillSample<ApiShoppingListEmbeddedList>("standardSingleList")
-        apiEmbedded.embeddedList.name = "LOCAL LIST"
-        val shoppingList = ShoppingList.Factory.create(apiEmbedded.embeddedList)
+         var apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardSingleList")
+        apiEmbedded.name = "LOCAL LIST"
+        val shoppingList = ShoppingList.Factory.create(apiEmbedded)
 
         databaseTestHelper?.setShoppingList(shoppingList)
     }

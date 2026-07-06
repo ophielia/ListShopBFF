@@ -1,0 +1,404 @@
+{
+    "tag_list": [
+        {
+            "name": "stew meat",
+            "power": 0.0,
+            "tag_id": "251",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "372"
+        },
+        {
+            "name": "Elegance",
+            "power": 2.0,
+            "tag_id": "397",
+            "user_id": "0",
+            "tag_type": "Rating",
+            "parent_id": "292"
+        },
+        {
+            "name": "Tapenade",
+            "power": 0.0,
+            "tag_id": "50931",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "411"
+        },
+        {
+            "name": "scallion",
+            "power": 0.0,
+            "tag_id": "211",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "388"
+        },
+        {
+            "name": "butter",
+            "power": 0.0,
+            "tag_id": "348",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "378"
+        },
+        {
+            "name": "parmesan cheese",
+            "power": 0.0,
+            "tag_id": "131",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "381"
+        },
+        {
+            "name": "sliced sausage",
+            "power": 0.0,
+            "tag_id": "269",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "421"
+        },
+        {
+            "name": "Quick To Table",
+            "power": 5.0,
+            "tag_id": "330",
+            "user_id": "0",
+            "tag_type": "Rating",
+            "parent_id": "290"
+        },
+        {
+            "name": "Elegance",
+            "power": 0.0,
+            "tag_id": "292",
+            "user_id": "0",
+            "tag_type": "Rating",
+            "parent_id": "0"
+        },
+        {
+            "name": "Super glue",
+            "power": 0.0,
+            "tag_id": "50760",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "313"
+        },
+        {
+            "name": "Duster",
+            "power": 0.0,
+            "tag_id": "50668",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "383"
+        },
+        {
+            "name": "envelopes",
+            "power": 0.0,
+            "tag_id": "276",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "384"
+        },
+        {
+            "name": "Breakfash Dish",
+            "power": 0.0,
+            "tag_id": "50564",
+            "user_id": "0",
+            "tag_type": "TagType",
+            "parent_id": "407"
+        },
+        {
+            "name": "black olives",
+            "power": 0.0,
+            "tag_id": "50353",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "386"
+        },
+        {
+            "name": "Whipped cream",
+            "power": 0.0,
+            "tag_id": "50867",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "393"
+        },
+        {
+            "name": "fresh pumpkin",
+            "power": 0.0,
+            "tag_id": "310",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "390"
+        },
+        {
+            "name": "vegetable oil",
+            "power": 0.0,
+            "tag_id": "347",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "385"
+        },
+        {
+            "name": "dried marjoram",
+            "power": 0.0,
+            "tag_id": "259",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "377"
+        },
+        {
+            "name": "Pasta",
+            "power": 0.0,
+            "tag_id": "24",
+            "user_id": "0",
+            "tag_type": "TagType",
+            "parent_id": "407"
+        },
+        {
+            "name": "big salt",
+            "power": 0.0,
+            "tag_id": "50598",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "377"
+        },
+        {
+            "name": "white wine",
+            "power": 0.0,
+            "tag_id": "23",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "392"
+        },
+        {
+            "name": "grapes",
+            "power": 0.0,
+            "tag_id": "50607",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "50500"
+        },
+        {
+            "name": "avocado",
+            "power": 0.0,
+            "tag_id": "50255",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "388"
+        },
+        {
+            "name": "brioche",
+            "power": 0.0,
+            "tag_id": "138",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "409"
+        },
+        {
+            "name": "mustard powder",
+            "power": 0.0,
+            "tag_id": "169",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "377"
+        },
+        {
+            "name": "baking soda",
+            "power": 0.0,
+            "tag_id": "79",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "382"
+        },
+        {
+            "name": "chocolate chips",
+            "power": 0.0,
+            "tag_id": "80",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "382"
+        },
+        {
+            "name": "Birthday present",
+            "power": 0.0,
+            "tag_id": "50984",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "380"
+        },
+        {
+            "name": "Teeth Cleaner",
+            "power": 0.0,
+            "tag_id": "51037",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "389"
+        },
+        {
+            "name": "crackers",
+            "power": 0.0,
+            "tag_id": "95",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "413"
+        },
+        {
+            "name": "lettuce",
+            "power": 0.0,
+            "tag_id": "32",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "390"
+        },
+        {
+            "name": "mascarpone",
+            "power": 0.0,
+            "tag_id": "51",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "381"
+        },
+        {
+            "name": "C batteries",
+            "power": 0.0,
+            "tag_id": "50765",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "313"
+        },
+        {
+            "name": "Barbeque Tongs",
+            "power": 0.0,
+            "tag_id": "50717",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "50722"
+        },
+        {
+            "name": "Sliced turkey",
+            "power": 0.0,
+            "tag_id": "50804",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "421"
+        },
+        {
+            "name": "beef roast",
+            "power": 0.0,
+            "tag_id": "50768",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "372"
+        },
+        {
+            "name": "vanilla ice cream",
+            "power": 0.0,
+            "tag_id": "50624",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "403"
+        },
+        {
+            "name": "gorgonzola",
+            "power": 0.0,
+            "tag_id": "202",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "381"
+        },
+        {
+            "name": "Bleach",
+            "power": 0.0,
+            "tag_id": "51772",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "380"
+        },
+        {
+            "name": "sweet paprika",
+            "power": 0.0,
+            "tag_id": "50560",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "377"
+        },
+        {
+            "name": "italian dressing",
+            "power": 0.0,
+            "tag_id": "50587",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "379"
+        },
+        {
+            "name": "dill",
+            "power": 0.0,
+            "tag_id": "207",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "390"
+        },
+        {
+            "name": "Dog leash",
+            "power": 0.0,
+            "tag_id": "50743",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "367"
+        },
+        {
+            "name": "Ranch dressing",
+            "power": 0.0,
+            "tag_id": "50920",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "379"
+        },
+        {
+            "name": "Bottle stopper",
+            "power": 0.0,
+            "tag_id": "50728",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "216"
+        },
+        {
+            "name": "bread",
+            "power": 0.0,
+            "tag_id": "44",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "409"
+        },
+        {
+            "name": "pears",
+            "power": 0.0,
+            "tag_id": "97",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "390"
+        },
+        {
+            "name": "Rubbing alcohol",
+            "power": 0.0,
+            "tag_id": "50675",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "389"
+        },
+        {
+            "name": "salsa",
+            "power": 0.0,
+            "tag_id": "183",
+            "user_id": "0",
+            "tag_type": "Ingredient",
+            "parent_id": "379"
+        },
+        {
+            "name": "white out",
+            "power": 0.0,
+            "tag_id": "50151",
+            "user_id": "0",
+            "tag_type": "NonEdible",
+            "parent_id": "384"
+        }
+    ]
+}

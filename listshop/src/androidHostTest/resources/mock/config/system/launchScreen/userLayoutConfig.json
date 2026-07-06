@@ -1,8 +1,8 @@
 {
   "label": "clientCompatible",
   "requestMethod": "GET",
-  "requestPath": "/layout/user",
+  "requestPath": "/v2/layout/user",
   "requestBodyFilename": "",
   "responseStatus": 200,
-  "responseBodyFilename": "launchScreen/userLayout.json"
+  "responseBodyFilename": "standards/standardUserLayout.json"
 }

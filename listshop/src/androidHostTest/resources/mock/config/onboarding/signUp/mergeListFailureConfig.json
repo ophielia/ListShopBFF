@@ -1,7 +1,7 @@
 {
   "label": "mergeList",
   "requestMethod": "PUT",
-  "requestPath": "/shoppinglist/shared",
+  "requestPath": "/v2/shoppinglist/shared",
   "requestBodyFilename": "onboarding/signUp/mergeListRequestListExists.json",
   "responseStatus": 500,
   "responseBodyFilename": "emptyResponse.json"

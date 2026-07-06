@@ -1,7 +1,7 @@
 {
   "label": "retrieveLayoutsSuccess",
   "requestMethod": "GET",
-  "requestPath": "/layout/user",
+  "requestPath": "/v2/layout/standard",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "standards/standardUserLayout.json"

@@ -1,13 +1,18 @@
 package com.listshop.bff.data.model
 
 import com.listshop.bff.data.remote.ApiShoppingList
+import com.listshop.bff.data.remote.ApiShoppingListAmount
 import com.listshop.bff.data.remote.ApiShoppingListCategory
+import com.listshop.bff.data.remote.ApiShoppingListDetails
 import com.listshop.bff.data.remote.ApiShoppingListItem
 import com.listshop.bff.data.remote.ApiShoppingListTag
 import com.listshop.bff.data.remote.ApiTag
 import com.listshop.bff.db.ListCategoryEntity
+import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
+import kotlinx.datetime.Clock
+import kotlin.jvm.JvmName
 
 data class ShoppingList(
     var externalId: String?,
@@ -28,8 +33,9 @@ data class ShoppingList(
     companion object Factory {
         fun create(apiValue: ApiShoppingList): ShoppingList {
             val categories = apiValue.categories?.map { ShoppingListCategory.create(it) }
+            val now = Clock.System.now().toString()
             return ShoppingList(
-                apiValue.externalId.toString(),
+                apiValue.externalId,
                 apiValue.name,
                 categories ?: emptyList(),
                 created = apiValue.created,
@@ -39,7 +45,7 @@ data class ShoppingList(
                 isStarterList = apiValue.isStarter,
                 loading = false,
                 lastLocalChange = null,
-                lastSynced = null,
+                lastSynced = now,
                 legend = ShoppingListLegend()
             )
         }
@@ -86,7 +92,7 @@ data class ShoppingListCategory(
     var name: String,
     var displayOrder: Int,
     var items: List<ShoppingListItem>,
-    var externalId: Long
+    var externalId: String
 
 ) {
 
@@ -99,20 +105,29 @@ data class ShoppingListCategory(
                 apiValue.name ?: "",
                 displayOrder = apiValue.displayOrder ?: 0,
                 items = items,
-                externalId = apiValue.categoryId ?: 0,
+                externalId = apiValue.categoryId ?: "",
             )
         }
 
+        @JvmName("createFromDbEntities")
         fun create(dbValue: ListCategoryEntity, dbItems: List<ListItemEntity>): ShoppingListCategory {
             val items = dbItems.map { ShoppingListItem.create(it) }
             return ShoppingListCategory(
                 name = dbValue.name ?: "",
                 displayOrder = dbValue.displayOrder?.toInt() ?: 0,
                 items = items,
-                externalId = dbValue.externalId?.toLong() ?: 0
+                externalId = dbValue.externalId ?: ""
             )
         }
 
+        fun create(dbValue: ListCategoryEntity, items: List<ShoppingListItem>): ShoppingListCategory {
+            return ShoppingListCategory(
+                name = dbValue.name ?: "",
+                displayOrder = dbValue.displayOrder?.toInt() ?: 0,
+                items = items,
+                externalId = dbValue.externalId ?: ""
+            )
+        }
     }
 }
 
@@ -124,20 +139,27 @@ data class ShoppingListItem(
     var crossedOff: String?,
     var usedCount: Int,
     var tag: ShoppingListTag,
+    var amount: ListShopAmount?,
+    var details: List<ShoppingListDetail> = emptyList(),
+    var amountType: String? = null,
     var legendKeys: List<String> = emptyList()
 
 
 ) {
     companion object Factory {
         fun create(apiValue: ApiShoppingListItem): ShoppingListItem {
+            val details = apiValue.details.map { ShoppingListDetail.create(it) }
             return ShoppingListItem(
-                externalId = apiValue.itemId.toString(),
+                externalId = apiValue.itemId ?: "",
                 added = apiValue.added ?: "",
                 removed = null,
                 updatedOn = apiValue.updated,
                 crossedOff = apiValue.crossedOff,
                 usedCount = apiValue.usedCount ?: 0,
                 tag = ShoppingListTag.create(apiValue = apiValue.tag),
+                amount = ListShopAmount.create(apiValue = apiValue.amount),
+                details = details,
+                amountType = apiValue.amountType,
                 legendKeys = apiValue.sourceKeys ?: emptyList(),
             )
         }
@@ -152,7 +174,35 @@ data class ShoppingListItem(
                 crossedOff = dbValue.crossedOff,
                 usedCount = dbValue.usedCount?.toInt() ?: 0,
                 tag = tag,
-                legendKeys = emptyList()
+                amount = if (dbValue.quantity != null || dbValue.wholeQuantity != null) {
+                    ListShopAmount(
+                        quantity = dbValue.quantity,
+                        wholeQuantity = dbValue.wholeQuantity?.toInt(),
+                        roundedQuantity = dbValue.roundedQuantity,
+                        quantityDisplay = dbValue.quantityDisplay,
+                        unitId = dbValue.unitId,
+                        unitDisplay = dbValue.unitDisplay,
+                        amountDisplay = dbValue.amountDisplay
+                    )
+                } else null,
+                legendKeys = dbValue.legendKeys?.split(",")?.filter { it.isNotEmpty() } ?: emptyList()
+            )
+        }
+
+        fun create(dbValue: ListItemEntity, details: List<ListItemDetailEntity>): ShoppingListItem {
+            val detailList = details.map { ShoppingListDetail.create(it) }
+            val tag = ShoppingListTag.create(dbValue)
+            return ShoppingListItem(
+                externalId = dbValue.externalId ?: "0",
+                added = dbValue.added ?: "",
+                removed = dbValue.removed ?: "",
+                updatedOn = dbValue.updatedOn ?: "",
+                crossedOff = dbValue.crossedOff,
+                usedCount = dbValue.usedCount?.toInt() ?: 0,
+                tag = tag,
+                amount = ListShopAmount.create(dbValue),
+                details = detailList,
+                legendKeys = dbValue.legendKeys?.split(",")?.filter { it.isNotEmpty() } ?: emptyList()
             )
         }
     }
@@ -161,7 +211,6 @@ data class ShoppingListItem(
 data class ShoppingListTag(
     var externalId: String,
     var display: String,
-    var tagType: String,
     var categoryId: String?,
     var parentId: String? = null,
     var isUser: Boolean?,
@@ -173,9 +222,8 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = apiValue.tagId ?: "",
                 display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: TagType.INGREDIENT.display,
                 categoryId = null,
-                isUser = null,
+                isUser = null ,
             )
         }
 
@@ -183,7 +231,6 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = dbValue.externalId ?: "",
                 display = dbValue.tagName ?: "",
-                tagType = dbValue.tagType ?: "",
                 categoryId = dbValue.categoryExternalId,
                 isUser = null
             )
@@ -193,7 +240,6 @@ data class ShoppingListTag(
             return ShoppingListTag(
                 externalId = apiValue.externalId ?: "",
                 display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: "",
                 categoryId = "",
                 parentId = apiValue.parentId ?: "",
                 isUser = isUser
@@ -202,10 +248,97 @@ data class ShoppingListTag(
     }
 }
 
+data class ListShopAmount(
+    var quantity: Double?,
+    var wholeQuantity: Int?,
+    var roundedQuantity: Double?,
+    var quantityDisplay: String?,
+    var unitId: String?,
+    var unitDisplay: String?,
+    var amountDisplay: String?,
+    var fractionalQuantity: String? = null,
+) {
+    companion object {
+        fun empty() = ListShopAmount(null, null, null, null, null, null, null)
+        fun create(apiValue: ApiShoppingListAmount?) : ListShopAmount? {
+            if (apiValue == null) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = apiValue.quantity,
+                wholeQuantity = apiValue.wholeQuantity,
+                fractionalQuantity = apiValue.fractionalQuantity,
+                roundedQuantity = apiValue.roundedQuantity,
+                quantityDisplay = apiValue.quantityDisplay,
+                unitId = apiValue.unitId,
+                unitDisplay = apiValue.unitDisplay,
+                amountDisplay = apiValue.display
+            )
+        }
 
+        fun create(dbListDetail: ListItemDetailEntity?) : ListShopAmount? {
+            if (dbListDetail == null || (dbListDetail.quantity == null && dbListDetail.wholeQuantity == null)) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = dbListDetail.quantity,
+                wholeQuantity = dbListDetail.wholeQuantity,
+                fractionalQuantity = dbListDetail.fractionalQuantity,
+                roundedQuantity = dbListDetail.roundedQuantity,
+                quantityDisplay = dbListDetail.quantityDisplay,
+                unitId = dbListDetail.unitId,
+                unitDisplay = dbListDetail.unitDisplay,
+                amountDisplay = dbListDetail.amountDisplay
+            )
+        }
+
+
+        fun create(dbListItem: ListItemEntity?) : ListShopAmount? {
+            if (dbListItem == null || (dbListItem.quantity == null && dbListItem.wholeQuantity == null)) {
+                return null
+            }
+            return ListShopAmount(
+                quantity = dbListItem.quantity,
+                wholeQuantity = dbListItem.wholeQuantity,
+                fractionalQuantity = dbListItem.fractionalQuantity,
+                roundedQuantity = dbListItem.roundedQuantity,
+                quantityDisplay = dbListItem.quantityDisplay,
+                unitId = dbListItem.unitId,
+                unitDisplay = dbListItem.unitDisplay,
+                amountDisplay = dbListItem.amountDisplay
+            )
+        }
+    }
+}
+
+data class ShoppingListDetail(
+    var amount: ListShopAmount?,
+    var dishId: String?,
+    var listId: String?,
+    var containsUnspecified: Boolean = false
+)
+{
+    companion object {
+        fun create(apiValue: ApiShoppingListDetails): ShoppingListDetail {
+            return ShoppingListDetail(
+                amount = ListShopAmount.create(apiValue = apiValue.amount),
+                dishId = apiValue.linkedDishId,
+                listId = apiValue.linkedListId,
+                containsUnspecified = apiValue.containsUnspecified ?: false
+            )
+        }
+        fun create(dbValue: ListItemDetailEntity): ShoppingListDetail {
+            return ShoppingListDetail(
+                amount = ListShopAmount.create(dbValue),
+                dishId = dbValue.dishId,
+                listId = dbValue.listId,
+                containsUnspecified = dbValue.containsUnspecified
+            )
+        }
+    }
+}
 data class ShoppingListLegend(
-    var legendLkup: Map<String, LegendPoint> = emptyMap(),
-    var legendKeys: List<LegendPoint> = emptyList()
+    var points: List<LegendPoint> = emptyList()
 )
 
 data class LegendPointSource(
@@ -216,122 +349,17 @@ data class LegendPointSource(
 data class LegendPoint(
     var key: String,
     var display: String?,
-    var iconSource: LegendPointSource?
+    var type: LegendPointType,
+    var iconSource: LegendPointSource? = null
 )
 
+enum class LegendPointType(val display: String) {
+    DISH("DISH"),
+    LIST("LIST");
 
-/*
-//MM legend is open
-
-currently, provides map and keys
-map contains LegendPoints - which haven't been coded yet
-
-model implemented like this in ios
-code for legendpoint, legend, and legendpointsource
-public struct LegendPointSource: Codable, Equatable {
-
-
-    let color: String
-    let icon: String
-
-    init(color: String, icon: String) {
-        self.color = color
-        self.icon = icon
-    }
-
-    func toPath(forCircle: Bool) -> String {
-        let base = forCircle ? "circles/" : ""
-        let source = base + color + "/@" + icon
-        return source
-    }
-
-    static public func overflowPoint() -> LegendPointSource {
-        LegendPointSource(color: "orange", icon: "placeholder")
-    }
-
-}
-
-public struct LegendPoint: Codable {
-
-
-    let key: String
-    let display: String
-    var iconSource: LegendPointSource?
-
-    init(key: String,
-         display: String) {
-        self.key = key
-        self.display = display
-        iconSource = nil
-    }
-
-    init(key: String,
-         display: String,
-         iconSource: LegendPointSource) {
-        self.key = key
-        self.display = display
-        self.iconSource = iconSource
-    }
-
-    init(key: String,
-         display: String,
-         icon: String,
-         color: String) {
-        self.key = key
-        self.display = display
-        iconSource = LegendPointSource(color: color, icon: icon)
-    }
-
-    init(networkLegend: ApiLegend) {
-        key = networkLegend.key
-        display = networkLegend.display
-    }
-
-
-}
-
-public struct ShoppingListLegend: Codable {
-    var legendLkup: Dictionary<String, LegendPoint>
-
-    var legendKeys: Array<LegendPoint> {
-        var legendPoints: Array<LegendPoint> = []
-        let itemKeys = legendLkup.keys
-        itemKeys.forEach { key in
-            if let legend = legendLkup[key] {
-                legendPoints.append(legend)
-            }
-        }
-        legendPoints.sort { (point: LegendPoint, point2: LegendPoint) in
-            point.display.capitalized < point2.display.capitalized
-        }
-        return legendPoints
-    }
-
-    init(legendPoints: [LegendPoint]) {
-        legendLkup = [:]
-        legendPoints.forEach { point in
-            legendLkup[point.key] = point
-        }
-
-    }
-
-    func isEmpty() -> Bool {
-        legendLkup.keys.count == 0
-    }
-}
-
-{
     companion object {
-        fun create(apiValue: ApiShoppingListLegend)  : ShoppingListLegend {
-            return ShoppingListLegend(
-                externalId = apiValue.tagId ?: "",
-                display = apiValue.name ?: "",
-                tagType = apiValue.tagType ?: TagType.INGREDIENT.display,
-                categoryId = null,
-                isUser = null,
-            )
-        }
+        private val map = entries.associateBy(LegendPointType::display)
+        fun fromDisplay(display: String) = map[display]
     }
 }
 
-*/

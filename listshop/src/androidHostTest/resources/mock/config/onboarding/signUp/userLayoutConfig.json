@@ -1,7 +1,7 @@
 {
   "label": "signUp: userLayout",
   "requestMethod": "GET",
-  "requestPath": "/layout/user",
+  "requestPath": "/v2/layout",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "standards/standardUserLayout.json"

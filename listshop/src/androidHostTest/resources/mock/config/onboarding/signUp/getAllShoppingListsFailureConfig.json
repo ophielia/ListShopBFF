@@ -1,7 +1,7 @@
 {
   "label": "getAllShoppingLists",
   "requestMethod": "GET",
-  "requestPath": "/shoppinglist",
+  "requestPath": "/v2/shoppinglist",
   "requestBodyFilename": "",
   "responseStatus": 500,
   "responseBodyFilename": "emptyResponse.json"

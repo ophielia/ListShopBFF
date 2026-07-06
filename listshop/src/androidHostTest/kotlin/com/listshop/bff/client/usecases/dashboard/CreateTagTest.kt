@@ -94,7 +94,6 @@ class CreateTagTest {
         val newTag = result.value
         assertEquals("9876", newTag?.externalId)
         assertEquals(tagName, newTag?.display)
-        assertEquals(TagType.INGREDIENT.display, newTag?.tagType)
         assertTrue(newTag?.isUser ?: false)
         assertEquals(parentId, newTag?.parentId)
 
@@ -143,7 +142,6 @@ class CreateTagTest {
         val newTag = result.value
         assertEquals("9876", newTag?.externalId)
         assertEquals(tagName, newTag?.display)
-        assertEquals(TagType.INGREDIENT.display, newTag?.tagType)
         assertTrue(newTag?.isUser ?: false)
         assertEquals(parentId, newTag?.parentId)
 

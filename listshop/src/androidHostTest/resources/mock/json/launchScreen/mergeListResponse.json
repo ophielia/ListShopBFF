@@ -1,266 +1,2717 @@
 {
-    "links": [],
     "mergeResult": {
         "shoppingList": {
-            "list_id": 51167,
+            "list_id": "51210",
+            "created": "2026-04-18T10:56:53.994+00:00",
+            "updated": "2026-04-18T08:57:02.227+00:00",
+            "layout_id": "12",
+            "item_count": 86,
+            "legend": [
+                {
+                    "display": "Red Chili",
+                    "related_id": "44",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "Beef and Guiness Stew",
+                    "related_id": "77",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "Tomato Bacon Pasta",
+                    "related_id": "78",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "mashed potatoes",
+                    "related_id": "97",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "schnitzel with sauce",
+                    "related_id": "104",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "side salad",
+                    "related_id": "112",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "peas, carrots and corn",
+                    "related_id": "114",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "Slow Cooker Vegetarian Minestrone",
+                    "related_id": "56676",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "Apple bacon quiche",
+                    "related_id": "56767",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "peanut butter banana smoothie",
+                    "related_id": "56787",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "quick ratatouille",
+                    "related_id": "56823",
+                    "source_type": "DISH"
+                },
+                {
+                    "display": "Starter List",
+                    "related_id": "50550",
+                    "source_type": "LIST"
+                },
+                {
+                    "display": "Shopping List 2",
+                    "related_id": "51210",
+                    "source_type": "LIST"
+                }
+            ],
             "categories": [
                 {
                     "name": "Produce",
-                    "category_id": 52018,
-                    "displayOrder": 100,
+                    "category_id": "52018",
+                    "display_order": 100,
                     "items": [
                         {
                             "tag": {
                                 "tag_id": "65",
-                                "name": "apples",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "apples"
                             },
-                            "item_id": 100966,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "apples",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 2,
-                            "source_keys": [
-                                "d57683",
-                                "l50550"
-                            ]
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "1 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1 large"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110113",
+                            "added": "2026-04-18T10:56:57.082+00:00",
+                            "updated": "2026-04-18T10:57:00.398+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH56767"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50615",
+                                "name": "banana"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56787",
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110174",
+                            "added": "2026-04-18T10:57:00.324+00:00",
+                            "updated": "2026-04-18T10:57:00.335+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56787",
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "81",
+                                "name": "carrots"
+                            },
+                            "amount": {
+                                "quantity": 2.0,
+                                "whole_quantity": 2,
+                                "rounded_quantity": 2.0,
+                                "quantity_display": "2",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "2 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 2.0,
+                                        "rounded_quantity": 2.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "2"
+                                    },
+                                    "dish_id": "112",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "114",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110023",
+                            "added": "2026-04-18T10:56:54.900+00:00",
+                            "updated": "2026-04-18T10:57:01.475+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "LIST50550",
+                                "DISH112",
+                                "DISH114",
+                                "DISH77"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "15",
+                                "name": "celery"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110003",
+                            "added": "2026-04-18T10:56:54.504+00:00",
+                            "updated": "2026-04-18T10:56:59.976+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "LIST50550",
+                                "DISH77"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "34",
+                                "name": "cucumbers"
+                            },
+                            "amount": {
+                                "quantity": 0.333,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "1 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.333,
+                                        "rounded_quantity": 0.333,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1/3"
+                                    },
+                                    "dish_id": "112",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110148",
+                            "added": "2026-04-18T10:56:58.434+00:00",
+                            "updated": "2026-04-18T10:57:00.882+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH112"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "120",
+                                "name": "eggplant"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56823",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110090",
+                            "added": "2026-04-18T10:56:56.411+00:00",
+                            "updated": "2026-04-18T10:56:56.414+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56823"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "247",
+                                "name": "fresh parsley"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110009",
+                            "added": "2026-04-18T10:56:54.652+00:00",
+                            "updated": "2026-04-18T10:56:54.662+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50566",
+                                "name": "fresh spinach"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110005",
+                            "added": "2026-04-18T10:56:54.578+00:00",
+                            "updated": "2026-04-18T10:56:54.590+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "58",
+                                "name": "fresh thyme"
+                            },
+                            "amount": {
+                                "quantity": 4.0,
+                                "whole_quantity": 4,
+                                "rounded_quantity": 4.0,
+                                "quantity_display": "4",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "4"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 4.0,
+                                        "rounded_quantity": 4.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "4 sprigs"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110145",
+                            "added": "2026-04-18T10:56:58.352+00:00",
+                            "updated": "2026-04-18T10:56:58.380+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent",
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "19",
+                                "name": "garlic"
+                            },
+                            "amount": {
+                                "quantity": 5.0,
+                                "whole_quantity": 5,
+                                "rounded_quantity": 5.0,
+                                "quantity_display": "5",
+                                "unit_id": "1055",
+                                "unit_display": "clove",
+                                "display": "5 clove"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1055",
+                                        "unit_display": "clove",
+                                        "display": "1 clove"
+                                    },
+                                    "dish_id": "78",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 4.0,
+                                        "rounded_quantity": 4.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1055",
+                                        "unit_display": "clove",
+                                        "display": "4 cloves"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1001",
+                                        "unit_display": "tablespoon",
+                                        "display": "1 tablespoon minced"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110059",
+                            "added": "2026-04-18T10:56:55.641+00:00",
+                            "updated": "2026-04-18T10:56:58.338+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "DISH56767",
+                                "DISH78",
+                                "DISH77",
+                                "DISH44"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "187",
+                                "name": "green bell pepper"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110082",
+                            "added": "2026-04-18T10:56:56.222+00:00",
+                            "updated": "2026-04-18T10:56:56.231+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH44"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "32",
+                                "name": "lettuce"
+                            },
+                            "amount": {
+                                "quantity": 0.5,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "1"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.5,
+                                        "rounded_quantity": 0.5,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1/2 head"
+                                    },
+                                    "dish_id": "112",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110153",
+                            "added": "2026-04-18T10:56:58.556+00:00",
+                            "updated": "2026-04-18T10:56:58.590+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH112"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "16",
+                                "name": "onion"
+                            },
+                            "amount": {
+                                "quantity": 3.5,
+                                "whole_quantity": 4,
+                                "rounded_quantity": 4.0,
+                                "quantity_display": "4",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "4 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1"
+                                    },
+                                    "dish_id": "78",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 0.5,
+                                        "rounded_quantity": 0.5,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1/2 small"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 2.0,
+                                        "rounded_quantity": 2.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "2"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110015",
+                            "added": "2026-04-18T10:56:54.754+00:00",
+                            "updated": "2026-04-18T10:56:58.062+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "DISH56767",
+                                "DISH78",
+                                "DISH77",
+                                "DISH44"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "227",
+                                "name": "potatoes"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "97",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110039",
+                            "added": "2026-04-18T10:56:55.308+00:00",
+                            "updated": "2026-04-18T10:56:55.313+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH97"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "53",
+                                "name": "snow peas"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110172",
+                            "added": "2026-04-18T10:57:00.272+00:00",
+                            "updated": "2026-04-18T10:57:00.282+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
                         },
                         {
                             "tag": {
                                 "tag_id": "33",
-                                "name": "tomatoes",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "tomatoes"
                             },
-                            "item_id": 101026,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "tomatoes",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 1,
-                            "source_keys": [
-                                "l50550"
-                            ]
-                        },
-                        {
-                            "tag": {
-                                "tag_id": "349",
-                                "name": "white mushrooms",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                            "amount": {
+                                "quantity": 2.0,
+                                "whole_quantity": 2,
+                                "rounded_quantity": 2.0,
+                                "quantity_display": "2",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "2 medium"
                             },
-                            "item_id": 100823,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "white mushrooms",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 1,
-                            "source_keys": [
-                                "d56789"
-                            ]
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 2.0,
+                                        "rounded_quantity": 2.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "2"
+                                    },
+                                    "dish_id": "112",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56823",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110057",
+                            "added": "2026-04-18T10:56:55.615+00:00",
+                            "updated": "2026-04-18T10:57:00.818+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH112",
+                                "DISH56823"
+                            ],
+                            "amount_type": "MIXED"
                         },
                         {
                             "tag": {
                                 "tag_id": "342",
-                                "name": "zucchini",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "zucchini"
                             },
-                            "item_id": 100734,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "zucchini",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 2,
-                            "source_keys": [
-                                "d87",
-                                "d42"
-                            ]
+                            "details": [
+                                {
+                                    "dish_id": "56823",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110013",
+                            "added": "2026-04-18T10:56:54.720+00:00",
+                            "updated": "2026-04-18T10:56:55.715+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "DISH56823"
+                            ],
+                            "amount_type": "NONE"
                         }
                     ]
                 },
                 {
-                    "name": "Frozen",
-                    "category_id": 10,
-                    "displayOrder": 600,
+                    "name": "Meat",
+                    "category_id": "5",
+                    "display_order": 200,
                     "items": [
                         {
                             "tag": {
-                                "tag_id": "245",
-                                "name": "frozen peas",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "tag_id": "406",
+                                "name": "chicken breasts"
                             },
-                            "item_id": 100738,
-                            "added": "2026-01-03",
-
-                            "tag_name": "frozen peas",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 1,
-                            "source_keys": [
-                                "d66"
-                            ]
+                            "details": [
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110029",
+                            "added": "2026-04-18T10:56:55.051+00:00",
+                            "updated": "2026-04-18T10:56:55.060+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH104"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "435",
+                                "name": "ground beef"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110049",
+                            "added": "2026-04-18T10:56:55.504+00:00",
+                            "updated": "2026-04-18T10:56:55.509+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH44"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "74",
+                                "name": "lardons"
+                            },
+                            "amount": {
+                                "quantity": 0.75,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "ThreeQuarters",
+                                "rounded_quantity": 0.75,
+                                "quantity_display": "0 3/4",
+                                "unit_id": "1008",
+                                "unit_display": "lb",
+                                "display": "3/4 lb"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.5,
+                                        "rounded_quantity": 0.5,
+                                        "quantity_display": "",
+                                        "unit_id": "1008",
+                                        "unit_display": "lb",
+                                        "display": "8 ounces"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 0.25,
+                                        "rounded_quantity": 0.25,
+                                        "quantity_display": "",
+                                        "unit_id": "1008",
+                                        "unit_display": "lb",
+                                        "display": "4 ounces"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "amount": {
+                                        "quantity": 8.0,
+                                        "rounded_quantity": 8.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1009",
+                                        "unit_display": "oz",
+                                        "display": "8 ounces "
+                                    },
+                                    "dish_id": "78",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110109",
+                            "added": "2026-04-18T10:56:56.933+00:00",
+                            "updated": "2026-04-18T10:56:57.832+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767",
+                                "DISH78",
+                                "DISH77"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "162",
+                                "name": "sliced ham"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110161",
+                            "added": "2026-04-18T10:56:59.999+00:00",
+                            "updated": "2026-04-18T10:57:00.018+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "251",
+                                "name": "stew meat"
+                            },
+                            "amount": {
+                                "quantity": 2.5,
+                                "whole_quantity": 2,
+                                "fractional_quantity": "OneHalf",
+                                "rounded_quantity": 2.5,
+                                "quantity_display": "2 1/2",
+                                "unit_id": "1008",
+                                "unit_display": "lb",
+                                "display": "2 1/2 lb"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 2.5,
+                                        "rounded_quantity": 2.5,
+                                        "quantity_display": "",
+                                        "unit_id": "1008",
+                                        "unit_display": "lb",
+                                        "display": "2 1/2 pounds"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110133",
+                            "added": "2026-04-18T10:56:57.854+00:00",
+                            "updated": "2026-04-18T10:56:57.894+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
                         }
                     ]
                 },
                 {
                     "name": "Dairy",
-                    "category_id": 7,
-                    "displayOrder": 300,
+                    "category_id": "7",
+                    "display_order": 300,
                     "items": [
                         {
                             "tag": {
                                 "tag_id": "348",
-                                "name": "butter",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "butter"
                             },
-                            "item_id": 100756,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "butter",
-                            "used_count": 6,
-                            "source_keys": [
-                                "d101",
-                                "l50550",
-                                "d56620",
-                                "d27",
-                                "d56789",
-                                "d56757"
-                            ]
+                            "details": [
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "97",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110021",
+                            "added": "2026-04-18T10:56:54.863+00:00",
+                            "updated": "2026-04-18T10:57:01.531+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH104",
+                                "DISH97"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "18",
+                                "name": "cheddar cheese"
+                            },
+                            "amount": {
+                                "quantity": 0.5,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "OneHalf",
+                                "rounded_quantity": 0.5,
+                                "quantity_display": "0 1/2",
+                                "unit_id": "1000",
+                                "unit_display": "cup",
+                                "display": "1/2 cup medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.5,
+                                        "rounded_quantity": 0.5,
+                                        "quantity_display": "",
+                                        "unit_id": "1000",
+                                        "unit_display": "cup",
+                                        "display": "1/2 cup"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110034",
+                            "added": "2026-04-18T10:56:55.171+00:00",
+                            "updated": "2026-04-18T10:56:57.719+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767",
+                                "DISH44"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "69",
+                                "name": "eggs"
+                            },
+                            "amount": {
+                                "quantity": 3.0,
+                                "whole_quantity": 3,
+                                "rounded_quantity": 3.0,
+                                "quantity_display": "3",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "3 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 3.0,
+                                        "rounded_quantity": 3.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "3 large"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110041",
+                            "added": "2026-04-18T10:56:55.335+00:00",
+                            "updated": "2026-04-18T10:57:00.462+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH56767",
+                                "DISH104"
+                            ],
+                            "amount_type": "MIXED"
                         },
                         {
                             "tag": {
                                 "tag_id": "37",
-                                "name": "feta cheese",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "feta cheese"
                             },
-                            "item_id": 100976,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "feta cheese",
-                            "used_count": 1,
-                            "source_keys": [
-                                "d57683"
-                            ]
+                            "amount": {
+                                "quantity": 3.0,
+                                "whole_quantity": 3,
+                                "rounded_quantity": 3.0,
+                                "quantity_display": "3",
+                                "unit_id": "1009",
+                                "unit_display": "oz",
+                                "display": "3 oz"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 3.0,
+                                        "rounded_quantity": 3.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1009",
+                                        "unit_display": "oz",
+                                        "display": "3 ounces"
+                                    },
+                                    "dish_id": "112",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110151",
+                            "added": "2026-04-18T10:56:58.514+00:00",
+                            "updated": "2026-04-18T10:56:58.537+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH112"
+                            ],
+                            "amount_type": "ALL"
                         },
                         {
                             "tag": {
-                                "tag_id": "71",
-                                "name": "grated swiss cheese",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "tag_id": "444",
+                                "name": "half and half"
                             },
-                            "item_id": 100864,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "grated swiss cheese",
-                            "used_count": 2,
-                            "source_keys": [
-                                "d27",
-                                "d56758"
-                            ]
+                            "details": [
+                                {
+                                    "dish_id": "97",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110007",
+                            "added": "2026-04-18T10:56:54.616+00:00",
+                            "updated": "2026-04-18T10:56:54.629+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH97"
+                            ],
+                            "amount_type": "NONE"
                         },
                         {
                             "tag": {
-                                "tag_id": "126",
-                                "name": "heavy cream",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "tag_id": "67",
+                                "name": "milk"
                             },
-                            "item_id": 100916,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "heavy cream",
-                            "used_count": 1,
-                            "source_keys": [
-                                "d66"
-                            ]
+                            "amount": {
+                                "quantity": 6.0,
+                                "whole_quantity": 6,
+                                "rounded_quantity": 6.0,
+                                "quantity_display": "6",
+                                "unit_id": "1007",
+                                "unit_display": "fl oz",
+                                "display": "6 fl oz"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 6.0,
+                                        "rounded_quantity": 6.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1007",
+                                        "unit_display": "fl oz",
+                                        "display": "3/4 cups"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110117",
+                            "added": "2026-04-18T10:56:57.220+00:00",
+                            "updated": "2026-04-18T10:56:59.857+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "DISH56767"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "131",
+                                "name": "parmesan cheese"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110071",
+                            "added": "2026-04-18T10:56:55.940+00:00",
+                            "updated": "2026-04-18T10:56:55.948+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "462",
+                                "name": "plain yogurt"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110158",
+                            "added": "2026-04-18T10:56:59.928+00:00",
+                            "updated": "2026-04-18T10:56:59.942+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "4",
+                                "name": "prepared pie crust"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "1 medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110129",
+                            "added": "2026-04-18T10:56:57.746+00:00",
+                            "updated": "2026-04-18T10:56:57.774+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "203",
+                                "name": "sour cream"
+                            },
+                            "amount": {
+                                "quantity": 4.048,
+                                "whole_quantity": 4,
+                                "fractional_quantity": "OneEighth",
+                                "rounded_quantity": 4.125,
+                                "quantity_display": "4 1/8",
+                                "unit_id": "1009",
+                                "unit_display": "oz",
+                                "display": "4 1/8 oz"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 4.048,
+                                        "rounded_quantity": 4.048,
+                                        "quantity_display": "",
+                                        "unit_id": "1009",
+                                        "unit_display": "oz",
+                                        "display": "1/2 cup "
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110122",
+                            "added": "2026-04-18T10:56:57.400+00:00",
+                            "updated": "2026-04-18T10:56:57.490+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767"
+                            ],
+                            "amount_type": "ALL"
                         },
                         {
                             "tag": {
                                 "tag_id": "68",
-                                "name": "yogurt",
-                                "tag_type": "Ingredient",
-                                "is_group": false
+                                "name": "yogurt"
                             },
-                            "item_id": 101015,
-                            "added": "2026-01-03",
-                            "updated": "2026-01-03",
-                            "tag_name": "yogurt",
-                            "crossed_off": "2026-01-03",
-                            "used_count": 1,
-                            "source_keys": [
-                                "l50550"
-                            ]
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110182",
+                            "added": "2026-04-18T10:57:00.604+00:00",
+                            "updated": "2026-04-18T10:57:00.617+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50761",
+                                "name": "Yogurt helper"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110178",
+                            "added": "2026-04-18T10:57:00.490+00:00",
+                            "updated": "2026-04-18T10:57:00.496+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
                         }
                     ]
+                },
+                {
+                    "name": "Dry",
+                    "category_id": "52019",
+                    "display_order": 400,
+                    "items": [
+                        {
+                            "tag": {
+                                "tag_id": "50598",
+                                "name": "big salt"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1002",
+                                "unit_display": "teaspoon",
+                                "display": "1 teaspoon medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1002",
+                                        "unit_display": "teaspoon",
+                                        "display": "1 teaspoon "
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110125",
+                            "added": "2026-04-18T10:56:57.573+00:00",
+                            "updated": "2026-04-18T10:56:57.610+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767",
+                                "frequent"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50353",
+                                "name": "black olives"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110169",
+                            "added": "2026-04-18T10:57:00.158+00:00",
+                            "updated": "2026-04-18T10:57:00.171+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "334",
+                                "name": "black pepper"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1053",
+                                "unit_display": "pinch",
+                                "display": "1 pinch medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1053",
+                                        "unit_display": "pinch",
+                                        "display": "1 pinch"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "97",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110061",
+                            "added": "2026-04-18T10:56:55.678+00:00",
+                            "updated": "2026-04-18T10:56:58.018+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "frequent",
+                                "DISH97",
+                                "DISH77"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "264",
+                                "name": "boxed gravy"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110045",
+                            "added": "2026-04-18T10:56:55.416+00:00",
+                            "updated": "2026-04-18T10:56:55.424+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH104"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "44",
+                                "name": "bread"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110199",
+                            "added": "2026-04-18T10:57:00.977+00:00",
+                            "updated": "2026-04-18T10:57:00.999+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "62",
+                                "name": "bread crumbs"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110086",
+                            "added": "2026-04-18T10:56:56.308+00:00",
+                            "updated": "2026-04-18T10:56:56.313+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH104",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "96",
+                                "name": "brown cookies"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110205",
+                            "added": "2026-04-18T10:57:01.094+00:00",
+                            "updated": "2026-04-18T10:57:01.102+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "25",
+                                "name": "canned corn"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "114",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110067",
+                            "added": "2026-04-18T10:56:55.814+00:00",
+                            "updated": "2026-04-18T10:56:55.821+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH114"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "110",
+                                "name": "canned diced tomatoes"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1029",
+                                "unit_display": "can",
+                                "display": "1 can medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1029",
+                                        "unit_display": "can",
+                                        "display": "1 can"
+                                    },
+                                    "dish_id": "78",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110051",
+                            "added": "2026-04-18T10:56:55.522+00:00",
+                            "updated": "2026-04-18T10:56:56.793+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "DISH78",
+                                "DISH44"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "188",
+                                "name": "canned kidney beans"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110025",
+                            "added": "2026-04-18T10:56:54.937+00:00",
+                            "updated": "2026-04-18T10:56:56.561+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "DISH44"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "210",
+                                "name": "canned tuna"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110186",
+                            "added": "2026-04-18T10:57:00.669+00:00",
+                            "updated": "2026-04-18T10:57:00.675+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "437",
+                                "name": "chicken stock"
+                            },
+                            "amount": {
+                                "quantity": 0.625,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "FiveEighths",
+                                "rounded_quantity": 0.625,
+                                "quantity_display": "0 5/8",
+                                "unit_id": "1010",
+                                "unit_display": "quart",
+                                "display": "5/8 quart"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.625,
+                                        "rounded_quantity": 0.625,
+                                        "quantity_display": "",
+                                        "unit_id": "1010",
+                                        "unit_display": "quart",
+                                        "display": "2 1/2 cups"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110142",
+                            "added": "2026-04-18T10:56:58.188+00:00",
+                            "updated": "2026-04-18T10:56:58.252+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent",
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "184",
+                                "name": "chili powder"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110093",
+                            "added": "2026-04-18T10:56:56.482+00:00",
+                            "updated": "2026-04-18T10:56:56.485+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent",
+                                "DISH44"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "253",
+                                "name": "coffee"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110215",
+                            "added": "2026-04-18T10:57:01.268+00:00",
+                            "updated": "2026-04-18T10:57:01.275+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "95",
+                                "name": "crackers"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110192",
+                            "added": "2026-04-18T10:57:00.758+00:00",
+                            "updated": "2026-04-18T10:57:00.769+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "221",
+                                "name": "diet coke"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110203",
+                            "added": "2026-04-18T10:57:01.062+00:00",
+                            "updated": "2026-04-18T10:57:01.071+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50783",
+                                "name": "dried sage"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1001",
+                                "unit_display": "tablespoon",
+                                "display": "1 tablespoon medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1001",
+                                        "unit_display": "tablespoon",
+                                        "display": "1 Tablespoon "
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110115",
+                            "added": "2026-04-18T10:56:57.155+00:00",
+                            "updated": "2026-04-18T10:56:57.189+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "309",
+                                "name": "dried thyme"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110075",
+                            "added": "2026-04-18T10:56:56.041+00:00",
+                            "updated": "2026-04-18T10:56:56.050+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "436",
+                                "name": "elbow maccaroni"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110064",
+                            "added": "2026-04-18T10:56:55.744+00:00",
+                            "updated": "2026-04-18T10:56:55.751+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "134",
+                                "name": "farfalle"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1008",
+                                "unit_display": "lb",
+                                "display": "1 lb"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1008",
+                                        "unit_display": "lb",
+                                        "display": "1 pound"
+                                    },
+                                    "dish_id": "78",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110111",
+                            "added": "2026-04-18T10:56:57.027+00:00",
+                            "updated": "2026-04-18T10:56:57.056+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH78"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "350",
+                                "name": "flour"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "104",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110043",
+                            "added": "2026-04-18T10:56:55.377+00:00",
+                            "updated": "2026-04-18T10:56:55.386+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH104"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "220",
+                                "name": "friday snack"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110190",
+                            "added": "2026-04-18T10:57:00.724+00:00",
+                            "updated": "2026-04-18T10:57:00.735+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "243",
+                                "name": "ground cinnamon"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1053",
+                                "unit_display": "pinch",
+                                "display": "1 pinch medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1053",
+                                        "unit_display": "pinch",
+                                        "display": "1 pinch"
+                                    },
+                                    "dish_id": "56767",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110119",
+                            "added": "2026-04-18T10:56:57.284+00:00",
+                            "updated": "2026-04-18T10:56:57.315+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56767",
+                                "frequent"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "252",
+                                "name": "guiness beer"
+                            },
+                            "amount": {
+                                "quantity": 1.0,
+                                "whole_quantity": 1,
+                                "rounded_quantity": 1.0,
+                                "quantity_display": "1",
+                                "unit_id": "1011",
+                                "unit_display": "unit",
+                                "display": "1"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 1.0,
+                                        "rounded_quantity": 1.0,
+                                        "quantity_display": "",
+                                        "unit_id": "1011",
+                                        "unit_display": "unit",
+                                        "display": "1 can"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110069",
+                            "added": "2026-04-18T10:56:55.846+00:00",
+                            "updated": "2026-04-18T10:56:55.917+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "359",
+                                "name": "honey"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56787",
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110167",
+                            "added": "2026-04-18T10:57:00.122+00:00",
+                            "updated": "2026-04-18T10:57:00.133+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56787",
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "42",
+                                "name": "jelly"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110196",
+                            "added": "2026-04-18T10:57:00.907+00:00",
+                            "updated": "2026-04-18T10:57:00.913+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "66",
+                                "name": "muesli"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110219",
+                            "added": "2026-04-18T10:57:01.332+00:00",
+                            "updated": "2026-04-18T10:57:01.342+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "139",
+                                "name": "nutella"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110221",
+                            "added": "2026-04-18T10:57:01.376+00:00",
+                            "updated": "2026-04-18T10:57:01.382+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "336",
+                                "name": "olive oil"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110223",
+                            "added": "2026-04-18T10:57:01.412+00:00",
+                            "updated": "2026-04-18T10:57:01.421+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "185",
+                                "name": "oregano"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110031",
+                            "added": "2026-04-18T10:56:55.097+00:00",
+                            "updated": "2026-04-18T10:56:55.102+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "168",
+                                "name": "paprika"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "44",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110053",
+                            "added": "2026-04-18T10:56:55.550+00:00",
+                            "updated": "2026-04-18T10:56:55.559+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent",
+                                "DISH44"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "237",
+                                "name": "peanut butter"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110213",
+                            "added": "2026-04-18T10:57:01.230+00:00",
+                            "updated": "2026-04-18T10:57:01.248+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50959",
+                                "name": "pita bread"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110184",
+                            "added": "2026-04-18T10:57:00.642+00:00",
+                            "updated": "2026-04-18T10:57:00.647+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50612",
+                                "name": "poofy bread"
+                            },
+                            "details": [],
+                            "item_id": "110171",
+                            "added": "2026-04-18T10:57:00.239+00:00",
+                            "updated": "2026-04-18T10:57:00.244+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "360",
+                                "name": "salt"
+                            },
+                            "amount": {
+                                "quantity": 0.2116402116402114,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "OneQuarter",
+                                "rounded_quantity": 0.25,
+                                "quantity_display": "0 1/4",
+                                "unit_id": "1009",
+                                "unit_display": "oz",
+                                "display": "1/4 oz"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.2116402116402114,
+                                        "rounded_quantity": 0.2116402116402114,
+                                        "quantity_display": "",
+                                        "unit_id": "1009",
+                                        "unit_display": "oz",
+                                        "display": "1 teaspoon "
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "97",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                },
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110055",
+                            "added": "2026-04-18T10:56:55.587+00:00",
+                            "updated": "2026-04-18T10:56:57.950+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "frequent",
+                                "DISH97",
+                                "DISH77"
+                            ],
+                            "amount_type": "MIXED"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50303",
+                                "name": "tea bags"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110201",
+                            "added": "2026-04-18T10:57:01.022+00:00",
+                            "updated": "2026-04-18T10:57:01.036+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "341",
+                                "name": "tomato paste"
+                            },
+                            "amount": {
+                                "quantity": 0.25,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "OneQuarter",
+                                "rounded_quantity": 0.25,
+                                "quantity_display": "0 1/4",
+                                "unit_id": "1000",
+                                "unit_display": "cup",
+                                "display": "1/4 cup medium"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.25,
+                                        "rounded_quantity": 0.25,
+                                        "quantity_display": "",
+                                        "unit_id": "1000",
+                                        "unit_display": "cup",
+                                        "display": "1/4 cup "
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110138",
+                            "added": "2026-04-18T10:56:58.086+00:00",
+                            "updated": "2026-04-18T10:56:58.104+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "186",
+                                "name": "vegetable stock"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110037",
+                            "added": "2026-04-18T10:56:55.269+00:00",
+                            "updated": "2026-04-18T10:56:55.277+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "181",
+                                "name": "white sugar"
+                            },
+                            "amount": {
+                                "quantity": 0.148148148148148,
+                                "whole_quantity": 0,
+                                "fractional_quantity": "OneQuarter",
+                                "rounded_quantity": 0.25,
+                                "quantity_display": "0 1/4",
+                                "unit_id": "1009",
+                                "unit_display": "oz",
+                                "display": "1/4 oz"
+                            },
+                            "details": [
+                                {
+                                    "amount": {
+                                        "quantity": 0.148148148148148,
+                                        "rounded_quantity": 0.148148148148148,
+                                        "quantity_display": "",
+                                        "unit_id": "1009",
+                                        "unit_display": "oz",
+                                        "display": "1 teaspoon"
+                                    },
+                                    "dish_id": "77",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110140",
+                            "added": "2026-04-18T10:56:58.114+00:00",
+                            "updated": "2026-04-18T10:56:58.172+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent",
+                                "DISH77"
+                            ],
+                            "amount_type": "ALL"
+                        }
+                    ]
+                },
+                {
+                    "name": "Other",
+                    "category_id": "9",
+                    "display_order": 500,
+                    "items": [
+                        {
+                            "tag": {
+                                "tag_id": "270",
+                                "name": "dish soap"
+                            },
+                            "details": [],
+                            "item_id": "110198",
+                            "added": "2026-04-18T10:57:00.936+00:00",
+                            "updated": "2026-04-18T10:57:00.944+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "50648",
+                                "name": "dishwasher detergent"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110165",
+                            "added": "2026-04-18T10:57:00.088+00:00",
+                            "updated": "2026-04-18T10:57:00.099+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "254",
+                                "name": "gum"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110217",
+                            "added": "2026-04-18T10:57:01.309+00:00",
+                            "updated": "2026-04-18T10:57:01.315+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "51290",
+                                "name": "Laundry detergent"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110188",
+                            "added": "2026-04-18T10:57:00.692+00:00",
+                            "updated": "2026-04-18T10:57:00.701+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "145",
+                                "name": "mopping fluid"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110163",
+                            "added": "2026-04-18T10:57:00.045+00:00",
+                            "updated": "2026-04-18T10:57:00.055+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "283",
+                                "name": "paper towels"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110226",
+                            "added": "2026-04-18T10:57:01.496+00:00",
+                            "updated": "2026-04-18T10:57:01.506+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "225",
+                                "name": "shampoo"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110207",
+                            "added": "2026-04-18T10:57:01.124+00:00",
+                            "updated": "2026-04-18T10:57:01.130+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "226",
+                                "name": "shower soap"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110209",
+                            "added": "2026-04-18T10:57:01.157+00:00",
+                            "updated": "2026-04-18T10:57:01.166+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "236",
+                                "name": "toilet paper"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110211",
+                            "added": "2026-04-18T10:57:01.186+00:00",
+                            "updated": "2026-04-18T10:57:01.201+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "141",
+                                "name": "toothpaste"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110156",
+                            "added": "2026-04-18T10:56:59.885+00:00",
+                            "updated": "2026-04-18T10:56:59.894+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "265",
+                                "name": "trash bags"
+                            },
+                            "details": [
+                                {
+                                    "list_id": "50550",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110180",
+                            "added": "2026-04-18T10:57:00.529+00:00",
+                            "updated": "2026-04-18T10:57:00.539+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "LIST50550",
+                                "frequent"
+                            ],
+                            "amount_type": "NONE"
+                        }
+                    ]
+                },
+                {
+                    "name": "Frozen",
+                    "category_id": "52017",
+                    "display_order": 600,
+                    "items": [
+                        {
+                            "tag": {
+                                "tag_id": "307",
+                                "name": "frozen green beans"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "56676",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110101",
+                            "added": "2026-04-18T10:56:56.650+00:00",
+                            "updated": "2026-04-18T10:56:56.661+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH56676"
+                            ],
+                            "amount_type": "NONE"
+                        },
+                        {
+                            "tag": {
+                                "tag_id": "245",
+                                "name": "frozen peas"
+                            },
+                            "details": [
+                                {
+                                    "dish_id": "114",
+                                    "list_id": "51210",
+                                    "contains_unspecified": false
+                                }
+                            ],
+                            "item_id": "110084",
+                            "added": "2026-04-18T10:56:56.278+00:00",
+                            "updated": "2026-04-18T10:56:56.286+00:00",
+                            "list_id": "51210",
+                            "used_count": 0,
+                            "sources": [
+                                "DISH114"
+                            ],
+                            "amount_type": "NONE"
+                        }
+                    ]
+                },
+                {
+                    "name": "Not (yet) categorized",
+                    "category_id": "52010",
+                    "display_order": 700,
+                    "items": []
                 }
             ],
-            "created": "2026-01-03T12:58:14.015+00:00",
-            "updated": "2026-01-03T14:15:51.695+00:00",
-            "layout_type": null,
-            "layout_id": "12",
-            "item_count": 34,
-            "legend": [
-                {
-                    "key": "d42",
-                    "display": "Lentil and Bulgur Pilaf"
-                },
-                {
-                    "key": "d57683",
-                    "display": "Apple Fennel and Endive Salad"
-                },
-                {
-                    "key": "d27",
-                    "display": "tuna casserole I"
-                },
-                {
-                    "key": "d56620",
-                    "display": "Homemade Biscuits"
-                },
-                {
-                    "key": "d101",
-                    "display": "crockpot corn chowder"
-                },
-                {
-                    "key": "d56757",
-                    "display": "crepe sarrasin"
-                },
-                {
-                    "key": "d56787",
-                    "display": "peanut butter banana smoothie"
-                },
-                {
-                    "key": "d87",
-                    "display": "mixed veggies"
-                },
-                {
-                    "key": "d56758",
-                    "display": "Crepe Campagnarde"
-                },
-                {
-                    "key": "d66",
-                    "display": "Vegetarian Korma"
-                },
-                {
-                    "key": "d56789",
-                    "display": "Mushroom and Bacon Green Beans"
-                },
-                {
-                    "key": "l50550",
-                    "display": "Starter List"
-                }
-            ],
-            "user_id": 20,
             "is_starter_list": false,
             "name": "MergedWithServer"
         },
         "mergeConflicts": null
-    },
-    "resourceId": null,
-    "rootPath": "mergeresult"
+    }
 }

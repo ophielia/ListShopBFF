@@ -37,7 +37,7 @@ class TagTree() {
         stringLookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
     }
 
-    fun append(tag: ShoppingListTag, parentId: String) {
+    fun append(tag: ShoppingListTag, parentId: String, tagType: TagType) {
         val parentIdAsLong = parentId.toLongOrNull() ?: -1L
         val tagIdAsLong = tag.externalId.toLongOrNull() ?: -1L
         if (parentIdAsLong < 0 ||
@@ -51,7 +51,7 @@ class TagTree() {
             id = tagIdAsLong,
             isGroup = false,
             isUserTag = tag.isUser ?: false,
-            tagType = TagType.valueOf(tag.tagType),
+            tagType = tagType,
         )
         val newNode = TagTreeNode(newDisplay, parentId)
         stringLookupDictionary.put(tag.externalId, newNode)

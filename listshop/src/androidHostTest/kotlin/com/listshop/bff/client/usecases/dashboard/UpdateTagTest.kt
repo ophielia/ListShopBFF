@@ -92,7 +92,6 @@ class UpdateTagTest {
         val newTag = result.value
 
         assertEquals(tagName, newTag?.display)
-        assertEquals(TagType.INGREDIENT.display, newTag?.tagType)
         assertTrue(newTag?.isUser ?: false)
         assertEquals(tagId, newTag?.externalId)
 

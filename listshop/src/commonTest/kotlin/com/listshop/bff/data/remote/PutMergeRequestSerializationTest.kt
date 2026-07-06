@@ -22,10 +22,10 @@ class PutMergeRequestSerializationTest : DeserializationBaseTest() {
 
     @Test
     fun `when i serialize the PutMergeRequestSample - it doesn't blow up`() = runTest {
-        val listId = 110000L
+        val listId = "110000"
         val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
 
-        val mergeItems = dummyMergeItems(listId.toString())
+        val mergeItems = dummyMergeItems(listId)
         val mergeRequest = PutMergeRequest(
             listId = listId,
             lastChanged = now,
@@ -90,8 +90,7 @@ class PutMergeRequestSerializationTest : DeserializationBaseTest() {
     private fun buildTag(tagId: String, name: String, tagType: String): MergeItem.MergeTag {
         return MergeItem.MergeTag(
             tagId = tagId,
-            name = name,
-            tagType = tagType
+            name = name
         )
     }
 

@@ -1,8 +1,8 @@
 {
   "label": "retrieveLayoutsSuccess",
   "requestMethod": "GET",
-  "requestPath": "/layout/user",
+  "requestPath": "/v2/layout/tag/9876",
   "requestBodyFilename": "",
   "responseStatus": 200,
-  "responseBodyFilename": "standards/standardUserLayout.json"
+  "responseBodyFilename": "dashboard/createTag/retrieveTagCategory.json"
 }

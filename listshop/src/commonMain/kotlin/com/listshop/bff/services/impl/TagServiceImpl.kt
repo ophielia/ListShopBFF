@@ -62,16 +62,11 @@ class TagServiceImpl internal constructor(
 
         // retrieve new tag
         val newTag = tagApi.retrieveTag(newTagId)
-        // set parentid in tag (workaround, while endpoint still isnt returning parent id for single tag
-        newTag.parentId = parentId
 
         // save tag locally
         tagRepo.insertApiTagsLocally(listOf(newTag))
-        // reload user layouts
-        //MM - once we have an endpoint, we can change this so that we only add the tag to the layout
-        // AND / OR - change this so that it runs in the background
-        // fixing this - LS-2323
-        layoutService.retrieveLayoutsAndSaveLocally()
+        // get layout information for tag
+        layoutService.updateLayoutInformationForTag(newTag)
 
         return ShoppingListTag.create(newTag, true)
     }

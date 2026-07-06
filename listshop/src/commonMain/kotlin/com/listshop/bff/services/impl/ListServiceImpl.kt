@@ -76,7 +76,7 @@ class ListServiceImpl internal constructor(
         val mergeItemList =
             shoppingList?.categories?.flatMap { it.items }?.map { MergeItem.create(modelItem = it, listId = listId) }
         val listMergeRequest = PutMergeRequest(
-            listId = listId.toLong(),
+            listId = listId,
             lastChanged = shoppingList?.lastLocalChange,
             layoutId = shoppingList?.layoutId?.toLong() ?: 0,
             mergeItems = mergeItemList ?: emptyList()

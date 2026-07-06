@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PutMergeRequest(
     @SerialName("list_id")
-    val listId: Long,
+    val listId: String,
     @SerialName("last_changed")
     val lastChanged: String?,
     @SerialName("layout_id")
@@ -73,16 +73,13 @@ data class MergeItem @OptIn(ExperimentalSerializationApi::class) constructor(
         @SerialName("tag_id")
         val tagId: String,
         @SerialName("name")
-        val name: String,
-        @SerialName("tag_type")
-        val tagType: String
+        val name: String
     ) {
         companion object {
             fun create(tag: ShoppingListTag): MergeTag {
                 return MergeTag(
                     tagId = tag.externalId,
-                    name = tag.display,
-                    tagType = tag.tagType
+                    name = tag.display
                 )
 
             }

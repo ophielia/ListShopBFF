@@ -1,9 +1,13 @@
 package com.listshop.bff
 
+import com.listshop.bff.data.model.ListShopAmount
 import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.model.ShoppingListDetail
+import com.listshop.bff.data.model.ShoppingListItem
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListInfoEntity
+import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ShoppingListEntity
 import com.listshop.bff.db.TagEntity
@@ -86,24 +90,12 @@ class TestDatabaseHelper(
         // go through all categories, pulling items
         for (cat in shoppingList.categories) {
             val catId = cat.externalId.toString()
-            val items = cat.items.map {
-                ListItemEntity(
-                    externalId = it.externalId.toString(),
-                    categoryExternalId = catId,
-                    tagExternalId = it.tag.externalId,
-                    added = it.added,
-                    removed = it.removed,
-                    crossedOff = it.crossedOff,
-                    updatedOn = it.updatedOn,
-                    usedCount = it.usedCount.toLong(),
-                    tagName = it.tag.display,
-                    tagType = it.tag.tagType,
-                    legendKeys = ""
-                )
-            }
-
+            var detailList = mutableListOf<ListItemDetailEntity>();
+            val items = cat.items.map {mapShoppingListItem(it, catId, detailList)}
+            insertDetails(detailList)
             val categoryEntity =
-                ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder.toLong())
+                ListCategoryEntity(cat.name, cat.externalId.toString(), listId,
+                    cat.displayOrder)
             itemsByCategory.put(categoryEntity, items)
         }
         // save list
@@ -114,13 +106,82 @@ class TestDatabaseHelper(
             updatedOn = shoppingList.updated,
             lastLocalChange = shoppingList.lastLocalChange,
             lastSync = shoppingList.lastSynced,
-            itemCount = shoppingList.itemCount?.toLong(),
+            itemCount = shoppingList.itemCount,
             layoutId = shoppingList.layoutId,
             isStarter = shoppingList.isStarterList ?: false,
         )
         setShoppingList(listEntity, itemsByCategory)
 
     }
+
+    private fun insertDetails(detailList: MutableList<ListItemDetailEntity>) {
+        listShopDatabase.db.listDefinitionQueries.transaction {
+            detailList.forEach { detailEntity ->
+                listShopDatabase.db.listDefinitionQueries
+                    .insertIntoListItemDetailEntity(
+                        itemExternalId = detailEntity.itemExternalId,
+                        dishId = detailEntity.dishId,
+                        listId = detailEntity.listId,
+                        containsUnspecified = detailEntity.containsUnspecified,
+                        quantity = detailEntity.quantity,
+                        wholeQuantity = detailEntity.wholeQuantity,
+                        fractionalQuantity = detailEntity.fractionalQuantity,
+                        roundedQuantity = detailEntity.roundedQuantity,
+                        quantityDisplay = detailEntity.quantityDisplay,
+                        unitId = detailEntity.unitId,
+                        unitDisplay = detailEntity.unitDisplay,
+                        amountDisplay = detailEntity.amountDisplay
+                    )
+            }
+        }
+
+    }
+
+    private fun mapShoppingListItem(it: ShoppingListItem, catId: String, detailList: MutableList<ListItemDetailEntity>): ListItemEntity {
+        val itemId = it.externalId
+        val details = it.details.map{ mapShoppingListItemDetail(it,itemId) }
+        detailList.addAll(details)
+        return ListItemEntity(
+            externalId = it.externalId,
+            categoryExternalId = catId,
+            tagExternalId = it.tag.externalId,
+            added = it.added,
+            removed = it.removed,
+            crossedOff = it.crossedOff,
+            updatedOn = it.updatedOn,
+            usedCount = it.usedCount,
+            tagName = it.tag.display,
+            quantity = it.amount?.quantity,
+            wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
+            roundedQuantity = it.amount?.roundedQuantity,
+            quantityDisplay = it.amount?.quantityDisplay,
+            unitId = it.amount?.unitId,
+            unitDisplay = it.amount?.unitDisplay,
+            amountDisplay = it.amount?.amountDisplay,
+            tagType = "",  //MM REMOVE IF POSSIBLE
+            legendKeys = it.legendKeys.joinToString(",")
+        )
+    }
+
+    private fun mapShoppingListItemDetail(it: ShoppingListDetail, itemId: String): ListItemDetailEntity {
+        return ListItemDetailEntity(
+            itemExternalId = itemId,
+            dishId = it.dishId,
+            listId = it.listId,
+            containsUnspecified = it.containsUnspecified,
+            quantity = it.amount?.quantity,
+            quantityDisplay = it.amount?.quantityDisplay,
+            unitId = it.amount?.unitId,
+            unitDisplay = it.amount?.unitDisplay,
+            amountDisplay = it.amount?.amountDisplay,
+            wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
+            roundedQuantity = it.amount?.roundedQuantity
+        )
+    }
+
+
 
     private fun setShoppingList(shoppingList: ShoppingListEntity?, itemsByCategory: Map<ListCategoryEntity, List<ListItemEntity>>) {
         if (shoppingList == null) {
@@ -147,6 +208,7 @@ class TestDatabaseHelper(
             )
             val categoryId = it.key.externalId ?: "0"
             it.value.forEach { item ->
+                val amount = ListShopAmount.create(item)
                 listShopDatabase.db.listDefinitionQueries.insertIntoListItemEntity(
                     externalId = item.externalId,
                     categoryExternalId = categoryId,
@@ -158,6 +220,14 @@ class TestDatabaseHelper(
                     usedCount = item.usedCount,
                     tagName = item.tagName,
                     tagType = item.tagType,
+                    amountDisplay = amount?.amountDisplay,
+                    quantity = amount?.quantity,
+                    wholeQuantity = amount?.wholeQuantity,
+                    fractionalQuantity = amount?.fractionalQuantity,
+                    quantityDisplay = amount?.quantityDisplay,
+                    roundedQuantity = amount?.roundedQuantity,
+                    unitDisplay = amount?.unitDisplay,
+                    unitId = amount?.unitId,
                     legendKeys = item.legendKeys
                 )
             }

@@ -9,11 +9,11 @@ ApiLayout(
     @SerialName("name")
     val name: String?,
     @SerialName("layout_id")
-    val externalId: Int?,
+    val externalId: String?,
     @SerialName("is_default")
     val isDefault: Boolean = false,
     @SerialName("user_id")
-    val userId: String?,
+    val userId: String? = null,
     @SerialName("categories")
     val categories: List<ApiLayoutCategory> = listOf()
 )  {
@@ -33,7 +33,7 @@ data class ApiLayoutCategory(
     @SerialName("name")
     val name: String?,
     @SerialName("category_id")
-    val externalId: Int,
+    val externalId: String,
     @SerialName("display_order")
     val displayOrder: Long = 0,
     @SerialName("is_default")
@@ -59,8 +59,8 @@ data class EmbeddedApiLayoutList(
 
 @Serializable
 data class ApiLayoutList(
-    @SerialName("list_layout_list")
-    val layoutList: List<EmbeddedApiLayout>?
+    @SerialName("list_layouts")
+    val layoutList: List<ApiLayout>?
 )
 
 @Serializable

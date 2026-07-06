@@ -1,7 +1,7 @@
 {
   "label": "createTagSuccess",
   "requestMethod": "GET",
-  "requestPath": "/tag/9876",
+  "requestPath": "/v2/tag/9876",
   "requestBodyFilename": "",
   "responseStatus": 200,
   "responseBodyFilename": "dashboard/createTag/retrieveTagResponse.json",

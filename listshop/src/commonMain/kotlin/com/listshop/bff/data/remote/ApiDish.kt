@@ -12,19 +12,7 @@ data class ApiDish(
 )
 
 @Serializable
-data class ApiDishEmbedded(
-    @SerialName("dish")
-    val embeddedDish: ApiDish
-)
-
-@Serializable
-data class ApiDishResourceList(
-    @SerialName("dishResourceList")
-    val dishResourceList: List<ApiDishEmbedded>
-)
-
-@Serializable
-data class EmbeddedDishResourceList(
-    @SerialName("_embedded")
-    val embeddedList: ApiDishResourceList
+data class ApiDishList(
+    @SerialName("dish_list")
+    val dishes: List<ApiDish>
 )

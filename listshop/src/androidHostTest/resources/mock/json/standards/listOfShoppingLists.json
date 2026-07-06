@@ -1,73 +1,229 @@
 {
-  "links": [
-    "https://nastyvarmits.fr/shoppinglist"
-  ],
-  "_embedded": {
-    "shoppingListResourceList": [
-      {
-        "links": [],
-        "shopping_list": {
-          "list_id": 51067,
-          "categories": null,
-          "created": "2024-07-07T07:29:49.863+00:00",
-          "updated": "2024-07-07T09:46:18.363+00:00",
-          "layout_type": null,
-          "layout_id": "12",
-          "item_count": 4,
-          "legend": [],
-          "user_id": 20,
-          "is_starter_list": false,
-          "name": "Shopping List"
-        }
-      },
-      {
-        "links": [],
-        "shopping_list": {
-          "list_id": 50944,
-          "categories": null,
-          "created": "2023-02-23T15:13:11.171+00:00",
-          "updated": "2024-07-07T08:17:06.888+00:00",
-          "layout_type": null,
-          "layout_id": "12",
-          "item_count": 3,
-          "legend": [],
-          "user_id": 20,
-          "is_starter_list": false,
-          "name": "Supermarket"
-        }
-      },
-      {
-        "links": [],
-        "shopping_list": {
-          "list_id": 50907,
-          "categories": null,
-          "created": "2022-10-07T19:00:36.074+00:00",
-          "updated": "2024-02-17T09:49:17.964+00:00",
-          "layout_type": null,
-          "layout_id": null,
-          "item_count": 5,
-          "legend": [],
-          "user_id": 20,
-          "is_starter_list": false,
-          "name": "Z dieting stuff"
-        }
-      },
-      {
-        "links": [],
-        "shopping_list": {
-          "list_id": 50824,
-          "categories": null,
-          "created": "2021-11-13T09:27:33.902+00:00",
-          "updated": "2023-11-06T05:53:04.751+00:00",
-          "layout_type": null,
-          "layout_id": null,
-          "item_count": 0,
-          "legend": [],
-          "user_id": 20,
-          "is_starter_list": false,
-          "name": "Market list"
-        }
-      }
-    ]
-  }
+  "list_of_lists": [
+    {
+      "list_id": "50944",
+      "created": "2023-02-23T15:13:11.171+00:00",
+      "updated": "2026-07-03T04:54:01.766+00:00",
+      "item_count": 5,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Supermarket"
+    },
+    {
+      "list_id": "51222",
+      "created": "2026-05-30T12:15:14.707+00:00",
+      "updated": "2026-05-30T12:15:15.946+00:00",
+      "item_count": 113,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 14"
+    },
+    {
+      "list_id": "51221",
+      "created": "2026-05-30T12:15:02.049+00:00",
+      "updated": "2026-05-30T12:15:02.786+00:00",
+      "item_count": 87,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 13"
+    },
+    {
+      "list_id": "51220",
+      "created": "2026-05-30T12:14:50.971+00:00",
+      "updated": "2026-05-30T12:14:51.912+00:00",
+      "item_count": 92,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 12"
+    },
+    {
+      "list_id": "51219",
+      "created": "2026-05-30T12:14:37.617+00:00",
+      "updated": "2026-05-30T12:14:39.109+00:00",
+      "item_count": 97,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 11"
+    },
+    {
+      "list_id": "51218",
+      "created": "2026-05-30T12:09:45.430+00:00",
+      "updated": "2026-05-30T12:09:46.613+00:00",
+      "item_count": 94,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 10"
+    },
+    {
+      "list_id": "51217",
+      "created": "2026-05-30T12:09:30.730+00:00",
+      "updated": "2026-05-30T12:09:31.818+00:00",
+      "item_count": 94,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 9"
+    },
+    {
+      "list_id": "51216",
+      "created": "2026-05-30T12:09:14.918+00:00",
+      "updated": "2026-05-30T12:09:16.253+00:00",
+      "item_count": 113,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 8"
+    },
+    {
+      "list_id": "51215",
+      "created": "2026-05-30T12:08:59.196+00:00",
+      "updated": "2026-05-30T12:09:00.033+00:00",
+      "item_count": 87,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 7"
+    },
+    {
+      "list_id": "51214",
+      "created": "2026-05-30T12:08:43.063+00:00",
+      "updated": "2026-05-30T12:08:44.448+00:00",
+      "item_count": 92,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 6"
+    },
+    {
+      "list_id": "51213",
+      "created": "2026-05-30T12:08:31.901+00:00",
+      "updated": "2026-05-30T12:08:33.989+00:00",
+      "item_count": 97,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 5"
+    },
+    {
+      "list_id": "51212",
+      "created": "2026-05-30T12:08:15.063+00:00",
+      "updated": "2026-05-30T12:08:17.472+00:00",
+      "item_count": 97,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 4"
+    },
+    {
+      "list_id": "51183",
+      "created": "2026-04-06T17:21:32.681+00:00",
+      "updated": "2026-04-25T07:21:06.150+00:00",
+      "item_count": 15,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Inspiration"
+    },
+    {
+      "list_id": "51211",
+      "created": "2026-04-18T10:57:19.863+00:00",
+      "updated": "2026-04-24T16:05:38.682+00:00",
+      "item_count": 12,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 3"
+    },
+    {
+      "list_id": "51210",
+      "created": "2026-04-18T10:56:53.994+00:00",
+      "updated": "2026-04-18T08:57:02.227+00:00",
+      "item_count": 92,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 2"
+    },
+    {
+      "list_id": "51199",
+      "created": "2026-04-18T10:19:08.386+00:00",
+      "updated": "2026-04-18T08:19:10.618+00:00",
+      "item_count": 92,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List 1"
+    },
+    {
+      "list_id": "51198",
+      "created": "2026-04-18T10:18:55.499+00:00",
+      "updated": "2026-04-18T08:18:58.230+00:00",
+      "item_count": 134,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Shopping List"
+    },
+    {
+      "list_id": "50744",
+      "created": "2021-01-10T13:14:59.863+00:00",
+      "updated": "2026-04-12T17:28:01.944+00:00",
+      "item_count": 1,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "fridge list"
+    },
+    {
+      "list_id": "51185",
+      "created": "2026-04-12T10:07:28.200+00:00",
+      "updated": "2026-04-12T08:07:52.073+00:00",
+      "item_count": 2,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Extras"
+    },
+    {
+      "list_id": "51121",
+      "created": "2025-05-03T10:46:10.974+00:00",
+      "updated": "2026-04-11T08:03:05.066+00:00",
+      "item_count": 1,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Castorama"
+    },
+    {
+      "list_id": "51074",
+      "created": "2024-09-07T08:20:53.570+00:00",
+      "updated": "2026-03-01T09:51:06.477+00:00",
+      "item_count": 1,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Spices"
+    },
+    {
+      "list_id": "50550",
+      "created": "2019-01-01T19:26:13.176+00:00",
+      "updated": "2026-01-03T12:05:37.912+00:00",
+      "item_count": 42,
+      "user_id": "20",
+      "is_starter_list": true,
+      "name": "Starter List"
+    },
+    {
+      "list_id": "51123",
+      "created": "2025-05-10T09:07:28.367+00:00",
+      "updated": "2026-01-03T11:50:40.717+00:00",
+      "item_count": 3,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Botanic"
+    },
+    {
+      "list_id": "51154",
+      "created": "2025-10-18T08:28:38.350+00:00",
+      "updated": "2026-01-03T09:59:56.594+00:00",
+      "item_count": 1,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Ikea"
+    },
+    {
+      "list_id": "50824",
+      "created": "2021-11-13T09:27:33.902+00:00",
+      "updated": "2025-09-06T06:35:10.920+00:00",
+      "item_count": 0,
+      "user_id": "20",
+      "is_starter_list": false,
+      "name": "Market list"
+    }
+  ]
 }

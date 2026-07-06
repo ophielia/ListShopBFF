@@ -2,7 +2,10 @@ package com.listshop.bff.repositories.impl
 
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.model.ShoppingListCategory
+import com.listshop.bff.data.model.ShoppingListDetail
+import com.listshop.bff.data.model.ShoppingListItem
 import com.listshop.bff.db.ListCategoryEntity
+import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
 import com.listshop.bff.db.ListshopDb
 import com.listshop.bff.db.ShoppingListEntity
@@ -20,6 +23,7 @@ class ListRepositoryImpl(
     private val dbRef: ListshopDb = listShopDatabase.db
 
     private fun clearLocalListData() {
+        dbRef.listDefinitionQueries.removeAllListItemDetailEntities()
         dbRef.listDefinitionQueries.removeAllListItemEntities()
         dbRef.listDefinitionQueries.removeAllListCategoryEntities()
         dbRef.listDefinitionQueries.removeAllShoppingListEntities()
@@ -30,18 +34,25 @@ class ListRepositoryImpl(
         if (localLists.isEmpty()) {
             return null;
         }
+        // only one list is saved at a time
         val localList = localLists.first()
         val localListId = localList.externalId
         // get categories
         val categories = dbRef.listDefinitionQueries.selectAllCategoriesForList(localListId).executeAsList()
         val modelCategories = mutableListOf<ShoppingListCategory>()
         for (category in categories) {
-            val items =
-                dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
+            val items = retrieveListItems(category.externalId ?: "0")
             modelCategories.add(ShoppingListCategory.create(category, items))
         }
 
         return ShoppingList.create(localList, modelCategories)
+    }
+
+    fun retrieveListItems(listId: String): List<ShoppingListItem> {
+        val dbItems = dbRef.listDefinitionQueries.selectAllItemsForCategory(listId).executeAsList()
+        val dbItemDetails = dbRef.listDefinitionQueries.selectAllDetailsForCategory(listId).executeAsList()
+        val itemDetailMap = dbItemDetails.groupBy { it.itemExternalId }
+        return dbItems.map { ShoppingListItem.create(it, itemDetailMap[it.externalId] ?: emptyList()) }
     }
 
     override fun retrieveOrCreateLocalList(): ShoppingList {
@@ -90,25 +101,14 @@ class ListRepositoryImpl(
         val listId = shoppingList.externalId ?: "0"
         // go through all categories, pulling items
         for (cat in shoppingList.categories) {
-            val catId = cat.externalId.toString()
-            val items = cat.items.map {
-                ListItemEntity(
-                    externalId = it.externalId.toString(),
-                    categoryExternalId = catId,
-                    tagExternalId = it.tag.externalId,
-                    added = it.added,
-                    removed = it.removed,
-                    crossedOff = it.crossedOff,
-                    updatedOn = it.updatedOn,
-                    usedCount = it.usedCount.toLong(),
-                    tagName = it.tag.display,
-                    tagType = it.tag.tagType,
-                    legendKeys = ""
-                )
-            }
+            val catId = cat.externalId
+            var detailList = mutableListOf<ListItemDetailEntity>();
+            val items = cat.items.map {mapShoppingListItem(it, catId, detailList)}
+
             insertListItems(items)
+            insertListItemDetails(detailList)
             val categoryEntity =
-                ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder.toLong())
+                ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder)
             insertListCategory(categoryEntity)
         }
         // save list
@@ -119,11 +119,55 @@ class ListRepositoryImpl(
             updatedOn = shoppingList.updated,
             lastLocalChange = shoppingList.lastLocalChange,
             lastSync = shoppingList.lastSynced,
-            itemCount = shoppingList.itemCount?.toLong(),
+            itemCount = shoppingList.itemCount,
             layoutId = shoppingList.layoutId,
             isStarter = shoppingList.isStarterList ?: false,
         )
         insertList(listEntity)
+    }
+
+    private fun mapShoppingListItem(it: ShoppingListItem, catId: String, detailList: MutableList<ListItemDetailEntity>): ListItemEntity {
+        val itemId = it.externalId
+        val details = it.details.map{ mapShoppingListItemDetail(it,itemId) }
+        detailList.addAll(details)
+        return ListItemEntity(
+            externalId = it.externalId,
+            categoryExternalId = catId,
+            tagExternalId = it.tag.externalId,
+            added = it.added,
+            removed = it.removed,
+            crossedOff = it.crossedOff,
+            updatedOn = it.updatedOn,
+            usedCount = it.usedCount,
+            tagName = it.tag.display,
+            quantity = it.amount?.quantity,
+            wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
+            roundedQuantity = it.amount?.roundedQuantity,
+            quantityDisplay = it.amount?.quantityDisplay,
+            unitId = it.amount?.unitId,
+            unitDisplay = it.amount?.unitDisplay,
+            amountDisplay = it.amount?.amountDisplay,
+            tagType = "",  //MM REMOVE IF POSSIBLE
+            legendKeys = it.legendKeys.joinToString(",")
+        )
+    }
+
+    private fun mapShoppingListItemDetail(it: ShoppingListDetail, itemId: String): ListItemDetailEntity {
+        return ListItemDetailEntity(
+            itemExternalId = itemId,
+            dishId = it.dishId,
+            listId = it.listId,
+            containsUnspecified = it.containsUnspecified,
+            quantity = it.amount?.quantity,
+            quantityDisplay = it.amount?.quantityDisplay,
+            unitId = it.amount?.unitId,
+            unitDisplay = it.amount?.unitDisplay,
+            amountDisplay = it.amount?.amountDisplay,
+            wholeQuantity = it.amount?.wholeQuantity,
+            fractionalQuantity = it.amount?.fractionalQuantity,
+            roundedQuantity = it.amount?.roundedQuantity
+        )
     }
 
     private fun insertList(listEntity: ShoppingListEntity) {
@@ -165,8 +209,38 @@ class ListRepositoryImpl(
                         crossedOff = listItemEntity.crossedOff,
                         usedCount = listItemEntity.usedCount,
                         tagName = listItemEntity.tagName,
+                        quantity = listItemEntity.quantity,
+                        wholeQuantity = listItemEntity.wholeQuantity,
+                        fractionalQuantity = listItemEntity.fractionalQuantity,
+                        roundedQuantity = listItemEntity.roundedQuantity,
+                        quantityDisplay = listItemEntity.quantityDisplay,
+                        unitId = listItemEntity.unitId,
+                        unitDisplay = listItemEntity.unitDisplay,
+                        amountDisplay = listItemEntity.amountDisplay,
                         tagType = listItemEntity.tagType,
                         legendKeys = listItemEntity.legendKeys,
+                    )
+            }
+        }
+    }
+
+    private fun insertListItemDetails(details: List<ListItemDetailEntity>) {
+        dbRef.listDefinitionQueries.transaction {
+            details.forEach { detailEntity ->
+                dbRef.listDefinitionQueries
+                    .insertIntoListItemDetailEntity(
+                        itemExternalId = detailEntity.itemExternalId,
+                        dishId = detailEntity.dishId,
+                        listId = detailEntity.listId,
+                        containsUnspecified = detailEntity.containsUnspecified,
+                        quantity = detailEntity.quantity,
+                        wholeQuantity = detailEntity.wholeQuantity,
+                        fractionalQuantity = detailEntity.fractionalQuantity,
+                        roundedQuantity = detailEntity.roundedQuantity,
+                        quantityDisplay = detailEntity.quantityDisplay,
+                        unitId = detailEntity.unitId,
+                        unitDisplay = detailEntity.unitDisplay,
+                        amountDisplay = detailEntity.amountDisplay
                     )
             }
         }
