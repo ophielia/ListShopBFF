@@ -1,9 +1,11 @@
 package com.listshop.bff.repositories.impl
 
+import com.listshop.bff.data.model.LegendPoint
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.model.ShoppingListCategory
 import com.listshop.bff.data.model.ShoppingListDetail
 import com.listshop.bff.data.model.ShoppingListItem
+import com.listshop.bff.db.LegendPointEntity
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
@@ -44,8 +46,11 @@ class ListRepositoryImpl(
             val items = retrieveListItems(category.externalId ?: "0")
             modelCategories.add(ShoppingListCategory.create(category, items))
         }
+        // get local list legend
+        val legendPoints = dbRef.listDefinitionQueries.selectAllLegendPoints().executeAsList()
 
-        return ShoppingList.create(localList, modelCategories)
+
+        return ShoppingList.create(localList, modelCategories, legendPoints)
     }
 
     fun retrieveListItems(listId: String): List<ShoppingListItem> {
@@ -70,8 +75,10 @@ class ListRepositoryImpl(
                 dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
             modelCategories.add(ShoppingListCategory.create(category, items))
         }
+        // get local list legend
+        val legendPoints = dbRef.listDefinitionQueries.selectAllLegendPoints().executeAsList()
 
-        return ShoppingList.create(localList, modelCategories)
+        return ShoppingList.create(localList, modelCategories, legendPoints)
     }
 
     override fun createAndSaveLocalList(): ShoppingList {
@@ -111,6 +118,10 @@ class ListRepositoryImpl(
                 ListCategoryEntity(cat.name, cat.externalId.toString(), listId, cat.displayOrder)
             insertListCategory(categoryEntity)
         }
+
+        val legendPoints = shoppingList.legend?.points?.map{mapListLegendPoint(it)}
+        insertLegendPoints(legendPoints)
+
         // save list
         val listEntity = ShoppingListEntity(
             name = shoppingList.name,
@@ -124,6 +135,13 @@ class ListRepositoryImpl(
             isStarter = shoppingList.isStarterList ?: false,
         )
         insertList(listEntity)
+    }
+
+
+    private fun mapListLegendPoint(apiPoint: LegendPoint): LegendPointEntity {
+        return LegendPointEntity(id = apiPoint.key,
+            display = apiPoint.display,
+            type = apiPoint.type.toString())
     }
 
     private fun mapShoppingListItem(it: ShoppingListItem, catId: String, detailList: MutableList<ListItemDetailEntity>): ListItemEntity {
@@ -241,6 +259,19 @@ class ListRepositoryImpl(
                         unitId = detailEntity.unitId,
                         unitDisplay = detailEntity.unitDisplay,
                         amountDisplay = detailEntity.amountDisplay
+                    )
+            }
+        }
+    }
+
+    private fun insertLegendPoints(legendPoints: List<LegendPointEntity>?) {
+        dbRef.listDefinitionQueries.transaction {
+            legendPoints?.forEach { pointEntity ->
+                dbRef.listDefinitionQueries
+                    .insertIntoLegendPointEntity(
+                        id = pointEntity.id,
+                        display = pointEntity.display,
+                        type = pointEntity.type
                     )
             }
         }

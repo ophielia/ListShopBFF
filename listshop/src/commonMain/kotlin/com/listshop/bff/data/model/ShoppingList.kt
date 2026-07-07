@@ -5,8 +5,10 @@ import com.listshop.bff.data.remote.ApiShoppingListAmount
 import com.listshop.bff.data.remote.ApiShoppingListCategory
 import com.listshop.bff.data.remote.ApiShoppingListDetails
 import com.listshop.bff.data.remote.ApiShoppingListItem
+import com.listshop.bff.data.remote.ApiShoppingListLegendPoint
 import com.listshop.bff.data.remote.ApiShoppingListTag
 import com.listshop.bff.data.remote.ApiTag
+import com.listshop.bff.db.LegendPointEntity
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListItemDetailEntity
 import com.listshop.bff.db.ListItemEntity
@@ -33,6 +35,7 @@ data class ShoppingList(
     companion object Factory {
         fun create(apiValue: ApiShoppingList): ShoppingList {
             val categories = apiValue.categories?.map { ShoppingListCategory.create(it) }
+            val legendPoints = apiValue.legend?.map { LegendPoint.create(it) }
             val now = Clock.System.now().toString()
             return ShoppingList(
                 apiValue.externalId,
@@ -46,7 +49,7 @@ data class ShoppingList(
                 loading = false,
                 lastLocalChange = null,
                 lastSynced = now,
-                legend = ShoppingListLegend()
+                legend = ShoppingListLegend.create(legendPoints)
             )
         }
 
@@ -67,7 +70,8 @@ data class ShoppingList(
             )
         }
 
-        fun create(dbValue: ShoppingListEntity, modelCategories: List<ShoppingListCategory>): ShoppingList {
+        fun create(dbValue: ShoppingListEntity, modelCategories: List<ShoppingListCategory>, legendPoints: List<LegendPointEntity>): ShoppingList {
+            val apiPoints = legendPoints.map{ LegendPoint.create(dbValue = it) }
             return ShoppingList(
                 externalId = dbValue.externalId,
                 name = dbValue.name,
@@ -77,7 +81,7 @@ data class ShoppingList(
                 layoutId = dbValue.layoutId,
                 itemCount = dbValue.itemCount?.toInt() ?: 0,
                 isStarterList = dbValue.isStarter,
-                legend = ShoppingListLegend(),
+                legend = ShoppingListLegend(apiPoints),
                 loading = false,
                 lastLocalChange = dbValue.lastLocalChange,
                 lastSynced = dbValue.lastSync
@@ -86,6 +90,8 @@ data class ShoppingList(
     }
 
 }
+
+
 
 
 data class ShoppingListCategory(
@@ -337,9 +343,14 @@ data class ShoppingListDetail(
         }
     }
 }
+
 data class ShoppingListLegend(
-    var points: List<LegendPoint> = emptyList()
-)
+    var points: List<LegendPoint> = emptyList())
+    {
+        companion object {
+        fun create(points: List<LegendPoint>?) = ShoppingListLegend(points ?: emptyList())
+    }
+    }
 
 data class LegendPointSource(
     var color: String,
@@ -351,7 +362,27 @@ data class LegendPoint(
     var display: String?,
     var type: LegendPointType,
     var iconSource: LegendPointSource? = null
-)
+) {
+    companion object Factory {
+        fun create(apiValue: ApiShoppingListLegendPoint): LegendPoint {
+            return LegendPoint(
+                key = apiValue.id ?: "",
+                display = apiValue.display,
+                type = LegendPointType.fromDisplay(apiValue.sourceType) ?: LegendPointType.DISH,
+
+            )
+        }
+
+        fun create(dbValue: LegendPointEntity): LegendPoint {
+            return LegendPoint(
+                key = dbValue.id ?: "",
+                display = dbValue.display,
+                type = LegendPointType.fromDisplay(dbValue.type) ?: LegendPointType.DISH
+
+                )
+        }
+    }
+}
 
 enum class LegendPointType(val display: String) {
     DISH("DISH"),
@@ -359,7 +390,7 @@ enum class LegendPointType(val display: String) {
 
     companion object {
         private val map = entries.associateBy(LegendPointType::display)
-        fun fromDisplay(display: String) = map[display]
+        fun fromDisplay(display: String?) = map[display]
     }
 }
 

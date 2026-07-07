@@ -58,6 +58,13 @@ CREATE TABLE ListItemDetailEntity (
     amountDisplay TEXT
 );
 
+
+CREATE TABLE LegendPointEntity (
+    id TEXT,
+    display TEXT,
+    type TEXT
+);
+
 insertIntoShoppingListEntity:
 INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastLocalChange,lastSync,itemCount,layoutId  , isStarter)
 VALUES (?,?,?,?, ?, ?, ?, ?, ?);
@@ -74,6 +81,10 @@ insertIntoListItemDetailEntity:
 INSERT INTO ListItemDetailEntity(itemExternalId, dishId, listId, containsUnspecified, quantity, wholeQuantity,fractionalQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
+insertIntoLegendPointEntity:
+INSERT INTO LegendPointEntity(id, display, type)
+VALUES (?, ?, ?);
+
 removeAllShoppingListEntities:
 DELETE FROM ShoppingListEntity;
 
@@ -86,11 +97,15 @@ DELETE FROM ListItemEntity;
 removeAllListItemDetailEntities:
 DELETE FROM ListItemDetailEntity;
 
+removeAllLegendPointEntities:
+DELETE FROM LegendPointEntity;
+
 removeAllData:
 DELETE FROM ShoppingListEntity;
 DELETE FROM ListCategoryEntity;
 DELETE FROM ListItemEntity;
 DELETE FROM ListItemDetailEntity;
+DELETE FROM LegendPointEntity;
 
 selectAllLists:
 SELECT ShoppingListEntity.*
@@ -105,6 +120,11 @@ selectAllItemsForCategory:
 SELECT *
 FROM ListItemEntity
 WHERE categoryExternalId = ?;
+
+selectAllLegendPoints:
+SELECT *
+FROM LegendPointEntity;
+
 
 selectAllDetailsForCategory:
 SELECT ListItemDetailEntity.*

@@ -185,6 +185,10 @@ class SignInTest {
         assertNotNull(shoppingList)
         assertEquals(7, shoppingList.categories.size)
 
+        val legend = shoppingList.legend
+        assertNotNull(legend)
+        assertEquals(13, legend?.points?.size)
+
         val tagTree = result.value?.second
         assertNotNull(tagTree)
     }
