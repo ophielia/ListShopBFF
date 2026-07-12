@@ -71,8 +71,7 @@ class ListRepositoryImpl(
         val categories = dbRef.listDefinitionQueries.selectAllCategoriesForList(localListId).executeAsList()
         val modelCategories = mutableListOf<ShoppingListCategory>()
         for (category in categories) {
-            val items =
-                dbRef.listDefinitionQueries.selectAllItemsForCategory(category.externalId ?: "0").executeAsList()
+            val items = retrieveListItems(category.externalId ?: "0")
             modelCategories.add(ShoppingListCategory.create(category, items))
         }
         // get local list legend
@@ -156,6 +155,7 @@ class ListRepositoryImpl(
             removed = it.removed,
             crossedOff = it.crossedOff,
             updatedOn = it.updatedOn,
+            lastChanged = it.lastChanged,
             usedCount = it.usedCount,
             tagName = it.tag.display,
             quantity = it.amount?.quantity,
@@ -225,6 +225,7 @@ class ListRepositoryImpl(
                         removed = listItemEntity.removed,
                         updatedOn = listItemEntity.updatedOn,
                         crossedOff = listItemEntity.crossedOff,
+                        lastChanged = listItemEntity.lastChanged,
                         usedCount = listItemEntity.usedCount,
                         tagName = listItemEntity.tagName,
                         quantity = listItemEntity.quantity,

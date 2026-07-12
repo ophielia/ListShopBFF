@@ -29,6 +29,7 @@ CREATE TABLE ListItemEntity (
     removed TEXT,
     updatedOn TEXT,
     crossedOff TEXT,
+    lastChanged TEXT,
     usedCount INTEGER AS Int,
     tagName TEXT,
     quantity REAL,
@@ -74,8 +75,8 @@ INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
 VALUES (?, ?, ?, ?);
 
 insertIntoListItemEntity:
-INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,updatedOn, usedCount, tagName, quantity, wholeQuantity, fractionalQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay, tagType, legendKeys)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?);
+INSERT INTO ListItemEntity(externalId, categoryExternalId, tagExternalId, added, removed, crossedOff,lastChanged,updatedOn, usedCount, tagName, quantity, wholeQuantity, fractionalQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay, tagType, legendKeys)
+VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?);
 
 insertIntoListItemDetailEntity:
 INSERT INTO ListItemDetailEntity(itemExternalId, dishId, listId, containsUnspecified, quantity, wholeQuantity,fractionalQuantity, roundedQuantity, quantityDisplay, unitId, unitDisplay, amountDisplay)

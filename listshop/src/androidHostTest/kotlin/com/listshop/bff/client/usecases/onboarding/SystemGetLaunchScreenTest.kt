@@ -24,6 +24,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
@@ -126,6 +127,10 @@ class SystemGetLaunchScreenTest {
 
         val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
+
+        assertFalse(shoppingList.categories
+            .flatMap { it.items }
+            .all { it.lastChanged == null }, "all fields lastChanged should not be null");
 
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)

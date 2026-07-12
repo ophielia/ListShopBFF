@@ -65,6 +65,8 @@ data class ApiShoppingListItem(
     val added: String?,
     @SerialName("updated")
     val updated: String? = null,
+    @SerialName("last_changed")
+    val lastChanged: String? = null,
     @SerialName("crossed_off")
     val crossedOff: String? = null,
     @SerialName("used_count")

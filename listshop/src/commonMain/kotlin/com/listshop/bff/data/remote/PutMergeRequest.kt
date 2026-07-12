@@ -36,6 +36,8 @@ data class MergeItem @OptIn(ExperimentalSerializationApi::class) constructor(
     @SerialName("updated")
     @EncodeDefault
     var updated: String? = null,
+    @SerialName("last_changed")
+    var lastChanged: String? = null,
     @SerialName("crossed_off")
     @EncodeDefault
     var crossedOff: String? = null,
@@ -59,6 +61,7 @@ data class MergeItem @OptIn(ExperimentalSerializationApi::class) constructor(
                 removed = modelItem.removed,
                 updated = modelItem.updatedOn,
                 crossedOff = modelItem.crossedOff,
+                lastChanged = modelItem.lastChanged,
                 listId = listId,
                 tagId = modelItem.tag.externalId.toLong(),
                 usedCount = modelItem.usedCount,
