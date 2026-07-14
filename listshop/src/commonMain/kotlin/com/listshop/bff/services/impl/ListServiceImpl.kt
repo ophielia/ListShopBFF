@@ -5,7 +5,6 @@ import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.MergeItem
 import com.listshop.bff.data.remote.PostShoppingList
 import com.listshop.bff.data.remote.PutMergeRequest
-import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.remote.ShoppingListApi
 import com.listshop.bff.repositories.ListRepository
 import com.listshop.bff.services.ListService
@@ -15,9 +14,9 @@ class ListServiceImpl internal constructor(
     private val remoteApi: ShoppingListApi,
     private val listRepo: ListRepository,
     private val sessionService: SessionService,
-    private val listShopAnalytics : ListShopAnalytics
+    private val listShopAnalytics: ListShopAnalytics
 ) : ListService {
-    val DEFAULT_LIST_NAME : String = "Shopping List"
+    val DEFAULT_LIST_NAME: String = "Shopping List"
 
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
         return remoteApi.getAllShoppingLists()
@@ -52,12 +51,22 @@ class ListServiceImpl internal constructor(
         return ShoppingList.empty()
     }
 
+    override suspend fun addServerList(): String? {
+
+        // create payload (empty in this case)
+        val payload = PostShoppingList(name = null)
+
+        val newListId = remoteApi.createList(payload)
+        return newListId
+
+    }
+
     override suspend fun retrieveLocalList(): ShoppingList? {
         return listRepo.retrieveLocalList()
     }
 
     override suspend fun retrieveOrCreateLocalList(): ShoppingList? {
-        val shoppingList =  listRepo.retrieveLocalList()
+        val shoppingList = listRepo.retrieveLocalList()
         if (shoppingList == null) {
             return listRepo.createAndSaveLocalList()
         }
@@ -117,7 +126,6 @@ class ListServiceImpl internal constructor(
         // return list
         return shoppingList
     }
-
 
 
 }

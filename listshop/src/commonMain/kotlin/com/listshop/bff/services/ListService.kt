@@ -12,4 +12,5 @@ interface ListService {
     suspend fun clearLocalList()
     suspend fun retrieveMostRecentList(): ShoppingList?
     suspend fun retrieveLocalList(): ShoppingList?
+    suspend fun addServerList(): String?
 }

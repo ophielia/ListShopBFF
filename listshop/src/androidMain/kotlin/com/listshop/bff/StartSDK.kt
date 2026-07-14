@@ -18,7 +18,8 @@ fun startSDK(analytics: Analytics, context: Context,
         tagUCP = locator.tagUCP,
         sessionService = locator.sessionService,
         onboardingUCP = locator.onboardingUCP,
-        dashboardUCP = locator.dashboardUCP
+        dashboardUCP = locator.dashboardUCP,
+        listUCP = locator.listUCP
 
     )
 }

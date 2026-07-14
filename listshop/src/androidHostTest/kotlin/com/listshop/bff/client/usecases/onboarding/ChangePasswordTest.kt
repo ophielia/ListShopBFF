@@ -61,13 +61,15 @@ class ChangePasswordTest {
         val tagUCP = tagUCPStartup(analyticsHandle!!, appInfo)
         val onboardingUCP = onboardingUCPStartup(analyticsHandle!!, appInfo)
         val dashboardUCP = dashboardUCPStartup(analyticsHandle!!, appInfo)
+        val listUCP = listUCPStartup(analyticsHandle!!, appInfo)
         val sessionService = sessionServiceStartup(analyticsHandle!!, appInfo)
         val sdkHandle: SDKHandle = SDKHandle(
             appAnalytics = analyticsHandle!!.appAnalytics,
             tagUCP = tagUCP,
             sessionService = sessionService,
             onboardingUCP = onboardingUCP,
-            dashboardUCP = dashboardUCP
+            dashboardUCP = dashboardUCP,
+            listUCP = listUCP
 
         )
 

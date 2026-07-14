@@ -1,0 +1,9 @@
+{
+  "label": "createListSuccess",
+  "requestMethod": "POST",
+  "requestPath": "/v2/shoppinglist",
+  "requestBodyFilename": "list/addList/addListPost.json",
+  "responseStatus": 200,
+  "responseBodyFilename": "emptyResponse.json",
+  "additionalHeaders": "Location=9876;Hidden=abc;Rufus=34jk"
+}
