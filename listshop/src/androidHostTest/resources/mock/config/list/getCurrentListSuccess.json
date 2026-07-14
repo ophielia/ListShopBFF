@@ -1,0 +1,8 @@
+{
+  "label": "getAllShoppingLists",
+  "requestMethod": "GET",
+  "requestPath": "/v2/shoppinglist/12345",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "standards/standardSingleList.json"
+}

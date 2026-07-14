@@ -5,6 +5,7 @@ import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.model.ShoppingListDetail
 import com.listshop.bff.data.model.ShoppingListItem
 import com.listshop.bff.data.model.Tag
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.db.ListCategoryEntity
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.ListItemDetailEntity
@@ -291,5 +292,11 @@ class TestDatabaseHelper(
                 tagType = t.tagType,
                 userId = null
             ) }
+    }
+
+    fun loadStandardListLocally(apiList: ApiShoppingList) {
+        val shoppingList = ShoppingList.Factory.create(apiList)
+        setShoppingList(shoppingList)
+        setServerListId(shoppingList.externalId ?: "")
     }
 }

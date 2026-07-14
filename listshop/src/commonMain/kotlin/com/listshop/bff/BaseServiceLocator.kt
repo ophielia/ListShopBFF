@@ -14,6 +14,8 @@ import com.listshop.bff.repositories.impl.TagRepositoryImpl
 import com.listshop.bff.services.*
 import com.listshop.bff.services.impl.*
 import com.listshop.bff.ucp.DashboardUCP
+import com.listshop.bff.ucp.ListManagementUCP
+import com.listshop.bff.ucp.ListUCP
 import com.listshop.bff.ucp.OnboardingUCP
 import com.listshop.bff.ucp.SystemUCP
 import com.listshop.bff.ucp.TagUCP
@@ -38,6 +40,23 @@ internal abstract class BaseServiceLocator(
             dataRepo = tagRepository,
             tagApi = tagApi,
             listShopAnalytics = listShopAnalytics
+        )
+    }
+
+    override val listManagementUCP: ListManagementUCP by lazy {
+        ListManagementUCP(
+            listService = listService,
+            sessionService = sessionService,
+            analyticsHandle = analyticsHandle
+        )
+    }
+
+
+    override val listUCP: ListUCP by lazy {
+        ListUCP(
+            listService = listService,
+            sessionService = sessionService,
+            analyticsHandle = analyticsHandle
         )
     }
 

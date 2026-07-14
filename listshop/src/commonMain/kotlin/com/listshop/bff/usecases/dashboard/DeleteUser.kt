@@ -9,6 +9,7 @@ import com.listshop.bff.exceptions.OfflineException
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SyncService
 import com.listshop.bff.services.UserService
+import com.listshop.bff.usecases.validators.ConnectionStatusValidator
 
 class DeleteUser(
     private val userService: UserService,
@@ -16,7 +17,7 @@ class DeleteUser(
     private val connectionStatus: ConnectionStatus,
     private val syncService: SyncService,
     private val analyticsHandle: AnalyticsHandle
-) {
+) : ConnectionStatusValidator {
     suspend fun process(): BFFResult<Unit> {
         analyticsHandle.debug("DeleteUser - begin use case")
         try {
@@ -32,10 +33,5 @@ class DeleteUser(
         }
     }
 
-    private fun checkOnlineStatus(connectionStatus: ConnectionStatus) {
-        if (connectionStatus != ConnectionStatus.Online) {
-            throw OfflineException("User cannot delete account while offline")
-        }
-    }
 
 }

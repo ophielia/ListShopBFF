@@ -1,0 +1,9 @@
+{
+  "label": "deleteListSuccess",
+  "requestMethod": "DELETE",
+  "requestPath": "/v2/shoppinglist/12345",
+  "requestBodyFilename": "",
+  "responseStatus": 204,
+  "responseBodyFilename": "",
+  "additionalHeaders": ""
+}

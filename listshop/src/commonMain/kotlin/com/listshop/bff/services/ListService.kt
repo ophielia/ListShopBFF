@@ -11,5 +11,9 @@ interface ListService {
     suspend fun mergeLocalWithServerList(): ShoppingList?
     suspend fun clearLocalList()
     suspend fun retrieveMostRecentList(): ShoppingList?
+    suspend fun retrieveServerListById(listId: String): ShoppingList?
     suspend fun retrieveLocalList(): ShoppingList?
+    suspend fun addServerList(): String?
+    suspend fun deleteList(listIdToDelete: String)
+    suspend fun updateListProperties(listId: String, listName: String, starterList: Boolean?)
 }

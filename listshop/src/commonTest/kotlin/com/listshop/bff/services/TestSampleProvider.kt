@@ -4,20 +4,32 @@ import com.goncalossilva.resources.Resource
 import kotlinx.serialization.json.Json
 
 
-open class TestSampleProvider( val sourcePath: String) {
+open class TestSampleProvider(val sourcePath: String) {
 
     inline fun <reified T> fillSample(sampleFile: String): T {
-        val fullPath = if (!sampleFile.isEmpty()) {
-                "$sourcePath/$sampleFile.json"
-        } else {
-            "bad path"
+        if (sampleFile.isEmpty()) throw Exception("Empty sample file name")
+
+        val fileName = "$sampleFile.json"
+        val paths = listOf(
+            "$sourcePath/$fileName",
+            "src/commonTest/resources/$sourcePath/$fileName"
+        )
+
+        var jsonAsString: String? = null
+        for (path in paths) {
+            try {
+                jsonAsString = Resource(path).readText()
+                break
+            } catch (e: Exception) {
+                // Try next path
+            }
         }
 
-        val jsonAsString = Resource(fullPath).readText()
+        if (jsonAsString == null) {
+            throw Exception("Could not find resource $sampleFile in any of the attempted paths: $paths")
+        }
+
         val deserializer = Json { ignoreUnknownKeys = true }
         return deserializer.decodeFromString<T>(jsonAsString)
-
-
     }
-
 }

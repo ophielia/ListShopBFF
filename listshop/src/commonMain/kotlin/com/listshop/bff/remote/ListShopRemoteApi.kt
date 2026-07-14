@@ -14,4 +14,5 @@ internal interface ListShopRemoteApi {
     fun mapNonSuccessToException(statusValue: Int, exception: Exception)
     fun pullLocation(response:HttpResponse): String
     fun mapNonSuccessToException(statusValue: Int, message: String)
+
 }

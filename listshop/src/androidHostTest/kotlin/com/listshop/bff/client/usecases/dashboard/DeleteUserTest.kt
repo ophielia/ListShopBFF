@@ -3,6 +3,8 @@ package com.listshop.bff.client.usecases.dashboard
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFErrorSubtype
+import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
@@ -125,6 +127,8 @@ class DeleteUserTest {
         var result = useCaseProvider?.deleteUser(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isFailure)
+        assertEquals(BFFErrorType.OFFLINE, result._error?.type, "the error is offline")
+        assertEquals(BFFErrorSubtype.OFFLINE, result._error?.subType, "the error subtype is offline")
     }
 
     @Test

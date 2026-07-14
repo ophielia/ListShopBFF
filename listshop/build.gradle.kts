@@ -29,7 +29,6 @@ kotlin {
             (this as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget)?.publishLibraryVariants("release", "debug")
         }
     }
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -59,6 +58,7 @@ kotlin {
         }
 
         getByName("androidHostTest") {
+            resources.srcDir("src/commonTest/resources")
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(libs.junit)
@@ -76,6 +76,30 @@ kotlin {
         }
     }
     task("testClasses")
+}
+
+// Disable tests on ARM64 hosts that are incompatible
+tasks.configureEach {
+    if (name == "iosSimulatorArm64Test") {
+        enabled = true
+        // Set a default device for the simulator tests if not already set
+        if ((this as? org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest)?.device?.orNull == null) {
+            (this as? org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest)?.device?.set("iPhone 16")
+        }
+    }
+}
+
+// Copy resources for native tests so they can be found by goncalossilva:resources
+tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest>().configureEach {
+    val testTask = this
+    if (testTask is org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest) {
+        testTask.doFirst {
+            project.copy {
+                from("src/commonTest/resources")
+                into(testTask.executable.parentFile)
+            }
+        }
+    }
 }
 
 // For publishing Android AAR files to GitHub Packages
