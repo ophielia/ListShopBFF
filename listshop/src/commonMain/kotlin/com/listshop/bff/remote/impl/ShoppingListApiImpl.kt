@@ -74,7 +74,7 @@ internal class ShoppingListApiImpl(
         val response = remoteApi.postRequest(urlString, payload)
         remoteApi.mapNonSuccessToException(
             response.status.value,
-            "merge shopping list call failed with status: " + response.status.value
+            "create list call failed with status: " + response.status.value
         )
         val location = remoteApi.pullLocation(response)
         val elements = location.split("/")

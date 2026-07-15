@@ -3,6 +3,7 @@ package com.listshop.bff.ucp
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
+import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
 import com.listshop.bff.usecases.listmanagement.AddList
 
@@ -12,8 +13,9 @@ class ListUCP internal constructor(
 ) {
 
     @Throws(Exception::class)
-    suspend fun addList(): BFFResult<ListShoppingList> {
+    suspend fun addList(connectionStatus: ConnectionStatus): BFFResult<ListShoppingList> {
         val useCase = AddList(
+            connectionStatus = connectionStatus,
             listService = listService,
             analyticsHandle = analyticsHandle
         )

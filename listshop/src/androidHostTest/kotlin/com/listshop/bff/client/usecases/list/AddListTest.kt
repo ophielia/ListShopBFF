@@ -3,9 +3,10 @@ package com.listshop.bff.client.usecases.list
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.data.model.TagType
+import com.listshop.bff.data.bff.BFFErrorSubtype
+import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
-import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.ListUCP
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
@@ -76,45 +77,70 @@ class AddListTest {
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
         databaseTestHelper?.setUser(loggedInUser)
 
-        val tagName = "tagName"
-        val tagType = TagType.INGREDIENT.name
-        val parentId = "1234"
+        val connectionStatus = ConnectionStatus.Online
 
-        // swap out shopping list success with failure
+        // create list succeeds
         val testDispatcher = TestDispatcherBuilder("list/addList")
             .withConfigFile("createListSuccess.json")
             .withConfigFile("getAllLists.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.addList()
+        var result = useCaseProvider?.addList(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         val listOfLists = result.value
         assertNotNull(listOfLists);
     }
 
-    //MM bookmark - up next - test failure, and check / make test for list service
-
-  /*
-  @Test
+    @Test
     fun `when creating a list fails, a Failed request is returned`(): Unit = runBlocking {
-        val tagName = "tagName"
-        val tagType = TagType.INGREDIENT.name
-        val parentId = "1234"
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
 
-        // swap out shopping list success with failure
-        val testDispatcher = TestDispatcherBuilder("dashboard/createTag")
-            .withConfigFile("createTagFailure.json")
+        val connectionStatus = ConnectionStatus.Online
+
+        val testDispatcher = TestDispatcherBuilder("list/addList")
+            .withConfigFile("createListFailure.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.createTag(tagName, tagType, parentId)
+        var result = useCaseProvider?.addList(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertFalse(result.isSuccess)
+        val error = result._error
+        assertNotNull(error)
+        assertEquals(BFFErrorType.API, error.type, "List creation failed")
+        assertEquals(BFFErrorSubtype.SERVER_ERROR, error.subType, "List creation failed")
+        assertTrue(error.message.startsWith("create list call failed with status: "), "List creation failed")
     }
 
-   */
+    @Test
+    fun `when offline, I can't add a list`(): Unit = runBlocking {
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+
+        val connectionStatus = ConnectionStatus.Offline
+
+        val testDispatcher = TestDispatcherBuilder("list/addList")
+            .withConfigFile("createListSuccess.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.addList(connectionStatus)
+        assertNotNull(result)
+        assertFalse(result.isSuccess)
+        val error = result._error
+        assertNotNull(error)
+        assertEquals(BFFErrorType.OFFLINE, error.type, "List creation failed - offline")
+        assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "List creation failed - offline")
+    }
+
+
     @AfterTest
     fun shutDown() {
         mockWebServer.shutdown()
