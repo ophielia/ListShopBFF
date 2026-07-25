@@ -5,25 +5,33 @@ import com.listshop.analytics.debug
 import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.model.ListShoppingList
+import com.listshop.bff.data.state.ConnectionStatus
+import com.listshop.bff.services.ListService
 import com.listshop.bff.services.UserService
+import com.listshop.bff.usecases.validators.ConnectionStatusValidator
 
 class GetAllLists(
-    private val originalPassword: String,
-    private val newPassword: String,
-    private val userService: UserService,
+    private val connectionStatus: ConnectionStatus,
+    private val listService: ListService,
     private val analyticsHandle: AnalyticsHandle
-) {
-    suspend fun process(): BFFResult<Unit> {
-        analyticsHandle.debug("ChangePassword - begin use case")
+) : ConnectionStatusValidator {
+    suspend fun process(): BFFResult<ListShoppingList> {
+        analyticsHandle.debug("Get All Lists - begin use case")
         try {
-            val userNameTaken = userService.changePassword(originalPassword, newPassword)
-            analyticsHandle.debug("ChangePassword - end use case")
-            return BFFResult.success(value = userNameTaken)
+            checkOnlineStatus(connectionStatus)
+            val lists = listService.retrieveListOfLists()
+            val listOfLists = ListShoppingList(lists)
+            analyticsHandle.debug("Get All Lists - end use case")
+            return BFFResult.success(value = listOfLists)
         } catch (e: Exception) {
-            analyticsHandle.error("Error in CheckUserNameTaken call")
+            analyticsHandle.error("Error in Get All Lists call")
             return BFFError.errorFromException(e)
         }
     }
+
+}
+
 
     /*
 
@@ -71,5 +79,5 @@ class GetAllLists(
 
      */
 
-}
+
 

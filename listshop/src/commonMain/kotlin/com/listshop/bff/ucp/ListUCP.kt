@@ -8,6 +8,7 @@ import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
 import com.listshop.bff.usecases.listmanagement.AddList
 import com.listshop.bff.usecases.listmanagement.DeleteList
+import com.listshop.bff.usecases.listmanagement.GetAllLists
 import com.listshop.bff.usecases.listmanagement.SelectListForEdit
 import com.listshop.bff.usecases.listmanagement.UpdateList
 
@@ -57,6 +58,16 @@ class ListUCP internal constructor(
             listId = listId,
             listName = listName,
             isStarterList = isStarterList,
+            listService = listService,
+            analyticsHandle = analyticsHandle
+        )
+        return useCase.process()
+    }
+
+    @Throws(Exception::class)
+    suspend fun getAllLists(connectionStatus: ConnectionStatus): BFFResult<ListShoppingList> {
+        val useCase = GetAllLists(
+            connectionStatus = connectionStatus,
             listService = listService,
             analyticsHandle = analyticsHandle
         )
