@@ -3,6 +3,7 @@ package com.listshop.bff.services.impl
 import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.MergeItem
+import com.listshop.bff.data.remote.PostListProperties
 import com.listshop.bff.data.remote.PostShoppingList
 import com.listshop.bff.data.remote.PutMergeRequest
 import com.listshop.bff.remote.ShoppingListApi
@@ -67,6 +68,15 @@ class ListServiceImpl internal constructor(
 
     override suspend fun deleteList(listIdToDelete: String) {
         remoteApi.deleteList(listIdToDelete)
+    }
+
+    override suspend fun updateListProperties(listId: String, listName: String, starterList: Boolean?) {
+        val payload = PostListProperties(listId, listName, starterList)
+        remoteApi.updateList(listId, payload)
+        // if this is the current list, we should reload the current list to take changes into account
+        if (listId.equals(sessionService.currentListSession().serverListId)) {
+            doRetrieveServerList()
+        }
     }
 
     override suspend fun retrieveLocalList(): ShoppingList? {

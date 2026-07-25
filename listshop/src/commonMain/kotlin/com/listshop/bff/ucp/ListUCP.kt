@@ -9,6 +9,7 @@ import com.listshop.bff.services.ListService
 import com.listshop.bff.usecases.listmanagement.AddList
 import com.listshop.bff.usecases.listmanagement.DeleteList
 import com.listshop.bff.usecases.listmanagement.SelectListForEdit
+import com.listshop.bff.usecases.listmanagement.UpdateList
 
 class ListUCP internal constructor(
     private val listService: ListService,
@@ -42,6 +43,20 @@ class ListUCP internal constructor(
         val useCase = SelectListForEdit(
             connectionStatus = connectionStatus,
             listId = listId,
+            listService = listService,
+            analyticsHandle = analyticsHandle
+        )
+        return useCase.process()
+    }
+
+
+    @Throws(Exception::class)
+    suspend fun updateList(connectionStatus: ConnectionStatus,listId:String, listName: String, isStarterList:Boolean? = null): BFFResult<ListShoppingList> {
+        val useCase = UpdateList(
+            connectionStatus = connectionStatus,
+            listId = listId,
+            listName = listName,
+            isStarterList = isStarterList,
             listService = listService,
             analyticsHandle = analyticsHandle
         )

@@ -1,0 +1,9 @@
+{
+  "label": "updateListSuccess",
+  "requestMethod": "PUT",
+  "requestPath": "/v2/shoppinglist/12345",
+  "requestBodyFilename": "list/updateList/listPropertiesPost.json",
+  "responseStatus": 204,
+  "responseBodyFilename": "",
+  "additionalHeaders": ""
+}

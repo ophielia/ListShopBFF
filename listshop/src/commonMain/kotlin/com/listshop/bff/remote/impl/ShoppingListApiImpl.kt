@@ -80,6 +80,21 @@ internal class ShoppingListApiImpl(
         )
 
     }
+
+    override suspend fun updateList(listId: String, properties: PostListProperties) {
+        val urlString = remoteApi.buildPath("$shoppingListPath/${listId}")
+        listShopAnalytics.debug("updating list, id: $listId")
+
+        val payload = Json.encodeToString(properties)
+        val response = remoteApi.putRequest(urlString, payload)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            "get shopping list call failed with status: " + response.status.value
+        )
+
+    }
+
     override suspend fun createList(payload: PostShoppingList): String {
         val payload = Json.encodeToString(payload)
         val urlString = remoteApi.buildPath(shoppingListPath)
