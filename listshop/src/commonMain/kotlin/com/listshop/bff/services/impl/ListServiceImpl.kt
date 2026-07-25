@@ -61,6 +61,10 @@ class ListServiceImpl internal constructor(
 
     }
 
+    override suspend fun deleteList(listIdToDelete: String) {
+        remoteApi.deleteList(listIdToDelete)
+    }
+
     override suspend fun retrieveLocalList(): ShoppingList? {
         return listRepo.retrieveLocalList()
     }

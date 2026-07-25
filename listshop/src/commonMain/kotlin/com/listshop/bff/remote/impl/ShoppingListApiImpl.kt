@@ -68,6 +68,18 @@ internal class ShoppingListApiImpl(
         return ShoppingList.create(apiValue = result)
     }
 
+    override suspend fun deleteList(listIdToDelete: String) {
+        val urlString = remoteApi.buildPath("$shoppingListPath/${listIdToDelete}")
+        listShopAnalytics.debug("deleting list, id: $listIdToDelete")
+
+        val response = remoteApi.deleteRequest(urlString)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            "get shopping list call failed with status: " + response.status.value
+        )
+
+    }
     override suspend fun createList(payload: PostShoppingList): String {
         val payload = Json.encodeToString(payload)
         val urlString = remoteApi.buildPath(shoppingListPath)

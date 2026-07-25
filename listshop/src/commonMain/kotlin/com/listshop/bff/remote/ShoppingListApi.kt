@@ -11,4 +11,5 @@ internal interface ShoppingListApi {
     suspend fun mergeLocalListWithServer(listMergeRequest: PutMergeRequest): ShoppingList
     suspend fun retrieveListById(serverId: String): ShoppingList
     suspend fun createList(payload: PostShoppingList): String
+    suspend fun deleteList(listIdToDelete: String)
 }
