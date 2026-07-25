@@ -3,10 +3,12 @@ package com.listshop.bff.ucp
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
+import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
 import com.listshop.bff.usecases.listmanagement.AddList
 import com.listshop.bff.usecases.listmanagement.DeleteList
+import com.listshop.bff.usecases.listmanagement.SelectListForEdit
 
 class ListUCP internal constructor(
     private val listService: ListService,
@@ -28,6 +30,18 @@ class ListUCP internal constructor(
         val useCase = DeleteList(
             connectionStatus = connectionStatus,
             listIdToDelete = listId,
+            listService = listService,
+            analyticsHandle = analyticsHandle
+        )
+        return useCase.process()
+    }
+
+
+    @Throws(Exception::class)
+    suspend fun selectListForEdit(connectionStatus: ConnectionStatus,listId:String): BFFResult<ShoppingList> {
+        val useCase = SelectListForEdit(
+            connectionStatus = connectionStatus,
+            listId = listId,
             listService = listService,
             analyticsHandle = analyticsHandle
         )

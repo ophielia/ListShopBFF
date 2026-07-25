@@ -51,6 +51,10 @@ class ListServiceImpl internal constructor(
         return ShoppingList.empty()
     }
 
+    override suspend fun retrieveServerListById(listId: String): ShoppingList? {
+        return doRetrieveServerListById(listId)
+    }
+
     override suspend fun addServerList(): String? {
 
         // create payload (empty in this case)
@@ -113,8 +117,13 @@ class ListServiceImpl internal constructor(
 
     private suspend fun doRetrieveServerList(): ShoppingList? {
         val serverId = sessionService.currentListSession().serverListId
+
+        return doRetrieveServerListById(serverId ?: "0")
+    }
+
+    private suspend fun doRetrieveServerListById(listId: String): ShoppingList? {
         // retrieve api list
-        val shoppingList: ShoppingList = remoteApi.retrieveListById(serverId ?: "0")
+        val shoppingList: ShoppingList = remoteApi.retrieveListById(listId )
         // save server list id in session
         sessionService.setServerListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
