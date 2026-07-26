@@ -7,6 +7,7 @@ import com.listshop.analytics.ClientType
 import com.listshop.analytics.initDummyAnalytics
 import com.listshop.bff.SDKHandle
 import com.listshop.bff.dashboardUCPStartup
+import com.listshop.bff.listManagementUCPStartup
 import com.listshop.bff.listUCPStartup
 import com.listshop.bff.onboardingUCPStartup
 import com.listshop.bff.sessionServiceStartup
@@ -75,6 +76,7 @@ class CheckUserNameTakenTest {
         val onboardingUCP = onboardingUCPStartup(analyticsHandle!!, appInfo)
         val dashboardUCP = dashboardUCPStartup(analyticsHandle!!, appInfo)
         val listUCP = listUCPStartup(analyticsHandle!!, appInfo)
+        val listManagementUCP = listManagementUCPStartup(analyticsHandle!!, appInfo)
         val sessionService = sessionServiceStartup(analyticsHandle!!, appInfo)
         val sdkHandle: SDKHandle = SDKHandle(
             appAnalytics = analyticsHandle!!.appAnalytics,
@@ -82,7 +84,8 @@ class CheckUserNameTakenTest {
             sessionService = sessionService,
             onboardingUCP = onboardingUCP,
             dashboardUCP = dashboardUCP,
-            listManagementUCP = listUCP
+            listManagementUCP = listManagementUCP,
+            listUCP = listUCP
 
         )
 

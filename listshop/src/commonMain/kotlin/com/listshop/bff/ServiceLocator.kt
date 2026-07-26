@@ -6,6 +6,7 @@ import com.listshop.analytics.ListShopAnalytics
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.ListManagementUCP
+import com.listshop.bff.ucp.ListUCP
 import com.listshop.bff.ucp.OnboardingUCP
 import com.listshop.bff.ucp.SystemUCP
 import com.listshop.bff.ucp.TagUCP
@@ -14,6 +15,7 @@ internal interface ServiceLocator {
     val tagUCP: TagUCP
     val onboardingUCP: OnboardingUCP
     val listManagementUCP: ListManagementUCP
+    val listUCP: ListUCP
     val systemUCP: SystemUCP
     val dashboardUCP: DashboardUCP
     val sessionService: SessionService

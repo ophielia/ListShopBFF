@@ -9,6 +9,7 @@ import com.listshop.bff.db.ListshopDb
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.ucp.DashboardUCP
 import com.listshop.bff.ucp.ListManagementUCP
+import com.listshop.bff.ucp.ListUCP
 import com.listshop.bff.ucp.OnboardingUCP
 import com.listshop.bff.ucp.TagUCP
 import com.russhwolf.settings.Settings
@@ -20,7 +21,12 @@ internal fun tagUCPStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): 
     return locator.tagUCP
 }
 
-internal fun listUCPStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): ListManagementUCP {
+internal fun listUCPStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): ListUCP {
+    val locator = TestServiceLocator( analyticsHandle, appInfo)
+    return locator.listUCP
+}
+
+internal fun listManagementUCPStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): ListManagementUCP {
     val locator = TestServiceLocator( analyticsHandle, appInfo)
     return locator.listManagementUCP
 }
