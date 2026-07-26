@@ -23,7 +23,9 @@ fun getProviders(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): ProviderCo
         sessionService = locator.sessionService,
         onboardingUCP = locator.onboardingUCP,
         dashboardUCP = locator.dashboardUCP,
-        systemUCP = locator.systemUCP
+        systemUCP = locator.systemUCP,
+        listUCP = locator.listUCP,
+        listManagementUCP = locator.listManagementUCP
 
     )
 }
