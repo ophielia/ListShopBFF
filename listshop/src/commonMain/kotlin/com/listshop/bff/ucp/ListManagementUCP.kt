@@ -12,7 +12,7 @@ import com.listshop.bff.usecases.listmanagement.GetAllLists
 import com.listshop.bff.usecases.listmanagement.SelectListForEdit
 import com.listshop.bff.usecases.listmanagement.UpdateList
 
-class ListUCP internal constructor(
+class ListManagementUCP internal constructor(
     private val listService: ListService,
     private val analyticsHandle: AnalyticsHandle
 ) {

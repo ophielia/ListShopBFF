@@ -1,4 +1,4 @@
-package com.listshop.bff.client.usecases.list
+package com.listshop.bff.client.usecases.listmanagement
 
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
@@ -7,7 +7,7 @@ import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
-import com.listshop.bff.ucp.ListUCP
+import com.listshop.bff.ucp.ListManagementUCP
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
 import okhttp3.mockwebserver.MockWebServer
@@ -15,7 +15,7 @@ import kotlin.test.*
 
 class AddListTest {
 
-    var useCaseProvider: ListUCP? = null
+    var useCaseProvider: ListManagementUCP? = null
 
     val mockWebServer = MockWebServer()
 
@@ -66,7 +66,7 @@ class AddListTest {
         val locator: TestServiceLocator = TestServiceLocator(analyticsHandle!!, appInfo)
         databaseTestHelper = locator.testDBHelper
 
-        useCaseProvider = locator.listUCP
+        useCaseProvider = locator.listManagementUCP
     }
 
 
@@ -80,7 +80,7 @@ class AddListTest {
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/addList")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/addList")
             .withConfigFile("createListSuccess.json")
             .withConfigFile("getAllLists.json")
             .build()
@@ -102,7 +102,7 @@ class AddListTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        val testDispatcher = TestDispatcherBuilder("list/addList")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/addList")
             .withConfigFile("createListFailure.json")
             .build()
 
@@ -126,7 +126,7 @@ class AddListTest {
 
         val connectionStatus = ConnectionStatus.Offline
 
-        val testDispatcher = TestDispatcherBuilder("list/addList")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/addList")
             .withConfigFile("createListSuccess.json")
             .build()
 

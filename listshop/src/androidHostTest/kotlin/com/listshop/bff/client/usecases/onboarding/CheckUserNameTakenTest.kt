@@ -82,7 +82,7 @@ class CheckUserNameTakenTest {
             sessionService = sessionService,
             onboardingUCP = onboardingUCP,
             dashboardUCP = dashboardUCP,
-            listUCP = listUCP
+            listManagementUCP = listUCP
 
         )
 

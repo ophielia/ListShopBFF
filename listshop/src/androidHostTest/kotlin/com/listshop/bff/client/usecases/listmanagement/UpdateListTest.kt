@@ -1,24 +1,21 @@
-package com.listshop.bff.client.usecases.list
+package com.listshop.bff.client.usecases.listmanagement
 
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
-import com.listshop.bff.data.model.ShoppingList
-import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.services.TestSampleProvider
 import com.listshop.bff.test.server.TestDispatcherBuilder
-import com.listshop.bff.ucp.ListUCP
+import com.listshop.bff.ucp.ListManagementUCP
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
 import okhttp3.mockwebserver.MockWebServer
 import kotlin.test.*
 
-class SelectListForEditTest {
+class UpdateListTest {
 
-    var useCaseProvider: ListUCP? = null
+    var useCaseProvider: ListManagementUCP? = null
 
     val mockWebServer = MockWebServer()
 
@@ -27,8 +24,6 @@ class SelectListForEditTest {
     var databaseTestHelper: TestDatabaseHelper? = null
 
     var baseUrl: String = ""
-
-    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/launchScreen")
 
     @BeforeTest
     fun setUp() {
@@ -71,63 +66,62 @@ class SelectListForEditTest {
         val locator: TestServiceLocator = TestServiceLocator(analyticsHandle!!, appInfo)
         databaseTestHelper = locator.testDBHelper
 
-        useCaseProvider = locator.listUCP
+        useCaseProvider = locator.listManagementUCP
     }
 
 
     @Test
-    fun `when i select a list, a single list is returned`(): Unit = runBlocking {
+    fun `when i update a list, a list of lists is returned`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
         databaseTestHelper?.setUser(loggedInUser)
-        val apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardListAsApi")
-        databaseTestHelper?.loadStandardListLocally(apiEmbedded)
+        databaseTestHelper?.setServerListId("999999999")
 
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/selectList")
-            .withConfigFile("selectListSuccess.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/updateList")
+            .withConfigFile("updateListSuccess.json")
+            .withConfigFile("getAllLists.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
+        var result = useCaseProvider?.updateList(connectionStatus, "12345", "GEORGE")
         assertNotNull(result)
         assertTrue(result.isSuccess)
-        val list: ShoppingList? = result.value
-        assertNotNull(list);
-        assertEquals("12345", list.externalId)
-
+        val listOfLists = result.value
+        assertNotNull(listOfLists);
     }
 
     @Test
-    fun `when i select a list, the list is set as the server list`(): Unit = runBlocking {
+    fun `when i update the current list, a the current list is reloaded`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
         databaseTestHelper?.setUser(loggedInUser)
-        val apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardListAsApi")
-        databaseTestHelper?.loadStandardListLocally(apiEmbedded)
+        databaseTestHelper?.setServerListId("12345")
+
 
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/selectList")
-            .withConfigFile("selectListSuccess.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/updateList")
+            .withConfigFile("updateListSuccess.json")
+            .withConfigFile("reloadCurrentListConfig.json")
+            .withConfigFile("getAllLists.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
+        var result = useCaseProvider?.updateList(connectionStatus, "12345", "GEORGE")
         assertNotNull(result)
         assertTrue(result.isSuccess)
-
-        val listInformations = databaseTestHelper?.currentListInfo()
-        val listInformation = listInformations?.first()
-        assertNotNull(listInformation)
-        assertEquals("12345", listInformation?.serverListId)
+        val listOfLists = result.value
+        assertNotNull(listOfLists);
     }
 
     @Test
-    fun `when selecting a list fails, I get an error`(): Unit = runBlocking {
+    fun `when updating a list fails, I get an error`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
@@ -136,12 +130,12 @@ class SelectListForEditTest {
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/selectList")
-            .withConfigFile("selectListFailure.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/updateList")
+            .withConfigFile("updateListFailure.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
+        var result = useCaseProvider?.updateList(connectionStatus, "12345", "listName")
         assertNotNull(result)
         assertFalse(result.isSuccess)
         val error = result._error
@@ -151,7 +145,7 @@ class SelectListForEditTest {
     }
 
     @Test
-    fun `when offline, I can't select a list`(): Unit = runBlocking {
+    fun `when offline, I can't update a list`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
@@ -159,8 +153,8 @@ class SelectListForEditTest {
 
         val connectionStatus = ConnectionStatus.Offline
 
-        val testDispatcher = TestDispatcherBuilder("list/selectList")
-            .withConfigFile("selectListSuccess.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/updateList")
+            .withConfigFile("updateListSuccess.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher

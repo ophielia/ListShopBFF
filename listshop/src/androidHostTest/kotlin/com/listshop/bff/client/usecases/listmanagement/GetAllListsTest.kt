@@ -1,22 +1,21 @@
-package com.listshop.bff.client.usecases.list
+package com.listshop.bff.client.usecases.listmanagement
 
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
-import com.listshop.bff.ucp.ListUCP
+import com.listshop.bff.ucp.ListManagementUCP
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
 import okhttp3.mockwebserver.MockWebServer
 import kotlin.test.*
 
-class DeleteListTest {
+class GetAllListsTest {
 
-    var useCaseProvider: ListUCP? = null
+    var useCaseProvider: ListManagementUCP? = null
 
     val mockWebServer = MockWebServer()
 
@@ -67,27 +66,26 @@ class DeleteListTest {
         val locator: TestServiceLocator = TestServiceLocator(analyticsHandle!!, appInfo)
         databaseTestHelper = locator.testDBHelper
 
-        useCaseProvider = locator.listUCP
+        useCaseProvider = locator.listManagementUCP
     }
 
-
     @Test
-    fun `when i delete a list, a list of lists is returned`(): Unit = runBlocking {
+    fun `when i get all lists, a list of lists is returned`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
         databaseTestHelper?.setUser(loggedInUser)
 
+
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/deleteList")
-            .withConfigFile("deleteListSuccess.json")
-            .withConfigFile("getAllLists.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
+            .withConfigFile("getAllListsSuccess.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.deleteList(connectionStatus, "12345")
+        var result = useCaseProvider?.getAllLists(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         val listOfLists = result.value
@@ -95,7 +93,7 @@ class DeleteListTest {
     }
 
     @Test
-    fun `when deleting a list fails, I get an error`(): Unit = runBlocking {
+    fun `when getting all lists fails, I get an error`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
@@ -104,22 +102,22 @@ class DeleteListTest {
         val connectionStatus = ConnectionStatus.Online
 
         // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("list/deleteList")
-            .withConfigFile("deleteListFailure.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
+            .withConfigFile("getAllListsFailure.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.deleteList(connectionStatus, "12345")
+        var result = useCaseProvider?.getAllLists(connectionStatus)
         assertNotNull(result)
         assertFalse(result.isSuccess)
         val error = result._error
         assertNotNull(error)
         assertEquals(BFFErrorType.API, error?.type)
-        assertEquals(BFFErrorSubtype.BAD_REQUEST, error?.subType)
+        assertEquals(BFFErrorSubtype.SERVER_ERROR, error?.subType)
     }
 
     @Test
-    fun `when offline, I can't delete a list`(): Unit = runBlocking {
+    fun `when offline, I can't get all lists`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
@@ -127,8 +125,8 @@ class DeleteListTest {
 
         val connectionStatus = ConnectionStatus.Offline
 
-        val testDispatcher = TestDispatcherBuilder("list/deleteList")
-            .withConfigFile("deleteListSuccess.json")
+        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
+            .withConfigFile("getAllListsSuccess.json")
             .build()
 
         mockWebServer.dispatcher = testDispatcher
