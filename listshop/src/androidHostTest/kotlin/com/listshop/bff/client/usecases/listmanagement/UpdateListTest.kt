@@ -158,7 +158,7 @@ class UpdateListTest {
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.addList(connectionStatus)
+        var result = useCaseProvider?.updateList(connectionStatus, "12345", "listName")
         assertNotNull(result)
         assertFalse(result.isSuccess)
         val error = result._error

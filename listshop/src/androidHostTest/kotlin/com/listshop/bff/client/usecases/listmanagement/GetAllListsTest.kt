@@ -130,7 +130,7 @@ class GetAllListsTest {
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.addList(connectionStatus)
+        var result = useCaseProvider?.getAllLists(connectionStatus)
         assertNotNull(result)
         assertFalse(result.isSuccess)
         val error = result._error

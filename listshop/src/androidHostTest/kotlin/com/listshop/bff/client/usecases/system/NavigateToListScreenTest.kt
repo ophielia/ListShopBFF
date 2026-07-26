@@ -3,6 +3,8 @@ package com.listshop.bff.client.usecases.system
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFErrorSubtype
+import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
@@ -200,7 +202,7 @@ class NavigateToListScreenTest {
     }
 
     @Test
-    fun `when i navigate to the list screen and all api calls fail, i get an empty list`(): Unit = runBlocking {
+    fun `when i navigate to the list screen and all api calls fail, i get an error`(): Unit = runBlocking {
         val serverListId = "1234"
         // setup database / context
         initializeContext()
@@ -219,15 +221,11 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
-        assertTrue(result.value is TransitionViewState.ListScreen)
-        val list = (result.value as TransitionViewState.ListScreen).shoppingList
-        assertNotNull(list)
-        assertEquals(0, list.categories.size)
-
-        val listOfLists = (result.value as TransitionViewState.ListScreen).shoppingLists
-        assertNotNull(listOfLists)
-        assertEquals(0, listOfLists.list.size)
+        assertFalse(result.isSuccess)
+        val error = result._error
+        assertNotNull(error)
+        assertEquals(BFFErrorType.API, error.type, "Action cannot be done while offline")
+        assertEquals(BFFErrorSubtype.BAD_REQUEST, error.subType, "Action cannot be done while offline")
     }
 
 

@@ -131,7 +131,7 @@ class DeleteListTest {
             .build()
 
         mockWebServer.dispatcher = testDispatcher
-        var result = useCaseProvider?.addList(connectionStatus)
+        var result = useCaseProvider?.deleteList(connectionStatus, "12345")
         assertNotNull(result)
         assertFalse(result.isSuccess)
         val error = result._error

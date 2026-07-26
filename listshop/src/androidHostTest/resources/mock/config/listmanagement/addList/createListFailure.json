@@ -2,7 +2,7 @@
   "label": "createListSuccess",
   "requestMethod": "POST",
   "requestPath": "/v2/shoppinglist",
-  "requestBodyFilename": "list/addList/addListPost.json",
+  "requestBodyFilename": "listmanagement/addList/addListPost.json",
   "responseStatus": 505,
   "responseBodyFilename": "emptyResponse.json"
 }

@@ -2,16 +2,10 @@ package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.bff.BFFResult
-import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
-import com.listshop.bff.usecases.listmanagement.AddList
-import com.listshop.bff.usecases.listmanagement.DeleteList
-import com.listshop.bff.usecases.listmanagement.GetAllLists
-import com.listshop.bff.usecases.listmanagement.GetCurrentList
-import com.listshop.bff.usecases.listmanagement.SelectListForEdit
-import com.listshop.bff.usecases.listmanagement.UpdateList
+import com.listshop.bff.usecases.list.GetCurrentList
 
 class ListUCP internal constructor(
     private val listService: ListService,

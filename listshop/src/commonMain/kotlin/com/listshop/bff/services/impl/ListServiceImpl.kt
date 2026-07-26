@@ -43,13 +43,7 @@ class ListServiceImpl internal constructor(
             // swallowing this exception for now
             listShopAnalytics.error("Error while retrieving server list - ${e.message}")
         }
-        try {
-            return retrieveMostRecentList()
-        } catch (e: Exception) {
-            // swallowing this exception for now
-            listShopAnalytics.error("Error while retrieving most recent list - ${e.message}")
-        }
-        return ShoppingList.empty()
+        return retrieveMostRecentList()
     }
 
     override suspend fun retrieveServerListById(listId: String): ShoppingList? {
