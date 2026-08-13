@@ -5,10 +5,12 @@ import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.usecases.list.GetCurrentList
 
 class ListUCP internal constructor(
     private val listService: ListService,
+    private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
 ) {
 
@@ -18,7 +20,8 @@ class ListUCP internal constructor(
         val useCase = GetCurrentList(
             connectionStatus = connectionStatus,
             listService = listService,
-            analyticsHandle = analyticsHandle
+            analyticsHandle = analyticsHandle,
+            sessionService = sessionService
         )
         return useCase.process()
     }

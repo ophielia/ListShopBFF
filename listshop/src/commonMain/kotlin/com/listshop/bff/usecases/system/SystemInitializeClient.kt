@@ -26,8 +26,8 @@ class SystemInitializeClient(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
-        analyticsHandle.debug("SystemGetLaunchScreen - begin use case")
+    suspend fun process(): BFFResult<TagTree> {
+        analyticsHandle.debug("SystemInitializeClient - begin use case")
         val compatible = syncService.checkApiCompatibility(connectionStatus)
 
         if (compatible) {
@@ -42,8 +42,8 @@ class SystemInitializeClient(
         return BFFResult.Companion.error(bfferror)
     }
 
-    private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
-        analyticsHandle.debug("SystemGetLaunchScreen - load for session")
+    private suspend fun loadForSession(): BFFResult<TagTree> {
+        analyticsHandle.debug("SystemInitializeClient - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
         val firstTimeUser = session.userLastSeen == null
@@ -61,10 +61,11 @@ class SystemInitializeClient(
         }
 
         try {
-            val viewState: TransitionViewState = when (session.sessionState) {
+            when (session.sessionState) {
                 UserSessionState.User ->
                     // server list
                     if (isOnline) {
+                        // merge local and server lists
                         destinationServerList()
                     } else {
                         destinationLocalList()
@@ -90,19 +91,19 @@ class SystemInitializeClient(
                 }
             }
 
-            return BFFResult.success(Pair(viewState, tagTree))
+            return BFFResult.success(tagTree)
         } catch (e: Exception) {
             return BFFError.errorFromException(e)
         }
     }
 
     private fun destinationGreeting(): TransitionViewState {
-        analyticsHandle.debug("SystemGetLaunchScreen - destination onboarding")
+        analyticsHandle.debug("SystemInitializeClient - destination onboarding")
         return TransitionViewState.Guides
     }
 
     private suspend fun destinationLocalList(): TransitionViewState {
-        analyticsHandle.debug("SystemGetLaunchScreen - destination local list")
+        analyticsHandle.debug("SystemInitializeClient - destination local list")
 
         val wrappedLists = ListShoppingList(emptyList())
         val shoppingList = listService.retrieveOrCreateLocalList()
@@ -117,26 +118,12 @@ class SystemInitializeClient(
     }
 
     private fun destinationOnboarding(): TransitionViewState {
-        analyticsHandle.debug("SystemGetLaunchScreen - destination onboarding")
+        analyticsHandle.debug("SystemInitializeClient - destination onboarding")
         return TransitionViewState.Onboarding(OnboardingViewState.Choose)
     }
 
-    private suspend fun destinationServerList(): TransitionViewState {
-        analyticsHandle.debug("SystemGetLaunchScreen - destination server list")
-        val listOfLists = listService.retrieveListOfLists()
-        val wrappedLists = ListShoppingList(listOfLists)
-
-        var shoppingList = syncService.loadMergedShoppingList(connectionStatus)
-        if (shoppingList == null) {
-            shoppingList = listService.retrieveMostRecentList()
-        }
-
-        // error if shopping list is still null - shouldn't happen
-        if (shoppingList == null) {
-            throw UnexpectedEmptyException("No Server List Found")
-        }
-
-        return TransitionViewState.ListScreen(shoppingList, wrappedLists)
+    private suspend fun destinationServerList() {
+        analyticsHandle.debug("SystemInitializeClient - destination server list")
     }
 
     private suspend fun syncLookupData(connectionStatus: ConnectionStatus): TagTree {

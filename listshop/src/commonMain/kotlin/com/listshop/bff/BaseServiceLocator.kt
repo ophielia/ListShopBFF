@@ -46,6 +46,7 @@ internal abstract class BaseServiceLocator(
     override val listManagementUCP: ListManagementUCP by lazy {
         ListManagementUCP(
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
     }
@@ -54,6 +55,7 @@ internal abstract class BaseServiceLocator(
     override val listUCP: ListUCP by lazy {
         ListUCP(
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
     }

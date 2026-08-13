@@ -5,7 +5,10 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.model.ShoppingList
+import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
+import com.listshop.bff.services.TestSampleProvider
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.ListUCP
 import kotlinx.coroutines.runBlocking
@@ -24,6 +27,8 @@ class GetCurrentListTest {
     var databaseTestHelper: TestDatabaseHelper? = null
 
     var baseUrl: String = ""
+
+    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/standards")
 
     @BeforeTest
     fun setUp() {
@@ -142,11 +147,12 @@ class GetCurrentListTest {
     }
 
     @Test
-    fun `when offline, I can't get the current list`(): Unit = runBlocking {
+    fun `when offline, I get the local list`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()
             ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
         databaseTestHelper?.setUser(loggedInUser)
+        saveLocalList()
 
         val connectionStatus = ConnectionStatus.Offline
 
@@ -157,16 +163,23 @@ class GetCurrentListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getCurrentList(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
-        assertNotNull(error)
-        assertEquals(BFFErrorType.OFFLINE, error.type, "Action cannot be done while offline")
-        assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "Action cannot be done while offline")
+        assertTrue(result.isSuccess)
+        val shoppingList = result.value
+        assertNotNull(shoppingList)
+        assertEquals("LOCAL LIST", shoppingList.name)
     }
 
 
     @AfterTest
     fun shutDown() {
         mockWebServer.shutdown()
+    }
+
+    private fun saveLocalList() {
+        var apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardSingleList")
+        apiEmbedded.name = "LOCAL LIST"
+        val shoppingList = ShoppingList.Factory.create(apiEmbedded)
+
+        databaseTestHelper?.setShoppingList(shoppingList)
     }
 }

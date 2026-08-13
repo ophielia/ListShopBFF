@@ -6,6 +6,7 @@ import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.usecases.listmanagement.AddList
 import com.listshop.bff.usecases.listmanagement.DeleteList
 import com.listshop.bff.usecases.listmanagement.GetAllLists
@@ -14,6 +15,7 @@ import com.listshop.bff.usecases.listmanagement.UpdateList
 
 class ListManagementUCP internal constructor(
     private val listService: ListService,
+    private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
 ) {
 
