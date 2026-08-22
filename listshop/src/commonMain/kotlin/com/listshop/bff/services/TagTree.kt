@@ -10,6 +10,7 @@ class TagTree() {
     var stringLookupDictionary = hashMapOf<String, TagTreeNode>()
     val BASE_GROUP = 0L
     val BASE_GROUP_STRING = "0"
+    val ABBREVIATED_DISPLAY_COUNT = 15
 
     init {
         // will initialize private lookup dictionary to null
@@ -61,6 +62,92 @@ class TagTree() {
 
     fun isFilled(): Boolean {
         return stringLookupDictionary.size > 0
+    }
+
+    fun contentList(
+        id: String,
+        isAbbreviated: Boolean,
+        groupsOnly: Boolean = false,
+        tagTypes: List<TagType>? = null,
+        showOnlyDirectChildren: Boolean = true
+    ): List<TagTreeDisplay> {
+        val contentNode = stringLookupDictionary[id] ?: return emptyList()
+
+        if (id == BASE_GROUP_STRING) {
+            return baseContentList(isAbbreviated, groupsOnly, tagTypes, showOnlyDirectChildren)
+        }
+
+        val childGroups = contentNode.groups.mapNotNull { it.display }
+        var childTags = if (!groupsOnly) {
+            contentNode.allChildren()
+                .sortedWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
+        } else {
+            emptyList()
+        }
+
+        if (isAbbreviated && childTags.isNotEmpty()) {
+            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, childTags.size)
+            val limit = maxOf(0, maxArray - 1)
+            val itemList = childTags.take(limit).toMutableList()
+            if (maxArray >= ABBREVIATED_DISPLAY_COUNT) {
+                itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
+            }
+            childTags = itemList
+        }
+
+        return childGroups + childTags
+    }
+
+    private fun baseContentList(
+        isAbbreviated: Boolean,
+        groupsOnly: Boolean,
+        tagTypes: List<TagType>?,
+        showOnlyDirectChildren: Boolean = true
+    ): List<TagTreeDisplay> {
+        val types = tagTypes ?: return emptyList()
+        if (types.isEmpty()) return emptyList()
+
+        val contentNode = stringLookupDictionary[BASE_GROUP_STRING] ?: return emptyList()
+
+        // filter groups
+        val childGroups = contentNode.groups
+            .mapNotNull { it.display }
+            .filter { types.contains(it.tagType) }
+
+        // retrieve tags
+        var childTags = if (!groupsOnly) {
+            // add tags directly assigned to node
+            val directTags = contentNode.tags
+                .mapNotNull { it.display }
+                .filter { types.contains(it.tagType) }
+
+            val groupNodes = contentNode.groups.filter { node ->
+                node.display?.let { types.contains(it.tagType) } ?: false
+            }
+
+            val descendantTags = if (!showOnlyDirectChildren) {
+                groupNodes.flatMap { it.allChildren() }
+            } else {
+                emptyList()
+            }
+
+            (directTags + descendantTags)
+                .sortedWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
+        } else {
+            emptyList()
+        }
+
+        if (isAbbreviated && !showOnlyDirectChildren && childTags.isNotEmpty()) {
+            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, childTags.size)
+            val limit = maxOf(0, maxArray - 1)
+            val itemList = childTags.take(limit).toMutableList()
+            if (maxArray >= ABBREVIATED_DISPLAY_COUNT) {
+                itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
+            }
+            childTags = itemList
+        }
+
+        return childGroups + childTags
     }
 
     private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: String) {

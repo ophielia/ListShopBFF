@@ -19,6 +19,10 @@ class TagTreeNode(
         return display!!.isGroup
     }
 
+    fun allChildren(): List<TagTreeDisplay> {
+        return tags.mapNotNull { it.display } + groups.flatMap { it.allChildren() }
+    }
+
     fun processChildren() {
         if (rawChildren.isEmpty()) {
             return
