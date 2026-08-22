@@ -4,5 +4,5 @@
   "requestPath": "/user/client/version",
   "requestBodyFilename": "",
   "responseStatus": 200,
-  "responseBodyFilename": "onboarding/launchScreen/compatibleResponse.json"
+  "responseBodyFilename": "system/initializeClient/compatibleResponse.json"
 }

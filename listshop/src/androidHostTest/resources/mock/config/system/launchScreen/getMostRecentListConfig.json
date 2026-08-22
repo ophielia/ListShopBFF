@@ -4,5 +4,5 @@
   "requestPath": "/v2/shoppinglist/mostrecent",
   "requestBodyFilename": "",
   "responseStatus": 200,
-  "responseBodyFilename": "launchScreen/mostRecentShoppingList.json"
+  "responseBodyFilename": "onboarding/launchScreen/mostRecentShoppingList.json"
 }

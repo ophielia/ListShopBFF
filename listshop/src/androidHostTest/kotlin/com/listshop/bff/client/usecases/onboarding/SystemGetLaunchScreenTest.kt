@@ -1,15 +1,10 @@
 package com.listshop.bff.client.usecases.onboarding
 
-import com.listshop.analytics.Analytics
-import com.listshop.analytics.AnalyticsHandle
-import com.listshop.analytics.AppInfo
-import com.listshop.analytics.ClientType
-import com.listshop.analytics.initDummyAnalytics
+import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
-import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
@@ -20,13 +15,7 @@ import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
 import okhttp3.mockwebserver.MockWebServer
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class SystemGetLaunchScreenTest {
 
@@ -37,13 +26,13 @@ class SystemGetLaunchScreenTest {
     var analyticsHandle: AnalyticsHandle? = null
     var databaseTestHelper: TestDatabaseHelper? = null
 
-    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/launchScreen")
+    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/onboarding/launchScreen")
 
     @BeforeTest
     fun setUp() {
         mockWebServer.start()
         baseUrl = mockWebServer.url("").toString()
-        baseUrl = baseUrl.substring(0, baseUrl.length.minus(1) )
+        baseUrl = baseUrl.substring(0, baseUrl.length.minus(1))
 
         val standardDispatcher = TestDispatcherBuilder("signIn")
             .build()
@@ -97,7 +86,7 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
         assertEquals("Current version 1.1.0, Required Version 8.0", result._error?.message)
 
@@ -119,24 +108,26 @@ class SystemGetLaunchScreenTest {
             .build()
         mockWebServer.dispatcher = offlineDispatcher
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
         assertTrue(result.isSuccess)
         assertTrue(result.value?.first is TransitionViewState)
-        assertTrue(result.value?.first is TransitionViewState.ListScreen)
+        assertTrue(result.value.first is TransitionViewState.ListScreen)
 
-        val shoppingList = (result.value?.first as TransitionViewState.ListScreen).shoppingList
+        val shoppingList = (result.value.first as TransitionViewState.ListScreen).shoppingList
         assertNotNull(shoppingList)
 
-        assertFalse(shoppingList.categories
+        assertFalse(
+            shoppingList.categories
             .flatMap { it.items }
-            .all { it.lastChanged == null }, "all fields lastChanged should not be null");
+            .all { it.lastChanged == null }, "all fields lastChanged should not be null"
+        )
 
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         assertTrue(shoppingLists.list.isEmpty())
 
-        val tagTree = result.value?.second
+        val tagTree = result.value.second
         assertNotNull(tagTree)
     }
 
@@ -162,18 +153,18 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         val shoppingLists = (viewState as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         TestCase.assertFalse(shoppingLists.list.isEmpty())
-        val shoppingList = (viewState as TransitionViewState.ListScreen).shoppingList
+        val shoppingList = viewState.shoppingList
         assertNotNull(shoppingList)
         assertEquals("MergedWithServer", shoppingList.name)
 
-        val tagTree = result.value?.second
+        val tagTree = result.value.second
         assertNotNull(tagTree)
 
     }
@@ -199,9 +190,9 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         val shoppingLists = (viewState as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -233,12 +224,12 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         assertTrue(viewState is TransitionViewState.Onboarding)
-        assertEquals(OnboardingViewState.Choose, (viewState as TransitionViewState.Onboarding).state)
+        assertEquals(OnboardingViewState.Choose, (viewState ).state)
 
         val tagTree = result.value?.second
         assertNotNull(tagTree)
@@ -265,9 +256,9 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         val shoppingLists = (viewState as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -276,7 +267,7 @@ class SystemGetLaunchScreenTest {
         assertNotNull(shoppingList)
         assertEquals("StandardLocalList", shoppingList.name)
 
-        val tagTree = result.value?.second
+        val tagTree = result.value.second
         assertNotNull(tagTree)
 
     }
@@ -298,9 +289,9 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         assertTrue(viewState is TransitionViewState.Guides)
 
@@ -328,9 +319,9 @@ class SystemGetLaunchScreenTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        var result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        var viewState = result.value?.first
+        val viewState = result.value?.first
         assertNotNull(viewState)
         assertTrue(viewState is TransitionViewState.Guides)
 
@@ -342,7 +333,7 @@ class SystemGetLaunchScreenTest {
 
     private fun loadStandardListLocally() {
         val apiEmbedded = sampleProvider.fillSample<ApiShoppingList>("standardListAsApi")
-        val shoppingList = ShoppingList.Factory.create(apiEmbedded)
+        val shoppingList = ShoppingList.create(apiEmbedded)
         databaseTestHelper?.setShoppingList(shoppingList)
     }
 

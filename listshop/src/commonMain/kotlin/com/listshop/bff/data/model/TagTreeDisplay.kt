@@ -23,13 +23,23 @@ class TagTreeDisplay(
                 tagType = TagType.fromDisplay(tag.tagType ?: "Empty") ?: TagType.EMPTY
             )
         }
+
+        fun empty(): TagTreeDisplay {
+            return TagTreeDisplay(
+                name = "empty",
+                id = -99,
+                isGroup = false,
+                isUserTag = false,
+                tagType =  TagType.EMPTY
+            )
+        }
     }
 
 
     fun updateFromTag(tag: TagEntity) {
         name = tag.name ?: ""
         id = tag.externalId!!.toLong()
-        isGroup = tag.isGroup
+        //isGroup = tag.isGroup
         isUserTag = tag.userId != null
         tagType = TagType.fromDisplay(tag.tagType ?: "Empty") ?: TagType.EMPTY
     }
