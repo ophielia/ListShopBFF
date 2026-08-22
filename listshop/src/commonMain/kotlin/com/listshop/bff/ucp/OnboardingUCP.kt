@@ -13,6 +13,7 @@ import com.listshop.bff.usecases.system.LegacySystemGetLaunchScreen
 import com.listshop.bff.usecases.onboarding.SignIn
 import com.listshop.bff.usecases.onboarding.SignUp
 import com.listshop.bff.usecases.system.SystemGetLaunchScreen
+import com.listshop.bff.usecases.system.SystemInitializeClient
 
 class OnboardingUCP internal constructor(
     private val sessionService: SessionService,
@@ -35,6 +36,17 @@ class OnboardingUCP internal constructor(
             connectionStatus = connectionStatus,
             sessionService = sessionService,
             listService = listService,
+            syncService = syncService,
+            analyticsHandle = analyticsHandle
+        )
+        return useCase.process()
+    }
+
+    @Throws(Exception::class)
+    suspend fun systemInitializeClient(connectionStatus: ConnectionStatus): BFFResult<TagTree> {
+        val useCase = SystemInitializeClient(
+            connectionStatus = connectionStatus,
+            sessionService = sessionService,
             syncService = syncService,
             analyticsHandle = analyticsHandle
         )

@@ -7,12 +7,9 @@ import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
-import com.listshop.bff.data.model.ListShoppingList
+import com.listshop.bff.data.session.UserSession
 import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.data.state.OnboardingViewState
-import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.data.state.UserSessionState
-import com.listshop.bff.exceptions.UnexpectedEmptyException
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.SyncService
@@ -21,7 +18,6 @@ import com.listshop.bff.services.TagTree
 class SystemInitializeClient(
     private val connectionStatus: ConnectionStatus,
     private val sessionService: SessionService,
-    private val listService: ListService,
     private val syncService: SyncService,
     private val analyticsHandle: AnalyticsHandle
 ) {
@@ -46,7 +42,6 @@ class SystemInitializeClient(
         analyticsHandle.debug("SystemInitializeClient - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
-        val firstTimeUser = session.userLastSeen == null
         val isOnline = connectionStatus == ConnectionStatus.Online
 
         // I see you, user, even if you're not logged in
@@ -60,70 +55,20 @@ class SystemInitializeClient(
             return BFFError.errorFromException(e)
         }
 
+        // merge list if online user
         try {
-            when (session.sessionState) {
-                UserSessionState.User ->
-                    // server list
-                    if (isOnline) {
-                        // merge local and server lists
-                        destinationServerList()
-                    } else {
-                        destinationLocalList()
-                    }
-
-                UserSessionState.UserLoggedOut ->
-                    // login
-                    destinationOnboarding()
-
-                UserSessionState.Anon ->
-                    // lovsl lidz
-                    destinationLocalList()
-
-                UserSessionState.AnonNoList -> {
-                    // greeting if first time or no list
-                    val listNotAvailable = sessionService.currentListSession().localListUpdated == null
-                    if (firstTimeUser || listNotAvailable) {
-                        destinationGreeting()
-                    } else {
-                        destinationLocalList()
-                    }
-
-                }
-            }
-
-            return BFFResult.success(tagTree)
+            mergeShoppingListChanges(session, isOnline)
         } catch (e: Exception) {
             return BFFError.errorFromException(e)
         }
+
+        return BFFResult.success(tagTree)
     }
 
-    private fun destinationGreeting(): TransitionViewState {
-        analyticsHandle.debug("SystemInitializeClient - destination onboarding")
-        return TransitionViewState.Guides
-    }
-
-    private suspend fun destinationLocalList(): TransitionViewState {
-        analyticsHandle.debug("SystemInitializeClient - destination local list")
-
-        val wrappedLists = ListShoppingList(emptyList())
-        val shoppingList = listService.retrieveOrCreateLocalList()
-
-        // error if shopping list is still null - shouldn't happen
-        if (shoppingList == null) {
-            throw UnexpectedEmptyException("No LocalList Found")
+    private suspend fun mergeShoppingListChanges(session: UserSession, isOnline: Boolean) {
+        if (session.sessionState == UserSessionState.User && isOnline) {
+            syncService.loadMergedShoppingList(connectionStatus)
         }
-        return TransitionViewState.ListScreen(shoppingList, wrappedLists)
-
-
-    }
-
-    private fun destinationOnboarding(): TransitionViewState {
-        analyticsHandle.debug("SystemInitializeClient - destination onboarding")
-        return TransitionViewState.Onboarding(OnboardingViewState.Choose)
-    }
-
-    private suspend fun destinationServerList() {
-        analyticsHandle.debug("SystemInitializeClient - destination server list")
     }
 
     private suspend fun syncLookupData(connectionStatus: ConnectionStatus): TagTree {

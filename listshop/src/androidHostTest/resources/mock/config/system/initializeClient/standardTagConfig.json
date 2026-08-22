@@ -1,0 +1,8 @@
+{
+  "label": "clientCompatible",
+  "requestMethod": "GET",
+  "requestPath": "/v2/tag",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "standards/standardTags.json"
+}

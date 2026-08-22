@@ -28,7 +28,7 @@ class SelectListForEditTest {
 
     var baseUrl: String = ""
 
-    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/launchScreen")
+    val sampleProvider = TestSampleProvider("src/androidHostTest/resources/mock/json/onboarding/launchScreen")
 
     @BeforeTest
     fun setUp() {
