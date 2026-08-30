@@ -1,8 +1,10 @@
 package com.listshop.bff.services
 
 import com.listshop.bff.data.model.ShoppingListTag
+import com.listshop.bff.data.model.TagTreeDescendantType
 import com.listshop.bff.data.model.TagTreeDisplay
 import com.listshop.bff.data.model.TagTreeNode
+import com.listshop.bff.data.model.TagTreeNodeType
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.db.TagEntity
 
@@ -35,7 +37,12 @@ class TagTree() {
         }
 
         // sift tags in each of the nodes
+        siftNodes()
+    }
+
+    private fun siftNodes() {
         stringLookupDictionary.entries.forEach { entry -> entry.value.processChildren() }
+        stringLookupDictionary.entries.forEach { entry -> entry.value.rawChildren = emptyList() }
     }
 
     fun append(tag: ShoppingListTag, parentId: String, tagType: TagType) {
@@ -67,87 +74,49 @@ class TagTree() {
     fun contentList(
         id: String,
         isAbbreviated: Boolean,
-        groupsOnly: Boolean = false,
+        nodeType: TagTreeNodeType = TagTreeNodeType.ALL,
         tagTypes: List<TagType>? = null,
-        showOnlyDirectChildren: Boolean = true
+        descendantType: TagTreeDescendantType = TagTreeDescendantType.ALL
     ): List<TagTreeDisplay> {
         val contentNode = stringLookupDictionary[id] ?: return emptyList()
 
-        if (id == BASE_GROUP_STRING) {
-            return baseContentList(isAbbreviated, groupsOnly, tagTypes, showOnlyDirectChildren)
+        val simpleList : MutableList<TagTreeDisplay> = when (nodeType) {
+            TagTreeNodeType.ALL -> {
+                var allDisplays : MutableList<TagTreeDisplay>  = mutableListOf<TagTreeDisplay>()
+                allDisplays.addAll(contentNode.descendantGroups(tagTypes, descendantType))
+                allDisplays.addAll(contentNode.descendantTags(tagTypes, descendantType))
+                return allDisplays
+            }
+            TagTreeNodeType.GROUPS_ONLY -> contentNode.descendantGroups(tagTypes, descendantType)
+            TagTreeNodeType.TAGS_ONLY -> contentNode.descendantTags(tagTypes, descendantType)
         }
 
-        val childGroups = contentNode.groups.mapNotNull { it.display }
-        var childTags = if (!groupsOnly) {
-            contentNode.allChildren()
-                .sortedWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
-        } else {
-            emptyList()
-        }
+        // sort
+        sortList(simpleList, nodeType)
 
-        if (isAbbreviated && childTags.isNotEmpty()) {
-            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, childTags.size)
+        // abbreviate
+        if (isAbbreviated && simpleList.isNotEmpty()) {
+            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, simpleList.size)
             val limit = maxOf(0, maxArray - 1)
-            val itemList = childTags.take(limit).toMutableList()
+            val itemList = simpleList.take(limit).toMutableList()
             if (maxArray >= ABBREVIATED_DISPLAY_COUNT) {
                 itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
             }
-            childTags = itemList
+            //simpleList = itemList
         }
 
-        return childGroups + childTags
+        return simpleList
     }
 
-    private fun baseContentList(
-        isAbbreviated: Boolean,
-        groupsOnly: Boolean,
-        tagTypes: List<TagType>?,
-        showOnlyDirectChildren: Boolean = true
-    ): List<TagTreeDisplay> {
-        val types = tagTypes ?: return emptyList()
-        if (types.isEmpty()) return emptyList()
-
-        val contentNode = stringLookupDictionary[BASE_GROUP_STRING] ?: return emptyList()
-
-        // filter groups
-        val childGroups = contentNode.groups
-            .mapNotNull { it.display }
-            .filter { types.contains(it.tagType) }
-
-        // retrieve tags
-        var childTags = if (!groupsOnly) {
-            // add tags directly assigned to node
-            val directTags = contentNode.tags
-                .mapNotNull { it.display }
-                .filter { types.contains(it.tagType) }
-
-            val groupNodes = contentNode.groups.filter { node ->
-                node.display?.let { types.contains(it.tagType) } ?: false
-            }
-
-            val descendantTags = if (!showOnlyDirectChildren) {
-                groupNodes.flatMap { it.allChildren() }
-            } else {
-                emptyList()
-            }
-
-            (directTags + descendantTags)
-                .sortedWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
+    private fun sortList(
+        simpleList: MutableList<TagTreeDisplay>,
+        nodeType: TagTreeNodeType
+    ) {
+        if (nodeType.equals(TagTreeNodeType.TAGS_ONLY)) {
+            simpleList.sortWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
         } else {
-            emptyList()
+            simpleList.sortWith(compareByDescending<TagTreeDisplay> { it.name })
         }
-
-        if (isAbbreviated && !showOnlyDirectChildren && childTags.isNotEmpty()) {
-            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, childTags.size)
-            val limit = maxOf(0, maxArray - 1)
-            val itemList = childTags.take(limit).toMutableList()
-            if (maxArray >= ABBREVIATED_DISPLAY_COUNT) {
-                itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
-            }
-            childTags = itemList
-        }
-
-        return childGroups + childTags
     }
 
     private fun addNodeToParent(tagTreeNode: TagTreeNode, parentId: String) {
