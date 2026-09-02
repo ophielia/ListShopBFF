@@ -73,19 +73,19 @@ class TagTree() {
 
     fun contentList(
         id: String,
-        isAbbreviated: Boolean,
+        abbreviatedTo: Int? = null,
         nodeType: TagTreeNodeType = TagTreeNodeType.ALL,
         tagTypes: List<TagType>? = null,
         descendantType: TagTreeDescendantType = TagTreeDescendantType.ALL
     ): List<TagTreeDisplay> {
         val contentNode = stringLookupDictionary[id] ?: return emptyList()
 
-        val simpleList : MutableList<TagTreeDisplay> = when (nodeType) {
+        var simpleList : MutableList<TagTreeDisplay> = when (nodeType) {
             TagTreeNodeType.ALL -> {
                 var allDisplays : MutableList<TagTreeDisplay>  = mutableListOf<TagTreeDisplay>()
                 allDisplays.addAll(contentNode.descendantGroups(tagTypes, descendantType))
                 allDisplays.addAll(contentNode.descendantTags(tagTypes, descendantType))
-                return allDisplays
+                allDisplays
             }
             TagTreeNodeType.GROUPS_ONLY -> contentNode.descendantGroups(tagTypes, descendantType)
             TagTreeNodeType.TAGS_ONLY -> contentNode.descendantTags(tagTypes, descendantType)
@@ -95,14 +95,16 @@ class TagTree() {
         sortList(simpleList, nodeType)
 
         // abbreviate
-        if (isAbbreviated && simpleList.isNotEmpty()) {
-            val maxArray = minOf(ABBREVIATED_DISPLAY_COUNT, simpleList.size)
-            val limit = maxOf(0, maxArray - 1)
-            val itemList = simpleList.take(limit).toMutableList()
-            if (maxArray >= ABBREVIATED_DISPLAY_COUNT) {
+        if (abbreviatedTo != null && simpleList.isNotEmpty()) {
+            val origSize = simpleList.size
+            val requestedSize = abbreviatedTo ?:origSize
+            val maxArray = minOf(requestedSize , origSize)
+
+            val itemList = simpleList.take(maxArray).toMutableList()
+            if (requestedSize < simpleList.size) {
                 itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
             }
-            //simpleList = itemList
+            simpleList = itemList
         }
 
         return simpleList
@@ -115,7 +117,7 @@ class TagTree() {
         if (nodeType.equals(TagTreeNodeType.TAGS_ONLY)) {
             simpleList.sortWith(compareByDescending<TagTreeDisplay> { it.addedListCount }.thenBy { it.name })
         } else {
-            simpleList.sortWith(compareByDescending<TagTreeDisplay> { it.name })
+            simpleList.sortWith(compareBy<TagTreeDisplay> { it.name })
         }
     }
 

@@ -21,7 +21,6 @@ class TagTreeTest {
     private val sessionService = mock<SessionService>()
     private val analytics = mock<Analytics>()
     private val listShopAnalytics = initDummyAnalytics(analytics).listShopAnalytics
-    private val dummyId = "dummyId"
 
     private lateinit var service: ListServiceImpl
 
@@ -51,7 +50,6 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -65,7 +63,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -85,7 +83,7 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -99,7 +97,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -117,7 +115,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             descendantType = TagTreeDescendantType.ALL
         )
@@ -134,7 +132,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.GROUPS_ONLY,
             descendantType = TagTreeDescendantType.DIRECT
         )
@@ -153,7 +151,7 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -167,7 +165,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -187,7 +185,7 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -200,7 +198,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -218,7 +216,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             descendantType = TagTreeDescendantType.ALL
         )
@@ -235,7 +233,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.TAGS_ONLY,
             descendantType = TagTreeDescendantType.DIRECT
         )
@@ -254,7 +252,7 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -269,7 +267,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.ALL
@@ -290,7 +288,7 @@ class TagTreeTest {
         val tagTree = TagTree(baseTagEntityList)
         val result = tagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -304,7 +302,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             tagTypes = listOf(TagType.INGREDIENT),
             descendantType = TagTreeDescendantType.DIRECT
@@ -322,7 +320,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             descendantType = TagTreeDescendantType.ALL
         )
@@ -340,7 +338,7 @@ class TagTreeTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
-            isAbbreviated = false,
+            
             nodeType = TagTreeNodeType.ALL,
             descendantType = TagTreeDescendantType.DIRECT
         )
@@ -351,11 +349,340 @@ class TagTreeTest {
         assertTrue(fullResult.all { it.isGroup })
     }
 
+    @Test
+    fun `when I get the Tag Type group content for the Dietary Type group, I get one group`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(1, result.size)
+        assertTrue(result.all { it.isGroup })
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertTrue(fullResult.all { it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct Tag Type group content for the Dietary Type group, I get one group`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(1, result.size)
+        assertTrue(result.all { it.isGroup })
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertTrue(fullResult.all { it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get all group content for the Dietary Type group, I get one group`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertTrue(fullResult.all { it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct group content for the Dietary Type group, I get one group`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.GROUPS_ONLY,
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertTrue(fullResult.all { it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get the Tag Type tag content for the Dietary Type group, I get 3 tags`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(3, result.size)
+        assertTrue(result.all { !it.isGroup })
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(3, fullResult.size)
+        assertTrue(fullResult.all { !it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct Tag Type tag content for the Dietary Type group, I get 0 tags`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(0, result.size)
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(0, fullResult.size)
+
+    }
+
+    @Test
+    fun `when I get all tag content for the Dietary Type group, I get 3 tags`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(3, fullResult.size)
+        assertTrue(fullResult.all { !it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct tag content for the Dietary Type group, I get 0 tags`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.TAGS_ONLY,
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(0, fullResult.size)
+
+    }
+
+
+    @Test
+    fun `when I get the Tag Type content - all, for the Dietary Type group, I get 4 elements`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(4, result.size)
+        assertEquals(1,result.count { it.isGroup })
+        assertEquals(3,result.count { !it.isGroup })
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(4, fullResult.size)
+        assertEquals(1,fullResult.count { it.isGroup })
+        assertEquals(3,fullResult.count { !it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct Tag Type content - all, for the Dietary Type group, I get one element`() = runTest {
+        val baseTagEntityList = createTagTypeBaseEntityList()
+
+        val tagTree = TagTree(baseTagEntityList)
+        val result = tagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(result, "Result list should not be null")
+        assertEquals(1, result.size)
+        assertEquals(1,result.count { it.isGroup })
+
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            tagTypes = listOf(TagType.TAG_TYPE),
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertEquals(1,fullResult.count { it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get all content - all, for the Dietary Type group, I get 4 elements`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            descendantType = TagTreeDescendantType.ALL
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(4, fullResult.size)
+        assertEquals(1,fullResult.count { it.isGroup })
+        assertEquals(3,fullResult.count { !it.isGroup })
+
+    }
+
+    @Test
+    fun `when I get direct content - all, for the Dietary Type group, I get one element`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1300",
+            
+            nodeType = TagTreeNodeType.ALL,
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(1, fullResult.size)
+        assertTrue(fullResult.all { it.isGroup })
+    }
+
+
+
 
 // done - next up - repeat the core tests for all (instead of groups or tags)
-// repeat all three core type tests a child category - like produce
-// revisit abbreviation (pass in abbreviation limit)
+// done - repeat all three core type tests a child category - like produce
+// test - revisit abbreviation (pass in abbreviation limit)
 // repeat three core tests (groups, tags, all) with abbreviation
+
+    @Test
+    fun `when I get abbreviated direct content, for the Cuisine group, I get three elements`() = runTest {
+        val fullTagTree = TagTree(buildListAllTags())
+        val fullResult = fullTagTree.contentList(
+            "1100",
+            abbreviatedTo = 2,
+            nodeType = TagTreeNodeType.ALL,
+            descendantType = TagTreeDescendantType.DIRECT
+        )
+
+
+        assertNotNull(fullResult, "Result list should not be null")
+        assertEquals(3, fullResult.size)
+//        val resultIds : List<String> = fullResult.map { it.id }
+  //      assertFalse(resultIds.contains("1101")) /
+        // -- Mexican 1101
+        // -- Chinese 1102
+        // -- Indian 1103
+        assertTrue(fullResult.all { it.isGroup })
+    }
 
 
     private fun buildListAllTags(): List<TagEntity> {
