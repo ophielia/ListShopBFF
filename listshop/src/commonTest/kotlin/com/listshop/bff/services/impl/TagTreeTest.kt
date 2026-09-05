@@ -35,7 +35,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when tagTree is created from a list of TagEntity objects, the tag tree is filled`() = runTest {
+    fun `when tagTree is created from a list of TagEntity objects the tag tree is filled`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val result = TagTree(baseTagEntityList)
@@ -44,7 +44,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get the Ingredient group content for the base test TagTree, I get five groups`() = runTest {
+    fun `when I get the Ingredient group content for the base test TagTree I get five groups`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -77,7 +77,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Ingredient group content for the base test TagTree, I get the three groups`() = runTest {
+    fun `when I get direct Ingredient group content for the base test TagTree I get the three groups`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -111,7 +111,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all group content for the base test TagTree, I get nine groups`() = runTest {
+    fun `when I get all group content for the base test TagTree I get nine groups`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -128,7 +128,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct group content for the base test TagTree, I get six groups`() = runTest {
+    fun `when I get direct group content for the base test TagTree I get six groups`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -145,7 +145,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get the Ingredient tag content for the base test TagTree, I get 6 tags`() = runTest {
+    fun `when I get the Ingredient tag content for the base test TagTree I get 6 tags`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -179,7 +179,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Ingredient tag content for the base test TagTree, I get the one tag`() = runTest {
+    fun `when I get direct Ingredient tag content for the base test TagTree I get the one tag`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -212,7 +212,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all tag content for the base test TagTree, I get 16 tags`() = runTest {
+    fun `when I get all tag content for the base test TagTree I get 16 tags`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -229,7 +229,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct tag content for the base test TagTree, I get 0 tags`() = runTest {
+    fun `when I get direct tag content for the base test TagTree I get 0 tags`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -246,7 +246,7 @@ class TagTreeTest {
 
 
     @Test
-    fun `when I get the Ingredient content - all, for the base test TagTree, I get 11 elements`() = runTest {
+    fun `when I get the Ingredient content - all for the base test TagTree I get 11 elements`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -282,7 +282,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Ingredient content - all, for the base test TagTree, I get the three elements`() = runTest {
+    fun `when I get direct Ingredient content - all for the base test TagTree I get the three elements`() = runTest {
         val baseTagEntityList = createIngredientBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -316,7 +316,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all content - all, for the base test TagTree, I get 25 elements`() = runTest {
+    fun `when I get all content - all for the base test TagTree I get 25 elements`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -334,7 +334,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct content - all, for the base test TagTree, I get 6 elements`() = runTest {
+    fun `when I get direct content - all for the base test TagTree I get 6 elements`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "0",
@@ -350,7 +350,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get the Tag Type group content for the Dietary Type group, I get one group`() = runTest {
+    fun `when I get the Tag Type group content for the Dietary Type group I get one group`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -384,7 +384,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Tag Type group content for the Dietary Type group, I get one group`() = runTest {
+    fun `when I get direct Tag Type group content for the Dietary Type group I get one group`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -418,7 +418,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all group content for the Dietary Type group, I get one group`() = runTest {
+    fun `when I get all group content for the Dietary Type group I get one group`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -435,7 +435,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct group content for the Dietary Type group, I get one group`() = runTest {
+    fun `when I get direct group content for the Dietary Type group I get one group`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -452,7 +452,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get the Tag Type tag content for the Dietary Type group, I get 3 tags`() = runTest {
+    fun `when I get the Tag Type tag content for the Dietary Type group I get 3 tags`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -486,7 +486,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Tag Type tag content for the Dietary Type group, I get 0 tags`() = runTest {
+    fun `when I get direct Tag Type tag content for the Dietary Type group I get 0 tags`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -518,7 +518,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all tag content for the Dietary Type group, I get 3 tags`() = runTest {
+    fun `when I get all tag content for the Dietary Type group I get 3 tags`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -535,7 +535,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct tag content for the Dietary Type group, I get 0 tags`() = runTest {
+    fun `when I get direct tag content for the Dietary Type group I get 0 tags`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -552,7 +552,7 @@ class TagTreeTest {
 
 
     @Test
-    fun `when I get the Tag Type content - all, for the Dietary Type group, I get 4 elements`() = runTest {
+    fun `when I get the Tag Type content - all for the Dietary Type group I get 4 elements`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -588,7 +588,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct Tag Type content - all, for the Dietary Type group, I get one element`() = runTest {
+    fun `when I get direct Tag Type content - all for the Dietary Type group I get one element`() = runTest {
         val baseTagEntityList = createTagTypeBaseEntityList()
 
         val tagTree = TagTree(baseTagEntityList)
@@ -622,7 +622,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get all content - all, for the Dietary Type group, I get 4 elements`() = runTest {
+    fun `when I get all content - all for the Dietary Type group I get 4 elements`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -640,7 +640,7 @@ class TagTreeTest {
     }
 
     @Test
-    fun `when I get direct content - all, for the Dietary Type group, I get one element`() = runTest {
+    fun `when I get direct content - all for the Dietary Type group I get one element`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1300",
@@ -664,7 +664,7 @@ class TagTreeTest {
 // repeat three core tests (groups, tags, all) with abbreviation
 
     @Test
-    fun `when I get abbreviated direct content, for the Cuisine group, I get three elements`() = runTest {
+    fun `when I get abbreviated direct content for the Cuisine group I get three elements`() = runTest {
         val fullTagTree = TagTree(buildListAllTags())
         val fullResult = fullTagTree.contentList(
             "1100",
@@ -676,12 +676,9 @@ class TagTreeTest {
 
         assertNotNull(fullResult, "Result list should not be null")
         assertEquals(3, fullResult.size)
-//        val resultIds : List<String> = fullResult.map { it.id }
-  //      assertFalse(resultIds.contains("1101")) /
-        // -- Mexican 1101
-        // -- Chinese 1102
-        // -- Indian 1103
-        assertTrue(fullResult.all { it.isGroup })
+        val resultNames = fullResult.map { it.name }
+        assertTrue(resultNames.contains("Show All"))
+        assertTrue(fullResult.any { it.name != "Show All" && !it.isGroup })
     }
 
 

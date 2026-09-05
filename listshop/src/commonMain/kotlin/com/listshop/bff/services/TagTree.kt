@@ -24,7 +24,7 @@ class TagTree() {
         // will fill in object based on passed list
         val baseTag = TagTreeDisplay(
             name = "All",
-            id = BASE_GROUP,
+            id = BASE_GROUP_STRING,
             tagType = TagType.EMPTY
         )
         val baseNode = TagTreeNode(display = baseTag, parentId = "-99")
@@ -46,17 +46,12 @@ class TagTree() {
     }
 
     fun append(tag: ShoppingListTag, parentId: String, tagType: TagType) {
-        val parentIdAsLong = parentId.toLongOrNull() ?: -1L
-        val tagIdAsLong = tag.externalId.toLongOrNull() ?: -1L
-        if (parentIdAsLong < 0 ||
-            tagIdAsLong < 0 ||
-            !stringLookupDictionary.containsKey(parentId)
-        ) {
+        if (!stringLookupDictionary.containsKey(parentId)) {
             return
         }
         val newDisplay = TagTreeDisplay(
             name = tag.display,
-            id = tagIdAsLong,
+            id = tag.externalId,
             isGroup = false,
             isUserTag = tag.isUser ?: false,
             tagType = tagType,
@@ -102,7 +97,7 @@ class TagTree() {
 
             val itemList = simpleList.take(maxArray).toMutableList()
             if (requestedSize < simpleList.size) {
-                itemList.add(TagTreeDisplay(name = "Show All", id = -1, tagType = TagType.EMPTY))
+                itemList.add(TagTreeDisplay(name = "Show All", id = "-1", tagType = TagType.EMPTY))
             }
             simpleList = itemList
         }

@@ -29,6 +29,7 @@ kotlin {
             (this as? org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget)?.publishLibraryVariants("release", "debug")
         }
     }
+    iosX64()
     iosArm64()
     iosSimulatorArm64()
 

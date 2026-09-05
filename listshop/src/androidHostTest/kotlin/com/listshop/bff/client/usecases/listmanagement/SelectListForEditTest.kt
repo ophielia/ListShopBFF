@@ -127,6 +127,25 @@ class SelectListForEditTest {
     }
 
     @Test
+    fun `when selecting a list with missing updated field, it still succeeds`(): Unit = runBlocking {
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+        databaseTestHelper?.setUser(loggedInUser)
+
+        val connectionStatus = ConnectionStatus.Online
+
+        // create list succeeds
+        val testDispatcher = TestDispatcherBuilder("listmanagement/selectList")
+            .withConfigFile("selectListMissingUpdated.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
+        assertNotNull(result)
+        assertTrue(result.isSuccess, "Should succeed even if updated field is missing")
+    }
+
+    @Test
     fun `when selecting a list fails, I get an error`(): Unit = runBlocking {
         initializeContext()
         val loggedInUser = databaseTestHelper?.standardUser()

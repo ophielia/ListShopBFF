@@ -4,7 +4,7 @@ import com.listshop.bff.db.TagEntity
 
 class TagTreeDisplay(
     var name: String,
-    var id: Long,
+    var id: String,
     var isGroup: Boolean = false,
     // var isRating: Boolean = false,  //MM check for deletion
     var isUserTag: Boolean = false,
@@ -17,7 +17,7 @@ class TagTreeDisplay(
         fun create(tag: TagEntity): TagTreeDisplay {
             return TagTreeDisplay(
                 name = tag.name ?: "",
-                id = tag.externalId!!.toLong(),
+                id = tag.externalId!!,
                 isGroup = tag.isGroup,
                 isUserTag = tag.userId != null,
                 tagType = TagType.fromDisplay(tag.tagType ?: "Empty") ?: TagType.EMPTY
@@ -27,7 +27,7 @@ class TagTreeDisplay(
         fun empty(): TagTreeDisplay {
             return TagTreeDisplay(
                 name = "empty",
-                id = -99,
+                id = "-99",
                 isGroup = false,
                 isUserTag = false,
                 tagType =  TagType.EMPTY
@@ -38,7 +38,7 @@ class TagTreeDisplay(
 
     fun updateFromTag(tag: TagEntity) {
         name = tag.name ?: ""
-        id = tag.externalId!!.toLong()
+        id = tag.externalId!!
         //isGroup = tag.isGroup
         isUserTag = tag.userId != null
         tagType = TagType.fromDisplay(tag.tagType ?: "Empty") ?: TagType.EMPTY
