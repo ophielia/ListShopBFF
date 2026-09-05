@@ -1,5 +1,7 @@
 package com.listshop.bff.data.bff
 
+import kotlinx.serialization.SerializationException
+import io.ktor.serialization.ContentConvertException
 import com.listshop.bff.exceptions.ApiException
 import com.listshop.bff.exceptions.AuthenticationException
 import com.listshop.bff.exceptions.BadParameterException
@@ -32,6 +34,8 @@ data class BFFError(
                 is AuthenticationException ->  handleAuthenticationException(exception)
                 is ApiException ->  handleApiException(exception)
                 is LoggedOutException ->  handleLoggedOutException(exception)
+                is SerializationException -> handleSerializationException(exception)
+                is ContentConvertException -> handleSerializationException(exception)
                 else ->  handleUnknownException(exception)
             }
             return BFFResult.error<T>(bfferror)
@@ -44,6 +48,11 @@ data class BFFError(
         private fun handleLoggedOutException(exception: LoggedOutException): BFFError {
             return BFFError(BFFErrorType.AUTHENTICATION, BFFErrorSubtype.NOT_LOGGGED_IN, exception.message ?: "")
         }
+
+        private fun handleSerializationException(exception: Exception): BFFError {
+            return BFFError(BFFErrorType.API, BFFErrorSubtype.BAD_REQUEST, exception.message ?: "")
+        }
+
         private fun handleApiException(exception: ApiException): BFFError {
             val subtype = when (exception) {
                 is BadRequestException -> BFFErrorSubtype.BAD_REQUEST

@@ -17,7 +17,7 @@ import kotlinx.datetime.Clock
 import kotlin.jvm.JvmName
 
 data class ShoppingList(
-    var externalId: String?,
+    var externalId: String,
     val name: String?,
     val categories: List<ShoppingListCategory> = emptyList(),
     var created: String?,
@@ -73,7 +73,7 @@ data class ShoppingList(
         fun create(dbValue: ShoppingListEntity, modelCategories: List<ShoppingListCategory>, legendPoints: List<LegendPointEntity>): ShoppingList {
             val apiPoints = legendPoints.map{ LegendPoint.create(dbValue = it) }
             return ShoppingList(
-                externalId = dbValue.externalId,
+                externalId = dbValue.externalId ?: "",
                 name = dbValue.name,
                 categories = modelCategories,
                 created = dbValue.createdOn,
