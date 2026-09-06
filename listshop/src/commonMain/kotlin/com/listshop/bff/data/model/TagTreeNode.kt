@@ -13,16 +13,14 @@ class TagTreeNode(
     }
 
     private fun isGroup(): Boolean {
-        if (display == null) {
-            return false
-        }
-        return display!!.isGroup
+        return rawChildren.isNotEmpty()
     }
 
     fun processChildren() {
         if (rawChildren.isEmpty()) {
             return
         }
+        display?.isGroup = true
         rawChildren.forEach { child ->
             if (child.isGroup()) {
                 groups += child
@@ -30,8 +28,44 @@ class TagTreeNode(
                 tags += child
             }
         }
-        // clear raw children
-        rawChildren = emptyList()
+    }
+
+    fun descendantGroups(tagTypes: List<TagType>?, descendantType: TagTreeDescendantType): MutableList<TagTreeDisplay> {
+        val displays = mutableListOf<TagTreeDisplay>()
+
+        groups.forEach { groupNode ->
+            groupNode.display?.let { display ->
+                if (tagTypes == null || tagTypes.contains(display.tagType)) {
+                    displays.add(display)
+                }
+            }
+
+            if (descendantType == TagTreeDescendantType.ALL) {
+                displays.addAll(groupNode.descendantGroups(tagTypes, TagTreeDescendantType.ALL))
+            }
+        }
+
+        return displays
+    }
+
+    fun descendantTags(tagTypes: List<TagType>?, descendantType: TagTreeDescendantType) : MutableList<TagTreeDisplay> {
+        val displays = mutableListOf<TagTreeDisplay>()
+
+        tags.forEach { tagNode ->
+            tagNode.display?.let { display ->
+                if (tagTypes == null || tagTypes.contains(display.tagType)) {
+                    displays.add(display)
+                }
+            }
+        }
+
+        if (descendantType == TagTreeDescendantType.ALL) {
+            groups.forEach { groupNode ->
+                displays.addAll(groupNode.descendantTags(tagTypes, TagTreeDescendantType.ALL))
+            }
+        }
+
+        return displays
     }
 
     companion object Factory {
@@ -46,4 +80,5 @@ class TagTreeNode(
         }
     }
 }
+
 

@@ -6,19 +6,19 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ApiShoppingList(
     @SerialName("list_id")
-    val externalId: String?,
+    val externalId: String,
     @SerialName("created")
-    val created: String?,
+    val created: String? = null,
     @SerialName("updated")
-    val updated: String?,
+    val updated: String? = null,
     @SerialName("item_count")
-    val itemCount: Int?,
+    val itemCount: Int? = null,
     @SerialName("layout_id")
     val layoutId: String? = "",
     @SerialName("name")
-    var name: String?,
+    var name: String? = null,
     @SerialName("is_starter_list")
-    val isStarter: Boolean?,
+    val isStarter: Boolean? = null,
     @SerialName("categories")
     var categories : List<ApiShoppingListCategory>? = emptyList(),
     @SerialName("legend")

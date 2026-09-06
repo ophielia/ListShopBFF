@@ -3,12 +3,14 @@
 Here is a summary of the most useful Gradle commands for your Kotlin Multiplatform (KMM) project.
 
 #### 🛠 Build & Compilation
-| Command | Description |
-| :--- | :--- |
-| `./gradlew assemble` | Compiles code and packages artifacts (JARs/AARs) **without** running tests. Fastest way to check for syntax errors. |
-| `./gradlew build` | Full build: compiles everything **and** runs all tests. |
-| `./gradlew clean` | Deletes the `build` folders. Use this if the IDE gets confused or you want a fresh start. |
-| `./gradlew clean build` | The "fresh start" option: wipes old builds and does a complete fresh compilation and test run. |
+| Command                 | Description                                                                                                         |
+|:------------------------|:--------------------------------------------------------------------------------------------------------------------|
+| `./gradlew assemble`    | Compiles code and packages artifacts (JARs/AARs) **without** running tests. Fastest way to check for syntax errors. |
+| `./gradlew build`       | Full build: compiles everything **and** runs all tests.                                                             |
+| `./gradlew clean`       | Deletes the `build` folders. Use this if the IDE gets confused or you want a fresh start.                           |
+| `./gradlew clean build` | The "fresh start" option: wipes old builds and does a complete fresh compilation and test run.                      |
+| `./gradlew spmDevBuild` | Build for local use in developent with XCode.                                                                       |
+
 
 #### 🧪 Running Tests
 | Command | Description                                                                                |

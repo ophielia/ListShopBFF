@@ -140,6 +140,7 @@ class SystemInitializeClientTest {
         assertNotNull(result)
         assertTrue(result.isSuccess)
         assertNotNull(result.value)
+        assertTrue(result.value.isFilled())
         assertTrue(result.value is TagTree)
 
     }

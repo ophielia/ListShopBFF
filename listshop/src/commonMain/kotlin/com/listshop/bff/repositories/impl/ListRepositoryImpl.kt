@@ -104,7 +104,7 @@ class ListRepositoryImpl(
 
     override fun saveListLocally(shoppingList: ShoppingList) {
         clearLocalListData()
-        val listId = shoppingList.externalId ?: "0"
+        val listId = shoppingList.externalId
         // go through all categories, pulling items
         for (cat in shoppingList.categories) {
             val catId = cat.externalId
