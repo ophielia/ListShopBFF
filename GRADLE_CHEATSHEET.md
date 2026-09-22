@@ -31,7 +31,7 @@ Here is a summary of the most useful Gradle commands for your Kotlin Multiplatfo
 | Command | Description |
 | :--- | :--- |
 | `./gradlew testAndroidHostTest` | Runs Android host-side unit tests. |
-| `./gradlew iosX64Test` | Runs iOS simulator tests (uses the current simulator architecture). |
+| `./gradlew iosSimulatorArm64Test` | Runs iOS simulator tests (uses the current simulator architecture). |
 | `./gradlew :listshop:testAndroidHostTest --tests "ClassName"` | Runs all tests within a specific file (e.g., `CreateTagTest`). |
 
 ---
@@ -43,7 +43,7 @@ By default, Gradle is quiet about passed tests in the terminal. Here is how you 
 #### 1. HTML Reports (Recommended)
 Gradle generates a detailed, visual HTML report for every test task.
 *   **Android Host Tests:** `listshop/build/reports/tests/testAndroidHostTest/index.html`
-*   **iOS Tests:** `listshop/build/reports/tests/iosX64Test/index.html`
+*   **iOS Tests:** `listshop/build/reports/tests/iosSimulatorArm64Test/index.html`
 *   **Aggregated (All):** `listshop/build/reports/tests/allTests/index.html`
 
 *Simply open these files in your browser to see a breakdown of tests run, skipped, and failed.*
