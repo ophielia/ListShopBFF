@@ -24,10 +24,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Publish Android Release and Debug
+      - name: Publish Android and KMP Publications
         run: |
-          ./gradlew publishAllPublicationsToGitHubPackagesRepository \
-           -PNATIVE_BUILD_TYPE=DEBUG \
+          ./gradlew \
+            :analytics:publishAndroidPublicationToGitHubPackagesRepository \
+            :analytics:publishKotlinMultiplatformPublicationToGitHubPackagesRepository \
+            :listshop:publishAndroidPublicationToGitHubPackagesRepository \
+            :listshop:publishKotlinMultiplatformPublicationToGitHubPackagesRepository \
+            -PNATIVE_BUILD_TYPE=DEBUG \
             -PGITHUB_PUBLISH_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             -PGITHUB_REPO=${{ github.repository }} \
             -PENABLE_PUBLISHING=true \
