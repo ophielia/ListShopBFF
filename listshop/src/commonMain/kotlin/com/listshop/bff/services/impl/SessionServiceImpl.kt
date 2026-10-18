@@ -98,7 +98,7 @@ class SessionServiceImpl internal constructor(
         refreshOrInitializeUserSession()
     }
 
-    override fun setServerListId(listId: String) {
+    override fun setCurrentListId(listId: String) {
         val listInfo = getListInfo()
         listInfo.serverListId = listId
         updateListInfo(listInfo)

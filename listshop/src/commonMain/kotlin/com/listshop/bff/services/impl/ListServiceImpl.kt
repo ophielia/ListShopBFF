@@ -27,7 +27,7 @@ class ListServiceImpl internal constructor(
         // retrieve api list as bff model
         val shoppingList: ShoppingList = remoteApi.retrieveMostRecentList()
         // save server list id in session
-        sessionService.setServerListId(shoppingList.externalId ?: "0")
+        sessionService.setCurrentListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
         return saveLocallyAndReturnList(shoppingList)
 
@@ -129,7 +129,7 @@ class ListServiceImpl internal constructor(
         // retrieve api list
         val shoppingList: ShoppingList = remoteApi.retrieveListById(listId )
         // save server list id in session
-        sessionService.setServerListId(shoppingList.externalId ?: "0")
+        sessionService.setCurrentListId(shoppingList.externalId ?: "0")
         // deal with legends (later....)
         return saveLocallyAndReturnList(shoppingList)
     }
@@ -138,7 +138,7 @@ class ListServiceImpl internal constructor(
         // save as local list
         listRepo.saveListLocally(shoppingList)
         // update session info
-        sessionService.setServerListId(shoppingList.externalId ?: "")
+        sessionService.setCurrentListId(shoppingList.externalId ?: "")
         sessionService.setLocalListUpdated()
         // return list
         return shoppingList

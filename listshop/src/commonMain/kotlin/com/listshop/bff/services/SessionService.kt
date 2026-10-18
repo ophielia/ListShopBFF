@@ -22,7 +22,7 @@ interface SessionService {
 
     fun setLookupDataLastSyncedToNow()
 
-    fun setServerListId(listId: String)
+    fun setCurrentListId(listId: String)
 
     fun setLocalListUpdated(updateString: String)
 

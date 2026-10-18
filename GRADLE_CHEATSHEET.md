@@ -34,6 +34,12 @@ Here is a summary of the most useful Gradle commands for your Kotlin Multiplatfo
 | `./gradlew iosSimulatorArm64Test` | Runs iOS simulator tests (uses the current simulator architecture). |
 | `./gradlew :listshop:testAndroidHostTest --tests "ClassName"` | Runs all tests within a specific file (e.g., `CreateTagTest`). |
 
+#### 📤 Publishing to Maven Local
+| Command | Description |
+| :--- | :--- |
+| `./gradlew publishToMavenLocal` | Publishes artifacts for all modules to your local Maven repository (`~/.m2/repository`) for testing in other local projects. |
+| `./gradlew :listshop:publishToMavenLocal` | Publishes only the `listshop` module to Maven Local. |
+
 ---
 
 ### 📊 Viewing Test Results
