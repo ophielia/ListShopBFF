@@ -8,6 +8,8 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(21)
+
     androidLibrary {
         namespace = "com.listshop.bff.anayltics"
         compileSdk = libs.versions.compileSdk.get().toInt()
