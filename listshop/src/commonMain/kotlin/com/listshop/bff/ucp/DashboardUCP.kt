@@ -1,7 +1,6 @@
 package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
-import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.state.ConnectionStatus
@@ -21,7 +20,7 @@ class DashboardUCP internal constructor(
     @Throws(Exception::class)
     suspend fun logout(
         connectionStatus: ConnectionStatus
-    ): BFFResult<TransitionViewState> {
+    ): NewBFFResult<TransitionViewState> {
         val useCase = Logout(connectionStatus, userService, syncService, analyticsHandle)
         return useCase.process()
     }
@@ -31,7 +30,7 @@ class DashboardUCP internal constructor(
         tagName: String,
         tagType: String,
         groupId: String
-    ): BFFResult<ShoppingListTag> {
+    ): NewBFFResult<ShoppingListTag> {
         val useCase = CreateTag(
             tagName,
             tagType,
@@ -46,7 +45,7 @@ class DashboardUCP internal constructor(
     suspend fun updateTag(
         tagId: String,
         tagName: String
-    ): BFFResult<ShoppingListTag> {
+    ): NewBFFResult<ShoppingListTag> {
         val useCase = UpdateTag(
             tagId,
             tagName,
@@ -60,7 +59,7 @@ class DashboardUCP internal constructor(
     suspend fun updateUserProperty(
         key: String,
         value: String,
-    ): BFFResult<Unit> {
+    ): NewBFFResult<Unit> {
         val useCase = UpdateUserProperty(
             key,
             value,
@@ -72,7 +71,7 @@ class DashboardUCP internal constructor(
 
 
     @Throws(Exception::class)
-    suspend fun deleteUser(connectionStatus: ConnectionStatus): BFFResult<Unit> {
+    suspend fun deleteUser(connectionStatus: ConnectionStatus): NewBFFResult<Unit> {
         val useCase = DeleteUser(userService, listService, connectionStatus, syncService, analyticsHandle)
         return useCase.process()
     }

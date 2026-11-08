@@ -2,17 +2,12 @@ package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.bff.NewBFFResult
-import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
-import com.listshop.bff.usecases.listmanagement.AddList
-import com.listshop.bff.usecases.listmanagement.DeleteList
-import com.listshop.bff.usecases.listmanagement.GetAllLists
-import com.listshop.bff.usecases.listmanagement.SelectListForEdit
-import com.listshop.bff.usecases.listmanagement.UpdateList
+import com.listshop.bff.usecases.listmanagement.*
 
 class ListManagementUCP internal constructor(
     private val listService: ListService,
@@ -31,7 +26,7 @@ class ListManagementUCP internal constructor(
     }
 
     @Throws(Exception::class)
-    suspend fun deleteList(connectionStatus: ConnectionStatus,listId:String): NewBFFResult<ListShoppingList> {
+    suspend fun deleteList(connectionStatus: ConnectionStatus, listId: String): NewBFFResult<ListShoppingList> {
         val useCase = DeleteList(
             connectionStatus = connectionStatus,
             listIdToDelete = listId,
@@ -43,7 +38,7 @@ class ListManagementUCP internal constructor(
 
 
     @Throws(Exception::class)
-    suspend fun selectListForEdit(connectionStatus: ConnectionStatus,listId:String): NewBFFResult<ShoppingList> {
+    suspend fun selectListForEdit(connectionStatus: ConnectionStatus, listId: String): NewBFFResult<ShoppingList> {
         val useCase = SelectListForEdit(
             connectionStatus = connectionStatus,
             listId = listId,
@@ -55,7 +50,12 @@ class ListManagementUCP internal constructor(
 
 
     @Throws(Exception::class)
-    suspend fun updateList(connectionStatus: ConnectionStatus,listId:String, listName: String, isStarterList:Boolean? = null): NewBFFResult<ListShoppingList> {
+    suspend fun updateList(
+        connectionStatus: ConnectionStatus,
+        listId: String,
+        listName: String,
+        isStarterList: Boolean? = null
+    ): NewBFFResult<ListShoppingList> {
         val useCase = UpdateList(
             connectionStatus = connectionStatus,
             listId = listId,

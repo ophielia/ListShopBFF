@@ -1,7 +1,7 @@
 package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.TagList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
@@ -27,14 +27,14 @@ class SystemUCP internal constructor(
         fragment: String,
         tagTypes: List<String>,
         excludeGroups: Boolean
-    ): BFFResult<TagList> {
+    ): NewBFFResult<TagList> {
         val useCase = SystemLookupTags(fragment, tagTypes, excludeGroups, tagService, analyticsHandle)
         return useCase.process()
     }
 
 
     @Throws(Exception::class)
-    suspend fun navigateToDashboard(): BFFResult<TransitionViewState> {
+    suspend fun navigateToDashboard(): NewBFFResult<TransitionViewState> {
         val useCase = NavigateToDashboard(sessionService, analyticsHandle)
         return useCase.process()
     }
@@ -42,7 +42,7 @@ class SystemUCP internal constructor(
     @Throws(Exception::class)
     suspend fun navigateToListManagement(
         connectionStatus: ConnectionStatus
-    ): BFFResult<TransitionViewState> {
+    ): NewBFFResult<TransitionViewState> {
         val useCase = NavigateToListManagement(
             connectionStatus, listService, sessionService,
             analyticsHandle
@@ -53,7 +53,7 @@ class SystemUCP internal constructor(
     @Throws(Exception::class)
     suspend fun navigateToDishManagement(
         connectionStatus: ConnectionStatus
-    ): BFFResult<TransitionViewState> {
+    ): NewBFFResult<TransitionViewState> {
         val useCase = NavigateToDishManagement(
             connectionStatus, sessionService, dishService,
             analyticsHandle
@@ -64,7 +64,7 @@ class SystemUCP internal constructor(
     @Throws(Exception::class)
     suspend fun navigateToListScreen(
         connectionStatus: ConnectionStatus
-    ): BFFResult<TransitionViewState> {
+    ): NewBFFResult<TransitionViewState> {
         val useCase = NavigateToListScreen(
             connectionStatus, sessionService, listService,
             analyticsHandle

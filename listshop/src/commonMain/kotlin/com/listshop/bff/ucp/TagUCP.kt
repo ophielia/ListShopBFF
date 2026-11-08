@@ -11,7 +11,8 @@ class TagUCP internal constructor(
     private val listShopAnalytics: ListShopAnalytics
 ) {
 
-    @Throws(Exception::class) suspend fun getTags(forceReload: Boolean): List<Tag> {
+    @Throws(Exception::class)
+    suspend fun getTags(forceReload: Boolean): List<Tag> {
         val cachedTags = dataRepo.selectAllTags()
         return if (cachedTags.isNotEmpty() && !forceReload) {
             cachedTags

@@ -2,7 +2,7 @@ package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.ListShopAnalytics
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.services.*
@@ -24,13 +24,13 @@ class OnboardingUCP internal constructor(
 ) {
 
     @Throws(Exception::class)
-    suspend fun legacySystemGetLaunchScreen(connectionStatus: ConnectionStatus): BFFResult<TransitionViewState> {
+    suspend fun legacySystemGetLaunchScreen(connectionStatus: ConnectionStatus): NewBFFResult<TransitionViewState> {
         val useCase = LegacySystemGetLaunchScreen(connectionStatus, sessionService, userService, listService)
         return useCase.process()
     }
 
     @Throws(Exception::class)
-    suspend fun systemGetLaunchScreen(connectionStatus: ConnectionStatus): BFFResult<Pair<TransitionViewState, TagTree>> {
+    suspend fun systemGetLaunchScreen(connectionStatus: ConnectionStatus): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         val useCase = SystemGetLaunchScreen(
             connectionStatus = connectionStatus,
             sessionService = sessionService,
@@ -42,7 +42,7 @@ class OnboardingUCP internal constructor(
     }
 
     @Throws(Exception::class)
-    suspend fun systemInitializeClient(connectionStatus: ConnectionStatus): BFFResult<TagTree> {
+    suspend fun systemInitializeClient(connectionStatus: ConnectionStatus): NewBFFResult<TagTree> {
         val useCase = SystemInitializeClient(
             connectionStatus = connectionStatus,
             sessionService = sessionService,
@@ -57,7 +57,7 @@ class OnboardingUCP internal constructor(
         userName: String,
         password: String,
         connectionStatus: ConnectionStatus
-    ): BFFResult<Pair<TransitionViewState, TagTree>> {
+    ): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         val useCase =
             SignIn(userName, password, connectionStatus, userService, syncService, listService, analyticsHandle)
         return useCase.process()
@@ -68,21 +68,21 @@ class OnboardingUCP internal constructor(
         userName: String,
         password: String,
         connectionStatus: ConnectionStatus
-    ): BFFResult<Pair<TransitionViewState, TagTree>> {
+    ): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         val useCase =
             SignUp(userName, password, connectionStatus, userService, syncService, listService, analyticsHandle)
         return useCase.process()
     }
 
     @Throws(Exception::class)
-    suspend fun checkUserNameTaken(userName: String): BFFResult<Boolean> {
+    suspend fun checkUserNameTaken(userName: String): NewBFFResult<Boolean> {
         val useCase = CheckUserNameTaken(userName, userService, analyticsHandle = analyticsHandle)
         return useCase.process()
     }
 
 
     @Throws(Exception::class)
-    suspend fun requestPasswordReset(userName: String): BFFResult<Unit> {
+    suspend fun requestPasswordReset(userName: String): NewBFFResult<Unit> {
         val useCase = RequestPasswordReset(userName, userService, analyticsHandle = analyticsHandle)
         return useCase.process()
     }
