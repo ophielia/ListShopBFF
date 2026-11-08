@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.ListManagementUCP
@@ -90,6 +91,39 @@ class GetAllListsTest {
         assertTrue(result.isSuccess)
         val listOfLists = result.value
         assertNotNull(listOfLists);
+    }
+
+    @Test
+    fun `when i get all lists, the crossed off count is returned`(): Unit = runBlocking {
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+
+
+        val connectionStatus = ConnectionStatus.Online
+
+        // create list succeeds
+        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
+            .withConfigFile("getAllListsSuccess.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.getAllLists(connectionStatus)
+        assertNotNull(result)
+        // list 51222 without crossed off
+        // list 50944 - with crossed off
+
+
+        assertTrue(result.isSuccess)
+        val listOfLists = result.value
+        assertNotNull(listOfLists);
+        val resultMap: Map<String, ShoppingList>? = listOfLists?.list?.associateBy { it.externalId }
+        val crossedOffList = resultMap?.get("50944")
+        assertEquals(5, crossedOffList?.checkedOffCount)
+        val noCrossedOffList = resultMap?.get("51222")
+        assertEquals(0,noCrossedOffList?.checkedOffCount)
+
     }
 
     @Test

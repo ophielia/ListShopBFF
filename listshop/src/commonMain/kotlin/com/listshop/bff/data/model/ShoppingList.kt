@@ -47,7 +47,7 @@ data class ShoppingList(
                 updated = apiValue.updated,
                 layoutId = apiValue.layoutId,
                 itemCount = apiValue.itemCount,
-                checkedOffCount = apiValue.itemCount,
+                checkedOffCount = apiValue.crossedOffCount ?: 0,
                 isStarterList = apiValue.isStarter,
                 loading = false,
                 lastLocalChange = null,

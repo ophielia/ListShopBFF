@@ -13,6 +13,8 @@ data class ApiShoppingList(
     val updated: String? = null,
     @SerialName("item_count")
     val itemCount: Int? = null,
+    @SerialName("crossed_off_count")
+    val crossedOffCount: Int? = null,
     @SerialName("layout_id")
     val layoutId: String? = "",
     @SerialName("name")

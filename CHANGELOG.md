@@ -1,5 +1,9 @@
 ### LISTSHOP BFF
 
+0.1.32 2026-11
+Added
+ * add checkedOffCount to ShoppingList, in the context of a list
+
 0.1.24 - 0.1.27 2026-09
 CICD tests
 
