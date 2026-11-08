@@ -1,37 +1,22 @@
 package com.listshop.bff.client.usecases.onboarding
 
-import com.listshop.analytics.Analytics
-import com.listshop.analytics.AnalyticsHandle
-import com.listshop.analytics.AppInfo
-import com.listshop.analytics.ClientType
-import com.listshop.analytics.initDummyAnalytics
-import com.listshop.bff.SDKHandle
+import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.dashboardUCPStartup
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
-import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
-import com.listshop.bff.onboardingUCPStartup
+import com.listshop.bff.services.TagTree
 import com.listshop.bff.services.TestSampleProvider
-import com.listshop.bff.sessionServiceStartup
-import com.listshop.bff.tagUCPStartup
-import com.listshop.bff.test.server.TestDispatcher
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.OnboardingUCP
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class SignInTest {
 
@@ -108,11 +93,11 @@ class SignInTest {
 
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
         // verify the error result
-        val error = result._error!!
-        assertEquals(BFFErrorType.AUTHENTICATION,error.type)
-        assertEquals(BFFErrorSubtype.CANT_LOGIN,error.subType)
+        val error = result.error!!
+        assertEquals(BFFErrorType.AUTHENTICATION, error.type)
+        assertEquals(BFFErrorSubtype.CANT_LOGIN, error.subType)
         assertEquals("login call failed with status: 401", error.message)
     }
 
@@ -136,7 +121,8 @@ class SignInTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -175,7 +161,8 @@ class SignInTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -192,7 +179,6 @@ class SignInTest {
         val tagTree = result.value?.second
         assertNotNull(tagTree)
     }
-
 
 
     @Test
@@ -217,7 +203,7 @@ class SignInTest {
 
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         assertEquals(0, shoppingLists.list.size)
@@ -253,7 +239,7 @@ class SignInTest {
 
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         assertEquals(0, shoppingLists.list.size)
@@ -293,7 +279,7 @@ class SignInTest {
 
         var result = useCaseProvider?.signIn(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
         assertEquals(0, shoppingLists.list.size)

@@ -3,9 +3,8 @@ package com.listshop.bff.usecases.onboarding
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
-import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
-import com.listshop.bff.data.bff.NewBFFResult
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.services.UserService
 
 class RequestPasswordReset(
@@ -14,16 +13,16 @@ class RequestPasswordReset(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): NewBFFResult<Unit> {
+    suspend fun process(): BFFResult<Unit> {
         // send password reset request to server
         analyticsHandle.debug("RequestPasswordReset - begin use case")
         try {
             userService.requestPasswordReset(userName)
             analyticsHandle.debug("RequestPasswordReset - end use case")
-            return NewBFFResult.Success(Unit)
+            return BFFResult.Success(Unit)
         } catch (e: Exception) {
             analyticsHandle.error("Error while requesting password rest - ${e.message}")
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
     }
 }

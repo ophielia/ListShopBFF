@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
@@ -93,8 +94,8 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertTrue(result.isSuccess)
-        val list: ShoppingList? = result.value
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val list: ShoppingList = result.value
         assertNotNull(list);
         assertEquals("12345", list.externalId)
 
@@ -118,7 +119,7 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         val listInformations = databaseTestHelper?.currentListInfo()
         val listInformation = listInformations?.first()
@@ -142,7 +143,7 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertTrue(result.isSuccess, "Should succeed even if updated field is missing")
+        assertTrue(result is BFFResult.Success<*>, "Should succeed even if updated field is missing")
     }
 
     @Test
@@ -161,8 +162,9 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertFalse(result.isSuccess, "Should fail if list_id field is missing")
-        val error = result._error
+        assertFalse(result is BFFResult.Success<*>, "Should fail if list_id field is missing")
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.API, error?.type)
         assertEquals(BFFErrorSubtype.BAD_REQUEST, error?.subType)
@@ -185,8 +187,9 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertFalse(result is BFFResult.Success<ShoppingList>)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.API, error?.type)
         assertEquals(BFFErrorSubtype.BAD_REQUEST, error?.subType)
@@ -208,8 +211,9 @@ class SelectListForEditTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertFalse(result is BFFResult.Success<*>)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.OFFLINE, error.type, "Action cannot be done while offline")
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "Action cannot be done while offline")

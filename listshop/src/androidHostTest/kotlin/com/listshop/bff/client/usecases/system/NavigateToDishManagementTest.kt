@@ -85,7 +85,7 @@ class NavigateToDishManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToDishManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<TransitionViewState>)
 
        assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.DishManagementScreen)
@@ -111,7 +111,7 @@ class NavigateToDishManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToDishManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.DishManagementScreen)
@@ -135,7 +135,7 @@ class NavigateToDishManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToDishManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.DishManagementScreen)
@@ -161,7 +161,7 @@ class NavigateToDishManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToDishManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
 
     }
 

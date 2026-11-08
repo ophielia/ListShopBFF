@@ -3,6 +3,7 @@ package com.listshop.bff.client.usecases.system
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.Tag
 import com.listshop.bff.data.model.TagList
 import com.listshop.bff.data.remote.ApiTagList
@@ -87,7 +88,7 @@ class SytemLookupTagsTest {
 
         var result = useCaseProvider?.systemLookupTags("to", listOf("Ingredient"), false)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<TagList>)
 
         assertTrue(result.value is TagList)
         val list = result.value

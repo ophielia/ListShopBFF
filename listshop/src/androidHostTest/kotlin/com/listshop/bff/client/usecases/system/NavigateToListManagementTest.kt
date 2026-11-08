@@ -85,7 +85,7 @@ class NavigateToListManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
        assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListManagementScreen)
@@ -111,7 +111,7 @@ class NavigateToListManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListManagementScreen)
@@ -138,7 +138,7 @@ class NavigateToListManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result.value is TransitionViewState.ListManagementScreen)
         val lists = (result.value as TransitionViewState.ListManagementScreen).shoppingLists
@@ -164,7 +164,7 @@ class NavigateToListManagementTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListManagement(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
 
     }
 

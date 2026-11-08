@@ -3,11 +3,13 @@ package com.listshop.bff.client.usecases.onboarding
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
+import com.listshop.bff.services.TagTree
 import com.listshop.bff.services.TestSampleProvider
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.OnboardingUCP
@@ -88,7 +90,8 @@ class SystemGetLaunchScreenTest {
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        assertEquals("Current version 1.1.0, Required Version 8.0", result._error?.message)
+        assertTrue(result is BFFResult.Failure)
+        assertEquals("Current version 1.1.0, Required Version 8.0", result.error?.message)
 
         // restore original dispatcher
     }
@@ -110,7 +113,7 @@ class SystemGetLaunchScreenTest {
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         assertTrue(result.value?.first is TransitionViewState)
         assertTrue(result.value.first is TransitionViewState.ListScreen)
 
@@ -154,6 +157,7 @@ class SystemGetLaunchScreenTest {
         val connectionStatus = ConnectionStatus.Online
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         assertNotNull(result)
         val viewState = result.value?.first
         assertNotNull(viewState)
@@ -191,6 +195,7 @@ class SystemGetLaunchScreenTest {
         val connectionStatus = ConnectionStatus.Online
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         assertNotNull(result)
         val viewState = result.value?.first
         assertNotNull(viewState)
@@ -225,7 +230,7 @@ class SystemGetLaunchScreenTest {
         val connectionStatus = ConnectionStatus.Online
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
-        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         val viewState = result.value?.first
         assertNotNull(viewState)
         assertTrue(viewState is TransitionViewState.Onboarding)
@@ -257,6 +262,7 @@ class SystemGetLaunchScreenTest {
         val connectionStatus = ConnectionStatus.Online
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         assertNotNull(result)
         val viewState = result.value?.first
         assertNotNull(viewState)
@@ -291,6 +297,7 @@ class SystemGetLaunchScreenTest {
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
         assertNotNull(result)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         val viewState = result.value?.first
         assertNotNull(viewState)
         assertTrue(viewState is TransitionViewState.Guides)
@@ -320,6 +327,7 @@ class SystemGetLaunchScreenTest {
         val connectionStatus = ConnectionStatus.Online
 
         val result = useCaseProvider?.systemGetLaunchScreen(connectionStatus)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         assertNotNull(result)
         val viewState = result.value?.first
         assertNotNull(viewState)

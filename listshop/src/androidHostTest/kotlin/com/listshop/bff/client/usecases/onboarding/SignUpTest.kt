@@ -5,11 +5,12 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
-import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
+import com.listshop.bff.services.TagTree
 import com.listshop.bff.services.TestSampleProvider
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.OnboardingUCP
@@ -99,7 +100,8 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
 
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
@@ -138,8 +140,8 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
-
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -169,10 +171,10 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Offline
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
 
         // verify the result
-        val error = result._error
+        val error = result.error
         assertEquals(BFFErrorType.OFFLINE, error?.type)
         assertEquals(BFFErrorSubtype.OFFLINE, error?.subType)
         assertEquals("User cannot signup while offline", error?.message)
@@ -195,10 +197,10 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
 
         // verify the result
-        val error = result._error
+        val error = result.error
         assertEquals(BFFErrorType.VALIDATION, error?.type)
         assertEquals(BFFErrorSubtype.INVALID_INPUT, error?.subType)
         assertEquals("userName or password is blank", error?.message)
@@ -221,10 +223,10 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
 
         // verify the result
-        val error = result._error
+        val error = result.error
         assertEquals(BFFErrorType.VALIDATION, error?.type)
         assertEquals(BFFErrorSubtype.INVALID_INPUT, error?.subType)
         assertEquals("userName too long", error?.message)
@@ -256,8 +258,8 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
-
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)
@@ -295,8 +297,8 @@ class SignUpTest {
         val connectionStatus = ConnectionStatus.Online
         var result = useCaseProvider?.signUp(userName, password, connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
-
+        assertFalse(result is BFFResult.Failure)
+        assertTrue(result is BFFResult.Success<Pair<TransitionViewState, TagTree>>)
         // verify the result
         val shoppingLists = (result.value?.first as TransitionViewState.ListScreen).shoppingLists
         assertNotNull(shoppingLists)

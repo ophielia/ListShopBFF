@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.ListManagementUCP
@@ -89,7 +90,7 @@ class UpdateListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateList(connectionStatus, "12345", "GEORGE")
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val listOfLists = result.value
         assertNotNull(listOfLists);
     }
@@ -115,7 +116,7 @@ class UpdateListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateList(connectionStatus, "12345", "GEORGE")
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val listOfLists = result.value
         assertNotNull(listOfLists);
     }
@@ -137,8 +138,9 @@ class UpdateListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateList(connectionStatus, "12345", "listName")
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertFalse(result is BFFResult.Success<*>)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.API, error?.type)
         assertEquals(BFFErrorSubtype.BAD_REQUEST, error?.subType)
@@ -160,8 +162,9 @@ class UpdateListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateList(connectionStatus, "12345", "listName")
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertFalse(result is BFFResult.Success<*>)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.OFFLINE, error.type, "Action cannot be done while offline")
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "Action cannot be done while offline")

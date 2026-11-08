@@ -1,7 +1,7 @@
 package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
-import com.listshop.bff.data.bff.NewBFFResult
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
@@ -16,7 +16,7 @@ class ListManagementUCP internal constructor(
 ) {
 
     @Throws(Exception::class)
-    suspend fun addList(connectionStatus: ConnectionStatus): NewBFFResult<ListShoppingList> {
+    suspend fun addList(connectionStatus: ConnectionStatus): BFFResult<ListShoppingList> {
         val useCase = AddList(
             connectionStatus = connectionStatus,
             listService = listService,
@@ -26,7 +26,7 @@ class ListManagementUCP internal constructor(
     }
 
     @Throws(Exception::class)
-    suspend fun deleteList(connectionStatus: ConnectionStatus, listId: String): NewBFFResult<ListShoppingList> {
+    suspend fun deleteList(connectionStatus: ConnectionStatus, listId: String): BFFResult<ListShoppingList> {
         val useCase = DeleteList(
             connectionStatus = connectionStatus,
             listIdToDelete = listId,
@@ -38,7 +38,7 @@ class ListManagementUCP internal constructor(
 
 
     @Throws(Exception::class)
-    suspend fun selectListForEdit(connectionStatus: ConnectionStatus, listId: String): NewBFFResult<ShoppingList> {
+    suspend fun selectListForEdit(connectionStatus: ConnectionStatus, listId: String): BFFResult<ShoppingList> {
         val useCase = SelectListForEdit(
             connectionStatus = connectionStatus,
             listId = listId,
@@ -55,7 +55,7 @@ class ListManagementUCP internal constructor(
         listId: String,
         listName: String,
         isStarterList: Boolean? = null
-    ): NewBFFResult<ListShoppingList> {
+    ): BFFResult<ListShoppingList> {
         val useCase = UpdateList(
             connectionStatus = connectionStatus,
             listId = listId,
@@ -68,7 +68,7 @@ class ListManagementUCP internal constructor(
     }
 
     @Throws(Exception::class)
-    suspend fun getAllLists(connectionStatus: ConnectionStatus): NewBFFResult<ListShoppingList> {
+    suspend fun getAllLists(connectionStatus: ConnectionStatus): BFFResult<ListShoppingList> {
         val useCase = GetAllLists(
             connectionStatus = connectionStatus,
             listService = listService,

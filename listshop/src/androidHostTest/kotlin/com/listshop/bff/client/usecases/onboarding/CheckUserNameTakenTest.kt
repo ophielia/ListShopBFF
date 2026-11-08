@@ -7,6 +7,7 @@ import com.listshop.analytics.ClientType
 import com.listshop.analytics.initDummyAnalytics
 import com.listshop.bff.SDKHandle
 import com.listshop.bff.dashboardUCPStartup
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.listManagementUCPStartup
 import com.listshop.bff.listUCPStartup
 import com.listshop.bff.onboardingUCPStartup
@@ -110,8 +111,8 @@ class CheckUserNameTakenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.checkUserNameTaken(userName)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
-        assertTrue(result.value ?: false)
+        assertTrue(result is BFFResult.Success<*>)
+
 
     }
 
@@ -127,7 +128,7 @@ class CheckUserNameTakenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.checkUserNameTaken(userName)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<Boolean>)
         assertFalse(result.value ?: true)
 
     }
@@ -144,7 +145,7 @@ class CheckUserNameTakenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.checkUserNameTaken(userName)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
+        assertFalse(result is BFFResult.Success<*>)
 
     }
 

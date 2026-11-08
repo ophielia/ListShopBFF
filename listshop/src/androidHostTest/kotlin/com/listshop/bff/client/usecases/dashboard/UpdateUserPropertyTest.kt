@@ -3,6 +3,7 @@ package com.listshop.bff.client.usecases.dashboard
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
@@ -87,7 +88,7 @@ class UpdateUserPropertyTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateUserProperty(key, value)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
     }
 
     @Test
@@ -109,7 +110,7 @@ class UpdateUserPropertyTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateUserProperty(key, value)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val userProperties: List<UserPropertiesEntity> = databaseTestHelper?.getUserProperties() ?: emptyList()
         val userProperty = userProperties.filter { it.key.equals(key) }.firstOrNull()
         assertNotNull(userProperty)
@@ -135,7 +136,7 @@ class UpdateUserPropertyTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateUserProperty(key, value)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
 
@@ -159,7 +160,7 @@ class UpdateUserPropertyTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.updateUserProperty(key, value)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val userProperties: List<UserPropertiesEntity> = databaseTestHelper?.getUserProperties() ?: emptyList()
         val userProperty = userProperties.filter { it.key.equals(key) }.firstOrNull()
         assertNotNull(userProperty)

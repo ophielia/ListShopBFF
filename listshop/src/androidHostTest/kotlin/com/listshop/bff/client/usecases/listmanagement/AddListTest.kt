@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.ListManagementUCP
@@ -88,7 +89,7 @@ class AddListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.addList(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val listOfLists = result.value
         assertNotNull(listOfLists);
     }
@@ -109,12 +110,13 @@ class AddListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.addList(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
-        assertNotNull(error)
-        assertEquals(BFFErrorType.API, error.type, "List creation failed")
-        assertEquals(BFFErrorSubtype.SERVER_ERROR, error.subType, "List creation failed")
-        assertTrue(error.message.startsWith("create list call failed with status: "), "List creation failed")
+        assertFalse(result is BFFResult.Success<*>)
+        assertTrue(result is BFFResult.Failure)
+
+        //assertNotNull(error)
+        assertEquals(BFFErrorType.API, result.error.type, "List creation failed")
+        assertEquals(BFFErrorSubtype.SERVER_ERROR, result.error.subType, "List creation failed")
+        assertTrue(result.error.message.startsWith("create list call failed with status: "), "List creation failed")
     }
 
     @Test
@@ -133,8 +135,9 @@ class AddListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.addList(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertFalse(result is BFFResult.Success<*>)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.OFFLINE, error.type, "List creation failed - offline")
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "List creation failed - offline")

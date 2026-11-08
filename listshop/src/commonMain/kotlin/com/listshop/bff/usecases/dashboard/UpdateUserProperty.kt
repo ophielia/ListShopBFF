@@ -3,8 +3,7 @@ package com.listshop.bff.usecases.dashboard
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
-import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.NewBFFResult
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.services.UserService
 
 class UpdateUserProperty(
@@ -13,16 +12,16 @@ class UpdateUserProperty(
     private val userService: UserService,
     private val analyticsHandle: AnalyticsHandle,
 ) {
-    suspend fun process(): NewBFFResult<Unit> {
+    suspend fun process(): BFFResult<Unit> {
         analyticsHandle.debug("UpdateUserPropertiesUseCase - begin use case")
 
         try {
             userService.updateUserProperty(property, value)
             analyticsHandle.debug("UpdateUserPropertiesUseCase - end use case")
-            return NewBFFResult(value = null)
+            return BFFResult(value = null)
         } catch (e: Exception) {
             analyticsHandle.error("Error while updating user property - ${e.message}")
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
     }
 }

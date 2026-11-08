@@ -3,6 +3,8 @@ package com.listshop.bff.client.usecases.dashboard
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
+import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.model.TagType
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
@@ -90,7 +92,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<ShoppingListTag>)
         val newTag = result.value
         assertEquals("9876", newTag?.externalId)
         assertEquals(tagName, newTag?.display)
@@ -113,7 +115,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
     @Test
@@ -138,7 +140,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<ShoppingListTag>)
         val newTag = result.value
         assertEquals("9876", newTag?.externalId)
         assertEquals(tagName, newTag?.display)
@@ -162,7 +164,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
     @Test
@@ -180,7 +182,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
     @Test
@@ -198,7 +200,7 @@ class CreateTagTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.createTag(tagName, tagType, parentId)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
     @AfterTest

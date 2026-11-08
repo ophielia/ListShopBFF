@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
@@ -92,7 +93,7 @@ class GetCurrentListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getCurrentList(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         val list = result.value
         assertNotNull(list);
     }
@@ -116,7 +117,7 @@ class GetCurrentListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getCurrentList(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
         val list = result.value
         assertNotNull(list);
         assertEquals("99999", list.externalId)
@@ -139,11 +140,11 @@ class GetCurrentListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getCurrentList(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
-        assertNotNull(error)
-        assertEquals(BFFErrorType.API, error?.type)
-        assertEquals(BFFErrorSubtype.BAD_REQUEST, error?.subType)
+        assertFalse(result is BFFResult.Success<ShoppingList>)
+        assertTrue( result is BFFResult.Failure)
+
+        assertEquals(BFFErrorType.API, result.error.type)
+        assertEquals(BFFErrorSubtype.BAD_REQUEST, result.error.subType)
     }
 
     @Test
@@ -163,7 +164,7 @@ class GetCurrentListTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getCurrentList(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList = result.value
         assertNotNull(shoppingList)
         assertEquals("LOCAL LIST", shoppingList.name)

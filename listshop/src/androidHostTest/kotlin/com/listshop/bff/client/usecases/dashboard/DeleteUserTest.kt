@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
@@ -88,7 +89,7 @@ class DeleteUserTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.deleteUser(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
     }
 
     @Test
@@ -107,7 +108,7 @@ class DeleteUserTest {
 
         var result = useCaseProvider?.deleteUser(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
     @Test
@@ -126,9 +127,9 @@ class DeleteUserTest {
 
         var result = useCaseProvider?.deleteUser(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
-        assertEquals(BFFErrorType.OFFLINE, result._error?.type, "the error is offline")
-        assertEquals(BFFErrorSubtype.OFFLINE, result._error?.subType, "the error subtype is offline")
+        assertTrue(result is BFFResult.Failure)
+        assertEquals(BFFErrorType.OFFLINE, result.error.type, "the error is offline")
+        assertEquals(BFFErrorSubtype.OFFLINE, result.error.subType, "the error subtype is offline")
     }
 
     @Test
@@ -153,7 +154,7 @@ class DeleteUserTest {
 
         var result = useCaseProvider?.deleteUser(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         // assert session is cleared
         val listInfo = databaseTestHelper?.currentListInfo()?.first()
         val userInfo = databaseTestHelper?.currentUserInfo()?.first()

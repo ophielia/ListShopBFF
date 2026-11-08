@@ -3,6 +3,9 @@
 0.1.32 2026-11
 Added
  * add checkedOffCount to ShoppingList, in the context of a list
+Changed
+ * signature for BFFResult - for easier use in BFF and clients
+
 
 0.1.24 - 0.1.27 2026-09
 CICD tests

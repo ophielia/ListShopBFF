@@ -6,11 +6,10 @@ import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
-import com.listshop.bff.data.bff.NewBFFResult
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.session.UserSession
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.UserSessionState
-import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
 import com.listshop.bff.services.SyncService
 import com.listshop.bff.services.TagTree
@@ -22,7 +21,7 @@ class SystemInitializeClient(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): NewBFFResult<TagTree> {
+    suspend fun process(): BFFResult<TagTree> {
         analyticsHandle.debug("SystemInitializeClient - begin use case")
         val compatible = syncService.checkApiCompatibility(connectionStatus)
 
@@ -35,10 +34,10 @@ class SystemInitializeClient(
             "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
         analyticsHandle.error(message)
         val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.UPGRADE_REQUIRED, message)
-        return NewBFFResult.Companion.error(bfferror)
+        return BFFResult.Companion.error(bfferror)
     }
 
-    private suspend fun loadForSession(): NewBFFResult<TagTree> {
+    private suspend fun loadForSession(): BFFResult<TagTree> {
         analyticsHandle.debug("SystemInitializeClient - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
@@ -52,17 +51,17 @@ class SystemInitializeClient(
         try {
             tagTree = syncLookupData(connectionStatus)
         } catch (e: Exception) {
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
 
         // merge list if online user
         try {
             mergeShoppingListChanges(session, isOnline)
         } catch (e: Exception) {
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
 
-        return NewBFFResult.Success(tagTree)
+        return BFFResult.Success(tagTree)
     }
 
     private suspend fun mergeShoppingListChanges(session: UserSession, isOnline: Boolean) {

@@ -7,7 +7,7 @@ import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
-import com.listshop.bff.data.bff.NewBFFResult
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
@@ -27,7 +27,7 @@ class SystemGetLaunchScreen(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): NewBFFResult<Pair<TransitionViewState, TagTree>> {
+    suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
         analyticsHandle.debug("SystemGetLaunchScreen - begin use case")
         val compatible = syncService.checkApiCompatibility(connectionStatus)
 
@@ -40,10 +40,10 @@ class SystemGetLaunchScreen(
             "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
         analyticsHandle.error(message)
         val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.UPGRADE_REQUIRED, message)
-        return NewBFFResult.Failure(bfferror)
+        return BFFResult.Failure(bfferror)
     }
 
-    private suspend fun loadForSession(): NewBFFResult<Pair<TransitionViewState, TagTree>> {
+    private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
         analyticsHandle.debug("SystemGetLaunchScreen - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
@@ -58,7 +58,7 @@ class SystemGetLaunchScreen(
         try {
             tagTree = syncLookupData(connectionStatus)
         } catch (e: Exception) {
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
 
         try {
@@ -91,9 +91,9 @@ class SystemGetLaunchScreen(
                 }
             }
 
-            return NewBFFResult.Success(Pair(viewState, tagTree))
+            return BFFResult.Success(Pair(viewState, tagTree))
         } catch (e: Exception) {
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
     }
 

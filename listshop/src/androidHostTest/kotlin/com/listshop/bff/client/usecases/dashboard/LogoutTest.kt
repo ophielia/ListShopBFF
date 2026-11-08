@@ -5,6 +5,7 @@ import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
@@ -90,7 +91,7 @@ class LogoutTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
     }
 
     @Test
@@ -111,8 +112,8 @@ class LogoutTest {
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isFailure)
-        val resultValue = result.value
+        assertFalse(result is BFFResult.Failure)
+        val resultValue = result
         assertNotNull(resultValue)
         assertTrue(resultValue is TransitionViewState)
         assertTrue(resultValue is TransitionViewState.Onboarding)
@@ -137,10 +138,10 @@ class LogoutTest {
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isFailure)
-        assertEquals("User cannot logout when not logged in", result._error?.message)
-        assertEquals(BFFErrorType.AUTHENTICATION, result._error?.type)
-        assertEquals(BFFErrorSubtype.NOT_LOGGGED_IN, result._error?.subType)
+        assertTrue(result is BFFResult.Failure)
+        assertEquals("User cannot logout when not logged in", result.error?.message)
+        assertEquals(BFFErrorType.AUTHENTICATION, result.error?.type)
+        assertEquals(BFFErrorSubtype.NOT_LOGGGED_IN, result.error?.subType)
     }
 
     @Test
@@ -164,7 +165,7 @@ class LogoutTest {
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
         // assert session is cleared
         val listInfo = databaseTestHelper?.currentListInfo()?.first()
         val userInfo = databaseTestHelper?.currentUserInfo()?.first()

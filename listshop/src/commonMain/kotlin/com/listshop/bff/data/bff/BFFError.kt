@@ -1,20 +1,8 @@
 package com.listshop.bff.data.bff
 
+import com.listshop.bff.exceptions.*
+import io.ktor.serialization.*
 import kotlinx.serialization.SerializationException
-import io.ktor.serialization.ContentConvertException
-import com.listshop.bff.exceptions.ApiException
-import com.listshop.bff.exceptions.AuthenticationException
-import com.listshop.bff.exceptions.BadParameterException
-import com.listshop.bff.exceptions.BadRequestException
-import com.listshop.bff.exceptions.HttpClientException
-import com.listshop.bff.exceptions.InternalDataException
-import com.listshop.bff.exceptions.LoggedOutException
-import com.listshop.bff.exceptions.LoginException
-import com.listshop.bff.exceptions.LogoutException
-import com.listshop.bff.exceptions.OfflineException
-import com.listshop.bff.exceptions.ServerErrorException
-import com.listshop.bff.exceptions.SignUpException
-import com.listshop.bff.exceptions.UnknownApiException
 
 data class BFFError(
     var type: BFFErrorType,
@@ -24,36 +12,20 @@ data class BFFError(
 
     companion object {
 
-        fun <T> errorFromException(exception: Exception): BFFResult<T> {
-            val bfferror =  when (exception) {
-                is IllegalArgumentException ->  handleIllegalArgumentException(exception)
-                is HttpClientException ->  handleHttpClientException(exception)
-                is BadParameterException ->  handleBadParameterException(exception)
-                is InternalDataException ->  handleInternalDataException(exception)
-                is OfflineException ->  handleOfflineException(exception)
-                is AuthenticationException ->  handleAuthenticationException(exception)
-                is ApiException ->  handleApiException(exception)
-                is LoggedOutException ->  handleLoggedOutException(exception)
-                is SerializationException -> handleSerializationException(exception)
-                is ContentConvertException -> handleSerializationException(exception)
-                else ->  handleUnknownException(exception)
-            }
-            return BFFResult.error<T>(bfferror)
-        }
 
         fun rawErrorFromException(exception: Exception): BFFError {
-            return  when (exception) {
-                is IllegalArgumentException ->  handleIllegalArgumentException(exception)
-                is HttpClientException ->  handleHttpClientException(exception)
-                is BadParameterException ->  handleBadParameterException(exception)
-                is InternalDataException ->  handleInternalDataException(exception)
-                is OfflineException ->  handleOfflineException(exception)
-                is AuthenticationException ->  handleAuthenticationException(exception)
-                is ApiException ->  handleApiException(exception)
-                is LoggedOutException ->  handleLoggedOutException(exception)
+            return when (exception) {
+                is IllegalArgumentException -> handleIllegalArgumentException(exception)
+                is HttpClientException -> handleHttpClientException(exception)
+                is BadParameterException -> handleBadParameterException(exception)
+                is InternalDataException -> handleInternalDataException(exception)
+                is OfflineException -> handleOfflineException(exception)
+                is AuthenticationException -> handleAuthenticationException(exception)
+                is ApiException -> handleApiException(exception)
+                is LoggedOutException -> handleLoggedOutException(exception)
                 is SerializationException -> handleSerializationException(exception)
                 is ContentConvertException -> handleSerializationException(exception)
-                else ->  handleUnknownException(exception)
+                else -> handleUnknownException(exception)
             }
         }
 
@@ -100,7 +72,7 @@ data class BFFError(
         }
 
         private fun handleAuthenticationException(exception: AuthenticationException): BFFError {
-            val subtype =  when (exception) {
+            val subtype = when (exception) {
                 is LoginException -> BFFErrorSubtype.CANT_LOGIN
                 is LogoutException -> BFFErrorSubtype.CANT_LOGOUT
                 is SignUpException -> BFFErrorSubtype.CANT_SIGNUP

@@ -2,6 +2,7 @@ package com.listshop.bff.client.usecases.onboarding
 
 import com.listshop.analytics.*
 import com.listshop.bff.*
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
 import kotlinx.coroutines.runBlocking
@@ -97,7 +98,7 @@ class ChangePasswordTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.changePassword(oldPassword, newPassword)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
     }
 
     @Test
@@ -113,7 +114,7 @@ class ChangePasswordTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.changePassword(oldPassword, newPassword)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
 }

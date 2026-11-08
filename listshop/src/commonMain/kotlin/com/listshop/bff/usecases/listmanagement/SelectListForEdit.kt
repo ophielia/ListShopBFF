@@ -3,10 +3,8 @@ package com.listshop.bff.usecases.listmanagement
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
-import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
-import com.listshop.bff.data.bff.NewBFFResult
-import com.listshop.bff.data.model.ListShoppingList
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 /*
@@ -25,7 +23,7 @@ class SelectListForEdit(
     private val listService: ListService,
     private val analyticsHandle: AnalyticsHandle
 ) : ConnectionStatusValidator {
-    suspend fun process(): NewBFFResult<ShoppingList> {
+    suspend fun process(): BFFResult<ShoppingList> {
         analyticsHandle.debug("Select List - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
@@ -33,11 +31,11 @@ class SelectListForEdit(
             analyticsHandle.debug("Select List - end use case")
             // exception should be thrown if list wasn't found, or there was an issue saving it
             // so we're just going to swallow the null and return an empty list
-            return NewBFFResult.Success(value = shoppingList ?: ShoppingList.empty())
+            return BFFResult.Success(value = shoppingList ?: ShoppingList.empty())
 
         } catch (e: Exception) {
             analyticsHandle.error("Error in Select List for Edit call")
-            return NewBFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(rawErrorFromException(e))
         }
     }
 

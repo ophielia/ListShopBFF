@@ -3,7 +3,7 @@ package com.listshop.bff.client.usecases.onboarding
 import com.listshop.analytics.*
 import com.listshop.bff.TestDatabaseHelper
 import com.listshop.bff.TestServiceLocator
-import com.listshop.bff.db.UserPropertiesEntity
+import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.OnboardingUCP
 import kotlinx.coroutines.runBlocking
@@ -85,7 +85,7 @@ class RequestPasswordResetTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.requestPasswordReset(userName)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
     }
 
 
@@ -106,7 +106,7 @@ class RequestPasswordResetTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.requestPasswordReset(userName)
         assertNotNull(result)
-        assertTrue(result.isFailure)
+        assertTrue(result is BFFResult.Failure)
     }
 
 

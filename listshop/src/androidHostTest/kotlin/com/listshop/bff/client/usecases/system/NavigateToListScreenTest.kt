@@ -8,7 +8,6 @@ import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.remote.ApiShoppingList
-import com.listshop.bff.data.remote.ApiShoppingListEmbeddedList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.services.TestSampleProvider
@@ -96,7 +95,7 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
        assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListScreen)
@@ -130,7 +129,7 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListScreen)
@@ -158,7 +157,7 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListScreen)
@@ -188,7 +187,7 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListScreen)
@@ -221,8 +220,8 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertFalse(result.isSuccess)
-        val error = result._error
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
         assertNotNull(error)
         assertEquals(BFFErrorType.API, error.type, "Action cannot be done while offline")
         assertEquals(BFFErrorSubtype.BAD_REQUEST, error.subType, "Action cannot be done while offline")
@@ -245,7 +244,7 @@ class NavigateToListScreenTest {
         mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.navigateToListScreen(connectionStatus)
         assertNotNull(result)
-        assertTrue(result.isSuccess)
+        assertTrue(result is BFFResult.Success<*>)
 
         assertTrue(result is BFFResult<TransitionViewState>)
         assertTrue(result.value is TransitionViewState.ListScreen)
