@@ -2,6 +2,7 @@ package com.listshop.bff.ucp
 
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ShoppingListTag
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
@@ -78,7 +79,7 @@ class DashboardUCP internal constructor(
 
 
     @Throws(Exception::class)
-    suspend fun changePassword(oldPassword: String, newPassword: String): BFFResult<Unit> {
+    suspend fun changePassword(oldPassword: String, newPassword: String): NewBFFResult<Unit> {
         val useCase = ChangePassword(oldPassword, newPassword, userService, analyticsHandle = analyticsHandle)
         return useCase.process()
     }

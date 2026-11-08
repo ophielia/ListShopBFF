@@ -4,9 +4,10 @@ import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
@@ -26,7 +27,7 @@ class SystemGetLaunchScreen(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
+    suspend fun process(): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         analyticsHandle.debug("SystemGetLaunchScreen - begin use case")
         val compatible = syncService.checkApiCompatibility(connectionStatus)
 
@@ -39,10 +40,10 @@ class SystemGetLaunchScreen(
             "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
         analyticsHandle.error(message)
         val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.UPGRADE_REQUIRED, message)
-        return BFFResult.Companion.error(bfferror)
+        return NewBFFResult.Failure(bfferror)
     }
 
-    private suspend fun loadForSession(): BFFResult<Pair<TransitionViewState, TagTree>> {
+    private suspend fun loadForSession(): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         analyticsHandle.debug("SystemGetLaunchScreen - load for session")
         // determine logged in state of user
         val session = sessionService.currentUserSession()
@@ -57,7 +58,7 @@ class SystemGetLaunchScreen(
         try {
             tagTree = syncLookupData(connectionStatus)
         } catch (e: Exception) {
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
 
         try {
@@ -90,9 +91,9 @@ class SystemGetLaunchScreen(
                 }
             }
 
-            return BFFResult.Companion.success(Pair(viewState, tagTree))
+            return NewBFFResult.Success(Pair(viewState, tagTree))
         } catch (e: Exception) {
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 

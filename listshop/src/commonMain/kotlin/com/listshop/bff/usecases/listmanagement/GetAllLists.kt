@@ -4,7 +4,9 @@ import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.BFFError.Companion.errorFromException
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
@@ -16,17 +18,17 @@ class GetAllLists(
     private val listService: ListService,
     private val analyticsHandle: AnalyticsHandle
 ) : ConnectionStatusValidator {
-    suspend fun process(): BFFResult<ListShoppingList> {
+    suspend fun process(): NewBFFResult<ListShoppingList> {
         analyticsHandle.debug("Get All Lists - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
             val lists = listService.retrieveListOfLists()
             val listOfLists = ListShoppingList(lists)
             analyticsHandle.debug("Get All Lists - end use case")
-            return BFFResult.success(value = listOfLists)
+            return NewBFFResult.Success(value = listOfLists)
         } catch (e: Exception) {
             analyticsHandle.error("Error in Get All Lists call")
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 

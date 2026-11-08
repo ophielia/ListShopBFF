@@ -41,6 +41,22 @@ data class BFFError(
             return BFFResult.error<T>(bfferror)
         }
 
+        fun rawErrorFromException(exception: Exception): BFFError {
+            return  when (exception) {
+                is IllegalArgumentException ->  handleIllegalArgumentException(exception)
+                is HttpClientException ->  handleHttpClientException(exception)
+                is BadParameterException ->  handleBadParameterException(exception)
+                is InternalDataException ->  handleInternalDataException(exception)
+                is OfflineException ->  handleOfflineException(exception)
+                is AuthenticationException ->  handleAuthenticationException(exception)
+                is ApiException ->  handleApiException(exception)
+                is LoggedOutException ->  handleLoggedOutException(exception)
+                is SerializationException -> handleSerializationException(exception)
+                is ContentConvertException -> handleSerializationException(exception)
+                else ->  handleUnknownException(exception)
+            }
+        }
+
         private fun handleUnknownException(exception: Exception): BFFError {
             return BFFError(BFFErrorType.UNKNOWN, BFFErrorSubtype.UNKNOWN, exception.message ?: "")
         }

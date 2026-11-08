@@ -5,7 +5,7 @@ import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
@@ -27,7 +27,7 @@ class SignUp(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): BFFResult<Pair<TransitionViewState, TagTree>> {
+    suspend fun process(): NewBFFResult<Pair<TransitionViewState, TagTree>> {
         // validate input
         analyticsHandle.debug("SignUp - begin use case")
         try {
@@ -35,7 +35,7 @@ class SignUp(
             checkParameters()
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("parameters invalid or offline")
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
 
         // signup user - (setting all session stuff in method)
@@ -66,7 +66,7 @@ class SignUp(
                     BFFErrorSubtype.DATA_NOT_FOUND,
                     "error after signing up, list retrieval failed"
                 )
-                return BFFResult.Companion.error(bfferror)
+                return NewBFFResult.Companion.error(bfferror)
             }
         }
         var tagTree: TagTree = TagTree()
@@ -83,14 +83,14 @@ class SignUp(
             val wrappedLists = ListShoppingList(listOfLists)
             val viewState = TransitionViewState.ListScreen(shoppingList ?: ShoppingList.empty(), wrappedLists)
             analyticsHandle.debug("SignUp - end use case")
-            return BFFResult.Companion.success(Pair(viewState, tagTree))
+            return NewBFFResult.Success(Pair(viewState, tagTree))
         } catch (e: Exception) {
             // we're swallowing errors here - the main thing is that the
             // user was created
             analyticsHandle.listShopAnalytics.error("processing post sign up failed, returning empty lists")
             val wrappedLists = ListShoppingList(listOfLists)
             val viewState = TransitionViewState.ListScreen(shoppingList ?: ShoppingList.empty(), wrappedLists)
-            return BFFResult.Companion.success(Pair(viewState, tagTree))
+            return NewBFFResult.Success(Pair(viewState, tagTree))
 
         }
     }

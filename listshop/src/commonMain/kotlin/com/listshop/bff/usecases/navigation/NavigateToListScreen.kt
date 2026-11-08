@@ -4,7 +4,8 @@ import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.model.ShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
@@ -20,7 +21,7 @@ class NavigateToListScreen(
     private val analyticsHandle: AnalyticsHandle
 ) {
 
-    suspend fun process(): BFFResult<TransitionViewState> {
+    suspend fun process(): NewBFFResult<TransitionViewState> {
         analyticsHandle.debug("NavigateToListScreen - begin use case")
         sessionService.setUserLastSeenToNow()
 
@@ -35,15 +36,15 @@ class NavigateToListScreen(
         }
     }
 
-    private suspend fun goToServerList(): BFFResult<TransitionViewState> {
+    private suspend fun goToServerList(): NewBFFResult<TransitionViewState> {
         try {
             val serverList = listService.retrieveServerList() ?: ShoppingList.Factory.empty()
             val wrappedLists = getListOfLists()
             analyticsHandle.debug("NavigateToListScreen - end use case")
-            return BFFResult.Companion.success(TransitionViewState.ListScreen(serverList, wrappedLists))
+            return NewBFFResult.Success(TransitionViewState.ListScreen(serverList, wrappedLists))
 
         } catch (e: Exception) {
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 
@@ -57,14 +58,14 @@ class NavigateToListScreen(
         }
     }
 
-    private suspend fun goToLocalList(): BFFResult<TransitionViewState> {
+    private suspend fun goToLocalList(): NewBFFResult<TransitionViewState> {
         try {
             val localList = listService.retrieveOrCreateLocalList() ?: ShoppingList.Factory.empty()
             val wrappedLists = getListOfLists()
             analyticsHandle.debug("NavigateToListScreen - end use case")
-            return BFFResult.Companion.success(TransitionViewState.ListScreen(localList, wrappedLists))
+            return NewBFFResult.Success(TransitionViewState.ListScreen(localList, wrappedLists))
         } catch (e: Exception) {
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 

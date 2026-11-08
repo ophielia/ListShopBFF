@@ -3,9 +3,9 @@ package com.listshop.bff.usecases.dashboard
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.state.ConnectionStatus
-import com.listshop.bff.exceptions.OfflineException
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SyncService
 import com.listshop.bff.services.UserService
@@ -18,7 +18,7 @@ class DeleteUser(
     private val syncService: SyncService,
     private val analyticsHandle: AnalyticsHandle
 ) : ConnectionStatusValidator {
-    suspend fun process(): BFFResult<Unit> {
+    suspend fun process(): NewBFFResult<Unit> {
         analyticsHandle.debug("DeleteUser - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
@@ -26,10 +26,10 @@ class DeleteUser(
             listService.clearLocalList()
             syncService.syncLookupData(connectionStatus)
             analyticsHandle.debug("DeleteUser - end use case")
-            return BFFResult(value = null)
+            return NewBFFResult.Success(Unit)
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("Error in Delete User call")
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 

@@ -4,7 +4,8 @@ import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
 import com.listshop.bff.data.bff.BFFError
-import com.listshop.bff.data.bff.BFFResult
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
+import com.listshop.bff.data.bff.NewBFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
@@ -18,7 +19,7 @@ class Logout(
     private val syncService: SyncService,
     private val analyticsHandle: AnalyticsHandle
 ) {
-    suspend fun process(): BFFResult<TransitionViewState> {
+    suspend fun process(): NewBFFResult<TransitionViewState> {
         analyticsHandle.debug("Logout - begin use case")
         try {
             val isOffline = connectionStatus != ConnectionStatus.Online
@@ -31,10 +32,10 @@ class Logout(
             // return TVS
             val goal = TransitionViewState.Onboarding(OnboardingViewState.Choose)
             analyticsHandle.debug("Logout - end use case")
-            return BFFResult.Companion.success(goal)
+            return NewBFFResult.Success(goal)
         } catch (e: Exception) {
             analyticsHandle.error("Error in Logout process")
-            return BFFError.errorFromException(e)
+            return NewBFFResult.Failure(rawErrorFromException(e))
         }
     }
 

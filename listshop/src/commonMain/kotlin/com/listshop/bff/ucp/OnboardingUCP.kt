@@ -6,12 +6,11 @@ import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.TransitionViewState
 import com.listshop.bff.services.*
-import com.listshop.bff.usecases.dashboard.ChangePassword
 import com.listshop.bff.usecases.onboarding.CheckUserNameTaken
 import com.listshop.bff.usecases.onboarding.RequestPasswordReset
-import com.listshop.bff.usecases.system.LegacySystemGetLaunchScreen
 import com.listshop.bff.usecases.onboarding.SignIn
 import com.listshop.bff.usecases.onboarding.SignUp
+import com.listshop.bff.usecases.system.LegacySystemGetLaunchScreen
 import com.listshop.bff.usecases.system.SystemGetLaunchScreen
 import com.listshop.bff.usecases.system.SystemInitializeClient
 
@@ -54,21 +53,30 @@ class OnboardingUCP internal constructor(
     }
 
     @Throws(Exception::class)
-    suspend fun signIn(userName: String, password: String, connectionStatus: ConnectionStatus): BFFResult<Pair<TransitionViewState, TagTree>> {
-        val useCase = SignIn(userName, password, connectionStatus,userService, syncService, listService, analyticsHandle)
+    suspend fun signIn(
+        userName: String,
+        password: String,
+        connectionStatus: ConnectionStatus
+    ): BFFResult<Pair<TransitionViewState, TagTree>> {
+        val useCase =
+            SignIn(userName, password, connectionStatus, userService, syncService, listService, analyticsHandle)
         return useCase.process()
     }
 
     @Throws(Exception::class)
-    suspend fun signUp(userName: String, password: String, connectionStatus: ConnectionStatus): BFFResult<Pair<TransitionViewState, TagTree>> {
+    suspend fun signUp(
+        userName: String,
+        password: String,
+        connectionStatus: ConnectionStatus
+    ): BFFResult<Pair<TransitionViewState, TagTree>> {
         val useCase =
-            SignUp(userName, password, connectionStatus, userService,syncService, listService, analyticsHandle)
+            SignUp(userName, password, connectionStatus, userService, syncService, listService, analyticsHandle)
         return useCase.process()
     }
 
     @Throws(Exception::class)
     suspend fun checkUserNameTaken(userName: String): BFFResult<Boolean> {
-        val useCase = CheckUserNameTaken(userName,  userService, analyticsHandle = analyticsHandle)
+        val useCase = CheckUserNameTaken(userName, userService, analyticsHandle = analyticsHandle)
         return useCase.process()
     }
 
