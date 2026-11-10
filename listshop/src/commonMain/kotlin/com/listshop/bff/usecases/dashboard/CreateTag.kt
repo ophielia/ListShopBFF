@@ -3,6 +3,7 @@ package com.listshop.bff.usecases.dashboard
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.bff.data.bff.BFFError
+import com.listshop.bff.data.bff.BFFError.Companion.rawErrorFromException
 import com.listshop.bff.data.bff.BFFErrorSubtype
 import com.listshop.bff.data.bff.BFFErrorType
 import com.listshop.bff.data.bff.BFFResult
@@ -26,7 +27,7 @@ class CreateTag(
         try {
             val newTag = tagService.createTag(tagName, parentId, tagType)
             analyticsHandle.debug("CreateTag - end use case")
-            return BFFResult(newTag)
+            return BFFResult.Success(newTag)
         } catch (e: Exception) {
             analyticsHandle.listShopAnalytics.error("Error while creating tag")
             return BFFResult.Failure(rawErrorFromException(e))

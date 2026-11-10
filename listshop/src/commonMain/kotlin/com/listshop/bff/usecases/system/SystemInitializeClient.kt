@@ -34,7 +34,7 @@ class SystemInitializeClient(
             "Current version " + sessionService.currentAppInfo().clientVersion + ", Required Version " + requiredVersion
         analyticsHandle.error(message)
         val bfferror = BFFError(BFFErrorType.API, BFFErrorSubtype.UPGRADE_REQUIRED, message)
-        return BFFResult.Companion.error(bfferror)
+        return BFFResult.Failure(bfferror)
     }
 
     private suspend fun loadForSession(): BFFResult<TagTree> {
@@ -51,14 +51,14 @@ class SystemInitializeClient(
         try {
             tagTree = syncLookupData(connectionStatus)
         } catch (e: Exception) {
-            return BFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(BFFError.rawErrorFromException(e))
         }
 
         // merge list if online user
         try {
             mergeShoppingListChanges(session, isOnline)
         } catch (e: Exception) {
-            return BFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(BFFError.rawErrorFromException(e))
         }
 
         return BFFResult.Success(tagTree)

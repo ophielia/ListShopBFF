@@ -126,6 +126,9 @@ selectAllLegendPoints:
 SELECT *
 FROM LegendPointEntity;
 
+selectLocalListId:
+SELECT externalId
+FROM ListItemEntity;
 
 selectAllDetailsForCategory:
 SELECT ListItemDetailEntity.*
@@ -133,10 +136,33 @@ FROM ListItemDetailEntity
 JOIN ListItemEntity ON ListItemEntity.externalId = ListItemDetailEntity.itemExternalId
 WHERE ListItemEntity.categoryExternalId = ?;
 
+selectItemByTagId:
+SELECT ListItemEntity.*
+FROM ListItemEntity
+WHERE ListItemEntity.tagExternalId = :tagId;
+
+selectItemByItemId:
+SELECT ListItemEntity.*
+FROM ListItemEntity
+WHERE ListItemEntity.externalId = ?;
+
+updateCrossedOffByItemId:
+UPDATE ListItemEntity
+SET crossedOff = :crossedOff
+WHERE externalId = :itemId;
+
+updateCrossedOffByTagId:
+UPDATE ListItemEntity
+SET crossedOff = :crossedOff
+WHERE tagExternalId = :tagId;
 
 updateListId:
 UPDATE ShoppingListEntity
 SET externalId = ?;
+
+updateListLastUpdated:
+UPDATE ShoppingListEntity
+SET lastLocalChange = :now;
 
 
 

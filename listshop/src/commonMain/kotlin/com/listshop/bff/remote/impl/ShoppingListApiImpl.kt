@@ -95,6 +95,19 @@ internal class ShoppingListApiImpl(
 
     }
 
+    override suspend fun crossOffListItem(listId: String, itemId: String, checkedOff: Boolean) {
+        val urlString = remoteApi.buildPath("$shoppingListPath/${listId}/item/shop/${itemId}?crossOff=$checkedOff")
+        listShopAnalytics.debug("crossing off item, listid: $listId, itemId: $itemId, checkedOff: $checkedOff")
+
+        val response = remoteApi.postRequest(urlString, null)
+
+        remoteApi.mapNonSuccessToException(
+            response.status.value,
+            "check off list item call failed with status: " + response.status.value
+        )
+
+    }
+
     override suspend fun createList(payload: PostShoppingList): String {
         val payload = Json.encodeToString(payload)
         val urlString = remoteApi.buildPath(shoppingListPath)

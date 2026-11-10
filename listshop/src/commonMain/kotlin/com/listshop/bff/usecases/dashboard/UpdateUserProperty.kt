@@ -3,6 +3,7 @@ package com.listshop.bff.usecases.dashboard
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
+import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.services.UserService
 
@@ -18,10 +19,10 @@ class UpdateUserProperty(
         try {
             userService.updateUserProperty(property, value)
             analyticsHandle.debug("UpdateUserPropertiesUseCase - end use case")
-            return BFFResult(value = null)
+            return BFFResult.Success(Unit)
         } catch (e: Exception) {
             analyticsHandle.error("Error while updating user property - ${e.message}")
-            return BFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(BFFError.rawErrorFromException(e))
         }
     }
 }

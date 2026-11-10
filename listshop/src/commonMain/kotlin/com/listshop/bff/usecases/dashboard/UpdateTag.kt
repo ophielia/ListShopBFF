@@ -20,15 +20,15 @@ class UpdateTag(
         analyticsHandle.debug("UpdateTag - begin use case")
         if (tagName.isBlank() || tagId.isBlank()) {
             val bfferror = BFFError(BFFErrorType.VALIDATION, BFFErrorSubtype.INVALID_INPUT, "name or id is blank")
-            return BFFResult.Companion.error(bfferror)
+            return BFFResult.Failure(bfferror)
         }
         try {
             val newTag = tagService.updateTag(tagId, tagName)
             analyticsHandle.debug("UpdateTag - end use case")
-            return BFFResult(newTag)
+            return BFFResult.Success(newTag)
         } catch (e: Exception) {
             analyticsHandle.error("Error while creating tag")
-            return BFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(BFFError.rawErrorFromException(e))
         }
     }
 

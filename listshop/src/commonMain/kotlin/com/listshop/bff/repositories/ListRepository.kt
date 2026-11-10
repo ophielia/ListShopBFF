@@ -9,4 +9,6 @@ interface ListRepository {
     fun deleteLocalList()
     fun setIdInLocalList(listId: String)
     fun retrieveOrCreateLocalList(): ShoppingList
+    fun checkOffItemLocally( itemId: String?, tagId: String, checkedOff: Boolean)
+    fun getLocalListId(): String?
 }

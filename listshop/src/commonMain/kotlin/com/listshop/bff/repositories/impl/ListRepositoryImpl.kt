@@ -31,6 +31,11 @@ class ListRepositoryImpl(
         dbRef.listDefinitionQueries.removeAllShoppingListEntities()
     }
 
+    override fun getLocalListId(): String? {
+        val idList = dbRef.listDefinitionQueries.selectLocalListId().executeAsList()
+        return idList.firstOrNull()?.externalId
+    }
+
     override fun retrieveLocalList(): ShoppingList? {
         val localLists = dbRef.listDefinitionQueries.selectAllLists().executeAsList()
         if (localLists.isEmpty()) {
@@ -134,6 +139,35 @@ class ListRepositoryImpl(
             isStarter = shoppingList.isStarterList ?: false,
         )
         insertList(listEntity)
+    }
+
+    override fun checkOffItemLocally( itemId: String?, tagId: String, checkedOff: Boolean) {
+        // retrieve list item - by item id or by tag id
+        val listItem = when (itemId == null) {
+            true -> dbRef.listDefinitionQueries.selectItemByTagId(tagId).executeAsOneOrNull()
+            false -> dbRef.listDefinitionQueries.selectItemByItemId(itemId).executeAsOneOrNull()
+        }
+
+        if (listItem == null) {
+            throw IllegalArgumentException("List item not found")
+        }
+
+        val checkedOffValue = when (checkedOff) {
+            true -> {
+                val now = Clock.System.now()
+                now.toString()
+            }
+            false -> null
+        }
+
+        // save item after update
+        when (itemId == null) {
+            true -> dbRef.listDefinitionQueries.updateCrossedOffByTagId( checkedOffValue, tagId)
+            false -> dbRef.listDefinitionQueries.updateCrossedOffByItemId(checkedOffValue, itemId)
+        }
+        val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
+        sessionService.setLocalListUpdated(now)
+        dbRef.listDefinitionQueries.updateListLastUpdated(now)
     }
 
 

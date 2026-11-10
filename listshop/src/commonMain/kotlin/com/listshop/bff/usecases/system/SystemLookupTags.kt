@@ -3,6 +3,7 @@ package com.listshop.bff.usecases.system
 import com.listshop.analytics.AnalyticsHandle
 import com.listshop.analytics.debug
 import com.listshop.analytics.error
+import com.listshop.bff.data.bff.BFFError
 import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.TagList
 import com.listshop.bff.services.TagService
@@ -22,10 +23,10 @@ class SystemLookupTags(
         try {
             val tags = tagService.searchTags(fragment, tagTypes, excludeGroups)
             analyticsHandle.debug("SystemLookupTags - end use case")
-            return BFFResult(value = TagList(tags))
+            return BFFResult.Success(value = TagList(tags))
         } catch (e: Exception) {
             analyticsHandle.error("SystemLookupTags - error while searching tags - ${e.message}")
-            return BFFResult.Failure(rawErrorFromException(e))
+            return BFFResult.Failure(BFFError.rawErrorFromException(e))
         }
 
 

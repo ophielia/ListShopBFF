@@ -17,17 +17,15 @@ class ListServiceImpl internal constructor(
     private val sessionService: SessionService,
     private val listShopAnalytics: ListShopAnalytics
 ) : ListService {
-    val DEFAULT_LIST_NAME: String = "Shopping List"
-
     override suspend fun retrieveListOfLists(): List<ShoppingList> {
         return remoteApi.getAllShoppingLists()
     }
 
-    override suspend fun retrieveMostRecentList(): ShoppingList? {
+    override suspend fun retrieveMostRecentList(): ShoppingList {
         // retrieve api list as bff model
         val shoppingList: ShoppingList = remoteApi.retrieveMostRecentList()
         // save server list id in session
-        sessionService.setCurrentListId(shoppingList.externalId ?: "0")
+        sessionService.setCurrentListId(shoppingList.externalId )
         // deal with legends (later....)
         return saveLocallyAndReturnList(shoppingList)
 
@@ -50,7 +48,7 @@ class ListServiceImpl internal constructor(
         return doRetrieveServerListById(listId)
     }
 
-    override suspend fun addServerList(): String? {
+    override suspend fun addServerList(): String {
 
         // create payload (empty in this case)
         val payload = PostShoppingList(name = null)
@@ -73,6 +71,25 @@ class ListServiceImpl internal constructor(
         }
     }
 
+    override suspend fun checkOffItemLocally(listId: String?, itemId: String?, tagId: String, checkedOff: Boolean) {
+        // validate local list id
+        validateLocalListId(listId)
+        listRepo.checkOffItemLocally(itemId, tagId, checkedOff)
+    }
+
+    private fun validateLocalListId(listId: String?) {
+        // ensure that the listId matches the list saved in the database
+        val localListId = listRepo.getLocalListId()
+        val bothIdsNull = localListId == null && listId == null
+        if (!bothIdsNull && localListId != listId) {
+            throw IllegalArgumentException("List id does not match persisted list id in session")
+        }
+    }
+
+    override suspend fun checkOffItemOnServer(listId: String, itemId: String, tagId: String, checkedOff: Boolean) {
+        remoteApi.crossOffListItem(listId, itemId, checkedOff)
+    }
+
     override suspend fun retrieveLocalList(): ShoppingList? {
         return listRepo.retrieveLocalList()
     }
@@ -91,16 +108,16 @@ class ListServiceImpl internal constructor(
         val listId = shoppingList?.externalId ?: ""
 
         if (shoppingList == null || listId.trim().length == 0) {
-            return null;
+            return null
         }
         // convert into PutMergeRequest
         val mergeItemList =
-            shoppingList?.categories?.flatMap { it.items }?.map { MergeItem.create(modelItem = it, listId = listId) }
+            shoppingList.categories.flatMap { it.items }.map { MergeItem.create(modelItem = it, listId = listId) }
         val listMergeRequest = PutMergeRequest(
             listId = listId,
-            lastChanged = shoppingList?.lastLocalChange,
-            layoutId = shoppingList?.layoutId?.toLong() ?: 0,
-            mergeItems = mergeItemList ?: emptyList()
+            lastChanged = shoppingList.lastLocalChange,
+            layoutId = shoppingList.layoutId?.toLong() ?: 0,
+            mergeItems = mergeItemList
         )
 
         // make call to merge
@@ -127,18 +144,18 @@ class ListServiceImpl internal constructor(
 
     private suspend fun doRetrieveServerListById(listId: String): ShoppingList? {
         // retrieve api list
-        val shoppingList: ShoppingList = remoteApi.retrieveListById(listId )
+        val shoppingList: ShoppingList = remoteApi.retrieveListById(listId)
         // save server list id in session
-        sessionService.setCurrentListId(shoppingList.externalId ?: "0")
+        sessionService.setCurrentListId(shoppingList.externalId )
         // deal with legends (later....)
         return saveLocallyAndReturnList(shoppingList)
     }
 
-    private fun saveLocallyAndReturnList(shoppingList: ShoppingList): ShoppingList? {
+    private fun saveLocallyAndReturnList(shoppingList: ShoppingList): ShoppingList {
         // save as local list
         listRepo.saveListLocally(shoppingList)
         // update session info
-        sessionService.setCurrentListId(shoppingList.externalId ?: "")
+        sessionService.setCurrentListId(shoppingList.externalId)
         sessionService.setLocalListUpdated()
         // return list
         return shoppingList

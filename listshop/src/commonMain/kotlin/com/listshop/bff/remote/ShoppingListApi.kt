@@ -14,4 +14,5 @@ internal interface ShoppingListApi {
     suspend fun createList(payload: PostShoppingList): String
     suspend fun deleteList(listIdToDelete: String)
     suspend fun updateList(listId: String, payload: PostListProperties)
+    suspend fun crossOffListItem(listId: String, itemId: String, checkedOff: Boolean)
 }
