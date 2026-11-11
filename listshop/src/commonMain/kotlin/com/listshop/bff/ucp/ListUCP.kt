@@ -27,7 +27,7 @@ class ListUCP internal constructor(
 
     @Throws(Exception::class)
     suspend fun checkOffItem(
-        listId: String,
+        listId: String?,
         itemId: String?,
         tagId: String,
         checkedOff: Boolean,

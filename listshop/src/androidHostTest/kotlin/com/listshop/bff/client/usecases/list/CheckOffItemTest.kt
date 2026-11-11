@@ -76,6 +76,7 @@ class CheckOffItemTest {
         useCaseProvider = locator.listUCP
     }
 
+    // Happy Paths
     @Test
     fun `when I check off an item while online and logged in, operation succeeds`(): Unit = runBlocking {
         //   • Setup: connectionStatus = Online, UserSessionState = User.
@@ -148,6 +149,415 @@ class CheckOffItemTest {
         assertTrue(crossedOffInstant > testStart)
     }
 
+    @Test
+    fun `when I check off an item while offline and logged out, operation succeeds `(): Unit = runBlocking{
+        //    • Offline & Logged In (Local Only)
+        val testStart = Clock.System.now()
+        initializeContext()
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Offline
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = "110113",
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNotNull(operationItem.crossedOff)
+        assertNotNull(operationItem.crossedOff)
+        val crossedOffInstant = Instant.parse(operationItem.crossedOff ?: "")
+        assertTrue(crossedOffInstant > testStart)
+    }
+
+    @Test
+    fun `when I check off an item while online and logged out, operation succeeds `(): Unit = runBlocking{
+        //    • Offline & Logged In (Local Only)
+        val testStart = Clock.System.now()
+        initializeContext()
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = "110113",
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNotNull(operationItem.crossedOff)
+        assertNotNull(operationItem.crossedOff)
+        val crossedOffInstant = Instant.parse(operationItem.crossedOff ?: "")
+        assertTrue(crossedOffInstant > testStart)
+    }
+
+    @Test
+    fun `when I check off an item using a tag while offline, operation succeeds `(): Unit = runBlocking {
+        //  Test  Offline & Logged In (Local Only):
+        val testStart = Clock.System.now()
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Offline
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = null,
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNotNull(operationItem.crossedOff)
+        assertNotNull(operationItem.crossedOff)
+        val crossedOffInstant = Instant.parse(operationItem.crossedOff ?: "")
+        assertTrue(crossedOffInstant > testStart)
+    }
+
+    @Test
+    fun `when I check off an item using a tag while offline and logged out, operation succeeds `(): Unit = runBlocking{
+        //    • Offline & Logged In (Local Only)
+        val testStart = Clock.System.now()
+        initializeContext()
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Offline
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = null,
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNotNull(operationItem.crossedOff)
+        assertNotNull(operationItem.crossedOff)
+        val crossedOffInstant = Instant.parse(operationItem.crossedOff ?: "")
+        assertTrue(crossedOffInstant > testStart)
+    }
+
+    @Test
+    fun `when I check off an item using a tag while online and logged out, operation succeeds `(): Unit = runBlocking{
+        //    • Offline & Logged In (Local Only)
+        val testStart = Clock.System.now()
+        initializeContext()
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = null,
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNotNull(operationItem.crossedOff)
+        assertNotNull(operationItem.crossedOff)
+        val crossedOffInstant = Instant.parse(operationItem.crossedOff ?: "")
+        assertTrue(crossedOffInstant > testStart)
+    }
+
+    @Test
+    fun `when I un-check off an item while online and logged in, operation succeeds`(): Unit = runBlocking {
+        //   • Setup: connectionStatus = Online, UserSessionState = User.
+        val itemId = "110174" // bananna - already crossed off
+        val tagId = "50615" // bananna tag id
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        // check off item succeeds
+        val testDispatcher = TestDispatcherBuilder("list")
+            .withConfigFile("checkOffFalseBananaWithItemIdSuccess.json")
+            .withConfigFile("getCurrentListSuccessCheckOff.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = itemId,
+            tagId = tagId,
+            false,
+            ConnectionStatus.Online
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // doesn't make sense to check the contents, here
+        // contents were overwritten by the server, which is dummy data
+        // contents will need to be checked - local contents, anyway, in offline test
+    }
+
+    @Test
+    fun `when I un-check off an item while offline, operation succeeds `(): Unit = runBlocking {
+        //  Test  Offline & Logged In (Local Only):
+        val itemId = "110174" // bananna - already crossed off
+        val tagId = "50615" // bananna tag id
+        val testStart = Clock.System.now()
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Offline
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = itemId,
+            tagId = tagId,
+            false,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNull(operationItem.crossedOff)
+    }
+
+    @Test
+    fun `when I un-check off an un-checked off item while offline, operation succeeds `(): Unit = runBlocking {
+        //  Test  Offline & Logged In (Local Only):
+        val itemId = "110174" // bananna - already crossed off
+        val tagId = "50615" // bananna tag id
+        val testStart = Clock.System.now()
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Offline
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = itemId,
+            tagId = tagId,
+            false,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<ShoppingList>)
+        val shoppingList: ShoppingList = result.value
+        assertNotNull(shoppingList)
+        // assert last updated has been updated
+        assertNotNull(shoppingList.lastLocalChange)
+        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
+        assertTrue(lastUpdated > testStart)
+        // assert item is checked off
+        val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
+        assertNotNull(operationItem)
+        assertNull(operationItem.crossedOff)
+    }
+
+    // Error / Validation Paths
+    @Test
+    fun `when I check off an item using a tag while online and logged in, operation fails`(): Unit = runBlocking {
+        //   • Setup: connectionStatus = Online, UserSessionState = User.
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "12345",
+            itemId = null,
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = (result as BFFResult.Failure).error
+        assertEquals("Item id cannot be null for server call", error.message)
+        assertEquals(BFFErrorType.VALIDATION, error.type)
+        assertEquals(BFFErrorSubtype.INVALID_INPUT, error.subType)
+    }
+
+    @Test
+    fun `when I check off an item with a mismatched list ID, an exception occurs`(): Unit = runBlocking {
+        //• Setup: Provide a listId that does not match the serverListId returned by sessionService.currentListSession().
+        //   • Setup: connectionStatus = Online, UserSessionState = User.
+        initializeContext()
+        val loggedInUser = databaseTestHelper?.standardUser()
+            ?.copy(userName = "george", userToken = "abcdefg", userLastSeen = Clock.System.now().toString())
+        databaseTestHelper?.setUser(loggedInUser)
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "23456",
+            itemId = "110113",
+            tagId = "65",
+            true,
+            connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = (result as BFFResult.Failure).error
+        assertEquals("List id does not match current list id in session", error.message)
+        assertEquals(BFFErrorType.VALIDATION, error.type)
+        assertEquals(BFFErrorSubtype.INVALID_INPUT, error.subType)
+
+    }
+
+    @Test
+    fun `when I check off an item with a mismatched local list IDs, an exception occurs`(): Unit = runBlocking {
+        //• Setup: Provide a listId that does not match the serverListId returned by sessionService.currentListSession().
+        //   • Setup: connectionStatus = Online, UserSessionState = User.
+        initializeContext()
+
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = "23456",
+            itemId = "110113",
+            tagId = "65",
+            true,
+            ConnectionStatus.Online
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = (result as BFFResult.Failure).error
+        assertEquals("List id does not match current list id in session", error.message)
+        assertEquals(BFFErrorType.VALIDATION, error.type)
+        assertEquals(BFFErrorSubtype.INVALID_INPUT, error.subType)
+
+    }
+
+    @Test
+    fun `when I check off an item locally with null list ids, no exceptions occur`(): Unit = runBlocking {
+        //• Setup: Provide a null list id and non null serverListId - should succeed
+        initializeContext()
+        databaseTestHelper?.setServerListId("12345")
+        saveLocalList()
+        databaseTestHelper?.setLocalListId(null)
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = null,
+            itemId = "110113",
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<*>)
+    }
+
+    @Test
+    fun `when I check off an item locally with all null list ids, no exceptions occur`(): Unit = runBlocking {
+        //• Setup: Provide a null list id and serverListId - should succeed
+        initializeContext()
+        saveLocalList()
+        databaseTestHelper?.setLocalListId(null)
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.checkOffItem(
+            listId = null,
+            itemId = "110113",
+            tagId = "65",
+            true,
+            connectionStatus = connectionStatus
+        )
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Success<*>)
+    }
+
+
+
     @AfterTest
     fun shutDown() {
         mockWebServer.shutdown()
@@ -165,37 +575,7 @@ class CheckOffItemTest {
 
 
 /*
-     Input Validation Scenarios
-• List ID Mismatch:
-fun `when I check off an item with a mismatched list ID, an exception occurs`(){
-//• Setup: Provide a listId that does not match the serverListId returned by sessionService.currentListSession().
-//• Expected: The use case should throw (or return as failure) an IllegalArgumentException with the message: "List id does not match current list id in session".
-}
-//• Null Item ID (Online & Logged In):
-fun `when I check of an item while online and logged in but with a null item id, an exception occurs`(){
-//• Setup: Set itemId to null, connectionStatus to Online, and user session to UserSessionState.User.
-//• Expected: Returns a BFFResult.Failure containing an IllegalArgumentException with the message: "Item id cannot be null for server call".
 
-
-}
-• Null Item ID (Offline or Guest):
-fun `when i check off an item offline with a null item id, operation succeeds`() {
-//• Setup: Set itemId to null while connectionStatus is Offline or the session state is not User.
-//• Expected: Should proceed successfully (returning a Success) because the server-side sync (which requires the ID) is skipped.
-}
-
-2. Functional Scenarios (Happy Path)
-
-
-fun `when I check off an item while online and logged out, operation succeeds `() {
-• Offline & Logged In (Local Only):
-• Setup: connectionStatus = Offline, UserSessionState = User.
-• Verification:
-• listService.checkOffItemLocally is called.
-• listService.checkOffItemOnServer is not called.
-• listService.retrieveOrCreateLocalList is called.
-• Result: Returns BFFResult.Success containing the local list.
-}
 
 
 3. Error Handling & Analytics

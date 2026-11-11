@@ -1,0 +1,8 @@
+{
+  "label": "checkOffFalseWithItemIdSuccess",
+  "requestMethod": "POST",
+  "requestPath": "/v2/shoppinglist/12345/item/shop/110113?crossOff=false",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": ""
+}

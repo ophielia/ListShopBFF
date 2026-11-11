@@ -14,7 +14,7 @@ import com.listshop.bff.services.SessionService
 import com.listshop.bff.usecases.validators.ConnectionStatusValidator
 
 class CheckOffItem(
-    private val listId: String,
+    private val listId: String?,
     private val itemId: String?,
     private val tagId: String,
     private val checkedOff: Boolean,
@@ -32,13 +32,14 @@ class CheckOffItem(
             val isLoggedIn = session.sessionState == UserSessionState.User
 
             validateListIdMatchesCurrent(listId, sessionService.currentListSession())
+            val validatedItemId: String = validateItemId(itemId, isOnline, isLoggedIn)
             // _always_ check off item locally
             listService.checkOffItemLocally(listId, itemId, tagId, checkedOff)
 
             // if online, check off item on server and refresh list
             if (isOnline && isLoggedIn) {
-                val validatedItemId: String = validateItemId(itemId)
-                listService.checkOffItemOnServer(listId, validatedItemId, tagId, checkedOff)
+                val validatedListId = validateListIdExists(listId)
+                listService.checkOffItemOnServer(validatedListId, validatedItemId, tagId, checkedOff)
             }
 
             val shoppingList: ShoppingList? = when (session.sessionState) {
@@ -63,14 +64,22 @@ class CheckOffItem(
         }
     }
 
-    private fun validateItemId(itemId: String?): String {
-        // check that item id is not null
-        return itemId ?: throw IllegalArgumentException("Item id cannot be null for server call")
+    private fun validateListIdExists(listId: String?): String {
+        return listId ?: throw IllegalArgumentException("List id cannot be null")
     }
 
-    private fun validateListIdMatchesCurrent(listId: String, session: ListSession) {
-        // check that list id matches current list id in session
-        if (listId != session.serverListId) {
+    private fun validateItemId(itemId: String?, isOnline: Boolean, isLoggedIn: Boolean): String {
+        // check that item id is not null - only when online with user
+        return when (isOnline && isLoggedIn) {
+         true -> itemId ?: throw IllegalArgumentException("Item id cannot be null for server call")
+         else -> itemId ?: ""
+        }
+    }
+
+    private fun validateListIdMatchesCurrent(listId: String?, session: ListSession) {
+        // check that list id matches current list id in session (non-logged in users may have empty list ids)
+        val bothNotNull = session.serverListId != null && listId != null
+        if (bothNotNull && listId != session.serverListId) {
             throw IllegalArgumentException("List id does not match current list id in session")
         }
     }

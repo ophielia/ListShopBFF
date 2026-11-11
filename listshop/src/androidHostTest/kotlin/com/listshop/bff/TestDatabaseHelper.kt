@@ -281,7 +281,11 @@ class TestDatabaseHelper(
         )
     }
 
-     fun setTags(tags: List<Tag>) {
+    fun setLocalListId(listId: String?) {
+        listShopDatabase.db.listDefinitionQueries.setLocalListId(localListId = null)
+    }
+
+    fun setTags(tags: List<Tag>) {
         tags.forEach { t ->
             listShopDatabase.db.tagDefinitionQueries.insertIntoTag(
                 externalId = t.externalId,

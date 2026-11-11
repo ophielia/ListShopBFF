@@ -130,6 +130,11 @@ selectLocalListId:
 SELECT externalId
 FROM ShoppingListEntity;
 
+setLocalListId:
+UPDATE ShoppingListEntity
+SET externalId = :localListId;
+
+
 selectAllDetailsForCategory:
 SELECT ListItemDetailEntity.*
 FROM ListItemDetailEntity
