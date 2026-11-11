@@ -89,7 +89,7 @@ class ListRepositoryImpl(
         // get empty list
         val shoppingList: ShoppingList = ShoppingList.empty()
         // add created, set session
-        val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
+        val now = Clock.System.now().toString()
         shoppingList.created = now
         shoppingList.updated = now
         sessionService.setLocalListUpdated(now)
@@ -165,7 +165,7 @@ class ListRepositoryImpl(
             true -> dbRef.listDefinitionQueries.updateCrossedOffByTagId( checkedOffValue, tagId)
             false -> dbRef.listDefinitionQueries.updateCrossedOffByItemId(checkedOffValue, itemId)
         }
-        val now = Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
+        val now = Clock.System.now().toString()
         sessionService.setLocalListUpdated(now)
         dbRef.listDefinitionQueries.updateListLastUpdated(now)
     }

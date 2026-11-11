@@ -128,7 +128,7 @@ FROM LegendPointEntity;
 
 selectLocalListId:
 SELECT externalId
-FROM ListItemEntity;
+FROM ShoppingListEntity;
 
 selectAllDetailsForCategory:
 SELECT ListItemDetailEntity.*

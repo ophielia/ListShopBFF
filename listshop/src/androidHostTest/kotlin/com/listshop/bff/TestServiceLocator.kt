@@ -3,6 +3,7 @@ package com.listshop.bff
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.listshop.analytics.AnalyticsHandle
+import com.listshop.analytics.AppAnalytics
 import com.listshop.analytics.AppInfo
 import com.listshop.bff.client.MySettingsImpl
 import com.listshop.bff.db.ListshopDb
@@ -15,6 +16,7 @@ import com.listshop.bff.ucp.TagUCP
 import com.russhwolf.settings.Settings
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
+import java.nio.file.Files
 
 internal fun tagUCPStartup(analyticsHandle: AnalyticsHandle, appInfo: AppInfo): TagUCP {
     val locator = TestServiceLocator( analyticsHandle, appInfo)
@@ -51,8 +53,16 @@ internal class TestServiceLocator(
     analyticsHandle: AnalyticsHandle,
     appInfo: AppInfo
 ) : BaseServiceLocator(analyticsHandle, appInfo) {
+
+
+    val databaseFile = Files.createTempFile("bff-e2e-", ".db").toFile()
+    init {
+        println("Test database: ${databaseFile.absolutePath}")
+    }
+
+
     override public val sqlDriver: SqlDriver by lazy {
-        JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        JdbcSqliteDriver("jdbc:sqlite:${databaseFile.absolutePath}")
             .also { ListshopDb.Schema.create(it) }
     }
 

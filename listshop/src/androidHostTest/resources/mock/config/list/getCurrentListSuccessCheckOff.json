@@ -1,0 +1,9 @@
+{
+  "label": "getAllShoppingListsCheckOff",
+  "requestMethod": "GET",
+  "requestPath": "/v2/shoppinglist/12345",
+  "body": "null",
+  "requestBodyFilename": "",
+  "responseStatus": 200,
+  "responseBodyFilename": "standards/standardSingleList.json"
+}

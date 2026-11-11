@@ -99,7 +99,7 @@ internal class ShoppingListApiImpl(
         val urlString = remoteApi.buildPath("$shoppingListPath/${listId}/item/shop/${itemId}?crossOff=$checkedOff")
         listShopAnalytics.debug("crossing off item, listid: $listId, itemId: $itemId, checkedOff: $checkedOff")
 
-        val response = remoteApi.postRequest(urlString, null)
+        val response = remoteApi.postRequest(urlString, "")
 
         remoteApi.mapNonSuccessToException(
             response.status.value,
