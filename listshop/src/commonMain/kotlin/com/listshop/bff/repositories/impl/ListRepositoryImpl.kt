@@ -1,22 +1,11 @@
 package com.listshop.bff.repositories.impl
 
-import com.listshop.bff.data.model.LegendPoint
-import com.listshop.bff.data.model.ShoppingList
-import com.listshop.bff.data.model.ShoppingListCategory
-import com.listshop.bff.data.model.ShoppingListDetail
-import com.listshop.bff.data.model.ShoppingListItem
-import com.listshop.bff.db.LegendPointEntity
-import com.listshop.bff.db.ListCategoryEntity
-import com.listshop.bff.db.ListItemDetailEntity
-import com.listshop.bff.db.ListItemEntity
-import com.listshop.bff.db.ListshopDb
-import com.listshop.bff.db.ShoppingListEntity
+import com.listshop.bff.data.model.*
+import com.listshop.bff.db.*
 import com.listshop.bff.repositories.ListRepository
 import com.listshop.bff.repositories.ListShopDatabase
 import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 
 class ListRepositoryImpl(
     private val listShopDatabase: ListShopDatabase,
@@ -99,7 +88,7 @@ class ListRepositoryImpl(
         return shoppingList
     }
 
-    override fun deleteLocalList(){
+    override fun deleteLocalList() {
         clearLocalListData()
     }
 
@@ -110,11 +99,12 @@ class ListRepositoryImpl(
     override fun saveListLocally(shoppingList: ShoppingList) {
         clearLocalListData()
         val listId = shoppingList.externalId
+        val lastUpdated = shoppingList.updated
         // go through all categories, pulling items
         for (cat in shoppingList.categories) {
             val catId = cat.externalId
             var detailList = mutableListOf<ListItemDetailEntity>();
-            val items = cat.items.map {mapShoppingListItem(it, catId, detailList)}
+            val items = cat.items.map { mapShoppingListItem(it, catId, detailList) }
 
             insertListItems(items)
             insertListItemDetails(detailList)
@@ -123,7 +113,7 @@ class ListRepositoryImpl(
             insertListCategory(categoryEntity)
         }
 
-        val legendPoints = shoppingList.legend?.points?.map{mapListLegendPoint(it)}
+        val legendPoints = shoppingList.legend?.points?.map { mapListLegendPoint(it) }
         insertLegendPoints(legendPoints)
 
         // save list
@@ -132,16 +122,16 @@ class ListRepositoryImpl(
             externalId = listId,
             createdOn = shoppingList.created,
             updatedOn = shoppingList.updated,
-            lastLocalChange = shoppingList.lastLocalChange,
             lastSync = shoppingList.lastSynced,
             itemCount = shoppingList.itemCount,
             layoutId = shoppingList.layoutId,
             isStarter = shoppingList.isStarterList ?: false,
         )
         insertList(listEntity)
+        sessionService.setLocalListUpdated(lastUpdated ?: Clock.System.now().toString())
     }
 
-    override fun checkOffItemLocally( itemId: String?, tagId: String, checkedOff: Boolean) {
+    override fun checkOffItemLocally(itemId: String?, tagId: String, checkedOff: Boolean) {
         // retrieve list item - by item id or by tag id
         val listItem = when (itemId == null) {
             true -> dbRef.listDefinitionQueries.selectItemByTagId(tagId).executeAsOneOrNull()
@@ -157,29 +147,35 @@ class ListRepositoryImpl(
                 val now = Clock.System.now()
                 now.toString()
             }
+
             false -> null
         }
 
         // save item after update
         when (itemId == null) {
-            true -> dbRef.listDefinitionQueries.updateCrossedOffByTagId( checkedOffValue, tagId)
+            true -> dbRef.listDefinitionQueries.updateCrossedOffByTagId(checkedOffValue, tagId)
             false -> dbRef.listDefinitionQueries.updateCrossedOffByItemId(checkedOffValue, itemId)
         }
         val now = Clock.System.now().toString()
         sessionService.setLocalListUpdated(now)
-        dbRef.listDefinitionQueries.updateListLastUpdated(now)
     }
 
 
     private fun mapListLegendPoint(apiPoint: LegendPoint): LegendPointEntity {
-        return LegendPointEntity(id = apiPoint.key,
+        return LegendPointEntity(
+            id = apiPoint.key,
             display = apiPoint.display,
-            type = apiPoint.type.toString())
+            type = apiPoint.type.toString()
+        )
     }
 
-    private fun mapShoppingListItem(it: ShoppingListItem, catId: String, detailList: MutableList<ListItemDetailEntity>): ListItemEntity {
+    private fun mapShoppingListItem(
+        it: ShoppingListItem,
+        catId: String,
+        detailList: MutableList<ListItemDetailEntity>
+    ): ListItemEntity {
         val itemId = it.externalId
-        val details = it.details.map{ mapShoppingListItemDetail(it,itemId) }
+        val details = it.details.map { mapShoppingListItemDetail(it, itemId) }
         detailList.addAll(details)
         return ListItemEntity(
             externalId = it.externalId,
@@ -229,7 +225,6 @@ class ListRepositoryImpl(
                 listEntity.externalId,
                 listEntity.createdOn,
                 listEntity.updatedOn,
-                listEntity.lastLocalChange,
                 listEntity.lastSync,
                 listEntity.itemCount,
                 listEntity.layoutId,

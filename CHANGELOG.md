@@ -7,7 +7,7 @@ Added
 Changed
  * signature for BFFResult - for easier use in BFF and clients
  * Logout use case available offline, and returns TagTree
-
+ * local list changed now saved only in session, not in db
 
 0.1.24 - 0.1.27 2026-09
 CICD tests

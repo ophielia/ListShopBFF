@@ -136,10 +136,6 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -170,10 +166,6 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -204,10 +196,7 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
+
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -241,10 +230,7 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
+
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -275,10 +261,6 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -309,10 +291,7 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
+
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -385,10 +364,6 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)
@@ -421,10 +396,6 @@ class CheckOffItemTest {
         assertTrue(result is BFFResult.Success<ShoppingList>)
         val shoppingList: ShoppingList = result.value
         assertNotNull(shoppingList)
-        // assert last updated has been updated
-        assertNotNull(shoppingList.lastLocalChange)
-        val lastUpdated = Instant.parse(shoppingList.lastLocalChange ?: "")
-        assertTrue(lastUpdated > testStart)
         // assert item is checked off
         val operationItem = shoppingList.categories.first().items.filter { it.externalId == "110113" }.first()
         assertNotNull(operationItem)

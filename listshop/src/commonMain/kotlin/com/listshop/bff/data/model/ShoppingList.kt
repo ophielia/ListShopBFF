@@ -30,7 +30,6 @@ data class ShoppingList(
     val isStarterList: Boolean?,
     val legend: ShoppingListLegend?,
     val loading: Boolean,
-    val lastLocalChange: String?,
     val lastSynced: String?
 
 ) {
@@ -50,7 +49,6 @@ data class ShoppingList(
                 checkedOffCount = apiValue.crossedOffCount ?: 0,
                 isStarterList = apiValue.isStarter,
                 loading = false,
-                lastLocalChange = null,
                 lastSynced = now,
                 legend = ShoppingListLegend.create(legendPoints)
             )
@@ -68,7 +66,6 @@ data class ShoppingList(
                 checkedOffCount = null,
                 isStarterList = null,
                 loading = false,
-                lastLocalChange = null,
                 lastSynced = null,
                 legend = ShoppingListLegend()
             )
@@ -88,7 +85,6 @@ data class ShoppingList(
                 isStarterList = dbValue.isStarter,
                 legend = ShoppingListLegend(apiPoints),
                 loading = false,
-                lastLocalChange = dbValue.lastLocalChange,
                 lastSynced = dbValue.lastSync
             )
         }

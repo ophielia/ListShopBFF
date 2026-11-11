@@ -6,7 +6,6 @@ CREATE TABLE ShoppingListEntity (
     externalId TEXT,
     createdOn TEXT,
     updatedOn TEXT,
-    lastLocalChange TEXT,
     lastSync TEXT,
     itemCount INTEGER AS Int,
     layoutId TEXT,
@@ -67,8 +66,8 @@ CREATE TABLE LegendPointEntity (
 );
 
 insertIntoShoppingListEntity:
-INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastLocalChange,lastSync,itemCount,layoutId  , isStarter)
-VALUES (?,?,?,?, ?, ?, ?, ?, ?);
+INSERT INTO ShoppingListEntity(name,externalId,createdOn,updatedOn,lastSync,itemCount,layoutId  , isStarter)
+VALUES (?,?,?,?, ?,  ?, ?, ?);
 
 insertIntoListCategoryEntity:
 INSERT INTO ListCategoryEntity(name, externalId, listExternalId, displayOrder)
@@ -165,9 +164,6 @@ updateListId:
 UPDATE ShoppingListEntity
 SET externalId = ?;
 
-updateListLastUpdated:
-UPDATE ShoppingListEntity
-SET lastLocalChange = :now;
 
 
 

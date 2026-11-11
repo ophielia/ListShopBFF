@@ -4,15 +4,16 @@ import com.listshop.analytics.AppInfo
 import com.listshop.bff.data.model.ListInfo
 import com.listshop.bff.data.model.UserInfo
 import com.listshop.bff.data.session.DishSessionMemory
+import com.listshop.bff.data.session.UserSession
 import com.listshop.bff.data.state.UserSessionState
 import com.listshop.bff.db.ListInfoEntity
 import com.listshop.bff.db.UserInfoEntity
 import com.listshop.bff.db.UserPropertiesEntity
 import com.listshop.bff.repositories.SessionInfoRepository
 import com.listshop.bff.services.ListSession
-import com.listshop.bff.data.session.UserSession
 import com.listshop.bff.services.SessionService
 import kotlinx.datetime.Clock
+import kotlin.time.Duration.Companion.days
 
 class SessionServiceImpl internal constructor(
     private val sessionRepo: SessionInfoRepository,
@@ -100,7 +101,12 @@ class SessionServiceImpl internal constructor(
 
     override fun setCurrentListId(listId: String) {
         val listInfo = getListInfo()
+        val resetLocalChanged = listInfo.serverListId != listId
         listInfo.serverListId = listId
+        if (resetLocalChanged) {
+            val tenYearsAgo = Clock.System.now().minus(3650.days)
+            listInfo.localListUpdated = tenYearsAgo.toString()
+        }
         updateListInfo(listInfo)
         refreshOrInitializeUserSession()
     }
@@ -188,6 +194,7 @@ class SessionServiceImpl internal constructor(
         userInfo = sessionRepo.createUserInfo()
         return userInfo!!
     }
+
     private fun clearUserInfo() {
         sessionRepo.deleteUserInfo()
     }
@@ -202,15 +209,15 @@ class SessionServiceImpl internal constructor(
     }
 
 
-    private fun getUserPropertiesAsMap() : Map<String, String> {
-        val properties : List<UserPropertiesEntity> = sessionRepo.getUserProperties()
+    private fun getUserPropertiesAsMap(): Map<String, String> {
+        val properties: List<UserPropertiesEntity> = sessionRepo.getUserProperties()
         if (properties.isNullOrEmpty()) {
             return emptyMap()
         }
 
         return properties
-            .filter{it.key != null}
-            .filter{it.property_value != null}
+            .filter { it.key != null }
+            .filter { it.property_value != null }
             .map { it.key!! to it.property_value!! }.toMap()
     }
 

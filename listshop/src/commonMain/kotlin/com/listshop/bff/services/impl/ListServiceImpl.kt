@@ -106,6 +106,7 @@ class ListServiceImpl internal constructor(
         // pull local list
         val shoppingList = listRepo.retrieveLocalList()
         val listId = shoppingList?.externalId ?: ""
+        val lastChange = sessionService.currentListSession().localListUpdated
 
         if (shoppingList == null || listId.trim().length == 0) {
             return null
@@ -115,7 +116,7 @@ class ListServiceImpl internal constructor(
             shoppingList.categories.flatMap { it.items }.map { MergeItem.create(modelItem = it, listId = listId) }
         val listMergeRequest = PutMergeRequest(
             listId = listId,
-            lastChanged = shoppingList.lastLocalChange,
+            lastChanged = lastChange,
             layoutId = shoppingList.layoutId?.toLong() ?: 0,
             mergeItems = mergeItemList
         )
