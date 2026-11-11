@@ -60,6 +60,10 @@ class TagRepositoryImpl(
         dbRef.tagDefinitionQueries.updateTagName( tagName, tagId)
     }
 
+    override suspend fun clearLocalUserTags() {
+        dbRef.tagDefinitionQueries.removeUserTags()
+    }
+
     override suspend fun searchTags(
         fragment: String,
         tagTypes: List<String>,

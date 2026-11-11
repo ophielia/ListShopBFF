@@ -3,8 +3,10 @@
 0.1.32 2026-11
 Added
  * add checkedOffCount to ShoppingList, in the context of a list
+ * add CheckOffItem use case
 Changed
  * signature for BFFResult - for easier use in BFF and clients
+ * Logout use case available offline, and returns TagTree
 
 
 0.1.24 - 0.1.27 2026-09

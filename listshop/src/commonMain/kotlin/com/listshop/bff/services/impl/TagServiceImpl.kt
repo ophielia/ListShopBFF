@@ -128,7 +128,6 @@ class TagServiceImpl internal constructor(
     }
 
     override suspend fun clearUserTags() {
-        // clear existing tags and replace with standard tags
-        retrieveTagsAndSaveLocally()
+        tagRepo.clearLocalUserTags()
     }
 }

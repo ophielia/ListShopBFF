@@ -20,7 +20,7 @@ class DashboardUCP internal constructor(
     @Throws(Exception::class)
     suspend fun logout(
         connectionStatus: ConnectionStatus
-    ): BFFResult<TransitionViewState> {
+    ): BFFResult<TagTree> {
         val useCase = Logout(connectionStatus, userService, syncService, analyticsHandle)
         return useCase.process()
     }

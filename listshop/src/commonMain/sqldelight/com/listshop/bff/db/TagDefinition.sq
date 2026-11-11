@@ -19,6 +19,10 @@ VALUES (?,?,?,?,?,?,?);
 removeAllTags:
 DELETE FROM TagEntity;
 
+removeUserTags:
+DELETE FROM TagEntity
+WHERE userId IS NOT NULL;
+
 selectAllTags:
 SELECT TagEntity.*
 FROM TagEntity;

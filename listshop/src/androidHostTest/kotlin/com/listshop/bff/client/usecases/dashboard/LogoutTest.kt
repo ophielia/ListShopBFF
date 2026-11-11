@@ -9,6 +9,7 @@ import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.data.state.OnboardingViewState
 import com.listshop.bff.data.state.TransitionViewState
+import com.listshop.bff.services.TagTree
 import com.listshop.bff.test.server.TestDispatcherBuilder
 import com.listshop.bff.ucp.DashboardUCP
 import kotlinx.coroutines.runBlocking
@@ -112,14 +113,10 @@ class LogoutTest {
 
         var result = useCaseProvider?.logout(connectionStatus)
         assertNotNull(result)
-        assertFalse(result is BFFResult.Failure)
-        val resultValue = result
+        assertTrue(result is BFFResult.Success<TagTree>)
+        val resultValue = result.value as TagTree
         assertNotNull(resultValue)
-        assertTrue(resultValue is TransitionViewState)
-        assertTrue(resultValue is TransitionViewState.Onboarding)
-        val viewStateValue = (resultValue as TransitionViewState.Onboarding).state
-        assertEquals(OnboardingViewState.Choose, viewStateValue)
-
+        assertTrue(resultValue.isFilled())
     }
 
     @Test

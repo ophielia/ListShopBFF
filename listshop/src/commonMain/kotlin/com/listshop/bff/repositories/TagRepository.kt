@@ -11,4 +11,5 @@ interface TagRepository {
     suspend fun retrieveTagLocally(tagId: String) : TagEntity
     suspend fun updateApiTagLocally(tagId: String, tagName: String)
     suspend fun searchTags(fragment: String, tagTypes: List<String>, excludeGroups: Boolean) : List<TagEntity>
+    suspend fun clearLocalUserTags()
 }

@@ -132,6 +132,7 @@ internal abstract class BaseServiceLocator(
             remoteApi = userApi,
             sessionService = sessionService,
             listService = listService,
+            tagService = tagService,
             analyticsHandle = analyticsHandle
         )
     }

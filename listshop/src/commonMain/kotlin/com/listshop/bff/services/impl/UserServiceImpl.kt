@@ -16,6 +16,7 @@ import com.listshop.bff.exceptions.LoggedOutException
 import com.listshop.bff.remote.UserApi
 import com.listshop.bff.services.ListService
 import com.listshop.bff.services.SessionService
+import com.listshop.bff.services.TagService
 import com.listshop.bff.services.UserService
 import io.ktor.utils.io.core.toByteArray
 import kotlin.io.encoding.Base64
@@ -25,6 +26,7 @@ import kotlin.math.min
 class UserServiceImpl internal constructor(
     private val remoteApi: UserApi,
     private val listService: ListService,
+    private val tagService: TagService,
     private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
 ) : UserService {
@@ -42,7 +44,9 @@ class UserServiceImpl internal constructor(
             throw LoggedOutException("User cannot logout when not logged in")
         }
 
-        if (!isOffline) {
+        if (isOffline) {
+            tagService.clearUserTags()
+        } else {
             logoutOnServer()
         }
 
