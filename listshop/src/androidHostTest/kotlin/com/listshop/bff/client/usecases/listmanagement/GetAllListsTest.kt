@@ -183,12 +183,6 @@ class GetAllListsTest {
 
         val connectionStatus = ConnectionStatus.Online
 
-        // create list succeeds
-        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
-            .withConfigFile("getAllListsLoggedOutFailure.json")
-            .build()
-
-        mockWebServer.dispatcher = testDispatcher
         var result = useCaseProvider?.getAllLists(connectionStatus)
         assertNotNull(result)
         assertTrue(result is BFFResult.Failure)

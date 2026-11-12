@@ -219,6 +219,20 @@ class SelectListForEditTest {
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "Action cannot be done while offline")
     }
 
+    @Test
+    fun `when logged out, I can't select a list`(): Unit = runBlocking {
+        initializeContext()
+        val connectionStatus = ConnectionStatus.Online
+
+        var result = useCaseProvider?.selectListForEdit(connectionStatus, "12345")
+
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
+        assertTrue(error.type == BFFErrorType.LOGIN_REQUIRED)
+        assertTrue(error.subType == BFFErrorSubtype.LOGIN_REQUIRED)
+    }
+
 
     @AfterTest
     fun shutDown() {

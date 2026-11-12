@@ -20,6 +20,7 @@ class ListManagementUCP internal constructor(
         val useCase = AddList(
             connectionStatus = connectionStatus,
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
         return useCase.process()
@@ -31,6 +32,7 @@ class ListManagementUCP internal constructor(
             connectionStatus = connectionStatus,
             listIdToDelete = listId,
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
         return useCase.process()
@@ -43,6 +45,7 @@ class ListManagementUCP internal constructor(
             connectionStatus = connectionStatus,
             listId = listId,
             listService = listService,
+            sessionService = sessionService ,
             analyticsHandle = analyticsHandle
         )
         return useCase.process()
@@ -62,6 +65,7 @@ class ListManagementUCP internal constructor(
             listName = listName,
             isStarterList = isStarterList,
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
         return useCase.process()
@@ -72,6 +76,7 @@ class ListManagementUCP internal constructor(
         val useCase = GetAllLists(
             connectionStatus = connectionStatus,
             listService = listService,
+            sessionService = sessionService,
             analyticsHandle = analyticsHandle
         )
         return useCase.process()

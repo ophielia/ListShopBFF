@@ -8,7 +8,9 @@ import com.listshop.bff.data.bff.BFFResult
 import com.listshop.bff.data.model.ListShoppingList
 import com.listshop.bff.data.state.ConnectionStatus
 import com.listshop.bff.services.ListService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.usecases.validators.ConnectionStatusValidator
+import com.listshop.bff.usecases.validators.UserLoggedInValidator
 
 class UpdateList(
     private val connectionStatus: ConnectionStatus,
@@ -16,12 +18,14 @@ class UpdateList(
     private val listName: String,
     private val isStarterList: Boolean?,
     private val listService: ListService,
+    private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
-) : ConnectionStatusValidator {
+) : ConnectionStatusValidator, UserLoggedInValidator {
     suspend fun process(): BFFResult<ListShoppingList> {
         analyticsHandle.debug("Update List Properties - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
+            checkUserLoggedIn(sessionService.currentUserSession())
             listService.updateListProperties(listId, listName, isStarterList)
             val lists = listService.retrieveListOfLists()
             val listOfLists = ListShoppingList(lists)

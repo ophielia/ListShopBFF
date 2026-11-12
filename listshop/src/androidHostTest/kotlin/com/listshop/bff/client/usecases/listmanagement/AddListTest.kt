@@ -143,6 +143,24 @@ class AddListTest {
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "List creation failed - offline")
     }
 
+    @Test
+    fun `when not logged in, I can't add a list`(): Unit = runBlocking {
+        initializeContext()
+        val connectionStatus = ConnectionStatus.Online
+
+        val testDispatcher = TestDispatcherBuilder("listmanagement/addList")
+            .withConfigFile("createListSuccess.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.addList(connectionStatus)
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
+        assertTrue(error.type == BFFErrorType.LOGIN_REQUIRED)
+        assertTrue(error.subType == BFFErrorSubtype.LOGIN_REQUIRED)
+    }
+
 
     @AfterTest
     fun shutDown() {

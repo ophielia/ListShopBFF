@@ -15,18 +15,22 @@ import com.listshop.bff.data.state.ConnectionStatus
  - return list
 */
 import com.listshop.bff.services.ListService
+import com.listshop.bff.services.SessionService
 import com.listshop.bff.usecases.validators.ConnectionStatusValidator
+import com.listshop.bff.usecases.validators.UserLoggedInValidator
 
 class SelectListForEdit(
     private val connectionStatus: ConnectionStatus,
     private val listId: String,
     private val listService: ListService,
+    private val sessionService: SessionService,
     private val analyticsHandle: AnalyticsHandle
-) : ConnectionStatusValidator {
+) : ConnectionStatusValidator, UserLoggedInValidator {
     suspend fun process(): BFFResult<ShoppingList> {
         analyticsHandle.debug("Select List - begin use case")
         try {
             checkOnlineStatus(connectionStatus)
+            checkUserLoggedIn(sessionService.currentUserSession())
             val shoppingList = listService.retrieveServerListById(listId)
             analyticsHandle.debug("Select List - end use case")
             // exception should be thrown if list wasn't found, or there was an issue saving it
