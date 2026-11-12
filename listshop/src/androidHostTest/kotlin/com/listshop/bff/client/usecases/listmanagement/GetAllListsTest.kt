@@ -177,6 +177,26 @@ class GetAllListsTest {
         assertEquals(BFFErrorSubtype.OFFLINE, error.subType, "Action cannot be done while offline")
     }
 
+    @Test
+    fun `when i get all lists when logged out, an exception is returned`(): Unit = runBlocking {
+        initializeContext()
+
+        val connectionStatus = ConnectionStatus.Online
+
+        // create list succeeds
+        val testDispatcher = TestDispatcherBuilder("listmanagement/getAllLists")
+            .withConfigFile("getAllListsLoggedOutFailure.json")
+            .build()
+
+        mockWebServer.dispatcher = testDispatcher
+        var result = useCaseProvider?.getAllLists(connectionStatus)
+        assertNotNull(result)
+        assertTrue(result is BFFResult.Failure)
+        val error = result.error
+        assertTrue(error.type == BFFErrorType.LOGIN_REQUIRED)
+        assertTrue(error.subType == BFFErrorSubtype.LOGIN_REQUIRED)
+    }
+
 
     @AfterTest
     fun shutDown() {

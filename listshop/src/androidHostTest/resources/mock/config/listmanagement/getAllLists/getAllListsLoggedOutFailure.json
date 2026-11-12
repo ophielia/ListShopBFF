@@ -1,0 +1,8 @@
+{
+  "label": "getAllListsLoggedOutFailure",
+  "requestMethod": "GET",
+  "requestPath": "/v2/shoppinglist",
+  "requestBodyFilename": "",
+  "responseStatus": 403,
+  "responseBodyFilename": ""
+}

@@ -14,4 +14,5 @@ enum class BFFErrorSubtype {
     SERVER_ERROR,
     UPGRADE_REQUIRED,
     UNKNOWN,
+    LOGIN_REQUIRED
 }

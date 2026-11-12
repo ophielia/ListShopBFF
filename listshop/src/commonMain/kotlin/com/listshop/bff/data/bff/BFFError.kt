@@ -21,6 +21,7 @@ data class BFFError(
                 is InternalDataException -> handleInternalDataException(exception)
                 is OfflineException -> handleOfflineException(exception)
                 is AuthenticationException -> handleAuthenticationException(exception)
+                is AuthorizationException -> handleAuthorizationException(exception)
                 is ApiException -> handleApiException(exception)
                 is LoggedOutException -> handleLoggedOutException(exception)
                 is SerializationException -> handleSerializationException(exception)
@@ -76,9 +77,14 @@ data class BFFError(
                 is LoginException -> BFFErrorSubtype.CANT_LOGIN
                 is LogoutException -> BFFErrorSubtype.CANT_LOGOUT
                 is SignUpException -> BFFErrorSubtype.CANT_SIGNUP
-                else -> BFFErrorSubtype.UNKNOWN
+                else -> BFFErrorSubtype.LOGIN_REQUIRED
             }
             return BFFError(BFFErrorType.AUTHENTICATION, subtype, exception.message ?: "")
+        }
+
+        private fun handleAuthorizationException(exception: AuthorizationException): BFFError {
+
+            return BFFError(BFFErrorType.LOGIN_REQUIRED, BFFErrorSubtype.LOGIN_REQUIRED, exception.message ?: "")
         }
     }
 

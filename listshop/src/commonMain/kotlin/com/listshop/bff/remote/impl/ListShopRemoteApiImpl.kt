@@ -3,6 +3,8 @@ package com.listshop.bff.remote.impl
 import com.listshop.analytics.AppInfo
 import com.listshop.analytics.HttpClientAnalytics
 import com.listshop.analytics.ListShopAnalytics
+import com.listshop.bff.exceptions.AuthenticationException
+import com.listshop.bff.exceptions.AuthorizationException
 import com.listshop.bff.exceptions.BadRequestException
 import com.listshop.bff.exceptions.HttpClientException
 import com.listshop.bff.exceptions.ServerErrorException
@@ -221,6 +223,9 @@ internal class ListShopRemoteApiImpl(
 
     override fun mapNonSuccessToException(statusValue: Int, message: String) {
 
+        if (statusValue == 403) {
+            throw AuthorizationException(message)
+        }
         if (statusValue in 400..499) {
             throw BadRequestException(message)
         }

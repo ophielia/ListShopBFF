@@ -4,6 +4,7 @@ enum class BFFErrorType {
     API,
     AUTHENTICATION,
     DATABASE,
+    LOGIN_REQUIRED,
     NETWORK,
     OFFLINE,
     UNKNOWN,
