@@ -1,6 +1,6 @@
 ### LISTSHOP BFF
 
-0.1.32-33 2026-11
+0.1.32-34 2026-11
 Added
  * add checkedOffCount to ShoppingList, in the context of a list
  * add CheckOffItem use case
