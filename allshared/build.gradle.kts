@@ -14,6 +14,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
+            export(project(":listshop"))
             export(project(":analytics"))
             isStatic = true
         }
@@ -21,7 +22,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":listshop"))
+            api(project(":listshop"))
             api(project(":analytics"))
         }
     }
